@@ -31,6 +31,7 @@ module c_ID(
     input[4:0] RegWrAddr_ex,            //上一条指令写回Regs的地址，用于判断冒险发生的条件
     output MemToReg_id,                 //译码生成的选择回写Regs数据源的控制信号
     output RegWr_id,                    //译码生成的用于回写Regs的使能信号
+    output CPWr_id,                     //译码生成用于回写CP0寄存器的使能信号
     output MemWr_id,                    //译码生成的用于写MEM的使能信号
     output MemRead_id,                  //译码生成的指示当前指令是读MEM的信号
     output[1:0] MemReadSize_id,         //译码生成的用于判断读MEM指令读取位数的控制信号
@@ -51,7 +52,8 @@ module c_ID(
     output[31:0] JmpAddr,               //无条件跳转目标地址
     output[31:0] JrAddr,                //寄存器跳转目标地址
     output[31:0] RsData_id,             
-    output[31:0] RtData_id,             
+    output[31:0] RtData_id,
+    output[31:0] CPData_id,             
     output[4:0] RsAddr_id,             
     output[4:0] RtAddr_id,             
     output[4:0] RdAddr_id,             
@@ -78,12 +80,14 @@ module c_ID(
     m_Decoder Decoder(
     .op(Instruction_id[31:26]),
     .func(Instruction_id[5:0]),
+    .rs(Instruction_id[25:21]),
     .MemToReg(MemToReg_id),
     .MemWr(MemWr_id),
     .MemRead(MemRead_id),
     .MemReadSize(MemReadSize_id),
     .MemExtType(MemExtType_id),
     .RegWr(RegWr_id),
+    .CPWr(CPWr_id),
     .RegDst(RegDst_id),
     .ALUsrcA(ALUsrcA_id),
     .ALUsrcB(ALUsrcB_id),
@@ -121,5 +125,6 @@ module c_ID(
     .Stall(Stall)
     );
     
-    
+    //CP0
+    //wire[31:0] CPData_id;
 endmodule

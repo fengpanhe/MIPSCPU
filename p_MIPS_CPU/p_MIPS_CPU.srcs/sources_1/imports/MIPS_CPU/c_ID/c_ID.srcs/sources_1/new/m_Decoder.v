@@ -23,12 +23,14 @@
 module m_Decoder(
     input[5:0] op,
     input[5:0] func,
+    input[5:0] rs,
     output MemToReg,                //决定写回到Regs的数据源 0:ALU 1:MEM
     output MemWr,                   //MEM写使能信号
     output MemRead,                 //MEM读指令信号，用于进行冒险检测
     output[1:0] MemReadSize,        //MEM读指令选择读取的数据字长 00:1B 01:2B 11:4B
     output MemExtType,              //MEM读指令输出数据的扩展方式 0:零扩展(ZE) 1:符号扩展(SE)
     output RegWr,                   //Regs写使能信号
+    output CPWr,                    //CP0写使能信号
     output RegDst,                  //决定写回Regs的地址 0:RtAddr 1:RdAddr
     output ALUsrcA,                 //决定ALU操作数A的数据源 0:RsData 1:(ZE)Sa
     output ALUsrcB,                 //决定ALU操作数B的数据源 0:RtData 1:(SE)Imme
@@ -40,6 +42,7 @@ module m_Decoder(
     );
     /*R_type_instructions*/
     parameter R_type_op = 6'b000000;
+    parameter Interrupt_op = 6'b010000;
     parameter ADD_func = 6'b100000;
     parameter ADDU_func = 6'b100001;
     parameter SUB_func = 6'b100010;
@@ -103,6 +106,7 @@ module m_Decoder(
                 SRL,SRA,SLLV,SRLV,SRAV,JR,JALR,BREAK,SYSCALL,ERET;
      wire ADDI,ANDI,ORI,XORI,LUI,LB,LBU,LH,LHU,SB,SH,LW,SW,BEQ,BNE,BGEZ,BGTZ,BLEZ,BLTZ,BGEZAL,BLTZAL,SLTI,SLTIU;
      wire J,JAL;
+     wire MFC0,MTC0;
      //R型指令
      assign ADD = (op == R_type_op) && (func == ADD_func);
      assign ADDU = (op == R_type_op) && (func == ADDU_func);
@@ -132,6 +136,10 @@ module m_Decoder(
      assign JALR = (op == R_type_op) && (func == JALR_func);
      assign BREAK = (op == R_type_op) && (func == BREAK_func);
      assign SYSCALL = (op == R_type_op) && (func == SYSCALL_func);
+     //CP0相关指令
+     assign MFC0 = (op == Interrupt_op) && (rs == 5'b00000);
+     assign MTC0 = (op == Interrupt_op) && (rs == 5'b00100);
+     
      //I型指令
      assign ADDI = (op == ADDI_op);
      assign ADDIU = (op == ADDIU_op);
@@ -182,7 +190,8 @@ module m_Decoder(
      assign MemExtType = LB | LH ;
      assign MemReadSize[0] = LH | LHU | LW | SH | SW ;
      assign MemReadSize[1] = LW | SW;
-     assign RegWr = R_type1 | R_type3 | I_type1 | I_type2 | BGEZAL | BLTZAL | JAL;
+     assign RegWr = R_type1 | R_type3 | I_type1 | I_type2 | BGEZAL | BLTZAL | JAL | MFC0;
+     assign CPWr = MTC0;
      assign RegDst = R_type1 | R_type3 | BGEZAL | BLTZAL | JAL;
      assign ALUsrcA = R_type3;
      assign ALUsrcB = I_type1 | I_type2 | I_type3;
@@ -225,6 +234,8 @@ module m_Decoder(
      parameter ALU_BLEZ = 5'd27;
      parameter ALU_BLTZ = 5'd28;
      
+     parameter ALU_MCP0 = 5'd29;
+      
      /*assignment for ALUCode*/
      always @(*)
      begin
@@ -282,6 +293,7 @@ module m_Decoder(
         BLTZAL_op: ALUCode <= ALU_BLTZ;
         SLTI_op: ALUCode <= ALU_SLT;
         SLTIU_op: ALUCode <= ALU_SLTU;
+        Interrupt_op: ALUCode <= ALU_MCP0;
         default: ALUCode <= 5'bx; 
         endcase
     end     

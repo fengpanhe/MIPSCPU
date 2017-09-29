@@ -114,6 +114,8 @@ module m_MIPS_CPU(
     MemWr_mem <= 0;
     end;*/
     wire MemWr_id,MemWr_ex,MemWr_mem;
+    wire CPWr_id,CPWr_ex,CPWr_mem,CPWr_wb;
+    wire CPData_id,CPData_ex,CPData_mem,CPData_wb;
     wire ALUsrcA_id,ALUsrcA_ex,ALUsrcB_id,ALUsrcB_ex;
     wire[4:0] ALUCode_id,ALUCode_ex;
     wire RegDst_id,RegDst_ex;
@@ -136,6 +138,7 @@ module m_MIPS_CPU(
     .RegWrAddr_ex(RegWrAddr_ex),
     .MemToReg_id(MemToReg_id),
     .RegWr_id(RegWr_id),
+    .CPWr_id(CPWr_id),
     .MemWr_id(MemWr_id),
     .MemRead_id(MemRead_id),
     .MemReadSize_id(MemReadSize_id),
@@ -157,6 +160,7 @@ module m_MIPS_CPU(
     .JrAddr(JrAddr),
     .RsData_id(RsData_id),
     .RtData_id(RtData_id),
+    .CPData_id(CPData_id),
     .RsAddr_id(RsAddr_id),
     .RtAddr_id(RtAddr_id),
     .RdAddr_id(RdAddr_id),
@@ -320,9 +324,7 @@ module m_MIPS_CPU(
     .MemWrData_ex(MemWrData_ex),
     .Overflow(Overflow),
     .ALU_A(ALU_A),
-    .ALU_B(ALU_B),
-    .forwardA(forwardA),
-    .forwardB(forwardB)
+    .ALU_B(ALU_B)
     );
     /*EX/MEM Regs*/
     //reg for NextPC

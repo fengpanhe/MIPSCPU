@@ -44,13 +44,11 @@ module c_EX(
     output[31:0] MemWrData_ex,
     output Overflow,
     output reg[31:0] ALU_A,
-    output reg[31:0] ALU_B,
-    output[1:0] forwardA,
-    output[1:0] forwardB
+    output reg[31:0] ALU_B
     );
     wire[1:0] ForwardA,ForwardB;
-    assign forwardA = ForwardA;
-    assign forwardB = ForwardB;
+    //assign forwardA = ForwardA;
+    //assign forwardB = ForwardB;
     reg[31:0] MuxA,MuxB;//ALU_A,ALU_B;
     assign MemWrData_ex = MuxB;
     //处理冲突的转发部件
