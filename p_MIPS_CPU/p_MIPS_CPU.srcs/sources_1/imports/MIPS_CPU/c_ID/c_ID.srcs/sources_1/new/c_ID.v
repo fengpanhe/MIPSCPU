@@ -1,0 +1,125 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 2017/09/24 16:17:42
+// Design Name: 
+// Module Name: c_ID
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module c_ID(
+    input clk,                          //机器时钟
+    input[31:0] Instruction_id,         //待执行指令
+    input[31:0] NextPC_id,              //PC+4地址
+    input RegWr_wb,                     //Regs的写使能信号
+    input[4:0] RegWrAddr_wb,            //Regs的写寄存器地址
+    input[31:0] RegWrData_wb,           //Regs的写入数据
+    input MemRead_ex,                   //上一条指令是读MEM指令的信号，用于判断冒险发生的条件
+    input[4:0] RegWrAddr_ex,            //上一条指令写回Regs的地址，用于判断冒险发生的条件
+    output MemToReg_id,                 //译码生成的选择回写Regs数据源的控制信号
+    output RegWr_id,                    //译码生成的用于回写Regs的使能信号
+    output MemWr_id,                    //译码生成的用于写MEM的使能信号
+    output MemRead_id,                  //译码生成的指示当前指令是读MEM的信号
+    output[1:0] MemReadSize_id,         //译码生成的用于判断读MEM指令读取位数的控制信号
+    output MemExtType_id,               //译码生成的用于控制读MEM指令输出结果扩展方式的控制信号
+    output[4:0] ALUCode_id,             //译码生成的用于选择ALU运算功能的信号
+    output ALUsrcA_id,                  //译码生成的用于选择ALU操作数A的数据源的控制信号
+    output ALUsrcB_id,                  //译码生成的用于选择ALU操作数A的数据源的控制信号
+    output RegDst_id,                   //译码生成的用于选择回写Regs地址的控制信号
+    output Stall,                       //发生冒险时用于清空ID/EX级Reg的控制信号
+    output PC_IFWrite,                  //发生冒险时用于暂停IF/ID级Reg的控制信号
+    output IF_flush,                    //处理跳转分支冲突的控制信号
+    output Z,                        //分支指令条件成立的信号
+    output J,                           //跳转指令
+    output JR,                          //寄存器跳转指令
+    output JAL,                      //需保存PC地址的指令
+    output BAL,                      //分支跳转且需保存PC地址的指令
+    output[31:0] BranchAddr,            //分支跳转目标地址
+    output[31:0] JmpAddr,               //无条件跳转目标地址
+    output[31:0] JrAddr,                //寄存器跳转目标地址
+    output[31:0] RsData_id,             
+    output[31:0] RtData_id,             
+    output[4:0] RsAddr_id,             
+    output[4:0] RtAddr_id,             
+    output[4:0] RdAddr_id,             
+    output[31:0] Sa_id,                 //零扩展成32bit的移位立即数
+    output[31:0] Imme_id                //符号扩展成32bit的立即数
+    );
+    assign RsAddr_id = Instruction_id[25:21];
+    assign RtAddr_id = Instruction_id[20:16];
+    assign RdAddr_id = Instruction_id[15:11];
+    assign Sa_id = {27'b0,Instruction_id[10:6]};
+    assign Imme_id = {{16{Instruction_id[15]}},Instruction_id[15:0]};
+    assign JmpAddr = {NextPC_id[31:28],Instruction_id[25:0],2'b00};
+    assign JrAddr = RsData_id;
+    assign IF_flush = Z || J || JR;
+    wire[31:0] Imme_shift;
+    assign Imme_shift = Imme_id << 2;
+    //此处未做边界检测，当NextPC+offset < 0 时，相当于跳转到尾部对应位置
+    Branch_adder branchAdder (
+      .A(NextPC_id),  // input wire [31 : 0] A
+      .B(Imme_shift),  // input wire [31 : 0] B
+      .S(BranchAddr)  // output wire [31 : 0] S
+    );
+    //译码器
+    m_Decoder Decoder(
+    .op(Instruction_id[31:26]),
+    .func(Instruction_id[5:0]),
+    .MemToReg(MemToReg_id),
+    .MemWr(MemWr_id),
+    .MemRead(MemRead_id),
+    .MemReadSize(MemReadSize_id),
+    .MemExtType(MemExtType_id),
+    .RegWr(RegWr_id),
+    .RegDst(RegDst_id),
+    .ALUsrcA(ALUsrcA_id),
+    .ALUsrcB(ALUsrcB_id),
+    .ALUCode(ALUCode_id),
+    .Jmp(J),
+    .Jr(JR),
+    .Jal(JAL),
+    .Bal(BAL)
+    );
+    //Regs
+    m_Regs Regs(
+    .clk(clk),
+    .RegWr(RegWr_wb),
+    .RsAddr(RsAddr_id),
+    .RtAddr(RtAddr_id),
+    .RegWrAddr(RegWrAddr_wb),
+    .RegWrData(RegWrData_wb),
+    .RsData(RsData_id),
+    .RtData(RtData_id)
+    );
+    //ZeroTest
+    m_ZeroTest ZeroTest(
+    .ALUCode_id(ALUCode_id),
+    .RsData_id(RsData_id),
+    .RtData_id(RtData_id),
+    .Z(Z)
+    );
+    //HazardDectector
+    m_HazardDetector HazardDetector(
+    .MemRead_ex(MemRead_ex),
+    .RegWrAddr_ex(RegWrAddr_ex),
+    .RsAddr_id(RsAddr_id),
+    .RtAddr_id(RtAddr_id),
+    .PC_IFWrite(PC_IFWrite),
+    .Stall(Stall)
+    );
+    
+    
+endmodule

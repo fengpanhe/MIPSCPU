@@ -1,0 +1,384 @@
+#-----------------------------------------------------------
+# Vivado v2015.4 (64-bit)
+# SW Build 1412921 on Wed Nov 18 09:43:45 MST 2015
+# IP Build 1412160 on Tue Nov 17 13:47:24 MST 2015
+# Start of session at: Tue Sep 26 15:01:13 2017
+# Process ID: 3564
+# Current directory: E:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.runs/c_addsub_synth_1
+# Command line: vivado.exe -log c_addsub.vds -mode batch -messageDb vivado.pb -notrace -source c_addsub.tcl
+# Log file: E:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.runs/c_addsub_synth_1/c_addsub.vds
+# Journal file: E:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.runs/c_addsub_synth_1\vivado.jou
+#-----------------------------------------------------------
+source c_addsub.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/Xilinx/Vivado/2015.4/data/ip'.
+WARNING: [IP_Flow 19-3664] IP 'c_addsub' generated file not found 'e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub.dcp'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'c_addsub' generated file not found 'e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_stub.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'c_addsub' generated file not found 'e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_stub.vhdl'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'c_addsub' generated file not found 'e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_sim_netlist.v'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'c_addsub' generated file not found 'e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_sim_netlist.vhdl'. Please regenerate to continue.
+Command: synth_design -top c_addsub -part xc7a100tfgg484-1 -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 301.387 ; gain = 128.758
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'c_addsub' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/synth/c_addsub.vhd:68]
+INFO: [Synth 8-3491] module 'c_addsub_v12_0_8' declared at 'e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0.vhd:116' bound to instance 'U0' of component 'c_addsub_v12_0_8' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/synth/c_addsub.vhd:128]
+INFO: [Synth 8-638] synthesizing module 'c_addsub_v12_0_8' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0.vhd:163]
+INFO: [Synth 8-3491] module 'c_addsub_v12_0_8_viv' declared at 'e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:6457' bound to instance 'xst_addsub' of component 'c_addsub_v12_0_8_viv' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0.vhd:169]
+INFO: [Synth 8-638] synthesizing module 'c_addsub_v12_0_8_viv' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:6515]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1036]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1039]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1042]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1045]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1048]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1051]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1054]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1057]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1065]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1068]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1071]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1074]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1077]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1080]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1084]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1089]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1091]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1093]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1096]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1098]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1101]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1106]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1108]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1110]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1112]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1114]
+INFO: [Synth 8-3491] module 'c_addsub_v12_0_8_legacy' declared at 'e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:5542' bound to instance 'i_baseblox_addsub' of component 'c_addsub_v12_0_8_legacy' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:6636]
+INFO: [Synth 8-638] synthesizing module 'c_addsub_v12_0_8_legacy' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:5618]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/xbip_utils_v3_0_5/hdl/xbip_utils_v3_0_vh_rfs.vhd:594]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/xbip_utils_v3_0_5/hdl/xbip_utils_v3_0_vh_rfs.vhd:597]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/xbip_utils_v3_0_5/hdl/xbip_utils_v3_0_vh_rfs.vhd:594]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/xbip_utils_v3_0_5/hdl/xbip_utils_v3_0_vh_rfs.vhd:597]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1840]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1843]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1847]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1850]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1853]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1856]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1859]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1862]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1865]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1868]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1871]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1874]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1877]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1880]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1883]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1886]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1889]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1892]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1895]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1898]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1901]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1904]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1907]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1910]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1913]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1916]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1919]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1922]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1925]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1928]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1931]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1934]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1939]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1944]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1947]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1952]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1961]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:1965]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:2008]
+INFO: [Synth 8-3491] module 'c_addsub_v12_0_8_fabric_legacy' declared at 'e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:5278' bound to instance 'the_addsub' of component 'c_addsub_v12_0_8_fabric_legacy' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:5909]
+INFO: [Synth 8-638] synthesizing module 'c_addsub_v12_0_8_fabric_legacy' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:5330]
+INFO: [Synth 8-3491] module 'c_addsub_v12_0_8_lut6_legacy' declared at 'e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:2291' bound to instance 'i_lut6_addsub' of component 'c_addsub_v12_0_8_lut6_legacy' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:5347]
+INFO: [Synth 8-638] synthesizing module 'c_addsub_v12_0_8_lut6_legacy' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:2343]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/xbip_utils_v3_0_5/hdl/xbip_utils_v3_0_vh_rfs.vhd:594]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/xbip_utils_v3_0_5/hdl/xbip_utils_v3_0_vh_rfs.vhd:597]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:2386]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: assertion statement [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:2390]
+INFO: [Synth 8-113] binding component instance 'carrymux0' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3264]
+INFO: [Synth 8-113] binding component instance 'carryxor0' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3272]
+INFO: [Synth 8-113] binding component instance 'carryxortop' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3284]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-113] binding component instance 'carrymux' to cell 'MUXCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3306]
+INFO: [Synth 8-113] binding component instance 'carryxor' to cell 'XORCY' [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:3314]
+INFO: [Synth 8-256] done synthesizing module 'c_addsub_v12_0_8_lut6_legacy' (1#1) [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:2343]
+INFO: [Synth 8-256] done synthesizing module 'c_addsub_v12_0_8_fabric_legacy' (2#1) [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:5330]
+INFO: [Synth 8-256] done synthesizing module 'c_addsub_v12_0_8_legacy' (3#1) [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:5618]
+INFO: [Synth 8-256] done synthesizing module 'c_addsub_v12_0_8_viv' (4#1) [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0_vh_rfs.vhd:6515]
+INFO: [Synth 8-256] done synthesizing module 'c_addsub_v12_0_8' (5#1) [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_v12_0_8/hdl/c_addsub_v12_0.vhd:163]
+INFO: [Synth 8-256] done synthesizing module 'c_addsub' (6#1) [e:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/synth/c_addsub.vhd:68]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 341.633 ; gain = 169.004
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 341.633 ; gain = 169.004
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a100tfgg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 341.633 ; gain = 169.004
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7a100tfgg484-1
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 350.723 ; gain = 178.094
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+Start Parallel Synthesis Optimization  : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 474.941 ; gain = 302.313
+---------------------------------------------------------------------------------
+Start Cross Boundary Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary Optimization : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 476.191 ; gain = 303.563
+---------------------------------------------------------------------------------
+Finished Parallel Reinference  : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 476.191 ; gain = 303.563
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Area Optimization : Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 484.508 ; gain = 311.879
+---------------------------------------------------------------------------------
+Finished Parallel Area Optimization  : Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 484.508 ; gain = 311.879
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 484.508 ; gain = 311.879
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 484.508 ; gain = 311.879
+---------------------------------------------------------------------------------
+Finished Parallel Technology Mapping Optimization  : Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 484.508 ; gain = 311.879
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+Finished Parallel Synthesis Optimization  : Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 484.508 ; gain = 311.879
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 484.508 ; gain = 311.879
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 484.508 ; gain = 311.879
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 484.508 ; gain = 311.879
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 484.508 ; gain = 311.879
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 484.508 ; gain = 311.879
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 484.508 ; gain = 311.879
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+------+------+
+|      |Cell  |Count |
++------+------+------+
+|1     |LUT1  |     1|
+|2     |LUT3  |    32|
+|3     |MUXCY |    31|
+|4     |XORCY |    32|
++------+------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 484.508 ; gain = 311.879
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 73 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 484.508 ; gain = 259.828
+Synthesis Optimization Complete : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 484.508 ; gain = 311.879
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 63 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 8 instances were transformed.
+  (MUXCY,XORCY) => CARRY4: 8 instances
+
+INFO: [Common 17-83] Releasing license: Synthesis
+92 Infos, 78 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 550.625 ; gain = 325.945
+INFO: [Coretcl 2-1174] Renamed 5 cell refs.
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+write_checkpoint: Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 948.730 ; gain = 398.105
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.016 . Memory (MB): peak = 948.730 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Tue Sep 26 15:01:43 2017...
