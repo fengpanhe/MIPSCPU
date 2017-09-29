@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="10" Path="C:/Users/ThinkPad/Documents/GitHub/MIPSCPU/p_MIPS_CPU/p_MIPS_CPU.xpr">
+<Project Version="7" Minor="10" Path="/home/he/Xilinx/MIPSCPU/p_MIPS_CPU/p_MIPS_CPU.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="934dcbaca86a4af1b40efb6b405cce7a"/>
@@ -434,9 +434,6 @@
     <Simulator Name="Riviera">
       <Option Name="Description" Val="Riviera-PRO Simulator"/>
     </Simulator>
-    <Simulator Name="ActiveHDL">
-      <Option Name="Description" Val="Active-HDL Simulator"/>
-    </Simulator>
   </Simulators>
   <Runs Version="1" Minor="10">
     <Run Id="synth_1" Type="Ft3:Synth" SrcSet="sources_1" Part="xc7a100tfgg484-1" ConstrsSet="constrs_1" Description="Vivado Synthesis Defaults" State="current" IncludeInArchive="true">
@@ -445,54 +442,47 @@
         <Step Id="synth_design"/>
       </Strategy>
     </Run>
-    <Run Id="c_addsub_synth_1" Type="Ft3:Synth" SrcSet="c_addsub" Part="xc7a100tfgg484-1" ConstrsSet="c_addsub" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/c_addsub_synth_1" IncludeInArchive="true">
+    <Run Id="c_addsub_synth_1" Type="Ft3:Synth" SrcSet="c_addsub" Part="xc7a100tfgg484-1" ConstrsSet="c_addsub" Description="Vivado Synthesis Defaults" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2015"/>
         <Step Id="synth_design"/>
       </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
-    <Run Id="data_ram1_synth_1" Type="Ft3:Synth" SrcSet="data_ram1" Part="xc7a100tfgg484-1" ConstrsSet="data_ram1" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/data_ram1_synth_1" IncludeInArchive="true">
+    <Run Id="data_ram1_synth_1" Type="Ft3:Synth" SrcSet="data_ram1" Part="xc7a100tfgg484-1" ConstrsSet="data_ram1" Description="Vivado Synthesis Defaults" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2015"/>
         <Step Id="synth_design"/>
       </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
-    <Run Id="data_ram0_synth_1" Type="Ft3:Synth" SrcSet="data_ram0" Part="xc7a100tfgg484-1" ConstrsSet="data_ram0" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/data_ram0_synth_1" IncludeInArchive="true">
+    <Run Id="data_ram0_synth_1" Type="Ft3:Synth" SrcSet="data_ram0" Part="xc7a100tfgg484-1" ConstrsSet="data_ram0" Description="Vivado Synthesis Defaults" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2015"/>
         <Step Id="synth_design"/>
       </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
-    <Run Id="data_ram2_synth_1" Type="Ft3:Synth" SrcSet="data_ram2" Part="xc7a100tfgg484-1" ConstrsSet="data_ram2" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/data_ram2_synth_1" IncludeInArchive="true">
+    <Run Id="data_ram2_synth_1" Type="Ft3:Synth" SrcSet="data_ram2" Part="xc7a100tfgg484-1" ConstrsSet="data_ram2" Description="Vivado Synthesis Defaults" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2015"/>
         <Step Id="synth_design"/>
       </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
-    <Run Id="data_ram3_synth_1" Type="Ft3:Synth" SrcSet="data_ram3" Part="xc7a100tfgg484-1" ConstrsSet="data_ram3" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/data_ram3_synth_1" IncludeInArchive="true">
+    <Run Id="data_ram3_synth_1" Type="Ft3:Synth" SrcSet="data_ram3" Part="xc7a100tfgg484-1" ConstrsSet="data_ram3" Description="Vivado Synthesis Defaults" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2015"/>
         <Step Id="synth_design"/>
       </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
-    <Run Id="m_programRom_synth_1" Type="Ft3:Synth" SrcSet="m_programRom" Part="xc7a100tfgg484-1" ConstrsSet="m_programRom" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/m_programRom_synth_1" IncludeInArchive="true">
+    <Run Id="m_programRom_synth_1" Type="Ft3:Synth" SrcSet="m_programRom" Part="xc7a100tfgg484-1" ConstrsSet="m_programRom" Description="Vivado Synthesis Defaults" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2015"/>
         <Step Id="synth_design"/>
       </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
-    <Run Id="Branch_adder_synth_1" Type="Ft3:Synth" SrcSet="Branch_adder" Part="xc7a100tfgg484-1" ConstrsSet="Branch_adder" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/Branch_adder_synth_1" IncludeInArchive="true">
+    <Run Id="Branch_adder_synth_1" Type="Ft3:Synth" SrcSet="Branch_adder" Part="xc7a100tfgg484-1" ConstrsSet="Branch_adder" Description="Vivado Synthesis Defaults" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2015"/>
         <Step Id="synth_design"/>
       </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
     <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7a100tfgg484-1" ConstrsSet="constrs_1" Description="Vivado Implementation Defaults" State="current" SynthRun="synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
