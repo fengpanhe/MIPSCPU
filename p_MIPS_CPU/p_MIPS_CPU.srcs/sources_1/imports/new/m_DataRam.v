@@ -32,8 +32,30 @@ module m_DataRam(
     );
     wire clk;
     assign clk = ~clock;
-    wire MemWr0,MemWr1,MemWr2,MemWr3;
+    reg MemWr0,MemWr1,MemWr2,MemWr3;
+    reg[7:0] MemWrData0,MemWrData1,MemWrData2,MemWrData3;
     wire[31:0] tmpOut2;
+    
+    always @(*)
+    begin
+    case(MemAddr[1:0])
+    2'b00:begin
+        MemWr0 <=     
+    
+    
+    always @(*)
+    begin
+    case(MemWrSize)
+    2'b00:begin
+          MemWrData0 <= MemWrData[7:0];
+          MemWrData1 <= MemWrData[7:0];
+          MemWrData2 <= MemWrData[7:0];
+          MemWrData3 <= MemWrData[7:0];
+          end
+    2'b01:begin
+          
+     
+    
     
     assign MemWr0 = MemWr;
     assign MemWr1 = MemWrSize[0] & MemWr;
