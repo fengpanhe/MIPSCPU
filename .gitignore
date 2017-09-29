@@ -2,3 +2,4 @@ p_MIPS_CPU/p_MIPS_CPU.runs/
 p_MIPS_CPU/p_MIPS_CPU.cache/
 p_MIPS_CPU/p_MIPS_CPU.hw/
 p_MIPS_CPU/p_MIPS_CPU.sim/
+p_MIPS_CPU/p_MIPS_CPU.cache/wt/webtalk_pa.xml
