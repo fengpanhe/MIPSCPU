@@ -7,7 +7,7 @@
 #include<cstdlib>
 #include<stdlib.h>
 
-#include "assdefine.h"
+#include "asmdefine.h"
 using namespace std;
 //修正了addu 和 立即数的符号问题
 int N=0;
