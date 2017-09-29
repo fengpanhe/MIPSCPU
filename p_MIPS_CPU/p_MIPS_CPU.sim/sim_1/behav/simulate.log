@@ -1,10 +1,10 @@
 Vivado Simulator 2015.4
 Time resolution is 1 ps
 Note: Block Memory Generator module is using a behavioral model FOR simulation which will not precisely model memory collision behavior.
-Time: 85 ns  Iteration: 2  Process: /CPU_TEST2/MIPS_CPU/DataRam/ram0/U0/native_mem_module/mem_module/line__3418  File: E:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.ip_user_files/ipstatic/blk_mem_gen_v8_3_1/simulation/blk_mem_gen_v8_3.vhd
+Time: 85 ns  Iteration: 2  Process: /CPU_TEST2/MIPS_CPU/DataRam/ram0/U0/native_mem_module/mem_module/line__3418  File: C:/Users/ThinkPad/Documents/GitHub/MIPSCPU/p_MIPS_CPU/p_MIPS_CPU.ip_user_files/ipstatic/blk_mem_gen_v8_3_1/simulation/blk_mem_gen_v8_3.vhd
 Note: Block Memory Generator module is using a behavioral model FOR simulation which will not precisely model memory collision behavior.
-Time: 85 ns  Iteration: 2  Process: /CPU_TEST2/MIPS_CPU/DataRam/ram1/U0/native_mem_module/mem_module/line__3418  File: E:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.ip_user_files/ipstatic/blk_mem_gen_v8_3_1/simulation/blk_mem_gen_v8_3.vhd
+Time: 85 ns  Iteration: 2  Process: /CPU_TEST2/MIPS_CPU/DataRam/ram1/U0/native_mem_module/mem_module/line__3418  File: C:/Users/ThinkPad/Documents/GitHub/MIPSCPU/p_MIPS_CPU/p_MIPS_CPU.ip_user_files/ipstatic/blk_mem_gen_v8_3_1/simulation/blk_mem_gen_v8_3.vhd
 Note: Block Memory Generator module is using a behavioral model FOR simulation which will not precisely model memory collision behavior.
-Time: 85 ns  Iteration: 2  Process: /CPU_TEST2/MIPS_CPU/DataRam/ram2/U0/native_mem_module/mem_module/line__3418  File: E:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.ip_user_files/ipstatic/blk_mem_gen_v8_3_1/simulation/blk_mem_gen_v8_3.vhd
+Time: 85 ns  Iteration: 2  Process: /CPU_TEST2/MIPS_CPU/DataRam/ram2/U0/native_mem_module/mem_module/line__3418  File: C:/Users/ThinkPad/Documents/GitHub/MIPSCPU/p_MIPS_CPU/p_MIPS_CPU.ip_user_files/ipstatic/blk_mem_gen_v8_3_1/simulation/blk_mem_gen_v8_3.vhd
 Note: Block Memory Generator module is using a behavioral model FOR simulation which will not precisely model memory collision behavior.
-Time: 85 ns  Iteration: 2  Process: /CPU_TEST2/MIPS_CPU/DataRam/ram3/U0/native_mem_module/mem_module/line__3418  File: E:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.ip_user_files/ipstatic/blk_mem_gen_v8_3_1/simulation/blk_mem_gen_v8_3.vhd
+Time: 85 ns  Iteration: 2  Process: /CPU_TEST2/MIPS_CPU/DataRam/ram3/U0/native_mem_module/mem_module/line__3418  File: C:/Users/ThinkPad/Documents/GitHub/MIPSCPU/p_MIPS_CPU/p_MIPS_CPU.ip_user_files/ipstatic/blk_mem_gen_v8_3_1/simulation/blk_mem_gen_v8_3.vhd
