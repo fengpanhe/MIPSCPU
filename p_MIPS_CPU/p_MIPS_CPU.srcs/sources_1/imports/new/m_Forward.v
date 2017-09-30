@@ -23,12 +23,18 @@
 module m_Forward(
     input[4:0] RegWrAddr_mem,
     input[4:0] RegWrAddr_wb,
+    input[4:0] CPWrAddr_mem,
+    input[4:0] CPWrAddr_wb,
+    input CPWr_mem,
+    input CPWr_wb,
     input RegWr_mem,
     input RegWr_wb,
     input[4:0] RsAddr_ex,
     input[4:0] RtAddr_ex,
+    input[4:0] RdAddr_ex,
     output[1:0] ForwardA,
-    output[1:0] ForwardB
+    output[1:0] ForwardB,
+    output[1:0] ForwardCP
     );
     assign ForwardA[0] = RegWr_wb && (RegWrAddr_wb != 0)
                                 &&(RegWrAddr_mem != RsAddr_ex)
@@ -40,4 +46,8 @@ module m_Forward(
                         &&(RegWrAddr_wb == RtAddr_ex);
     assign ForwardB[1] = RegWr_mem && (RegWrAddr_mem != 0)
                         &&(RegWrAddr_mem == RtAddr_ex);   
+                        
+    assign ForwardCP[0] = CPWr_wb && (CPWrAddr_mem != RdAddr_ex) && (CPWrAddr_wb == RdAddr_ex);
+    
+    assign ForwardCP[1] = CPWr_mem && (CPWrAddr_mem == RdAddr_ex);
 endmodule

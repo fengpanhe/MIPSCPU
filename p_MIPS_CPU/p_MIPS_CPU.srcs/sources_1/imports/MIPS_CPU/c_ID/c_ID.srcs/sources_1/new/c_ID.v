@@ -25,11 +25,15 @@ module c_ID(
     input[31:0] Instruction_id,         //待执行指令
     input[31:0] NextPC_id,              //PC+4地址
     input RegWr_wb,                     //Regs的写使能信号
+    input CPWr_wb,
     input[4:0] RegWrAddr_wb,            //Regs的写寄存器地址
+    input[4:0] CPWrAddr_wb,
     input[31:0] RegWrData_wb,           //Regs的写入数据
+    input[31:0] CPWrData_wb,
     input MemRead_ex,                   //上一条指令是读MEM指令的信号，用于判断冒险发生的条件
     input[4:0] RegWrAddr_ex,            //上一条指令写回Regs的地址，用于判断冒险发生的条件
     output MemToReg_id,                 //译码生成的选择回写Regs数据源的控制信号
+    output CPToReg_id,                  
     output RegWr_id,                    //译码生成的用于回写Regs的使能信号
     output CPWr_id,                     //译码生成用于回写CP0寄存器的使能信号
     output MemWr_id,                    //译码生成的用于写MEM的使能信号
@@ -82,6 +86,7 @@ module c_ID(
     .func(Instruction_id[5:0]),
     .rs(Instruction_id[25:21]),
     .MemToReg(MemToReg_id),
+    .CPToReg(CPToReg_id),
     .MemWr(MemWr_id),
     .MemRead(MemRead_id),
     .MemReadSize(MemReadSize_id),
@@ -127,4 +132,5 @@ module c_ID(
     
     //CP0
     //wire[31:0] CPData_id;
+    assign CPData_id = 0;
 endmodule

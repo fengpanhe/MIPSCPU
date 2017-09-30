@@ -32,35 +32,52 @@ module c_EX(
     input[4:0] RdAddr_ex,
     input[31:0] RsData_ex,
     input[31:0] RtData_ex,
+    input[31:0] CPData_ex,/////
     input[31:0] RegWrData_wb,
+    input[31:0] CPWrData_wb, ////
+    input[31:0] CPWrData_mem,////
     input[31:0] ALUResult_mem,
     input[4:0] RegWrAddr_wb,
     input[4:0] RegWrAddr_mem,
+    input[4:0] CPWrAddr_wb,////////////
+    input[4:0] CPWrAddr_mem,////////////////
+    input CPWr_wb, //
+    input CPWr_mem, //
     input RegWr_wb,
     input RegWr_mem,
     input AL_ex,
     output reg[4:0] RegWrAddr_ex,
+    output[4:0] CPWrAddr_ex,/////////////////
     output[31:0] ALUResult_ex,
     output[31:0] MemWrData_ex,
+    output[31:0] CPWrData_ex, //需要写到CP0中的数据
+    output reg[31:0] CPResult_ex,//从CP0中读取的需要写到Regs中的数据
     output Overflow,
     output reg[31:0] ALU_A,
     output reg[31:0] ALU_B
     );
-    wire[1:0] ForwardA,ForwardB;
+    wire[1:0] ForwardA,ForwardB,ForwardCP;
     //assign forwardA = ForwardA;
     //assign forwardB = ForwardB;
     reg[31:0] MuxA,MuxB;//ALU_A,ALU_B;
     assign MemWrData_ex = MuxB;
+    assign CPWrAddr_ex = RdAddr_ex;
     //处理冲突的转发部件
     m_Forward forward(
     .RegWrAddr_mem(RegWrAddr_mem),
     .RegWrAddr_wb(RegWrAddr_wb),
+    .CPWrAddr_mem(CPWrAddr_mem),
+    .CPWrAddr_wb(CPWrAddr_wb),
+    .CPWr_mem(CPWr_mem),
+    .CPWr_wb(CPWr_wb),
     .RegWr_mem(RegWr_mem),
     .RegWr_wb(RegWr_wb),
     .RsAddr_ex(RsAddr_ex),
     .RtAddr_ex(RtAddr_ex),
+    .RdAddr_ex(RdAddr_ex),
     .ForwardA(ForwardA),
-    .ForwardB(ForwardB)
+    .ForwardB(ForwardB),
+    .ForwardCP(ForwardCP) ////
     );
     //ALU的A,B数据源的多路选择器
     always @(*) begin
@@ -96,7 +113,11 @@ module c_EX(
             default: ALU_B <= 32'bx;
         endcase
     end
-
+    
+    //CPWrData_ex
+    assign CPWrData_ex = MuxB;
+    
+    
     //选择RegWrAddr的多路选择器
     wire[1:0] sel;
     assign sel[0] = RegDst_ex;
@@ -109,6 +130,16 @@ module c_EX(
             2'b01: RegWrAddr_ex <= RdAddr_ex;
             2'b10: RegWrAddr_ex <= retAddr;
             2'b11: RegWrAddr_ex <= retAddr;
+        endcase
+    end
+    //Mux for CPResult
+    always @(*)
+    begin
+        case(ForwardCP)
+        2'b00: CPResult_ex <= CPData_ex;
+        2'b01: CPResult_ex <= CPWrData_wb;
+        2'b10: CPResult_ex <= CPWrData_mem;
+        default: CPResult_ex <= 32'bx;
         endcase
     end
     //ALU 

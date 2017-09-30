@@ -106,25 +106,21 @@ module m_MIPS_CPU(
     wire RegWr_id,RegWr_mem,RegWr_wb;
     wire MemRead_id,MemRead_ex;
     wire MemToReg_id,MemToReg_ex,MemToReg_mem,MemToReg_wb;
-   /* reg MemWr_ex,MemWr_mem;
-    initial 
-    begin
-    //MemWr_id <= 0;
-    MemWr_ex <= 0;
-    MemWr_mem <= 0;
-    end;*/
+    wire CPToReg_id,CPToReg_ex,CPToReg_mem,CPToReg_wb;////////////////////////////////
     wire MemWr_id,MemWr_ex,MemWr_mem;
-    wire CPWr_id,CPWr_ex,CPWr_mem,CPWr_wb;
-    wire CPData_id,CPData_ex,CPData_mem,CPData_wb;
+    wire CPWr_id,CPWr_ex,CPWr_mem,CPWr_wb;///////////////////////////////////////////
+    wire CPData_id,CPData_ex;///////////////////////////////////
     wire ALUsrcA_id,ALUsrcA_ex,ALUsrcB_id,ALUsrcB_ex;
     wire[4:0] ALUCode_id,ALUCode_ex;
     wire RegDst_id,RegDst_ex;
     wire JAL,BAL,AL_id,AL_ex,AL_mem,AL_wb;
     wire[31:0] Sa_id,Sa_ex,Imme_id,Imme_ex;
     wire[4:0] RegWrAddr_ex,RegWrAddr_mem,RegWrAddr_wb;
+    wire[4:0] CPWrAddr_ex,CPWrAddr_mem,CPWrAddr_wb;//////////////////////////////
     wire[1:0] MemReadSize_id,MemReadSize_ex,MemReadSize_mem;
     wire MemExtType_id,MemExtType_ex,MemExtType_mem;
     wire[31:0] RegWrData_wb;
+    wire[31:0] CPWrData_ex,CPWrData_mem,CPWrData_wb;///////////////////////
     wire[31:0] RsData_id,RtData_id,RsData_ex,RtData_ex;
     wire Stall;
     c_ID ID(
@@ -132,11 +128,15 @@ module m_MIPS_CPU(
     .Instruction_id(Instruction_id),
     .NextPC_id(NextPC_id),
     .RegWr_wb(RegWr_wb),
+    .CPWr_wb(CPWr_wb),
     .RegWrAddr_wb(RegWrAddr_wb),
+    .CPWrAddr_wb(CPWrAddr_wb),
     .RegWrData_wb(RegWrData_wb),
+    .CPWrData_wb(CPWrData_wb),
     .MemRead_ex(MemRead_ex),
     .RegWrAddr_ex(RegWrAddr_ex),
     .MemToReg_id(MemToReg_id),
+    .CPToReg_id(CPToReg_id),
     .RegWr_id(RegWr_id),
     .CPWr_id(CPWr_id),
     .MemWr_id(MemWr_id),
@@ -295,9 +295,29 @@ module m_MIPS_CPU(
     .din(MemReadSize_id),
     .dout(MemReadSize_ex)
     );  
+    m_dffr #(1) dffr19(
+    .clk(clk),
+    .reset(reset||Stall),
+    .din(CPToReg_id),
+    .dout(CPToReg_ex)
+    );
+    m_dffr #(1) dffr20(
+    .clk(clk),
+    .reset(reset||Stall),
+    .din(CPWr_id),
+    .dout(CPWr_ex)
+    );
+    m_dffr #(32) dffr21(
+    .clk(clk),
+    .reset(reset||Stall),
+    .din(CPData_id),
+    .dout(CPData_ex)
+    );
+    
     /*EX Module*/
     wire[31:0] ALUResult_ex,ALUResult_mem,ALUResult_wb;
     wire[31:0] MemWrData_ex,MemWrData_mem,MemWrData_wb;
+    wire[31:0] CPResult_ex,CPResult_mem,CPResult_wb;
     wire[31:0] ALU_A,ALU_B;
     wire Overflow;
     c_EX EX(
@@ -312,16 +332,26 @@ module m_MIPS_CPU(
     .RdAddr_ex(RdAddr_ex),
     .RsData_ex(RsData_ex),
     .RtData_ex(RtData_ex),
+    .CPData_ex(CPData_ex),
     .RegWrData_wb(RegWrData_wb),
+    .CPWrData_wb(CPWrData_wb),
+    .CPWrData_mem(CPWrData_mem),
     .ALUResult_mem(ALUResult_mem),
     .RegWrAddr_wb(RegWrAddr_wb),
     .RegWrAddr_mem(RegWrAddr_mem),
+    .CPWrAddr_wb(CPWrAddr_wb),
+    .CPWrAddr_mem(CPWrAddr_mem),
+    .CPWr_wb(CPWr_wb),
+    .CPWr_mem(CPWr_mem),
     .RegWr_wb(RegWr_wb),
     .RegWr_mem(RegWr_mem),
     .AL_ex(AL_ex),
     .RegWrAddr_ex(RegWrAddr_ex),
+    .CPWrAddr_ex(CPWrAddr_ex),
     .ALUResult_ex(ALUResult_ex),
     .MemWrData_ex(MemWrData_ex),
+    .CPWrData_ex(CPWrData_ex),
+    .CPResult_ex(CPResult_ex),
     .Overflow(Overflow),
     .ALU_A(ALU_A),
     .ALU_B(ALU_B)
@@ -387,6 +417,35 @@ module m_MIPS_CPU(
     .din(AL_ex),
     .dout(AL_mem)
     );
+    m_dff #(1) dffCP0(
+    .clk(clk),
+    .din(CPToReg_ex),
+    .dout(CPToReg_mem)
+    );
+    
+    m_dff #(1) dffCP1(
+    .clk(clk),
+    .din(CPWr_ex),
+    .dout(CPWr_mem)
+    );
+    
+    m_dff #(32) dffCP2(
+    .clk(clk),
+    .din(CPWrData_ex),
+    .dout(CPWrData_mem)
+    );
+    
+    m_dff #(32) dffCP3(
+    .clk(clk),
+    .din(CPResult_ex),
+    .dout(CPResult_mem)
+    );
+    
+    m_dff #(5) dffCP4(
+    .clk(clk),
+    .din(CPWrAddr_ex),
+    .dout(CPWrAddr_mem)
+    );
     /*MEM Module*/
     wire[31:0] MemResult_mem,MemResult_wb;
     m_DataRam DataRam(
@@ -443,6 +502,35 @@ module m_MIPS_CPU(
     .dout(MemResult_wb)
     );
     
+    m_dff #(1) dff18 (
+    .clk(clk),
+    .din(CPToReg_mem),
+    .dout(CPToReg_wb)
+    );
+    
+    m_dff #(1) dff19 (
+    .clk(clk),
+    .din(CPWr_mem),
+    .dout(CPWr_wb)
+    );
+    
+    m_dff #(32) dff20(
+    .clk(clk),
+    .din(CPWrData_mem),
+    .dout(CPWrData_wb)
+    );
+    
+    m_dff #(32) dff21(
+    .clk(clk),
+    .din(CPResult_mem),
+    .dout(CPResult_wb)
+    );
+    m_dff #(5) dff22(
+    .clk(clk),
+    .din(CPWrAddr_mem),
+    .dout(CPWrAddr_wb)
+    );
+    
     reg[31:0] RegWrData;
     always @(*)
     begin
@@ -450,6 +538,8 @@ module m_MIPS_CPU(
         RegWrData <= NextPC_wb;
     else if(MemToReg_wb == 1)
         RegWrData <= MemResult_wb;
+    else if(CPToReg_wb == 1)
+        RegWrData <= CPResult_wb;
     else
         RegWrData <= ALUResult_wb;
     end

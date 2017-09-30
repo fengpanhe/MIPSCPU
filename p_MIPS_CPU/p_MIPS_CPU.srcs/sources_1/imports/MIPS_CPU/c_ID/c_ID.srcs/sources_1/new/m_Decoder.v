@@ -25,6 +25,7 @@ module m_Decoder(
     input[5:0] func,
     input[5:0] rs,
     output MemToReg,                //决定写回到Regs的数据源 0:ALU 1:MEM
+    output CPToReg,                 //决定写回Regs的数据源 0：其他 1:CP0
     output MemWr,                   //MEM写使能信号
     output MemRead,                 //MEM读指令信号，用于进行冒险检测
     output[1:0] MemReadSize,        //MEM读指令选择读取的数据字长 00:1B 01:2B 11:4B
@@ -185,6 +186,7 @@ module m_Decoder(
       assign I_type3 = SB | SH | SW;
      //设计输出信号逻辑
      assign MemToReg = I_type2;
+     assign CPToReg = MFC0;
      assign MemWr = I_type3;
      assign MemRead = I_type2;
      assign MemExtType = LB | LH ;
