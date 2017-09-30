@@ -40,6 +40,8 @@ module m_MIPS_CPU(
     //output alusrcA_id,
     //output alusrcB_id,
     output[31:0] aluresult_ex,
+    output wire[31:0] HI,
+    output wire[31:0] LO,
     //output[31:0] aluresult_mem,
     //output regdst_id,
     //output regdst_ex,
@@ -109,7 +111,7 @@ module m_MIPS_CPU(
     wire CPToReg_id,CPToReg_ex,CPToReg_mem,CPToReg_wb;////////////////////////////////
     wire MemWr_id,MemWr_ex,MemWr_mem;
     wire CPWr_id,CPWr_ex,CPWr_mem,CPWr_wb;///////////////////////////////////////////
-    wire CPData_id,CPData_ex;///////////////////////////////////
+    wire[31:0] CPData_id,CPData_ex;///////////////////////////////////
     wire ALUsrcA_id,ALUsrcA_ex,ALUsrcB_id,ALUsrcB_ex;
     wire[4:0] ALUCode_id,ALUCode_ex;
     wire RegDst_id,RegDst_ex;
@@ -349,6 +351,8 @@ module m_MIPS_CPU(
     .RegWrAddr_ex(RegWrAddr_ex),
     .CPWrAddr_ex(CPWrAddr_ex),
     .ALUResult_ex(ALUResult_ex),
+    .HI(HI),
+    .LO(LO),
     .MemWrData_ex(MemWrData_ex),
     .CPWrData_ex(CPWrData_ex),
     .CPResult_ex(CPResult_ex),

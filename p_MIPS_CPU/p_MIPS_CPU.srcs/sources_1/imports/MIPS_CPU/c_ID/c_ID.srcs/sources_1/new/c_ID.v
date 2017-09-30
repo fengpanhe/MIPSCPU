@@ -129,8 +129,22 @@ module c_ID(
     .PC_IFWrite(PC_IFWrite),
     .Stall(Stall)
     );
-    
+    wire[4:0] excCode;              //异常类型编号
+    wire[5:0] int_i;                //中断类型号
+    assign excCode = Instruction_id[10:6];
+    assign int_i = Instruction_id[25:20];
     //CP0
-    //wire[31:0] CPData_id;
-    assign CPData_id = 0;
+    cp0_reg CP0Regs(
+    .rst(reset),
+    .clk(clk),
+    .we_i(CPWr_wb),
+    .waddr_i(CPWrAddr_wb),
+    .data_i(CPWrData_wb),
+    .raddr_i(RtAddr_id),
+    .excepttype_i(excCode),
+    .int_i(int_i),
+    .current_inst_addr_i(NexPC_id),
+    .data_o(CPData_id)
+    );
+    //assign CPData_id = 0;
 endmodule

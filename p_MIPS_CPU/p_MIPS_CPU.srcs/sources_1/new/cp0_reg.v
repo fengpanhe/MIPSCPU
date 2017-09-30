@@ -25,169 +25,107 @@ module cp0_reg(
     input wire rst,
     input wire clk,
 
-    input wire we_i,                //æ˜¯å¦è¦å†™CP0ä¸­çš„å¯„å­˜å™¨
-    input wire[4:0] waddr_i,        //è¦å†™å…¥çš„CP0å¯„å­˜å™¨çš„åœ°å€
-    input wire[`RegBus] data_i,     //è¦å†™å…¥CP0ä¸­å¯„å­˜å™¨çš„æ•°æ®
+    input wire we_i,                //CP0µÄĞ´Ê¹ÄÜ¶Ë
+    input wire[4:0] waddr_i,        //CP0Ğ´ÈëµØÖ·Ñ¡Ôñ
+    input wire[`RegBus] data_i,     //CP0Ğ´ÈëÊı¾İ
 
-    input wire[4:0] raddr_i,        //è¦è¯»å–çš„CP0å¯„å­˜å™¨çš„åœ°å€
-    output reg[`RegBus] data_o,     //è¯»å‡ºçš„CP0æŸä¸ªå¯„å­˜å™¨çš„å€¼
+    input wire[4:0] raddr_i,        //CP0¶ÁÈ¡µØÖ·
+    output reg[`RegBus] data_o,     //CP0¶ÁÈ¡Êı¾İ
 
-    //å¼‚å¸¸ç›¸å…³è¾“å…¥æ¥å£
-    input wire[31:0] excepttype_i,                  //æœ€ç»ˆçš„å¼‚å¸¸ç±»å‹
-    input wire[5:0] int_i,                          //6ä¸ªå¤–éƒ¨ç¡¬ä»¶ä¸­æ–­è¾“å…¥
-    input wire[`InstAddrBus] current_inst_addr_i,   //å‘ç”Ÿå¼‚å¸¸çš„æŒ‡ä»¤åœ°å€
-    input wire is_in_delayslot_i,                   //å‘ç”Ÿå¼‚å¸¸çš„æŒ‡ä»¤æ˜¯å¦æ˜¯å»¶è¿Ÿæ§½æŒ‡ä»¤
+    //Òì³£Ïà¹ØÊäÈë½Ó¿Ú
+    input wire[4:0] excepttype_i,                  //Òì³£ÀàĞÍ±àºÅ
+    input wire[5:0] int_i,                          //6¸öÍâ²¿Ó²¼şÖĞ¶ÏÊäÈë
+    input wire[`InstAddrBus] current_inst_addr_i,   //·¢ÉúÒì³£µÄÖ¸ÁîµØÖ·
 
+    output reg[`RegBus] status_o,   //Status RegµÄÖµ
+    output reg[`RegBus] cause_o,    //Cause RegµÄÖµ
+    output reg[`RegBus] epc_o      //EPC RegµÄÖµ£¬ÓÃÓÚ±£´æÖĞ¶Ï·µ»ØµØÖ·
 
-
-    output reg[`RegBus] status_o,   //Statuså¯„å­˜å™¨çš„å€¼
-    output reg[`RegBus] cause_o,    //Causeå¯„å­˜å™¨çš„å€¼
-    output reg[`RegBus] epc_o,      //EPCå¯„å­˜å™¨çš„å€¼
-
-
-    output reg timer_int_o          //æ˜¯å¦æœ‰å®šæ—¶ä¸­æ–­å‘ç”Ÿ
     );
 
 //******************************************************************************
-//                     å¯¹CP0ä¸­å¯„å­˜å™¨çš„å†™æ“ä½œï¼šæ—¶åºé€»è¾‘
-//  Causeå¯„å­˜å™¨åªæœ‰å…¶ä¸­çš„IP[1:0]ã€IVã€WPä¸‰ä¸ªå­—æ®µå¯å†™
+//                     ¶ÔCP0ÖĞ¼Ä´æÆ÷µÄĞ´²Ù×÷£ºÊ±ĞòÂß¼­
+//  Cause RegÖĞÖ»ÓĞÆäÖĞIP[5:0]¡¢ExcCode[4:0]×Ö¶Î¿ÉĞ´
 //******************************************************************************
     always @ ( posedge clk ) begin
         if(rst == `RstEnable) begin
-
-
-            //Statuså¯„å­˜å™¨çš„åˆå§‹å€¼ï¼šå…¶ä¸­CUå­—æ®µä¸º0001ï¼Œè¡¨ç¤ºåå¤„ç†å™¨CP0å­˜åœ¨
+            //Status¼Ä´æÆ÷µÄ³õÊ¼Öµ
             status_o <= 32'b0001_0000_0000_0000_0000_0000_0000_0000;
-
-            //Causeå¯„å­˜å™¨çš„åˆå§‹å€¼
+            //Cause¼Ä´æÆ÷µÄ³õÊ¼Öµ
             cause_o <= `ZeroWord;
-
-            //EPCå¯„å­˜å™¨çš„åˆå§‹å€¼
+            //EPC¼Ä´æÆ÷µÄ³õÊ¼Öµ
             epc_o <= `ZeroWord;
-
-            timer_int_o <= `InterruptNotAssert;
-
         end else begin
-
-            cause_o[15:10] <= int_i;     //Causeå¯„å­˜å™¨çš„10-15ä½ä¿å­˜å¤–éƒ¨ä¸­æ–­å£°æ˜
-
-
+            //Cause¼Ä´æÆ÷µÄ[13:8]Î»±£´æÍâ²¿ÖĞ¶ÏÀàĞÍ
             if(we_i == `WriteEnable) begin
                 case(waddr_i)
-                    `CP0_REG_STATUS:begin           //å†™Statuså¯„å­˜å™¨
+                    `CP0_REG_STATUS:begin           //Ğ´Status¼Ä´æÆ÷
                         status_o <= data_i;
                     end
-                    `CP0_REG_EPC:begin              //å†™EPCå¯„å­˜å™¨
+                    `CP0_REG_EPC:begin              //Ğ´EPC¼Ä´æÆ÷
                         epc_o <= data_i;
                     end
-                    `CP0_REG_CAUSE:begin            //å†™Causeå¯„å­˜å™¨
-                        //Causeå¯„å­˜å™¨åªæœ‰IP[1:0]ã€IVã€WPå­—æ®µæ˜¯å¯å†™çš„
-                        cause_o[9:8] <= data_i[9:8];    //IP[1:0]
-                        cause_o[23] <= data_i[23];      //IV
-                        cause_o[22] <= data_i[22];      //WP
+                    `CP0_REG_CAUSE:begin            //Ğ´Cause¼Ä´æÆ÷
+                        cause_o[13:8] <= data_i[13:8];    //IP[5:0]
                     end
                 endcase
-            end//if(we_i == `WriteEnable)
-
+            end
+            
+            //´¦ÀíÒì³£       
             case(excepttype_i)
-                32'h0000_0001:begin                 //å¤–éƒ¨ä¸­æ–­
-                    //å·²ç»åœ¨è®¿å­˜é˜¶æ®µåˆ¤æ–­äº†æ˜¯å¦å¤„äºå¼‚å¸¸çº§
-                    if(is_in_delayslot_i == `InDelaySlot) begin
-                        epc_o <= current_inst_addr_i - 4;
-                        cause_o[31] <= 1'b1;        //Causeå¯„å­˜å™¨çš„BDå­—æ®µ
-                    end else begin
-                        epc_o <= current_inst_addr_i;
-                        cause_o[31] <= 1'b0;
-                    end
-                    status_o[1] <= 1'b1;            //Statuså¯„å­˜å™¨çš„EXLå­—æ®µ
-                    cause_o[6:2] <= 5'b00000;       //Causeå¯„å­˜å™¨çš„ExcCodeå­—æ®µ
+                //Íâ²¿Ó²¼şÖĞ¶Ï
+                5'b00000:begin                
+                    epc_o <= current_inst_addr_i;  //±£´æ·µ»ØµØÖ·
+                    cause_o[6:2] <= 5'b00000;      //ÉèÖÃExcCode
                 end
-                32'h0000_0008:begin                 //ç³»ç»Ÿè°ƒç”¨syscallå¼‚å¸¸
-                    //Status[1]ä¸ºEXLå­—æ®µï¼Œè¡¨ç¤ºæ˜¯å¦å¤„äºå¼‚å¸¸çº§
-                    if(status_o[1] == 1'b0) begin
-                        if(is_in_delayslot_i == `InDelaySlot) begin
-                            epc_o <= current_inst_addr_i - 4;
-                            cause_o[31] <= 1'b1;
-                        end else begin
-                            epc_o <= current_inst_addr_i;
-                            cause_o[31] <= 1'b0;
-                        end
-                    end
-                    //å¦‚æœEXLå­—æ®µä¸º1ï¼Œè¡¨ç¤ºå½“å‰å·²ç»å¤„äºå¼‚å¸¸çº§äº†ï¼Œåˆå‘ç”Ÿäº†æ–°çš„å¼‚å¸¸ï¼Œé‚£ä¹ˆ
-                    //åªéœ€è¦å°†å¼‚å¸¸åŸå› ä¿å­˜åˆ°Causeå¯„å­˜å™¨çš„ExcCodeå­—æ®µ
-                    status_o[1] <= 1'b1;
+                //ÏµÍ³µ÷ÓÃsyscall
+                5'b01000:begin                 
+                    epc_o <= current_inst_addr_i;
                     cause_o[6:2] <= 5'b01000;
                 end
-                32'h0000_000a:begin                 //æ— æ•ˆæŒ‡ä»¤å¼‚å¸¸/ä¿ç•™æŒ‡ä»¤å¼‚å¸¸
-                    if(status_o[1] == 1'b0) begin
-                        if(is_in_delayslot_i == `InDelaySlot) begin
-                            epc_o <= current_inst_addr_i - 4;
-                            cause_o[31] <= 1'b1;
-                        end else begin
-                            epc_o <= current_inst_addr_i;
-                            cause_o[31] <= 1'b0;
-                        end
-                    end
-                    status_o[1] <= 1'b1;
+                //breakÒì³£
+                5'b01001:begin
+                    epc_o <= current_inst_addr_i;
                     cause_o[6:2] <= 5'b01010;
                 end
-                32'h0000_000d:begin                 //è‡ªé™·å¼‚å¸¸
-                    if(status_o[1] == 1'b0) begin
-                        if(is_in_delayslot_i == `InDelaySlot) begin
-                            epc_o <= current_inst_addr_i - 4;
-                            cause_o[31] <= 1'b1;
-                        end else begin
-                            epc_o <= current_inst_addr_i;
-                            cause_o[31] <= 1'b0;
-                        end
-                    end
-                    status_o[1] <= 1'b1;
-                    cause_o[6:2] <= 5'b01101;
+                //ÎŞĞ§¡¢±£ÁôÖ¸ÁîÒì³£
+                5'b01010:begin                
+                    epc_o <= current_inst_addr_i;
+                    cause_o[6:2] <= 5'b01010;
                 end
-                32'h0000_000c:begin                 //åŠ å‡æº¢å‡ºå¼‚å¸¸
-                    if(status_o[1] <= 1'b0) begin
-                        if(is_in_delayslot_i == `InDelaySlot) begin
-                            epc_o <= current_inst_addr_i - 4;
-                            cause_o[31] <= 1'b1;
-                        end else begin
-                            epc_o <= current_inst_addr_i;
-                            cause_o[31] <= 1'b0;
-                        end
-                    end
-                    status_o[1] <= 1'b1;
+                //¼Ó¼õÒç³öÒì³£
+                5'b01100:begin 
+                    epc_o <= current_inst_addr_i;
                     cause_o[6:2] <= 5'b01100;
-                end
-                32'h0000_000e:begin                 //å¼‚å¸¸è¿”å›æŒ‡ä»¤eret
-                    status_o[1] <= 1'b0;
                 end
                 default:begin
                 end
             endcase
-        end//else
+        end
     end
 
 
 //******************************************************************************
-//                      å¯¹CP0ä¸­å¯„å­˜å™¨çš„è¯»æ“ä½œï¼šç»„åˆé€»è¾‘
+//                      ¶ÔCP0ÖĞ¼Ä´æÆ÷µÄ¶Á²Ù×÷£º×éºÏÂß¼­
 //******************************************************************************
     always @ ( * ) begin
         if(rst == `RstEnable) begin
             data_o <= `ZeroWord;
         end else begin
             case(raddr_i)
-                `CP0_REG_STATUS:begin               //è¯»Statuså¯„å­˜å™¨
+                `CP0_REG_STATUS:begin               //¶ÁStatus¼Ä´æÆ÷
                     data_o <= status_o;
                 end
-                `CP0_REG_CAUSE:begin                //è¯»Causeå¯„å­˜å™¨
+                `CP0_REG_CAUSE:begin                //¶ÁCause¼Ä´æÆ÷
                     data_o <= cause_o;
                 end
-                `CP0_REG_EPC:begin                  //è¯»EPCå¯„å­˜å™¨
+                `CP0_REG_EPC:begin                  //¶ÁEPC¼Ä´æÆ÷
                     data_o <= epc_o;
                 end
                 default:begin
                 end
             endcase
-        end//else
+        end
     end
 
 endmodule

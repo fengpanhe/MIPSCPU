@@ -25,6 +25,8 @@ module m_ALU(
     input[31:0] ALU_A,
     input[31:0] ALU_B,
     output reg[31:0] ALU_Result,
+    output[31:0] HI,
+    output[31:0] LO,
     output reg Overflow
     );
     
@@ -60,8 +62,8 @@ module m_ALU(
     reg signed[31:0] B_signed;
     reg[31:0] r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15;
     always @(ALU_B) B_signed = ALU_B;    //��Bת�����з�����������������
-    wire[31:0] sum;             //�ӷ������?
-    wire[63:0] multRes,multRes_signed;//�˷������?
+    wire[31:0] sum;             //�ӷ������?
+    wire[63:0] multRes,multRes_signed;//�˷������?
     wire[63:0] divRes, divRes_signed;
     wire CF,OF,Cout,isAdd;      //�ж��Ƿ��Ǽӷ����� 0-add 1-others
     assign OF = &(ALU_A[31:0]~^ALU_B[31:0]);

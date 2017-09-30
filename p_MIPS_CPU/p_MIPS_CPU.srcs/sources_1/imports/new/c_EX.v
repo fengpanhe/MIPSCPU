@@ -49,9 +49,11 @@ module c_EX(
     output reg[4:0] RegWrAddr_ex,
     output[4:0] CPWrAddr_ex,/////////////////
     output[31:0] ALUResult_ex,
+    output wire[31:0] HI,
+    output wire[31:0] LO,
     output[31:0] MemWrData_ex,
-    output[31:0] CPWrData_ex, //ÐèÒªÐ´µ½CP0ÖÐµÄÊý¾Ý
-    output reg[31:0] CPResult_ex,//´ÓCP0ÖÐ¶ÁÈ¡µÄÐèÒªÐ´µ½RegsÖÐµÄÊý¾Ý
+    output[31:0] CPWrData_ex, //ï¿½ï¿½ÒªÐ´ï¿½ï¿½CP0ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½
+    output reg[31:0] CPResult_ex,//ï¿½ï¿½CP0ï¿½Ð¶ï¿½È¡ï¿½ï¿½ï¿½ï¿½ÒªÐ´ï¿½ï¿½Regsï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½
     output Overflow,
     output reg[31:0] ALU_A,
     output reg[31:0] ALU_B
@@ -62,7 +64,7 @@ module c_EX(
     reg[31:0] MuxA,MuxB;//ALU_A,ALU_B;
     assign MemWrData_ex = MuxB;
     assign CPWrAddr_ex = RdAddr_ex;
-    //´¦Àí³åÍ»µÄ×ª·¢²¿¼þ
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     m_Forward forward(
     .RegWrAddr_mem(RegWrAddr_mem),
     .RegWrAddr_wb(RegWrAddr_wb),
@@ -79,7 +81,7 @@ module c_EX(
     .ForwardB(ForwardB),
     .ForwardCP(ForwardCP) ////
     );
-    //ALUµÄA,BÊý¾ÝÔ´µÄ¶àÂ·Ñ¡ÔñÆ÷
+    //ALUï¿½ï¿½A,Bï¿½ï¿½ï¿½ï¿½Ô´ï¿½Ä¶ï¿½Â·Ñ¡ï¿½ï¿½ï¿½ï¿½
     always @(*) begin
         case(ForwardA)
             2'b00: MuxA <= RsData_ex;
@@ -118,7 +120,7 @@ module c_EX(
     assign CPWrData_ex = MuxB;
     
     
-    //Ñ¡ÔñRegWrAddrµÄ¶àÂ·Ñ¡ÔñÆ÷
+    //Ñ¡ï¿½ï¿½RegWrAddrï¿½Ä¶ï¿½Â·Ñ¡ï¿½ï¿½ï¿½ï¿½
     wire[1:0] sel;
     assign sel[0] = RegDst_ex;
     assign sel[1] = AL_ex;
@@ -148,6 +150,8 @@ module c_EX(
     .ALU_A(ALU_A),
     .ALU_B(ALU_B),
     .ALU_Result(ALUResult_ex),
+    .HI(HI),
+    .LO(LO),
     .Overflow(Overflow)
     );
 endmodule

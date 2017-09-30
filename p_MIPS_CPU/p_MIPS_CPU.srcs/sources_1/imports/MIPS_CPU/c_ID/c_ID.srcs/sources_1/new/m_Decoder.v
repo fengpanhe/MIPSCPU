@@ -23,7 +23,7 @@
 module m_Decoder(
     input[5:0] op,
     input[5:0] func,
-    input[5:0] rs,
+    input[4:0] rs,
     output MemToReg,                //决定写回到Regs的数据源 0:ALU 1:MEM
     output CPToReg,                 //决定写回Regs的数据源 0：其他 1:CP0
     output MemWr,                   //MEM写使能信号
