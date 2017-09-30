@@ -254,6 +254,12 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PPRDIR/../asm/test1.coe">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
         <Option Name="TopModule" Val="m_MIPS_CPU"/>
@@ -487,11 +493,12 @@
         <Step Id="synth_design"/>
       </Strategy>
     </Run>
-    <Run Id="m_programRom_synth_1" Type="Ft3:Synth" SrcSet="m_programRom" Part="xc7a100tfgg484-1" ConstrsSet="m_programRom" Description="Vivado Synthesis Defaults" IncludeInArchive="true">
+    <Run Id="m_programRom_synth_1" Type="Ft3:Synth" SrcSet="m_programRom" Part="xc7a100tfgg484-1" ConstrsSet="m_programRom" Description="Vivado Synthesis Defaults" Dir="$PRUNDIR/m_programRom_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2015"/>
         <Step Id="synth_design"/>
       </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
     <Run Id="Branch_adder_synth_1" Type="Ft3:Synth" SrcSet="Branch_adder" Part="xc7a100tfgg484-1" ConstrsSet="Branch_adder" Description="Vivado Synthesis Defaults" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">

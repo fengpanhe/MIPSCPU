@@ -200,7 +200,7 @@ int main(int argc, char** argv){
             printBin(rs, 5, obj);
             printBin(rt, 5, obj);
             printBin(0, 10, obj);       // shamt
-            printBin(0x19, 6, obj);    // funct
+            printBin(0x1a, 6, obj);    // funct
         }
         else if (!strcmp(command, "divu")){
             printBin(0, 6, obj);       // OpCode
@@ -214,7 +214,7 @@ int main(int argc, char** argv){
             printBin(rs, 5, obj);
             printBin(rt, 5, obj);
             printBin(0, 10, obj);       // shamt
-            printBin(0x1a, 6, obj);    // funct
+            printBin(0x1b, 6, obj);    // funct
         }
         else if (!strcmp(command, "mfhi")){
 
