@@ -61,11 +61,11 @@ module m_ALU(
     reg[31:0] LO;
     reg signed[31:0] B_signed;
     reg[31:0] r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15;
-    always @(ALU_B) B_signed = ALU_B;    //��Bת�����з�����������������
-    wire[31:0] sum;             //�ӷ������?
-    wire[63:0] multRes,multRes_signed;//�˷������?
+    always @(ALU_B) B_signed = ALU_B;    //閿熸枻鎷稡杞敓鏂ゆ嫹閿熸枻鎷烽敓鍙嚖鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�
+    wire[31:0] sum;             //閿熸帴鍑ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿燂拷?
+    wire[63:0] multRes,multRes_signed;//閿熷壙鍑ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿燂拷?
     wire[63:0] divRes, divRes_signed;
-    wire CF,OF,Cout,isAdd;      //�ж��Ƿ��Ǽӷ����� 0-add 1-others
+    wire CF,OF,Cout,isAdd;      //閿熷彨璁规嫹閿熻鍑ゆ嫹閿熻鍔犲嚖鎷烽敓鏂ゆ嫹閿熸枻鎷� 0-add 1-others
     assign OF = &(ALU_A[31:0]~^ALU_B[31:0]);
     assign CF = Cout^isAdd;
     assign isAdd = ~(ALUCode == ALU_ADD);
