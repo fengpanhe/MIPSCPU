@@ -32,6 +32,7 @@ module c_ID(
     input[31:0] CPWrData_wb,
     input MemRead_ex,                   //上一条指令是读MEM指令的信号，用于判断冒险发生的条件
     input[4:0] RegWrAddr_ex,            //上一条指令写回Regs的地址，用于判断冒险发生的条件
+    input overFlow,
     output MemToReg_id,                 //译码生成的选择回写Regs数据源的控制信号
     output CPToReg_id,                  
     output RegWr_id,                    //译码生成的用于回写Regs的使能信号
@@ -63,6 +64,8 @@ module c_ID(
     output[4:0] RdAddr_id,             
     output[31:0] Sa_id,                 //零扩展成32bit的移位立即数
     output[31:0] Imme_id                //符号扩展成32bit的立即数
+    //output breakExc,
+    //output syscallExc
     );
     assign RsAddr_id = Instruction_id[25:21];
     assign RtAddr_id = Instruction_id[20:16];
@@ -131,6 +134,7 @@ module c_ID(
     );
     wire[4:0] excCode;              //异常类型编号
     wire[5:0] int_i;                //中断类型号
+    wire[31:0] eretAddr;
     assign excCode = Instruction_id[10:6];
     assign int_i = Instruction_id[25:20];
     //CP0
@@ -144,7 +148,7 @@ module c_ID(
     .excepttype_i(excCode),
     .int_i(int_i),
     .current_inst_addr_i(NexPC_id),
-    .data_o(CPData_id)
+    .data_o(CPData_id),
+    .eretAddr(eretAddr)
     );
-    //assign CPData_id = 0;
 endmodule

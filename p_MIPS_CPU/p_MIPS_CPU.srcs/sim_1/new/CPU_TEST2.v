@@ -35,8 +35,8 @@ module CPU_TEST2();
      wire[4:0] ALUCode_id;
      wire flush;
      wire[31:0] ALUResult_ex;
-     wire[31:0] HI;
-     wire[31:0] LO;
+     //wire[31:0] HI;
+     //wire[31:0] LO;
      wire[31:0] RegWrData_wb;
      wire[31:0] ALUa_ex,ALUb_ex;
      wire[31:0] MemResult;
@@ -48,7 +48,7 @@ module CPU_TEST2();
      wire[31:0] MemWrData_mem;
      wire[31:0] tmpOut;
      wire[1:0] MemReadSize_mem;
-    m_MIPS_CPU MIPS_CPU(
+    /*m_MIPS_CPU MIPS_CPU(
      .clk(clk),
      .reset(reset),
      .pc_ifwrite(PC_IFWrite),
@@ -60,37 +60,37 @@ module CPU_TEST2();
      .HI(HI),
      .LO(LO),
      .Instruction2(Instruction_id)
-     );
-    //  m_MIPS_CPU MIPS_CPU(
-    //  .clk(clk),
-    //  .reset(reset),
-    //  .stall(Stall),
-    //  .pc_ifwrite(PC_IFWrite),
-    //  .Instruction(Instruction_if),
-    //  .ALUCode(ALUCode_id),
-    //  .ALU_a(ALUa_ex),
-    //  .ALU_b(ALUb_ex),
-    //  .aluresult_ex(ALUResult_ex),
-    //  .HI(HI),
-    //  .LO(LO),
-    //  .nextpc_if(NextPC_if),
-    //  .nextpc_id(NextPC_id),
-    //  .nextpc_ex(NextPC_ex),
-    //  .nextpc_mem(NextPC_mem),
-    //  .Instruction2(Instruction_id),
-    //  .regwrdata_wb(RegWrData_wb),
-    //  .memtoreg_wb(MemToReg_wb),
-    //  .flush(flush),
-    //  .memresult(MemResult),
-    //  .memaddr(MemAddr),
-    //  .memwr_id(MemWr_id),
-    //  .memwr_ex(MemWr_ex),
-    //  .memwr_mem(MemWr_mem),
-    //  .memwrdata_mem(MemWrData_mem),
-    //  .memtmpout(tmpOut),
-    //  .memreadsize_mem(MemReadSize_mem),
-    //  .j(J),
-    //  .jr(JR),
-    //  .z(Z)
-    //  );
+     );*/
+    m_MIPS_CPU MIPS_CPU(
+    .clk(clk),
+    .reset(reset),
+    .stall(Stall),
+    .pc_ifwrite(PC_IFWrite),
+    .Instruction(Instruction_if),
+    .ALUCode(ALUCode_id),
+    .ALU_a(ALUa_ex),
+    .ALU_b(ALUb_ex),
+    .aluresult_ex(ALUResult_ex),
+    .HI(HI),
+    .LO(LO),
+    .nextpc_if(NextPC_if),
+    .nextpc_id(NextPC_id),
+    .nextpc_ex(NextPC_ex),
+    .nextpc_mem(NextPC_mem),
+    .Instruction2(Instruction_id),
+    .regwrdata_wb(RegWrData_wb),
+    .memtoreg_wb(MemToReg_wb),
+    .flush(flush),
+    .memresult(MemResult),
+    .memaddr(MemAddr),
+    .memwr_id(MemWr_id),
+    .memwr_ex(MemWr_ex),
+    .memwr_mem(MemWr_mem),
+    .memwrdata_mem(MemWrData_mem),
+    .memtmpout(tmpOut),
+    .memreadsize_mem(MemReadSize_mem),
+    .j(J),
+    .jr(JR),
+    .z(Z)
+    );
 endmodule

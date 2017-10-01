@@ -315,7 +315,6 @@ module m_MIPS_CPU(
     .din(CPData_id),
     .dout(CPData_ex)
     );
-    
     /*EX Module*/
     wire[31:0] ALUResult_ex,ALUResult_mem,ALUResult_wb;
     wire[31:0] MemWrData_ex,MemWrData_mem,MemWrData_wb;
