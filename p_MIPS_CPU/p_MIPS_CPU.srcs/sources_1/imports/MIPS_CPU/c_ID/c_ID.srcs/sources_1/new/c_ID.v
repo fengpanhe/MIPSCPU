@@ -87,7 +87,7 @@ module c_ID(
     assign Imme_id = {{16{Instruction_id[15]}},Instruction_id[15:0]};
     //assign JmpAddr = {NextPC_id[31:28],Instruction_id[25:0],2'b00};
     assign JrAddr = RsData_id;
-    assign J = Jmp ;//|| Je;
+    assign J = Jmp|| Je;
     assign IF_flush = Z || Jmp || JR;
   
     assign JAddr = {NextPC_id[31:28],Instruction_id[25:0],2'b00};
@@ -176,11 +176,11 @@ module c_ID(
     .PC_IFWrite(PC_IFWrite),
     .Stall(Stall)
     );
-    wire[4:0] excCode;              //异常类型编号
+    //wire[4:0] excCode;              //异常类型编号
     wire[5:0] int_i;                //中断类型号
     wire[31:0] eretAddr;
-    assign excCode = Instruction_id[10:6];
-    assign int_i = Instruction_id[25:20];
+    //assign excCode = Instruction_id[10:6];
+    assign int_i = 0;
     m_ExceptionProc EP(
     .ALUCode(ALUCode_id),
     .Func(Instruction_id[5:0]),
