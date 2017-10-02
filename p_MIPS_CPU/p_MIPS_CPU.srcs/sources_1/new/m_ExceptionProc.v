@@ -44,7 +44,7 @@ module m_ExceptionProc(
     parameter EXC_RESERVED = 5'b01010;
     parameter EXC_OVERFLOW = 5'b01100;
     
-    parameter EXC_ADDR = 32'h00001000;
+    parameter EXC_ADDR = 32'h00000030;
     
     initial 
     begin

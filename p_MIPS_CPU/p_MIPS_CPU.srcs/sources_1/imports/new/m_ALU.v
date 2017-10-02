@@ -100,7 +100,7 @@ module m_ALU(
     );
     always @(*)
     begin
-        if((CF^sum[31]) && ((ALUCode == ALU_ADD) || (ALUCode == ALU_SUB)))
+        if((ALU_A[31]^sum[31]) && (B2[31]^sum[31]) && ((ALUCode == ALU_ADD) || (ALUCode == ALU_SUB)))
             Overflow = 1;
         else
             Overflow = 0;
