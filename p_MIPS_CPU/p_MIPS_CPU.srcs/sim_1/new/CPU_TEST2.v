@@ -35,10 +35,16 @@ module CPU_TEST2();
      wire[4:0] ALUCode_id;
      wire flush;
      wire[31:0] ALUResult_ex;
+<<<<<<< HEAD
      //wire[31:0] HI;
      //wire[31:0] LO;
      wire RegWr_wb;
      wire[31:0] RegWrData_wb,RegWrData_mem;
+=======
+     wire[31:0] HI;
+     wire[31:0] LO;
+     wire[31:0] RegWrData_wb;
+>>>>>>> d6966817fb57839ac159c5cab0ff7d10c5067af9
      wire[31:0] ALUa_ex,ALUb_ex;
     // wire[31:0] MemResult;
     // wire[31:0] MemAddr;
