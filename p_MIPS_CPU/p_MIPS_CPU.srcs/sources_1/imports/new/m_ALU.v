@@ -62,8 +62,8 @@ module m_ALU(
     reg signed[31:0] B_signed;
     reg[31:0] r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15;
     always @(ALU_B) B_signed = ALU_B;    //��Bת�����з�����������������
-    wire[31:0] sum;             //�ӷ������?
-    wire[63:0] multRes,multRes_signed;//�˷������?
+    wire[31:0] sum;             //�ӷ������??
+    wire[63:0] multRes,multRes_signed;//�˷������??
     wire[63:0] divRes, divRes_signed;
     wire CF,OF,Cout,isAdd;      //�ж��Ƿ��Ǽӷ����� 0-add 1-others
     assign OF = &(ALU_A[31:0]~^ALU_B[31:0]);
@@ -128,8 +128,8 @@ module m_ALU(
         case(ALUCode)
             ALU_ADD: ALU_Result = r0; 
             ALU_SUB: ALU_Result = r0;
-            ALU_MULT: {HI,LO} = multRes;
-            ALU_MULTU: {HI,LO} = multRes_signed;
+            ALU_MULT: {HI,LO} = multRes_signed;
+            ALU_MULTU: {HI,LO} = multRes;
             ALU_DIV: {HI,LO} = divRes_signed;
             ALU_DIVU: {HI,LO} = divRes;
             ALU_AND: ALU_Result = r1;

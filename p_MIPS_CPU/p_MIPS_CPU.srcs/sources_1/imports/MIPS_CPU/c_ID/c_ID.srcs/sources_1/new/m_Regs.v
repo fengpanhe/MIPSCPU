@@ -26,43 +26,56 @@ module m_Regs(
     input[4:0] RsAddr,
     input[4:0] RtAddr,
     input[4:0] RegWrAddr,
-    input[31:0] RegWrData,
-    output reg[31:0] RsData,
-    output reg[31:0] RtData
+    input[31:0] RegWrData_wb,
+    input[31:0] RegWrData_mem,
+    //input[31:0] ALUResult_mem,
+    input[31:0] ALUResult_ex,
+    input[2:0] ForwardA,
+    input[2:0] ForwardB,
+    output reg[31:0] RsResult,
+    output reg[31:0] RtResult
     );
     wire clk2;
     assign clk2 = ~clk;
     reg[31:0] Regs[31:0];
-    wire ForwardA,ForwardB;
-    assign ForwardA = RegWr && (|RegWrAddr) && (&(RegWrAddr~^RsAddr));
-    assign ForwardB = RegWr && (|RegWrAddr) && (&(RegWrAddr~^RtAddr));
+    reg[31:0] RsData,RtData;
     //¼Ä´æÆ÷³õÊ¼»¯
     integer i;
     initial
     begin
+    RsData <= 0;
+    RtData <= 0;
     for(i = 0; i < 32; i=i+1)
         Regs[i] = 0;
     end
-    
+
     always @(posedge clk2)
     begin
-        if(ForwardA)
-            RsData = RegWrData;
-        else
-            RsData = Regs[RsAddr];
-    end
-    
-    always @(posedge clk2)
-    begin
-        if(ForwardB)
-           RtData = RegWrData;
-        else
-           RtData <= Regs[RtAddr];
-    end
-    
-    always @(posedge clk2)
-    begin
+    RsData <= Regs[RsAddr];
+    RtData <= Regs[RtAddr];
     if(RegWr && (|RegWrAddr[4:0]))
-        Regs[RegWrAddr] = RegWrData;
+        Regs[RegWrAddr] = RegWrData_wb;
+    end
+    
+    always @(*)
+    begin
+        case(ForwardA)
+        3'b000: RsResult <= RsData;
+        3'b001: RsResult <= ALUResult_ex;
+        3'b010: RsResult <= RegWrData_mem;
+        3'b100: RsResult <= RegWrData_wb;
+        default: RsResult <= 32'bx;
+        endcase
+    end
+    
+    always @(*)
+    begin
+        case(ForwardB)
+        3'b000: RtResult <= RtData;
+        3'b001: RtResult <= ALUResult_ex;
+        3'b010: RtResult <= RegWrData_mem;
+        3'b100: RtResult <= RegWrData_wb;
+        default: RtResult <= 32'bx;
+        endcase
     end
 endmodule

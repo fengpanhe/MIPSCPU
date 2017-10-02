@@ -25,13 +25,25 @@ module c_ID(
     input[31:0] Instruction_id,         //待执行指令
     input[31:0] NextPC_id,              //PC+4地址
     input RegWr_wb,                     //Regs的写使能信号
+    input RegWr_mem,
+    input RegWr_ex,
     input CPWr_wb,
+    input CPWr_mem,
+    input CPWr_ex,
     input[4:0] RegWrAddr_wb,            //Regs的写寄存器地址
-    input[4:0] CPWrAddr_wb,
-    input[31:0] RegWrData_wb,           //Regs的写入数据
-    input[31:0] CPWrData_wb,
-    input MemRead_ex,                   //上一条指令是读MEM指令的信号，用于判断冒险发生的条件
+    input[4:0] RegWrAddr_mem,
     input[4:0] RegWrAddr_ex,            //上一条指令写回Regs的地址，用于判断冒险发生的条件
+    input[4:0] CPWrAddr_wb,
+    input[4:0] CPWrAddr_mem,
+    input[4:0] CPWrAddr_ex,
+    input[31:0] RegWrData_wb,           //Regs的写入数据
+    input[31:0] RegWrData_mem,
+    //input[31:0] ALUResult_mem,
+    input[31:0] ALUResult_ex,
+    input[31:0] CPWrData_wb,
+    input[31:0] CPWrData_mem,
+    input[31:0] CPWrData_ex,
+    input MemRead_ex,                   //上一条指令是读MEM指令的信号，用于判断冒险发生的条件         
     input overFlow,
     output MemToReg_id,                 //译码生成的选择回写Regs数据源的控制信号
     output CPToReg_id,                  
@@ -61,20 +73,24 @@ module c_ID(
     output[31:0] CPData_id,             
     output[4:0] RsAddr_id,             
     output[4:0] RtAddr_id,             
-    output[4:0] RdAddr_id,             
+    output[4:0] RdAddr_id,            
     output[31:0] Sa_id,                 //零扩展成32bit的移位立即数
     output[31:0] Imme_id                //符号扩展成32bit的立即数
-    //output breakExc,
-    //output syscallExc
     );
+    
+    wire[31:0] JAddr;
+    wire Je,Jmp;
     assign RsAddr_id = Instruction_id[25:21];
     assign RtAddr_id = Instruction_id[20:16];
     assign RdAddr_id = Instruction_id[15:11];
     assign Sa_id = {27'b0,Instruction_id[10:6]};
     assign Imme_id = {{16{Instruction_id[15]}},Instruction_id[15:0]};
-    assign JmpAddr = {NextPC_id[31:28],Instruction_id[25:0],2'b00};
+    //assign JmpAddr = {NextPC_id[31:28],Instruction_id[25:0],2'b00};
     assign JrAddr = RsData_id;
-    assign IF_flush = Z || J || JR;
+    assign J = Jmp ;//|| Je;
+    assign IF_flush = Z || Jmp || JR;
+  
+    assign JAddr = {NextPC_id[31:28],Instruction_id[25:0],2'b00};
     wire[31:0] Imme_shift;
     assign Imme_shift = Imme_id << 2;
     //此处未做边界检测，当NextPC+offset < 0 时，相当于跳转到尾部对应位置
@@ -100,11 +116,34 @@ module c_ID(
     .ALUsrcA(ALUsrcA_id),
     .ALUsrcB(ALUsrcB_id),
     .ALUCode(ALUCode_id),
-    .Jmp(J),
+    .Jmp(Jmp),
     .Jr(JR),
     .Jal(JAL),
     .Bal(BAL)
     );
+    //Forward
+    wire[2:0] ForwardA,ForwardB,ForwardCP;
+    m_Forward Forward(
+    .RegWrAddr_mem(RegWrAddr_mem),
+    .RegWrAddr_wb(RegWrAddr_wb),
+    .RegWrAddr_ex(RegWrAddr_ex),
+    .CPWrAddr_mem(CPWrAddr_mem),
+    .CPWrAddr_wb(CPWrAddr_wb),
+    .CPWrAddr_ex(CPWrAddr_ex),
+    .CPWr_mem(CPWr_mem),
+    .CPWr_wb(CPWr_wb),
+    .CPWr_ex(CPWr_ex),
+    .RegWr_mem(RegWr_mem),
+    .RegWr_wb(RegWr_wb),
+    .RegWr_ex(RegWr_ex),
+    .RsAddr_id(RsAddr_id),
+    .RtAddr_id(RtAddr_id),
+    .RdAddr_id(RdAddr_id),
+    .ForwardA(ForwardA),
+    .ForwardB(ForwardB),
+    .ForwardCP(ForwardCP)
+    );
+     
     //Regs
     m_Regs Regs(
     .clk(clk),
@@ -112,9 +151,14 @@ module c_ID(
     .RsAddr(RsAddr_id),
     .RtAddr(RtAddr_id),
     .RegWrAddr(RegWrAddr_wb),
-    .RegWrData(RegWrData_wb),
-    .RsData(RsData_id),
-    .RtData(RtData_id)
+    .RegWrData_wb(RegWrData_wb),
+    .RegWrData_mem(RegWrData_mem),
+    //.ALUResult_mem(ALUResult_mem),
+    .ALUResult_ex(ALUResult_ex),
+    .ForwardA(ForwardA),
+    .ForwardB(ForwardB),
+    .RsResult(RsData_id),
+    .RtResult(RtData_id)
     );
     //ZeroTest
     m_ZeroTest ZeroTest(
@@ -137,6 +181,17 @@ module c_ID(
     wire[31:0] eretAddr;
     assign excCode = Instruction_id[10:6];
     assign int_i = Instruction_id[25:20];
+    m_ExceptionProc EP(
+    .ALUCode(ALUCode_id),
+    .Func(Instruction_id[5:0]),
+    .Overflow(overFlow),
+    .int_i(int_i),
+    .JAddr(JAddr),
+    .eretAddr(eretAddr),
+    .JmpAddr(JmpAddr),
+    .Je(Je)
+    );
+    
     //CP0
     cp0_reg CP0Regs(
     .rst(reset),
@@ -145,9 +200,12 @@ module c_ID(
     .waddr_i(CPWrAddr_wb),
     .data_i(CPWrData_wb),
     .raddr_i(RtAddr_id),
+    .ForwardCP(ForwardCP),
+    .CPWrData_ex(CPWrData_ex),
+    .CPWrData_mem(CPWrData_mem),
     .excepttype_i(excCode),
     .int_i(int_i),
-    .current_inst_addr_i(NexPC_id),
+    .current_inst_addr_i(NextPC_id),
     .data_o(CPData_id),
     .eretAddr(eretAddr)
     );

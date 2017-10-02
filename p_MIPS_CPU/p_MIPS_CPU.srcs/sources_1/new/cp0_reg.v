@@ -22,28 +22,28 @@
 `include "defines.v"
 
 module cp0_reg(
-    input wire rst,
-    input wire clk,
-
-    input wire we_i,                //CP0的写使能端
-    input wire[4:0] waddr_i,        //CP0写入地址选择
-    input wire[`RegBus] data_i,     //CP0写入数据
-
-    input wire[4:0] raddr_i,        //CP0读取地址
-    output reg[`RegBus] data_o,     //CP0读取数据
-
+    input rst,
+    input clk,
+    input we_i,                //CP0的写使能端
+    input[4:0] waddr_i,        //CP0写入地址选择
+    input[31:0] data_i,     //CP0写入数据
+    input[4:0] raddr_i,        //CP0读取地址
+    output reg[31:0] data_o,     //CP0读取数据    
+    input[2:0] ForwardCP,
+    input[31:0] CPWrData_ex,
+    input[31:0] CPWrData_mem,
     //异常相关输入接口
-    input wire[4:0] excepttype_i,                  //异常类型编号
-    input wire[5:0] int_i,                          //6个外部硬件中断输入
-    input wire[`InstAddrBus] current_inst_addr_i,   //发生异常的指令地址
+    input[4:0] excepttype_i,                  //异常类型编号
+    input[5:0] int_i,                          //6个外部硬件中断输入
+    input[31:0] current_inst_addr_i,   //发生异常的指令地址
 
-    output reg[`RegBus] status_o,   //Status Reg的值
-    output reg[`RegBus] cause_o,    //Cause Reg的值
-    output reg[`RegBus] epc_o,      //EPC Reg的值，用于保存中断返回地址
+    output reg[31:0] status_o,   //Status Reg的值
+    output reg[31:0] cause_o,    //Cause Reg的值
+    output reg[31:0] epc_o,      //EPC Reg的值，用于保存中断返回地址
     output[31:0] eretAddr
 
     );
-
+    reg[31:0] CPResult;
     assign eretAddr = epc_o;
 //******************************************************************************
 //                     对CP0中寄存器的写操作：时序逻辑
@@ -118,17 +118,27 @@ module cp0_reg(
         end else begin
             case(raddr_i)
                 `CP0_REG_STATUS:begin               //读Status寄存器
-                    data_o <= status_o;
+                    CPResult <= status_o;
                 end
                 `CP0_REG_CAUSE:begin                //读Cause寄存器
-                    data_o <= cause_o;
+                    CPResult <= cause_o;
                 end
                 `CP0_REG_EPC:begin                  //读EPC寄存器
-                    data_o <= epc_o;
+                    CPResult <= epc_o;
                 end
                 default:begin
                 end
             endcase
         end
+    end
+    
+    always @(*)
+    begin
+        case(ForwardCP)
+        3'b000: data_o <= CPResult;
+        3'b001: data_o <= CPWrData_ex;
+        3'b010: data_o <= CPWrData_mem;
+        3'b100: data_o <= data_i;
+        endcase
     end
 endmodule

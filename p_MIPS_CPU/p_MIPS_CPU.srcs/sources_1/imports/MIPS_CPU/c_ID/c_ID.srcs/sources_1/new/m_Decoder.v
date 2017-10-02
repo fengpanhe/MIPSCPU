@@ -135,12 +135,14 @@ module m_Decoder(
      assign SRAV = (op == R_type_op) && (func == SRAV_func);
      assign JR = (op == R_type_op) && (func == JR_func);
      assign JALR = (op == R_type_op) && (func == JALR_func);
+     
      assign BREAK = (op == R_type_op) && (func == BREAK_func);
      assign SYSCALL = (op == R_type_op) && (func == SYSCALL_func);
+     
      //CP0相关指令
      assign MFC0 = (op == Interrupt_op) && (rs == 5'b00000);
-     assign MTC0 = (op == Interrupt_op) && (rs == 5'b00100);
-     
+     assign MTC0 = (op == Interrupt_op) && (rs == 5'b00100);  
+     assign ERET = (op == Interrupt_op) && (func == ERET_func);   
      //I型指令
      assign ADDI = (op == ADDI_op);
      assign ADDIU = (op == ADDIU_op);
@@ -177,6 +179,7 @@ module m_Decoder(
      wire I_type1;//需要写回Regs的ALU运算指令
      wire I_type2;//MEM读指令,需写回Regs
      wire I_type3;//MEM写指令
+     wire Int_type;
      
       assign R_type1 = ADD | ADDU | SUB | SUBU | AND | OR | XOR | NOR | SLT | SLTU | SLLV | SRLV | SRAV | JALR | MFHI | MFLO;
       assign R_type2 = MULT| MULTU | DIV | DIVU | MTHI | MTLO;
@@ -237,6 +240,8 @@ module m_Decoder(
      parameter ALU_BLTZ = 5'd28;
      
      parameter ALU_MCP0 = 5'd29;
+     parameter ALU_EXCEPT = 5'd30;
+     parameter ALU_NONE = 5'd31;
       
      /*assignment for ALUCode*/
      always @(*)
@@ -267,7 +272,11 @@ module m_Decoder(
         SLLV_func: ALUCode <= ALU_SLL;
         SRLV_func: ALUCode <= ALU_SRL;
         SRAV_func: ALUCode <= ALU_SRA;
-        default : ALUCode <= 5'bx;
+        JR_func: ALUCode <= ALU_ADD;
+        JALR_func: ALUCode <= ALU_ADD;
+        SYSCALL_func: ALUCode <= ALU_EXCEPT;
+        BREAK_func: ALUCode <= ALU_EXCEPT;
+        default : ALUCode <= ALU_NONE;
         endcase
     else
         case(op)
@@ -295,8 +304,15 @@ module m_Decoder(
         BLTZAL_op: ALUCode <= ALU_BLTZ;
         SLTI_op: ALUCode <= ALU_SLT;
         SLTIU_op: ALUCode <= ALU_SLTU;
-        Interrupt_op: ALUCode <= ALU_MCP0;
-        default: ALUCode <= 5'bx; 
+        J_op: ALUCode <= ALU_ADD;
+        JAL_op: ALUCode <= ALU_ADD;
+        Interrupt_op:begin
+                    if(func == ERET_func)
+                    ALUCode <= ALU_EXCEPT;
+                    else
+                    ALUCode <= ALU_MCP0;
+                    end
+        default: ALUCode <= ALU_NONE; 
         endcase
     end     
 endmodule

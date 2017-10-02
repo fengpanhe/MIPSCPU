@@ -29,7 +29,7 @@ module m_dff(
     input clk;
     input wire[Width-1:0] din;
     output reg[Width-1:0] dout;
-    reg start = 1;;
+    reg start = 1;
     
     always @(posedge clk)
     begin
