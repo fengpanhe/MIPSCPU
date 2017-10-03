@@ -44,7 +44,7 @@ module ctc16(
     reg[15:0] stat11, stat12;
     reg[15:0] stat21, stat22;
     reg[15:0] mode1, mode2;         //CNT0和CNT1的方式寄存器
-    reg[15:0] count1, count2        //CNT0和CNT0的减1计数器
+    reg[15:0] count1, count2;        //CNT0和CNT0的减1计数器
     reg[15:0] cnt11, cnt12;
     reg[15:0] cnt21, cnt22;
     reg[15:0] initcnt1, initcnt2;
