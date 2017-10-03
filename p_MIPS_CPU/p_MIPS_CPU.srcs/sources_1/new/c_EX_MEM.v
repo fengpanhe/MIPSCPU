@@ -28,12 +28,14 @@ module c_EX_MEM(
     output[31:0] ALUResult_mem,
     input[31:0] CPResult_ex,
     output[31:0] CPResult_mem,
-    input MemToReg_ex,
-    output MemToReg_mem,
+    input MemOrIOToReg_ex,
+    output MemOrIOToReg_mem,
     input CPToReg_ex,
     output CPToReg_mem,
-    input MemWr_ex,
-    output MemWr_mem,
+    input MemOrIOWr_ex,
+    output MemOrIOWr_mem,
+    input MemOrIORead_ex,
+    output MemOrIORead_mem,
     input RegWr_ex,
     output RegWr_mem,
     input CPWr_ex,
@@ -69,14 +71,14 @@ module c_EX_MEM(
      //reg for MemToReg
       m_dff #(1) dff3 (
       .clk(clk),
-      .din(MemToReg_ex),
-      .dout(MemToReg_mem)
+      .din(MemOrIOToReg_ex),
+      .dout(MemOrIOToReg_mem)
       );
       //reg for MemWr
       m_dff #(1) dff4 (
       .clk(clk),
-      .din(MemWr_ex),
-      .dout(MemWr_mem)
+      .din(MemOrIOWr_ex),
+      .dout(MemOrIOWr_mem)
       );
       //reg for MemExtType
       m_dff #(1) dff5 (
@@ -143,5 +145,11 @@ module c_EX_MEM(
      .clk(clk),
      .din(CPWrAddr_ex),
      .dout(CPWrAddr_mem)
+     );
+     //reg for MemRead
+     m_dff #(1) dff16(
+     .clk(clk),
+     .din(MemOrIORead_ex),
+     .dout(MemOrIORead_mem)
      );
 endmodule

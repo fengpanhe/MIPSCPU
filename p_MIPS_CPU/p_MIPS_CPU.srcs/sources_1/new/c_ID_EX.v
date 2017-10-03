@@ -23,12 +23,12 @@
 module c_ID_EX(
     input clk,
     input reset,
-    input MemToReg_id,
+    input MemOrIOToReg_id,
     input CPToReg_id,
-    input MemWr_id,
+    input MemOrIOWr_id,
     input CPWr_id,
     input RegWr_id,
-    input MemRead_id,
+    input MemOrIORead_id,
     input[4:0] ALUCode_id,
     input ALUsrcA_id,
     input ALUsrcB_id,
@@ -44,12 +44,12 @@ module c_ID_EX(
     input[4:0] RdAddr_id,
     input MemExtType_id,
     input[1:0] MemReadSize_id,
-    output MemToReg_ex,
+    output MemOrIOToReg_ex,
     output CPToReg_ex,
-    output MemWr_ex,
+    output MemOrIOWr_ex,
     output CPWr_ex,
     output RegWr_ex,
-    output MemRead_ex,
+    output MemOrIORead_ex,
     output[4:0] ALUCode_ex,
     output ALUsrcA_ex,
     output ALUsrcB_ex,
@@ -71,8 +71,8 @@ module c_ID_EX(
      m_dffr #(1) dffr1(
      .clk(clk),
      .reset(reset),
-     .din(MemToReg_id),
-     .dout(MemToReg_ex)
+     .din(MemOrIOToReg_id),
+     .dout(MemOrIOToReg_ex)
      );
      //reg for CPToReg  
      m_dffr #(1) dffr2(
@@ -92,8 +92,8 @@ module c_ID_EX(
      m_dffr #(1) dffr4(
     .clk(clk),
     .reset(reset),
-    .din(MemWr_id),
-    .dout(MemWr_ex)
+    .din(MemOrIOWr_id),
+    .dout(MemOrIOWr_ex)
     );
     //reg for CPWr
     m_dffr #(1) dffr5(
@@ -106,8 +106,8 @@ module c_ID_EX(
     m_dffr #(1) dffr6(        
     .clk(clk),                
     .reset(reset),  
-    .din(MemRead_id),           
-    .dout(MemRead_ex)           
+    .din(MemOrIORead_id),           
+    .dout(MemOrIORead_ex)           
     );                     
     //reg for ALUCode
     m_dffr #(5) dffr7(

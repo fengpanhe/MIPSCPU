@@ -39,19 +39,19 @@ module c_ID(
     input[4:0] CPWrAddr_ex,
     input[31:0] RegWrData_wb,           //Regs的写入数据
     input[31:0] RegWrData_mem,
-    //input[31:0] ALUResult_mem,
     input[31:0] ALUResult_ex,
     input[31:0] CPWrData_wb,
     input[31:0] CPWrData_mem,
     input[31:0] CPWrData_ex,
-    input MemRead_ex,                   //上一条指令是读MEM指令的信号，用于判断冒险发生的条件         
+    input MemOrIORead_ex,                   //上一条指令是读MEM指令的信号，用于判断冒险发生的条件         
     input overFlow,
-    output MemToReg_id,                 //译码生成的选择回写Regs数据源的控制信号
+    //output MemToReg_id,                 //译码生成的选择回写Regs数据源的控制信号
+    output MemOrIOToReg_id,
     output CPToReg_id,                  
     output RegWr_id,                    //译码生成的用于回写Regs的使能信号
     output CPWr_id,                     //译码生成用于回写CP0寄存器的使能信号
-    output MemWr_id,                    //译码生成的用于写MEM的使能信号
-    output MemRead_id,                  //译码生成的指示当前指令是读MEM的信号
+    output MemOrIOWr_id,                    //译码生成的用于写MEM的使能信号
+    output MemOrIORead_id,                  //译码生成的指示当前指令是读MEM的信号
     output[1:0] MemReadSize_id,         //译码生成的用于判断读MEM指令读取位数的控制信号
     output MemExtType_id,               //译码生成的用于控制读MEM指令输出结果扩展方式的控制信号
     output[4:0] ALUCode_id,             //译码生成的用于选择ALU运算功能的信号
@@ -105,10 +105,11 @@ module c_ID(
     .op(Instruction_id[31:26]),
     .func(Instruction_id[5:0]),
     .rs(Instruction_id[25:21]),
-    .MemToReg(MemToReg_id),
+    //.MemToReg(MemToReg_id),
+    .MemOrIOToReg(MemOrIOToReg_id),
     .CPToReg(CPToReg_id),
-    .MemWr(MemWr_id),
-    .MemRead(MemRead_id),
+    .MemOrIOWr(MemOrIOWr_id),
+    .MemOrIORead(MemOrIORead_id),
     .MemReadSize(MemReadSize_id),
     .MemExtType(MemExtType_id),
     .RegWr(RegWr_id),
@@ -170,7 +171,7 @@ module c_ID(
     );
     //HazardDectector
     m_HazardDetector HazardDetector(
-    .MemRead_ex(MemRead_ex),
+    .MemRead_ex(MemOrIORead_ex),
     .RegWrAddr_ex(RegWrAddr_ex),
     .RsAddr_id(RsAddr_id),
     .RtAddr_id(RtAddr_id),

@@ -91,10 +91,10 @@ module m_MIPS_CPU(
     /*ID Module*/
     wire[4:0] RsAddr_id,RdAddr_id,RtAddr_id,RdAddr_ex,RtAddr_ex;
     wire RegWr_id,RegWr_mem,RegWr_wb;
-    wire MemRead_id,MemRead_ex;
-    wire MemToReg_id,MemToReg_ex,MemToReg_mem,MemToReg_wb;
+    wire MemOrIORead_id,MemOrIORead_ex,MemOrIORead_mem;
+    wire MemOrIOToReg_id,MemOrIOToReg_ex,MemOrIOToReg_mem;//,MemOrIOToReg_wb;
     wire CPToReg_id,CPToReg_ex,CPToReg_mem,CPToReg_wb;////////////////////////////////
-    wire MemWr_id,MemWr_ex,MemWr_mem;
+    wire MemOrIOWr_id,MemOrIOWr_ex,MemOrIOWr_mem;
     wire CPWr_id,CPWr_ex,CPWr_mem,CPWr_wb;///////////////////////////////////////////
     wire ALUsrcA_id,ALUsrcA_ex,ALUsrcB_id,ALUsrcB_ex;
     wire[4:0] ALUCode_id,ALUCode_ex;
@@ -131,19 +131,18 @@ module m_MIPS_CPU(
     .CPWrAddr_ex(CPWrAddr_ex),
     .RegWrData_wb(RegWrData_wb),
     .RegWrData_mem(RegWrData_mem),
-    //.ALUResult_mem(ALUResult_mem),
     .ALUResult_ex(ALUResult_ex),
     .CPWrData_wb(CPWrData_wb),
     .CPWrData_mem(CPWrData_mem),
     .CPWrData_ex(CPWrData_ex),
-    .MemRead_ex(MemRead_ex),
+    .MemOrIORead_ex(MemOrIORead_ex),
     .overFlow(Overflow),
-    .MemToReg_id(MemToReg_id),
+    .MemOrIOToReg_id(MemOrIOToReg_id),
     .CPToReg_id(CPToReg_id),
     .RegWr_id(RegWr_id),
     .CPWr_id(CPWr_id),
-    .MemWr_id(MemWr_id),
-    .MemRead_id(MemRead_id),
+    .MemOrIOWr_id(MemOrIOWr_id),
+    .MemOrIORead_id(MemOrIORead_id),
     .MemReadSize_id(MemReadSize_id),
     .MemExtType_id(MemExtType_id),
     .ALUCode_id(ALUCode_id),
@@ -175,12 +174,12 @@ module m_MIPS_CPU(
     c_ID_EX IDToEXRegs(
     .clk(clk),
     .reset(reset||Stall),
-    .MemToReg_id(MemToReg_id),
+    .MemOrIOToReg_id(MemOrIOToReg_id),
     .CPToReg_id(CPToReg_id),
     .RegWr_id(RegWr_id),
-    .MemWr_id(MemWr_id),
+    .MemOrIOWr_id(MemOrIOWr_id),
     .CPWr_id(CPWr_id),
-    .MemRead_id(MemRead_id),
+    .MemOrIORead_id(MemOrIORead_id),
     .ALUCode_id(ALUCode_id),
     .ALUsrcA_id(ALUsrcA_id),
     .ALUsrcB_id(ALUsrcB_id),
@@ -196,12 +195,12 @@ module m_MIPS_CPU(
     .RdAddr_id(RdAddr_id),
     .MemExtType_id(MemExtType_id),
     .MemReadSize_id(MemReadSize_id),
-    .MemToReg_ex(MemToReg_ex),
+    .MemOrIOToReg_ex(MemOrIOToReg_ex),
     .CPToReg_ex(CPToReg_ex),
     .RegWr_ex(RegWr_ex),
-    .MemWr_ex(MemWr_ex),
+    .MemOrIOWr_ex(MemOrIOWr_ex),
     .CPWr_ex(CPWr_ex),
-    .MemRead_ex(MemRead_ex),
+    .MemOrIORead_ex(MemOrIORead_ex),
     .ALUCode_ex(ALUCode_ex),
     .ALUsrcA_ex(ALUsrcA_ex),
     .ALUsrcB_ex(ALUsrcB_ex),
@@ -235,7 +234,7 @@ module m_MIPS_CPU(
     .RdAddr_ex(RdAddr_ex),
     .RsData_ex(RsData_ex),
     .RtData_ex(RtData_ex),
-    .CPData_ex(CPData_ex),
+    .CPData_ex(CPResult_ex),
     .AL_ex(AL_ex),
     .RegWrAddr_ex(RegWrAddr_ex),
     .CPWrAddr_ex(CPWrAddr_ex),
@@ -257,12 +256,14 @@ module m_MIPS_CPU(
     .ALUResult_mem(ALUResult_mem),
     .CPResult_ex(CPResult_ex),
     .CPResult_mem(CPResult_mem),
-    .MemToReg_ex(MemToReg_ex),
-    .MemToReg_mem(MemToReg_mem),
+    .MemOrIOToReg_ex(MemOrIOToReg_ex),
+    .MemOrIOToReg_mem(MemOrIOToReg_mem),
     .CPToReg_ex(CPToReg_ex),
     .CPToReg_mem(CPToReg_mem),
-    .MemWr_ex(MemWr_ex),
-    .MemWr_mem(MemWr_mem),
+    .MemOrIOWr_ex(MemOrIOWr_ex),
+    .MemOrIOWr_mem(MemOrIOWr_mem),
+    .MemOrIORead_ex(MemOrIORead_ex),
+    .MemOrIORead_mem(MemOrIORead_mem),
     .RegWr_ex(RegWr_ex),
     .RegWr_mem(RegWr_mem),
     .CPWr_ex(CPWr_ex),
@@ -285,13 +286,15 @@ module m_MIPS_CPU(
     /*MEM Module*/
     c_MEM MEM(
     .clk(clk),
-    .MemWr_mem(MemWr_mem),
+    .reset(reset),
+    .MemOrIOWr_mem(MemOrIOWr_mem),
+    .MemOrIORead_mem(MemOrIORead_mem),
     .MemReadSize_mem(MemReadSize_mem),
     .MemExtType_mem(MemExtType_mem),
     .ALUResult_mem(ALUResult_mem),
     .CPResult_mem(CPResult_mem),
     .NextPC_mem(NextPC_mem),
-    .MemToReg_mem(MemToReg_mem),
+    .MemOrIOToReg_mem(MemToReg_mem),
     .CPToReg_mem(CPToReg_mem),
     .AL_mem(AL_mem),
     .MemWrData_mem(MemWrData_mem),
@@ -306,7 +309,7 @@ module m_MIPS_CPU(
     .RegWrAddr_mem(RegWrAddr_mem),
     .CPWrAddr_mem(CPWrAddr_mem),
     .RegWrData_mem(RegWrData_mem),
-    .CPWrData_mem(CPWrDat_mem),
+    .CPWrData_mem(CPWrData_mem),
     .RegWr_wb(RegWr_wb),
     .CPWr_wb(CPWr_wb),
     .RegWrAddr_wb(RegWrAddr_wb),
@@ -316,12 +319,13 @@ module m_MIPS_CPU(
     );
     
     
+    
     assign Instruction = Instruction_if;
     assign Instruction2 = Instruction_id;
     assign ALUCode = ALUCode_id;
     assign nextpc_if = NextPC_if;
     assign nextpc_id = NextPC_id;
-    assign nextpc_ex = NextPC_ex;
+    //assign nextpc_ex = NextPC_ex;
     assign nextpc_mem = NextPC_mem;
     assign aluresult_ex = ALUResult_ex;
     assign stall = Stall;
@@ -349,11 +353,11 @@ module m_MIPS_CPU(
     assign rsdata_id = RsData_id;
     assign rtdata_id = RtData_id;
     assign regwrdata_wb = RegWrData_wb;
-    assign memtoreg_wb = MemToReg_wb;
+    //assign memtoreg_wb = MemToReg_wb;
     assign memaddr = ALUResult_mem;
-    assign memwr_id = MemWr_id;
-    assign memwr_ex = MemWr_ex;
-    assign memwr_mem = MemWr_mem;
+    //assign memwr_id = MemWr_id;
+    //assign memwr_ex = MemWr_ex;
+    //assign memwr_mem = MemWr_mem;
     assign memwrdata_mem = MemWrData_mem;
     assign memreadsize_mem = MemReadSize_mem;
     assign jmpAddr = JmpAddr;
