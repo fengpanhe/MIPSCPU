@@ -36,7 +36,7 @@ module c_MEM(
     input[31:0] MemWrData_mem,
     output reg[31:0] RegWrData_mem
     );
-    
+    wire[31:0] WrData;      //写到MEM或IO中的数据
     wire MemWr;
     wire MemRead;
     wire IOWr;
@@ -54,7 +54,7 @@ module c_MEM(
     .MemWrSize(MemReadSize_mem),
     .MemExtType(MemExtType_mem),
     .MemAddr(ALUResult_mem),
-    .MemWrData(MemWrData_mem),
+    .MemWrData(WrData),
     .MemOutput(MemResult)
     );
     
@@ -69,6 +69,7 @@ module c_MEM(
      .iowrite(IOWrite),
      .mread_data(MemResult),
      .ioread_data(IOResult),
+     .wdata(MemWrData_mem),
      .DISPCtrl(DISPCtrl),
      .KEYCtrl(KEYCtrl),
      .CTCCtrl(CTCCtrl),
@@ -78,7 +79,8 @@ module c_MEM(
      .LEDCtrl(LEDCtrl),
      .SWCtrl(SWCtrl),
      .portAddress(portAddr),
-     .rdata(rData)
+     .rdata(rData),
+     .write_data(WrData)
      );
     
     wire[31:0] KEYReadData,UARTReadData,SWReadData;
@@ -97,8 +99,13 @@ module c_MEM(
     .ioread_data_sw(SWReadData),
     .ioread_data(IOResult)
     );
-    
-           
+   
+   /*在该段内声明外设接口的实现
+   输入包括：IOAddr(ALUResult_mem[9:0]),PortAddr,WrData,IOWr,clk，en(LEDCtrl/PWMCtrl/...)
+   输出包括：KEYReadData/SWReadData
+   */
+   
+            
     always @(*)
     begin
     if(AL_mem == 1)

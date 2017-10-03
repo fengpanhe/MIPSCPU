@@ -30,7 +30,7 @@ module memorio(
     input wire[31:0] mread_data,    //从存储器读取的数据
     input wire[31:0] ioread_data,    //从io读取的数据
 
-    //input wire[31:0] wdata,         //要输出到存储器或io中的数据
+    input wire[31:0] wdata,         //要输出到存储器或io中的数据
 
     
 
@@ -45,8 +45,8 @@ module memorio(
     output wire SWCtrl,             //拨码开关         0xFFFFFC70
     
     output wire[3:0] portAddress,      //PortNum
-    output wire[31:0] rdata        //存储器/io中的数据输出
-    //output reg[31:0] write_data   //准备写入mem/io的数据
+    output wire[31:0] rdata,        //存储器/io中的数据输出
+    output reg[31:0] write_data   //准备写入mem/io的数据
 
     );
 
@@ -65,7 +65,7 @@ module memorio(
     assign LEDCtrl = ((iorw == 1) && (caddress[9:4] == 6'b000110)) ? 1'b1 : 1'b0;
     assign SWCtrl = ((iorw == 1) && (caddress[9:4] == 6'b000111)) ? 1'b1 : 1'b0;
     
-   /* always @(*)
+    always @(*)
     begin
         if ((memwrite == 1) || (iowrite == 1)) begin
             write_data = wdata;
@@ -73,5 +73,5 @@ module memorio(
         else begin
             write_data = 32'hZZZZZZZZ;
         end
-    end*/
+    end
 endmodule
