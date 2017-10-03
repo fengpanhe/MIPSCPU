@@ -22,6 +22,7 @@
 
 module c_ID(
     input clk,                          //机器时钟
+    input reset,
     input[31:0] Instruction_id,         //待执行指令
     input[31:0] NextPC_id,              //PC+4地址
     input RegWr_wb,                     //Regs的写使能信号
@@ -88,7 +89,7 @@ module c_ID(
     //assign JmpAddr = {NextPC_id[31:28],Instruction_id[25:0],2'b00};
     assign JrAddr = RsData_id;
     assign J = Jmp|| Je;
-    assign IF_flush = Z || Jmp || JR;
+    assign IF_flush = Z || J || JR;
   
     assign JAddr = {NextPC_id[31:28],Instruction_id[25:0],2'b00};
     wire[31:0] Imme_shift;
@@ -176,7 +177,7 @@ module c_ID(
     .PC_IFWrite(PC_IFWrite),
     .Stall(Stall)
     );
-    //wire[4:0] excCode;              //异常类型编号
+    wire[4:0] excCode;              //异常类型编号
     wire[5:0] int_i;                //中断类型号
     wire[31:0] eretAddr;
     //assign excCode = Instruction_id[10:6];
@@ -188,6 +189,7 @@ module c_ID(
     .int_i(int_i),
     .JAddr(JAddr),
     .eretAddr(eretAddr),
+    .exceptType(excCode),
     .JmpAddr(JmpAddr),
     .Je(Je)
     );
@@ -199,7 +201,7 @@ module c_ID(
     .we_i(CPWr_wb),
     .waddr_i(CPWrAddr_wb),
     .data_i(CPWrData_wb),
-    .raddr_i(RtAddr_id),
+    .raddr_i(RdAddr_id),
     .ForwardCP(ForwardCP),
     .CPWrData_ex(CPWrData_ex),
     .CPWrData_mem(CPWrData_mem),

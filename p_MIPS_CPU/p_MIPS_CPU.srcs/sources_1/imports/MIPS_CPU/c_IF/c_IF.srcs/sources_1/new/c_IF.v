@@ -40,7 +40,7 @@ module c_IF(
     reg[31:0] NextPC;
     wire[2:0] PCSource = {Jr,J,Z};
     assign curPC_if = PC_out;
-    assign NextPC_if = PC_out;//因为ROM取指令有一个时钟的延迟，故输出的NextPC用curPC代替
+    assign NextPC_if = NextPC;//因为ROM取指令有一个时钟的延迟，故输出的NextPC用curPC代替
     initial 
     begin
     PC_in = 0;
@@ -75,7 +75,7 @@ module c_IF(
 
     //Program Rom
     m_programRom programRom (
-      .clka(clk),    // input wire clka
+      .clka(~clk),    // input wire clka
       .addra(PC_out[15:2]),  // input wire [13 : 0] addra
       .douta(Instruction_if)  // output wire [31 : 0] douta
     );

@@ -114,6 +114,7 @@ module m_MIPS_CPU(
     wire Overflow;
     c_ID ID(
     .clk(clk),
+    .reset(reset),
     .Instruction_id(Instruction_id),
     .NextPC_id(NextPC_id),
     .RegWr_wb(RegWr_wb),
