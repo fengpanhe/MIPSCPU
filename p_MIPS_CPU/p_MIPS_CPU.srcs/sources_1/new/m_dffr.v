@@ -29,14 +29,16 @@ module m_dffr(
     parameter Width = 32;
     wire[Width-1:0] din;
     reg[Width-1:0] dout;
-    initial 
-    begin
-    dout <= 0;
-    end
+    reg start = 1;
     
     always @(posedge clk)
     begin
-        if(reset == 1)
+        if(start == 1)
+            begin
+            dout <= 0;
+            start <= 0;
+            end
+        else if(reset == 1)
             dout<=0;
         else
             dout<=din;

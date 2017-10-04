@@ -21,18 +21,18 @@
 
 
 module led32(
-    input wire reset,           //ç³»ç»Ÿå¤ä½ä¿¡å·
+    input wire reset,           //ÏµÍ³¸´Î»ĞÅºÅ
     input wire clk,
-    input wire[31:0] data,      //ç³»ç»Ÿæ€»çº¿ä¸­çš„æ•°æ®çº¿
-    input wire cs,              //ç‰‡ä¿¡å·ï¼Œæ¥LEDCtrl
-    input wire iow,             //i/0å†™ä¿¡å·
-    output reg[7:0] led_o,      //ledè¾“å‡ºä¿¡å·
-    output reg[7:0] led_enable_o      //ledä½¿èƒ½ä¿¡å·
+    input wire[31:0] data,      //ÏµÍ³×ÜÏßÖĞµÄÊı¾İÏß
+    input wire cs,              //Æ¬ĞÅºÅ£¬½ÓLEDCtrl
+    input wire iow,             //i/0Ğ´ĞÅºÅ
+    output[7:0] led_o,      //ledÊä³öĞÅºÅ
+    output reg[7:0] led_enable_o      //ledÊ¹ÄÜĞÅºÅ
     );
-    reg[31:0] rdata; //æ•°æ®é”å­˜å™¨
-    reg[2:0] count; //8è®¡æ•°å™¨
+    reg[31:0] rdata; //Êı¾İËø´æÆ÷
+    reg[2:0] count; //8¼ÆÊıÆ÷
 
-    wire[3:0] dig;
+    reg[3:0] dig;
 
     wire clk_sys;
 
@@ -42,7 +42,7 @@ module led32(
             rdata = 32'h00000000;
         end
         else if (cs == 1 && iow == 1) begin
-            rdata = data;       //é”å­˜æ•°æ®
+            rdata = data;       //Ëø´æÊı¾İ
         end
     end
 
@@ -52,7 +52,7 @@ module led32(
         .clk_sys_1HZ(clk_sys)
     );
     
-    //8è®¡æ•°å™¨
+    //8¼ÆÊıÆ÷
     always @(posedge clk_sys or negedge reset)  begin
         if(reset == 1) begin
             count = 0;

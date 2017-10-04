@@ -29,7 +29,7 @@ module ioread(
     input wire UARTCtrl,
     input wire SWCtrl,
 
-    input wire[31:0] ioread_data_key,
+    input wire[15:0] ioread_data_key,
     input wire[15:0] ioread_data_ctc,
     input wire[31:0] ioread_data_uart,
     input wire[31:0] ioread_data_sw,
@@ -44,10 +44,10 @@ module ioread(
         end
         else if (ioread == 1) begin
             if (KEYCtrl == 1) begin
-                ioread_data = ioread_data_key;
+                ioread_data = {16'h0000,ioread_data_key};
             end
             else if (CTCCtrl == 1) begin
-                ioread_data = ioread_data_ctc;
+                ioread_data = {16'h0000,ioread_data_ctc};
             end
             else if (UARTCtrl == 1) begin
                 ioread_data = ioread_data_uart;

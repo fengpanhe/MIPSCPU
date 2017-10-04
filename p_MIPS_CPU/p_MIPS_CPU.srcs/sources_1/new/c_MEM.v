@@ -34,6 +34,16 @@ module c_MEM(
     input CPToReg_mem,
     input AL_mem,
     input[31:0] MemWrData_mem,
+    input pulse0,
+    input pulse1,
+    input[3:0] col,
+    output[3:0] line,
+    output[7:0] DISPOutput,
+    output[7:0] DISPEn,
+    output cnt0,
+    output cnt1,
+    output pwmWave,
+    output rst,
     output reg[31:0] RegWrData_mem
     );
     wire[31:0] WrData;      //写到MEM或IO中的数据
@@ -83,8 +93,8 @@ module c_MEM(
      .write_data(WrData)
      );
     
-    wire[31:0] KEYReadData,UARTReadData,SWReadData;
-    wire[15:0] CTCReadData;
+    wire[31:0] UARTReadData,SWReadData;
+    wire[15:0] KEYReadData,CTCReadData;
     ioread IOReadUnit(
     .clk(clk),
     .reset(reset),
@@ -104,7 +114,67 @@ module c_MEM(
    输入包括：IOAddr(ALUResult_mem[9:0]),PortAddr,WrData,IOWr,clk，en(LEDCtrl/PWMCtrl/...)
    输出包括：KEYReadData/SWReadData
    */
+   /*temp signal*/
+   //wire[7:0] LEDOutput;
+   //wire LEDEn;
+   led32 LED(
+   .clk(clk),
+   .reset(reset),
+   .data(WrData),
+   .cs(LEDCtrl),
+   .iow(IOWr),
+   .led_o(DISPOutput),
+   .led_enable_o(DISPEn)
+   );
+   //wire[3:0] col,line;
+   key16 KEY(
+   .clk(clk),
+   .reset(reset),
+   .cs(KEYCtrl),
+   .ior(IORead),
+   .address(portAddr[1:0]),
+   .col(col),
+   .line(line),
+   .ioread_data(KEYReadData)
+   );
+   //wire pulse0,pulse1;
+   //wire cnt0,cnt1;
+   ctc16 CTC(
+   .clk(clk),
+   .reset(reset),
+   .cs(CTCCtrl),
+   .iow(IOWr),
+   .ior(IORead),
+   .pulse0(pulse0),
+   .pulse1(pulse1),
+   .address(portAddr),
+   .iowrite_data(WrData[15:0]),
+   .ioread_data(CTCReadData),
+   .cout0(cnt0),
+   .cout1(cnt1)
+   );
+  
+   //wire pwmWave;
+   pwm16 PWM(
+   .clk(clk),
+   .reset(reset),
+   .cs(PWMCtrl),
+   .address(portAddr[2:0]),
+   .iow(IOWr),
+   .data(WrData[15:0]),
+   .pwm(pwmWave)
+   );
    
+   //wire rst;
+   wtd16 WTD(
+   .clk(clk),
+   .reset(reset),
+   .cs(WTDCtrl),
+   .iow(IOWr),
+   .data(WrData[15:0]),
+   .rst(rst)
+   );
+      
             
     always @(*)
     begin

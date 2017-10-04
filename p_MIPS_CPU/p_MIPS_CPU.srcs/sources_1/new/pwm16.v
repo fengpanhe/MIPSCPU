@@ -21,20 +21,20 @@
 
 
 module pwm16(
-    input reset,                    //ç³»ç»Ÿå¤ä½
-    input[2:0] address,             //ç«¯å£å·
-    input[15:0] data,               //cpuå†™åˆ°pwmæ§åˆ¶å™¨çš„æ•°æ®
-    input cs,                       //ç‰‡é€‰ï¼Œæ¥PWMCtrl
-    input clk,                      //ç³»ç»Ÿæ—¶é’Ÿ
-    input iow,                      //å†™ä¿¡å·
-    output reg pwm                 //è¾“å‡ºæ–¹æ³¢ä¿¡å·
+    input reset,                    //ÏµÍ³¸´Î»
+    input[2:0] address,             //¶Ë¿ÚºÅ
+    input[15:0] data,               //cpuĞ´µ½pwm¿ØÖÆÆ÷µÄÊı¾İ
+    input cs,                       //Æ¬Ñ¡£¬½ÓPWMCtrl
+    input clk,                      //ÏµÍ³Ê±ÖÓ
+    input iow,                      //Ğ´ĞÅºÅ
+    output reg pwm                 //Êä³ö·½²¨ĞÅºÅ
     );
 
-    reg[15:0] maxcount;             //æœ€å¤§å€¼å¯„å­˜å™¨
-    reg[15:0] midcount;             //å¯¹æ¯”å¯„å­˜å™¨
-    reg[15:0] flag;                 //ä½¿èƒ½å¯„å­˜å™¨
-    reg[15:0] rubbish;              //é”™è¯¯ç«¯å£å·çš„dataå¤„ç†
-    reg[15:0] counter;              //è®¡æ•°å™¨
+    reg[15:0] maxcount;             //×î´óÖµ¼Ä´æÆ÷
+    reg[15:0] midcount;             //¶Ô±È¼Ä´æÆ÷
+    reg[15:0] flag;                 //Ê¹ÄÜ¼Ä´æÆ÷
+    reg[15:0] rubbish;              //´íÎó¶Ë¿ÚºÅµÄdata´¦Àí
+    reg[15:0] counter;              //¼ÆÊıÆ÷
 
 
     always @(negedge clk) begin
@@ -46,25 +46,25 @@ module pwm16(
             pwm = 1;
             counter = 16'h0000;
         end
-        else if (cs == 1 && iow == 1) begin      //cpuå†™pwmå¯„å­˜å™¨
+        else if (cs == 1 && iow == 1) begin      //cpuĞ´pwm¼Ä´æÆ÷
             case (address[2:0])
                 3'b000: maxcount = data;
                 3'b010: midcount = data;
-                3'b100: flag[0] = data[0];      //å†™å®èƒ½å¯„å­˜å™¨
+                3'b100: flag[0] = data[0];      //Ğ´ÊµÄÜ¼Ä´æÆ÷
                 default: rubbish = data;
             endcase
         end
         else if (flag[0]) begin
-            if (counter == maxcount) begin      //è®¡æ•°åˆ°æœ€å¤§å€¼
+            if (counter == maxcount) begin      //¼ÆÊıµ½×î´óÖµ
                 counter = 16'b0000;
                 pwm = 1;
             end
             else begin
                 counter = counter + 1'b1;
-                if (counter > midcount) begin       //è®¡æ•°å€¼å¤§äºå¯¹æ¯”å€¼
+                if (counter > midcount) begin       //¼ÆÊıÖµ´óÓÚ¶Ô±ÈÖµ
                     pwm = 0;
                 end
-                else begin                          //è®¡æ•°å€¼å°äºå¯¹æ¯”å€¼
+                else begin                          //¼ÆÊıÖµĞ¡ÓÚ¶Ô±ÈÖµ
                     pwm = 1;
                 end
             end

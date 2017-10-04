@@ -66,7 +66,7 @@ module CPU_TEST2();
      );*/
     m_MIPS_CPU MIPS_CPU(
     .clk(clk),
-    .reset(reset),
+    .rst(reset),
     .stall(Stall),
     .pc_ifwrite(PC_IFWrite),
     .Instruction(Instruction_if),

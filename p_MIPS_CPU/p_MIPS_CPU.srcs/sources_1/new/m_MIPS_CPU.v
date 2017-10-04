@@ -22,7 +22,7 @@
 
 module m_MIPS_CPU(
     input clk,
-    input reset,
+    input rst,
     output[31:0] Instruction,
     output stall,
     output pc_ifwrite,
@@ -58,8 +58,20 @@ module m_MIPS_CPU(
     output regwr_wb,
     output j,
     output jr,
-    output z
-    );       
+    output z,
+    output[7:0] DISPOutput,
+    output[7:0] DISPEn,
+    input[3:0] col,
+    output[3:0] line,
+    input pulse0,
+    input pulse1,
+    output cnt0,
+    output cnt1,
+    output pwmWave
+    );
+    wire WDTRst;       
+    wire reset;
+    assign reset = rst|| WDTRst;  
     /*IF Module*/
     wire[31:0] Instruction_if,Instruction_id;
     wire[31:0] NextPC_id,NextPC_if,NextPC_ex,NextPC_mem,NextPC_wb;
@@ -298,6 +310,16 @@ module m_MIPS_CPU(
     .CPToReg_mem(CPToReg_mem),
     .AL_mem(AL_mem),
     .MemWrData_mem(MemWrData_mem),
+    .pulse0(pulse0),
+    .pulse1(pulse1),
+    .col(col),
+    .line(line),
+    .DISPOutput(DISPOutput),
+    .DISPEn(DISPEn),
+    .cnt0(cnt0),
+    .cnt1(cnt1),
+    .pwmWave(pwmWave),
+    .rst(WDTRst),
     .RegWrData_mem(RegWrData_mem)
     );
 

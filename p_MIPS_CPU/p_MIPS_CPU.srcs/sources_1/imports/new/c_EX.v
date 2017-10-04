@@ -44,6 +44,13 @@ module c_EX(
     output[31:0] HI,                  //HI寄存器中的值(用于测试)
     output[31:0] LO                   //LO寄存器中的值(用于测试)
     );
+    initial
+    begin
+    RegWrAddr_ex <= 5'b00000;
+    ALU_A <= 32'h00000000;
+    ALU_B <= 32'h00000000;
+    end
+    
     assign MemWrData_ex = RtData_ex;
     assign CPWrAddr_ex = RdAddr_ex;
     assign CPWrData_ex = RtData_ex;
