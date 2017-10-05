@@ -117,11 +117,11 @@ module c_MEM(
    /*temp signal*/
    //wire[7:0] LEDOutput;
    //wire LEDEn;
-   led32 LED(
+   disp32 DISP(
    .clk(clk),
    .reset(reset),
    .data(WrData),
-   .cs(LEDCtrl),
+   .cs(DISPCtrl),
    .iow(IOWr),
    .led_o(DISPOutput),
    .led_enable_o(DISPEn)
