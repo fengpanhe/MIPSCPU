@@ -33,7 +33,7 @@ module m_signedDiv(
     assign A_op = A[31];
     assign B_op = B[31];  
     assign res_op = A_op^B_op; 
-    assign remainder_op = ({{A_op}} & B_unsigned) & {32{|res[31:0]}};
+    assign remainder_op = ({32{A_op}} & B_unsigned) & {32{|res[31:0]}};
     assign A_reverse = A^{32{A_op}};
     assign B_reverse = B^{32{B_op}};
     mult_adder A_adder (
@@ -54,7 +54,7 @@ module m_signedDiv(
     c_addsub remainder_adder (
         .A(remainder_op),
         .B(res[31:0]),
-        .ADD(|remainder_op),
+        .ADD(~(|remainder_op)),
         .S(remainder)
     );
     assign P[31:0] = remainder;

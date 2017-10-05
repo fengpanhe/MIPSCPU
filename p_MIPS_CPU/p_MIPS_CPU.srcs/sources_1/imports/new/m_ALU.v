@@ -21,13 +21,13 @@
 
 
 module m_ALU(
-    input[4:0] ALUCode,
-    input[31:0] ALU_A,
-    input[31:0] ALU_B,
-    output reg[31:0] ALU_Result,
-    output[31:0] HI,
+    input[4:0] ALUCode,             //ALU要执行的运算类型
+    input[31:0] ALU_A,              //ALU源操作数A
+    input[31:0] ALU_B,              //ALU源操作数B
+    output reg[31:0] ALU_Result,   //ALU运算结果
+    output[31:0] HI,                
     output[31:0] LO,
-    output reg Overflow
+    output reg Overflow            //有符号加减运算溢出标志
     );
     
     /*ALU_OP Parameters*/
@@ -59,18 +59,25 @@ module m_ALU(
     
     reg[31:0] HI;
     reg[31:0] LO;
+    initial
+    begin
+    HI <= 32'b0;
+    LO <= 32'b0;
+    end
+    
     reg signed[31:0] B_signed;
     reg[31:0] r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15;
-    always @(ALU_B) B_signed = ALU_B;    //锟斤拷B转锟斤拷锟斤拷锟叫凤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
-    wire[31:0] sum;             //锟接凤拷锟斤拷锟斤拷锟??
-    wire[63:0] multRes,multRes_signed;//锟剿凤拷锟斤拷锟斤拷锟??
-    wire[63:0] divRes, divRes_signed;
-    wire CF,OF,Cout,isAdd;      //闁跨喎褰ㄧ拋瑙勫闁跨喕顫楅崙銈嗗闁跨喕顫楅崝鐘插殩閹风兘鏁撻弬銈嗗闁跨喐鏋婚幏锟? 0-add 1-others
-    assign OF = &(ALU_A[31:0]~^ALU_B[31:0]);
-    assign CF = Cout^isAdd;
-    assign isAdd = ~(ALUCode == ALU_ADD);
-    wire[31:0] B2;
+    always @(ALU_B) B_signed = ALU_B;    //将B转换为有符号数便于进行移位运算
+    wire[31:0] sum;                     //加、减法运算结果
+    wire[63:0] multRes,multRes_signed;  //乘法运算结果
+    wire[63:0] divRes, divRes_signed;   //除法运算结果
+    wire CF,Cout,isAdd;              //标志位 
+    //assign OF = &(ALU_A[31:0]~^ALU_B[31:0]);    //判断A、B是否相等的标志位
+    assign CF = Cout^isAdd;                     //判断是否有进位/借位的标志位
+    assign isAdd = ~(ALUCode == ALU_ADD);       //判断是否是加法运算 0-add 1-others
+    wire[31:0] B2;                      //操作数B的反码
     assign B2 = ALU_B^{32{isAdd}};
+    //有/无符号加减法运算
     m_addsuber aluAdder (
       .A(ALU_A),          // input wire [31 : 0] A
       .B(B2),          // input wire [31 : 0] B
@@ -78,26 +85,31 @@ module m_ALU(
       .C_OUT(Cout),  // output wire C_OUT
       .S(sum)          // output wire [31 : 0] S
     );
+    //无符号乘法运算
     m_multiplier aluMultiplier (
          .A(ALU_A),      // input wire [31 : 0] A
          .B(ALU_B),      // input wire [31 : 0] B
          .P(multRes)      // output wire [63 : 0] P
     );
+    //有符号乘法运算
     m_signedMult aluMultiplier2(
          .A(ALU_A),
          .B(ALU_B),
          .P(multRes_signed)
     );
+    
     m_signedDiv aluSignedDiv(
         .A(ALU_A),
         .B(ALU_B),
         .P(divRes_signed)
     );
     m_divider divider (
-        .s_axis_divisor_tdata(ALU_A),      // input wire [31 : 0] s_axis_divisor_tdata
-        .s_axis_dividend_tdata(ALU_B),    // input wire [31 : 0] s_axis_dividend_tdata
+        .s_axis_divisor_tdata(ALU_B),      // input wire [31 : 0] s_axis_divisor_tdata
+        .s_axis_dividend_tdata(ALU_A),    // input wire [31 : 0] s_axis_dividend_tdata
         .m_axis_dout_tdata(divRes)            // output wire [63 : 0] m_axis_dout_tdata
     );
+    
+    //判断有符号加减法是否溢出
     always @(*)
     begin
         if((ALU_A[31]^sum[31]) && (B2[31]^sum[31]) && ((ALUCode == ALU_ADD) || (ALUCode == ALU_SUB)))
@@ -107,7 +119,7 @@ module m_ALU(
     end
     always @(*)
     begin
-        r0 = sum;                   //add|addi|sub|subi
+        r0 = sum;                           //add|addi|sub|subi
         r1 <= ALU_A & ALU_B;                //and
         r2 <= ALU_A | ALU_B;                //or
         r3 <= ALU_A ^ ALU_B;                //xor
@@ -115,14 +127,14 @@ module m_ALU(
         r5 <= ALU_A & {16'b0,ALU_B[15:0]};  //andi
         r6 <= ALU_A | {16'b0,ALU_B[15:0]};  //ori
         r7 <= ALU_A ^ {16'b0,ALU_B[15:0]};  //xori
-        r8 <= {ALU_B[15:0],16'b0};      //lui
+        r8 <= {ALU_B[15:0],16'b0};          //lui
         r9 <= ALU_B << ALU_A;               //sll|sllv
         r10 <= ALU_B >> ALU_A;              //srl|srlv
-        r11 <= B_signed >> ALU_A;       //sra|srav
+        r11 <= B_signed >> ALU_A;           //sra|srav
         r12 = (ALU_A[31]&&(~ALU_B[31])) || ((ALU_A[31]~^ALU_B[31])&&sum[31]);//slt
-        r13 = CF;                   //sltu
-        r14 = HI;                   //mfhi
-        r15 = LO;                   //mflo
+        r13 = CF;                           //sltu
+        r14 = HI;                           //mfhi
+        r15 = LO;                           //mflo
     end
     always @(*) begin
         case(ALUCode)
@@ -149,6 +161,7 @@ module m_ALU(
             ALU_ORI: ALU_Result = r6;
             ALU_XORI: ALU_Result = r7;
             ALU_LUI: ALU_Result = r8;
+            default:ALU_Result = 32'bx;
         endcase
     end 
 endmodule

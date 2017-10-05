@@ -31,30 +31,31 @@ module CPU_TEST2();
      end
      wire[31:0] Instruction_if,Instruction_id;
     // wire Stall,pc_ifwrite;
-     wire[31:0] NextPC_if,NextPC_id;//,NextPC_ex,NextPC_mem;
+     //wire[31:0] NextPC_if,NextPC_id;//,NextPC_ex,NextPC_mem;
      wire[4:0] ALUCode_id;
-     wire flush;
+     //wire flush;
      wire[31:0] ALUResult_ex;
-     wire RegWr_wb;
-     wire[31:0] RegWrData_wb,RegWrData_mem;
+    // wire RegWr_wb;
+     //wire[31:0] RegWrData_wb,RegWrData_mem;
      wire[31:0] ALUa_ex,ALUb_ex;
     // wire[31:0] MemResult;
     // wire[31:0] MemAddr;
     // wire MemToReg_wb;
-     wire J,JR,Z;
-     wire Stall,PC_IFWrite;
+    // wire J,JR,Z;
+    // wire Stall,PC_IFWrite;
     // wire MemWr_ex,MemWr_id,MemWr_mem;
     // wire[31:0] MemWrData_mem;
     // wire[31:0] tmpOut;
     // wire[1:0] MemReadSize_mem;
-     wire[31:0] JmpAddr,JrAddr;
-     wire[4:0] RegWrAddr_wb;
-     wire[31:0] RsData_id,RtData_id;
-     wire[4:0] RsAddr_id,RtAddr_id;
-    /*m_MIPS_CPU MIPS_CPU(
+     //wire[31:0] JmpAddr,JrAddr;
+    // wire[4:0] RegWrAddr_wb;
+     //wire[31:0] RsData_id,RtData_id;
+    // wire[4:0] RsAddr_id,RtAddr_id;
+    wire[31:0] HI,LO;
+    m_MIPS_CPU MIPS_CPU(
      .clk(clk),
-     .reset(reset),
-     .pc_ifwrite(PC_IFWrite),
+     .rst(reset),
+     //.pc_ifwrite(PC_IFWrite),
      .Instruction(Instruction_if),
      .ALUCode(ALUCode_id),
      .ALU_a(ALUa_ex),
@@ -63,8 +64,8 @@ module CPU_TEST2();
      .HI(HI),
      .LO(LO),
      .Instruction2(Instruction_id)
-     );*/
-    m_MIPS_CPU MIPS_CPU(
+     );
+    /*m_MIPS_CPU MIPS_CPU(
     .clk(clk),
     .rst(reset),
     .stall(Stall),
@@ -102,5 +103,5 @@ module CPU_TEST2();
     .j(J),
     .jr(JR),
     .z(Z)
-    );
+    );*/
 endmodule
