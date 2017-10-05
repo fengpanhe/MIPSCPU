@@ -23,14 +23,14 @@
 module led32(
     input reset,    //复位
     input clk,      //系统时钟
-    input cs,      //片选
-    input iow,      //写信号
-    input address, //端口号
+    input cs,      //片�??
+    input iow,      //写信�?
+    input address, //端口�?
     input[31:0] data,      //系统总线中的数据
     output reg[31:0] ledo  //LED引脚
     );
 
-    always @(posedge cs or posedge reset) begin
+    always @(posedge clk or posedge reset) begin
         if (reset == 1) begin
             // reset
             ledo <= 32'h00000000;

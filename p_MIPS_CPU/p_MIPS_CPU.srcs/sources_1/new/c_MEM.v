@@ -36,10 +36,12 @@ module c_MEM(
     input[31:0] MemWrData_mem,
     input pulse0,
     input pulse1,
+    input[31:0] SWInput,
     input[3:0] col,
     output[3:0] line,
     output[7:0] DISPOutput,
     output[7:0] DISPEn,
+    output[31:0] LEDOutput,
     output cnt0,
     output cnt1,
     output pwmWave,
@@ -174,7 +176,26 @@ module c_MEM(
    .data(WrData[15:0]),
    .rst(rst)
    );
-      
+    
+   led32 LED(
+   .clk(clk),
+   .reset(reset),
+   .cs(LEDCtrl),
+   .iow(IOWr),
+   .address(portAddr[0]),
+   .data(WrData),
+   .ledo(LEDOutput)
+   );  
+   
+   sw32 SW(
+   .clk(clk),
+   .reset(reset),
+   .cs(SWCtrl),
+   .ior(IORead),
+   .address(portAddr[0]),
+   .swi(SWInput),
+   .ioread_data(SWReadData)
+   );
             
     always @(*)
     begin

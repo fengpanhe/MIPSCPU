@@ -61,6 +61,8 @@ module m_MIPS_CPU(
     output z,
     output[7:0] DISPOutput,
     output[7:0] DISPEn,
+    input[31:0] SWInput,
+    output[31:0] LEDOutput,
     input[3:0] col,
     output[3:0] line,
     input pulse0,
