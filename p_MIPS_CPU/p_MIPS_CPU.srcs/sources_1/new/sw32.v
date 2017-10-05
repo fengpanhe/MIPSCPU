@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10/05/2017 09:29:20 AM
+// Create Date: 10/05/2017 09:14:49 AM
 // Design Name: 
-// Module Name: led32
+// Module Name: sw32
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,23 +20,23 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module led32(
+module sw32(
     input reset,    //复位
     input clk,      //系统时钟
     input cs,      //片选
-    input iow,      //写信号
+    input ior,      //读信号
     input address, //端口号
-    input[31:0] data,      //系统总线中的数据
-    output reg[31:0] ledo  //LED引脚
+    input[31:0] swi,      //sw的引脚输入信号
+    output reg[31:0] ioread_data   //读出的数据
     );
 
-    always @(posedge cs or posedge reset) begin
+    always @(negedge clk) begin
         if (reset == 1) begin
             // reset
-            ledo <= 32'h00000000;
+            ioread_data = 16'h0000;
         end
-        else if (cs == 1 && iow == 1) begin
-            ledo = data;       //锁存数据
+        if ((cs == 1) && (ior == 1) && (address == 1)) begin
+            ioread_data <= swi;
         end
     end
 endmodule

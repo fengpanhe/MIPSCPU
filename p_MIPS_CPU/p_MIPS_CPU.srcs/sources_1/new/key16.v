@@ -21,14 +21,14 @@
 
 
 module key16(
-    input wire reset,       //¸´Î»ÐÅºÅ
-    input wire cs,          //Æ¬Ñ¡ÐÅºÅ£¬½Ókeyctrl
-    input wire clk,         //ÏµÍ³Ê±ÖÓ
-    input wire ior,         //¶ÁÐÅºÅ
-    input wire[1:0] address,//¶Ë¿ÚºÅ
-    input wire[3:0] col,    //ÁÐÏß
-    output reg[3:0] line,   //ÐÐÏß
-    output reg[15:0] ioread_data//Êä³öÊý¾Ý
+    input wire reset,       //ï¿½ï¿½Î»ï¿½Åºï¿½
+    input wire cs,          //Æ¬Ñ¡ï¿½ÅºÅ£ï¿½ï¿½ï¿½keyctrl
+    input wire clk,         //ÏµÍ³Ê±ï¿½ï¿½
+    input wire ior,         //ï¿½ï¿½ï¿½Åºï¿½
+    input wire[1:0] address,//ï¿½Ë¿Úºï¿½
+    input wire[3:0] col,    //ï¿½ï¿½ï¿½ï¿½
+    output reg[3:0] line,   //ï¿½ï¿½ï¿½ï¿½
+    output reg[15:0] ioread_data//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     );
 
     reg[15:0] keyvalue;
@@ -45,7 +45,7 @@ module key16(
         else begin
             case(line)
                 4'b0000: if(col != 4'b1111) line <= 4'b1110;
-                4'b1110: //0ÐÐ
+                4'b1110: //0ï¿½ï¿½
                     if(col != 4'b1111) begin
                         keyvalue[3:0] = col;
                         keyvalue[7:4] = line;
@@ -55,7 +55,7 @@ module key16(
                     else begin
                         line <= 4'b1101;
                     end
-                4'b1101: //1ÐÐ
+                4'b1101: //1ï¿½ï¿½
                     if(col != 4'b1111) begin
                         keyvalue[3:0] = col;
                         keyvalue[7:4] = line;
@@ -65,7 +65,7 @@ module key16(
                     else begin
                         line <= 4'b1011;
                     end
-                4'b1011: //2ÐÐ
+                4'b1011: //2ï¿½ï¿½
                     if(col != 4'b1111) begin
                         keyvalue[3:0] = col;
                         keyvalue[7:4] = line;
@@ -75,7 +75,7 @@ module key16(
                     else begin
                         line <= 4'b0111;
                     end
-                4'b0111: //3ÐÐ
+                4'b0111: //3ï¿½ï¿½
                     if(col != 4'b1111) begin
                         keyvalue[3:0] = col;
                         keyvalue[7:4] = line;
@@ -88,11 +88,11 @@ module key16(
                     end
             endcase
 
-            if ((cs == 1) && (ior == 1)) begin // ¶ÁÐÅºÅ
-                if (address == 2'b00) begin    //¶Á¼üÖµ
+            if ((cs == 1) && (ior == 1)) begin // ï¿½ï¿½ï¿½Åºï¿½
+                if (address == 2'b00) begin    //ï¿½ï¿½ï¿½ï¿½Öµ
                     ioread_data = keyvalue;
                 end
-                else if(address == 2'b10) begin //¶Á×´Ì¬Í¬Ê±Çå×´Ì¬
+                else if(address == 2'b10) begin //ï¿½ï¿½×´Ì¬Í¬Ê±ï¿½ï¿½×´Ì¬
                     ioread_data = keystat;
                     keystat = keystat & 16'hfffe;
                 end
