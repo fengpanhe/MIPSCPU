@@ -31,7 +31,7 @@ module clock_div(
     reg [25:0] div_counter = 0;
     always @(posedge clk)
     begin
-        if(div_counter >= 50000000)
+        if(div_counter >= 5)
         begin
             clk_sys_1HZ <= ~clk_sys_1HZ;
             div_counter = 0;

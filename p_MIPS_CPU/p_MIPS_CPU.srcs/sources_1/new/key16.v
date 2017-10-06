@@ -21,14 +21,14 @@
 
 
 module key16(
-    input wire reset,       //��λ�ź�
-    input wire cs,          //Ƭѡ�źţ���keyctrl
-    input wire clk,         //ϵͳʱ��
-    input wire ior,         //���ź�
-    input wire[1:0] address,//�˿ں�
-    input wire[3:0] col,    //����
-    output reg[3:0] line,   //����
-    output reg[15:0] ioread_data//�������
+    input wire reset,       //锟斤拷位锟脚猴拷
+    input wire cs,          //片选锟脚号ｏ拷锟斤拷keyctrl
+    input wire clk,         //系统时锟斤拷
+    input wire ior,         //锟斤拷锟脚猴拷
+    input wire[1:0] address,//锟剿口猴拷
+    input wire[3:0] col,    //锟斤拷锟斤拷
+    output reg[3:0] line,   //锟斤拷锟斤拷
+    output reg[15:0] ioread_data//锟斤拷锟斤拷锟斤拷锟�
     );
 
     reg[15:0] keyvalue;
@@ -45,7 +45,7 @@ module key16(
         else begin
             case(line)
                 4'b0000: if(col != 4'b1111) line <= 4'b1110;
-                4'b1110: //0��
+                4'b1110: //0锟斤拷
                     if(col != 4'b1111) begin
                         keyvalue[3:0] = col;
                         keyvalue[7:4] = line;
@@ -55,7 +55,7 @@ module key16(
                     else begin
                         line <= 4'b1101;
                     end
-                4'b1101: //1��
+                4'b1101: //1锟斤拷
                     if(col != 4'b1111) begin
                         keyvalue[3:0] = col;
                         keyvalue[7:4] = line;
@@ -65,7 +65,7 @@ module key16(
                     else begin
                         line <= 4'b1011;
                     end
-                4'b1011: //2��
+                4'b1011: //2锟斤拷
                     if(col != 4'b1111) begin
                         keyvalue[3:0] = col;
                         keyvalue[7:4] = line;
@@ -75,7 +75,7 @@ module key16(
                     else begin
                         line <= 4'b0111;
                     end
-                4'b0111: //3��
+                4'b0111: //3锟斤拷
                     if(col != 4'b1111) begin
                         keyvalue[3:0] = col;
                         keyvalue[7:4] = line;
@@ -88,11 +88,11 @@ module key16(
                     end
             endcase
 
-            if ((cs == 1) && (ior == 1)) begin // ���ź�
-                if (address == 2'b00) begin    //����ֵ
+            if ((cs == 1) && (ior == 1)) begin // 锟斤拷锟脚猴拷
+                if (address == 2'b00) begin    //锟斤拷锟斤拷值
                     ioread_data = keyvalue;
                 end
-                else if(address == 2'b10) begin //��״̬ͬʱ��״̬
+                else if(address == 2'b10) begin //锟斤拷状态同时锟斤拷状态
                     ioread_data = keystat;
                     keystat = keystat & 16'hfffe;
                 end

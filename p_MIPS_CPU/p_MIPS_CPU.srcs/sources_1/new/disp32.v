@@ -26,8 +26,11 @@ module disp32(
     input wire[31:0] data,      //系统总线中的数据线
     input wire cs,              //片信号，接LEDCtrl
     input wire iow,             //i/0写信号
-    output[7:0] led_o,      //led输出信号
+    output wire[7:0] led_o,      //led输出信号
     output reg[7:0] led_enable_o      //led使能信号
+    // output[2:0] count,
+    // output[3:0] dig,
+    // output clk_sys
     );
     reg[31:0] rdata; //数据锁存器
     reg[2:0] count; //8计数器
@@ -36,7 +39,7 @@ module disp32(
 
     wire clk_sys;
 
-    always @(posedge cs or posedge reset) begin
+    always @(reset) begin
         if (reset == 1) begin
             // reset
             rdata = 32'h00000000;
@@ -53,7 +56,7 @@ module disp32(
     );
     
     //8计数器
-    always @(posedge clk_sys or negedge reset)  begin
+    always @(clk_sys)  begin
         if(reset == 1) begin
             count = 0;
         end 
@@ -73,9 +76,9 @@ module disp32(
         .led_o(led_o)
         );
 
-    always @(rdata or count) begin
+    always @(count) begin
         case(count[2:0])
-            3'h0: begin
+            3'b000: begin
                 dig = rdata[3:0];
                 led_enable_o <= 8'b11111110;
             end
