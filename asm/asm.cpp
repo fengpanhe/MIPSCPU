@@ -21,9 +21,22 @@ int getReg(char* arg){
         sign = -1;
         p++;
     }
-    while(*p >= '0' && *p <= '9'){
-        reg = 10 * reg + (*p - '0');
-        p++;
+
+    if (p[0] == '0' && p[1] == 'x'){    //16进制数
+        p += 2;
+        while(*p != '\0'){
+            if(*p >= '0' && *p <= '9'){
+                reg = 16 * reg + (*p - '0');
+            } else if (*p >= 'a' && *p <= 'f') {
+                reg = 16 * reg + (*p - 'a' + 10);
+            }
+            *p++;
+        }
+    } else {        //非16进制
+        while(*p >= '0' && *p <= '9'){
+            reg = 10 * reg + (*p - '0');
+            p++;
+        }
     }
     return reg * sign;
 }
