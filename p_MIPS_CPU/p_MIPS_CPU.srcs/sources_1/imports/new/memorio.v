@@ -71,7 +71,7 @@ module memorio(
             write_data = wdata;
         end
         else begin
-            write_data = 32'hZZZZZZZZ;
+            write_data = 32'h0;
         end
     end
 endmodule

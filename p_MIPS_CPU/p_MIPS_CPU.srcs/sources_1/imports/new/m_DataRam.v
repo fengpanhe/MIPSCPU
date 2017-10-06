@@ -99,10 +99,13 @@ module m_DataRam(
           endcase
           end
     2'b11:begin
-          if(MemAddr[1:0] == 0)
+          if(MemAddr[1:0] == 2'b00)
             begin
             {MemWrData3,MemWrData2,MemWrData1,MemWrData0} <= MemWrData;
-            {MemWr3,MemWr2,MemWr1,MemWr0} <= 4'b1111;
+            MemWr0 <= MemWr;
+            MemWr1 <= MemWr;
+            MemWr2 <= MemWr;
+            MemWr3 <= MemWr;
             end
           else
             begin

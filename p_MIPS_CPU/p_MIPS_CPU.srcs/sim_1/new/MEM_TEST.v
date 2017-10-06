@@ -38,9 +38,9 @@ module MEM_TEST();
      MemWrSize = 2'b00;
      MemWr = 0;
      #100
-     MemWr = 1;
+     MemWr <= 1;
+     MemWrSize <= 2'b11;
      #100
-     MemWrSize = 2'b11;
      MemWr = 0;
      end
     

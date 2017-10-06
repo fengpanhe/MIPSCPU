@@ -36,6 +36,7 @@ module m_MIPS_CPU(
     output[31:0] ALU_a,
     output[31:0] ALU_b,
     output[31:0] aluresult_ex,
+    output[31:0] aluresult_mem,
     output[31:0] HI,
     output[31:0] LO,
     output[31:0] regwrdata_wb,
@@ -48,6 +49,7 @@ module m_MIPS_CPU(
     output memwr_mem,
     output[31:0] memtmpout,
     output[1:0] memreadsize_mem,
+    output[31:0] tmpout,
     output[31:0] jmpAddr,
     output[31:0] jrAddr,
     output[4:0] rsaddr_id,
@@ -308,7 +310,7 @@ module m_MIPS_CPU(
     .ALUResult_mem(ALUResult_mem),
     .CPResult_mem(CPResult_mem),
     .NextPC_mem(NextPC_mem),
-    .MemOrIOToReg_mem(MemToReg_mem),
+    .MemOrIOToReg_mem(MemOrIOToReg_mem),
     .CPToReg_mem(CPToReg_mem),
     .AL_mem(AL_mem),
     .MemWrData_mem(MemWrData_mem),
@@ -322,7 +324,8 @@ module m_MIPS_CPU(
     .cnt1(cnt1),
     .pwmWave(pwmWave),
     .rst(WDTRst),
-    .RegWrData_mem(RegWrData_mem)
+    .RegWrData_mem(RegWrData_mem),
+    .tmpOut(tmpout)
     );
 
     /*MEM/WB Regs*/  
@@ -352,6 +355,7 @@ module m_MIPS_CPU(
     //assign nextpc_ex = NextPC_ex;
     assign nextpc_mem = NextPC_mem;
     assign aluresult_ex = ALUResult_ex;
+    assign aluresult_mem = ALUResult_mem;
     assign stall = Stall;
     assign pc_ifwrite = PC_IFWrite;
     //assign aluresult_mem = ALUResult_mem;
@@ -379,9 +383,9 @@ module m_MIPS_CPU(
     assign regwrdata_wb = RegWrData_wb;
     //assign memtoreg_wb = MemToReg_wb;
     assign memaddr = ALUResult_mem;
-    //assign memwr_id = MemWr_id;
-    //assign memwr_ex = MemWr_ex;
-    //assign memwr_mem = MemWr_mem;
+    assign memwr_id = MemOrIOWr_id;
+    assign memwr_ex = MemOrIOWr_ex;
+    assign memwr_mem = MemOrIOWr_mem;
     assign memwrdata_mem = MemWrData_mem;
     assign memreadsize_mem = MemReadSize_mem;
     assign jmpAddr = JmpAddr;

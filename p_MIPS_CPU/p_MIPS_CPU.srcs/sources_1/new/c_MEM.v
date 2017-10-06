@@ -46,7 +46,8 @@ module c_MEM(
     output cnt1,
     output pwmWave,
     output rst,
-    output reg[31:0] RegWrData_mem
+    output reg[31:0] RegWrData_mem,
+    output[31:0] tmpOut
     );
     wire[31:0] WrData;      //写到MEM或IO中的数据
     wire MemWr;
@@ -67,7 +68,8 @@ module c_MEM(
     .MemExtType(MemExtType_mem),
     .MemAddr(ALUResult_mem),
     .MemWrData(WrData),
-    .MemOutput(MemResult)
+    .MemOutput(MemResult),
+    .tmpOut(tmpOut)
     );
     
     wire[3:0] portAddr;
