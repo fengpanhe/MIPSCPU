@@ -24,6 +24,7 @@ module m_Decoder(
     input[5:0] op,
     input[5:0] func,
     input[4:0] rs,
+    input[4:0] rt,
     //output MemToReg,                //决定写回到Regs的数据源 0:ALU 1:MEM
     output MemOrIOToReg,
     output CPToReg,                 //决定写回Regs的数据源 0：其他 1:CP0
@@ -106,7 +107,7 @@ module m_Decoder(
     //指令类型信号 1表示对应指令成立
      wire ADD,ADDU,SUB,SUBU,AND,MULT,MULTU,DIV,DIVU,MFHI,MFLO,MTHI,MTLO,OR,XOR,NOR,SLT,SLTU,SLL,
                 SRL,SRA,SLLV,SRLV,SRAV,JR,JALR,BREAK,SYSCALL,ERET;
-     wire ADDI,ANDI,ORI,XORI,LUI,LB,LBU,LH,LHU,SB,SH,LW,SW,BEQ,BNE,BGEZ,BGTZ,BLEZ,BLTZ,BGEZAL,BLTZAL,SLTI,SLTIU;
+     wire ADDI,ADDIU,ANDI,ORI,XORI,LUI,LB,LBU,LH,LHU,SB,SH,LW,SW,BEQ,BNE,BGEZ,BGTZ,BLEZ,BLTZ,BGEZAL,BLTZAL,SLTI,SLTIU;
      wire J,JAL;
      wire MFC0,MTC0;
      //R型指令
@@ -161,12 +162,12 @@ module m_Decoder(
      assign SW = (op == SW_op);
      assign BEQ = (op == BEQ_op);
      assign BNE = (op == BNE_op);
-     assign BGEZ = (op == BGEZ_op);
-     assign BGTZ = (op == BGTZ_op);
-     assign BLEZ = (op == BLEZ_op);
-     assign BLTZ = (op == BLTZ_op);
-     assign BGEZAL = (op == BGEZAL_op);
-     assign BLTZAL = (op == BLTZAL_op);
+     assign BGEZ = (op == BGEZ_op) && (rt == 5'b00001);
+     assign BGTZ = (op == BGTZ_op) && (rt == 5'b00000);
+     assign BLEZ = (op == BLEZ_op) && (rt == 5'b00000);
+     assign BLTZ = (op == BLTZ_op) && (rt == 5'b00000);
+     assign BGEZAL = (op == BGEZAL_op) && (rt == 5'b10001);
+     assign BLTZAL = (op == BLTZAL_op) && (rt == 5'b10000);
      assign SLTI = (op == SLTI_op);
      assign SLTIU = (op == SLTIU_op);
      //J型指令
@@ -297,12 +298,20 @@ module m_Decoder(
         SW_op: ALUCode <= ALU_ADD;
         BEQ_op: ALUCode <= ALU_BEQ;
         BNE_op: ALUCode <= ALU_BNE;
-        BGEZ_op: ALUCode <= ALU_BGEZ;
+        BGEZ_op:begin
+                case(rt)
+                5'b00000:ALUCode <= ALU_BLTZ;
+                5'b00001:ALUCode <= ALU_BGEZ;
+                5'b10000:ALUCode <= ALU_BLTZ;
+                5'b10001:ALUCode <= ALU_BGEZ;
+                default:ALUCode <= ALU_NONE;
+                endcase
+                end
         BGTZ_op: ALUCode <= ALU_BGTZ;
         BLEZ_op: ALUCode <= ALU_BLEZ;
-        BLTZ_op: ALUCode <= ALU_BLTZ;
-        BGEZAL_op: ALUCode <= ALU_BGEZ;
-        BLTZAL_op: ALUCode <= ALU_BLTZ;
+        //BLTZ_op: ALUCode <= ALU_BLTZ;
+        //BGEZAL_op: ALUCode <= ALU_BGEZ;
+        //BLTZAL_op: ALUCode <= ALU_BLTZ;
         SLTI_op: ALUCode <= ALU_SLT;
         SLTIU_op: ALUCode <= ALU_SLTU;
         J_op: ALUCode <= ALU_ADD;

@@ -78,9 +78,9 @@ module c_MEM(
      memorio MemOrIO(
      .caddress(ALUResult_mem),
      .memread(MemRead),
-     .memwrite(MemWrite),
+     .memwrite(MemWr),
      .ioread(IORead),
-     .iowrite(IOWrite),
+     .iowrite(IOWr),
      .mread_data(MemResult),
      .ioread_data(IOResult),
      .wdata(MemWrData_mem),

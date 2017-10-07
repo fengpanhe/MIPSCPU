@@ -105,6 +105,7 @@ module c_ID(
     .op(Instruction_id[31:26]),
     .func(Instruction_id[5:0]),
     .rs(Instruction_id[25:21]),
+    .rt(Instruction_id[20:16]),
     //.MemToReg(MemToReg_id),
     .MemOrIOToReg(MemOrIOToReg_id),
     .CPToReg(CPToReg_id),

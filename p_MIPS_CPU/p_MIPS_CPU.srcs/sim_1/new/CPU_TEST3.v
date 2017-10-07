@@ -31,17 +31,15 @@ module CPU_TEST3();
      #5 reset = 0;
      end
      wire[31:0] Instruction_if,Instruction_id;
-    // wire Stall,pc_ifwrite;
      wire[31:0] NextPC_if,NextPC_id;//,NextPC_ex,NextPC_mem;
      wire[4:0] ALUCode_id;
-     //wire flush;
      wire[31:0] ALUResult_ex;
      wire[31:0] ALUResult_mem;
      wire RegWr_wb;
      wire[31:0] RegWrData_wb,RegWrData_mem;
      wire[31:0] ALUa_ex,ALUb_ex;
      wire J,JR,Z;
-    // wire Stall,PC_IFWrite;
+     wire PC_IFWrite;
      wire MemWr_ex,MemWr_id,MemWr_mem;
      wire[31:0] MemWrData_mem;
      wire[31:0] tmpOut;
@@ -54,6 +52,7 @@ module CPU_TEST3();
     m_MIPS_CPU MIPS_CPU(
     .clk(clk),
     .rst(reset),
+    .pc_ifwrite(PC_IFWrite),
     //.stall(Stall),
     .Instruction(Instruction_if),
     .ALUCode(ALUCode_id),
