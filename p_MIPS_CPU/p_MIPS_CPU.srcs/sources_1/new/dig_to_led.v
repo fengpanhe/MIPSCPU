@@ -27,7 +27,7 @@ module dig_to_led(
     output reg[7:0] led_o
     );
 
-    always @(dig_i) begin
+    always @(dig_i or point_i) begin
         if (enable_i == 0) begin
             led_o = 8'hff;
         end
@@ -51,7 +51,7 @@ module dig_to_led(
                 4'hf: led_o[6:0] = 7'h8e;
                 default: led_o[6:0] = 7'hff;
             endcase
-            led_o[7] = point_i;
+            led_o[7] = ~point_i;
         end    
     end
 endmodule

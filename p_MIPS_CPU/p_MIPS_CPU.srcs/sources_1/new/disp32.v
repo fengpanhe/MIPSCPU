@@ -23,32 +23,43 @@
 module disp32(
     input wire reset,           //系统复位信号
     input wire clk,
-    input wire[31:0] data,      //系统总线中的数据线
     input wire cs,              //片信号，接LEDCtrl
     input wire iow,             //i/0写信号
+    input wire[15:0] data,      //系统总线中的数据线
+    input wire[2:0] address,    //端口地址
     output wire[7:0] led_o,      //led输出信号
     output reg[7:0] led_enable_o      //led使能信号
     // output[2:0] count,
     // output[3:0] dig,
     // output clk_sys
     );
-    reg[31:0] rdata; //数据锁存器
+    reg[31:0] rdata; //数码管数据锁存器
+    reg[15:0] tdata; //特殊显示数据锁存器 低八位对应8个小数点，高八位表示某个数码管是否显示
     reg[2:0] count; //8计数器
 
     reg[3:0] dig;
+    reg point;
 
     wire clk_sys;
 
-    always @(reset) begin
+    always @(reset or posedge clk) begin
         if (reset == 1) begin
             // reset
             rdata = 32'h00000000;
+            tdata = 16'h0000;
         end
         else if (cs == 1 && iow == 1) begin
-            rdata = data;       //锁存数据
+            case (address[2:0])
+                3'b000: rdata[15:0] <= data;
+                3'b001: rdata[31:16] <= data;
+                3'b001: tdata[15:0] <= data;
+                default: begin
+                    rdata = 32'h00000000;
+                    tdata = 16'h0000;
+                end
+            endcase
         end
     end
-
 
     clock_div U0(
         .clk(clk),
@@ -72,46 +83,71 @@ module disp32(
     dig_to_led digtoled(
         .enable_i(1'b1),
         .dig_i(dig),
-        .point_i(1'b1),
+        .point_i(point),
         .led_o(led_o)
         );
 
     always @(count) begin
         case(count[2:0])
             3'b000: begin
-                dig = rdata[3:0];
-                led_enable_o <= 8'b11111110;
+                if (tdata[8] == 1) begin
+                    dig = rdata[3:0];
+                    point = tdata[0];
+                    led_enable_o <= 8'b11111110;
+                end
             end
             3'h1: begin
-                dig = rdata[7:4];
-                led_enable_o <= 8'b11111101;
+                if (tdata[9] == 1) begin
+                    dig = rdata[7:4];
+                    point = tdata[1];
+                    led_enable_o <= 8'b11111101;
+                end
             end
             3'h2: begin
-                dig = rdata[11:8];
-                led_enable_o <= 8'b11111011;
+                if (tdata[9] == 2) begin
+                    dig = rdata[11:8];
+                    point = tdata[2];
+                    led_enable_o <= 8'b11111011;
+                end
             end
             3'h3: begin
-                dig = rdata[15:12];
-                led_enable_o <= 8'b11110111;
+                if (tdata[9] == 3) begin
+                    dig = rdata[15:12];
+                    point = tdata[3];
+                    led_enable_o <= 8'b11110111;
+                end
             end
             3'h4: begin
-                dig = rdata[19:16];
-                led_enable_o <= 8'b11101111;
+                if (tdata[9] == 4) begin
+                    dig = rdata[19:16];
+                    point = tdata[4];
+                    led_enable_o <= 8'b11101111;
+                end
             end
             3'h5: begin
-                dig = rdata[23:20];
-                led_enable_o <= 8'b11011111;
+                if (tdata[9] == 5) begin
+                    dig = rdata[23:20];
+                    point = tdata[5];
+                    led_enable_o <= 8'b11011111;
+                end
             end
             3'h6: begin
-                dig = rdata[27:24];
-                led_enable_o <= 8'b10111111;
+                if (tdata[9] == 1) begin
+                    dig = rdata[27:24];
+                    point = tdata[6];
+                    led_enable_o <= 8'b10111111;
+                end
             end
             3'h7: begin
-                dig = rdata[31:28];
-                led_enable_o <= 8'b01111111;
+                if (tdata[9] == 1) begin
+                    dig = rdata[31:28];
+                    point = tdata[7];
+                    led_enable_o <= 8'b01111111;
+                end
             end
             default: begin
                 led_enable_o <= 8'b11111111;
+                point = 0;
             end
         endcase
     end
