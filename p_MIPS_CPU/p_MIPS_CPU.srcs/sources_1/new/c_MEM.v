@@ -124,8 +124,9 @@ module c_MEM(
    disp32 DISP(
    .clk(clk),
    .reset(reset),
-   .data(WrData),
+   .data(WrData[15:0]),
    .cs(DISPCtrl),
+   .address(portAddr[2:0]),
    .iow(IOWr),
    .led_o(DISPOutput),
    .led_enable_o(DISPEn)
