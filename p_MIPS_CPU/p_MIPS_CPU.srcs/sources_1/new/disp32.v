@@ -104,42 +104,42 @@ module disp32(
                 end
             end
             3'h2: begin
-                if (tdata[9] == 2) begin
+                if (tdata[10] == 1) begin
                     dig = rdata[11:8];
                     point = tdata[2];
                     led_enable_o <= 8'b11111011;
                 end
             end
             3'h3: begin
-                if (tdata[9] == 3) begin
+                if (tdata[11] == 1) begin
                     dig = rdata[15:12];
                     point = tdata[3];
                     led_enable_o <= 8'b11110111;
                 end
             end
             3'h4: begin
-                if (tdata[9] == 4) begin
+                if (tdata[12] == 1) begin
                     dig = rdata[19:16];
                     point = tdata[4];
                     led_enable_o <= 8'b11101111;
                 end
             end
             3'h5: begin
-                if (tdata[9] == 5) begin
+                if (tdata[13] == 1) begin
                     dig = rdata[23:20];
                     point = tdata[5];
                     led_enable_o <= 8'b11011111;
                 end
             end
             3'h6: begin
-                if (tdata[9] == 1) begin
+                if (tdata[14] == 1) begin
                     dig = rdata[27:24];
                     point = tdata[6];
                     led_enable_o <= 8'b10111111;
                 end
             end
             3'h7: begin
-                if (tdata[9] == 1) begin
+                if (tdata[15] == 1) begin
                     dig = rdata[31:28];
                     point = tdata[7];
                     led_enable_o <= 8'b01111111;

@@ -55,9 +55,10 @@ module disptest(
      .DISPOutput(DISPOutput),
      .DISPEn(DISPEn)
      );
-    // wire[31:0] data = 32'h87654321;
+    // wire[31:0] data = 16'h87654321;
     // wire cs = 1;
     // wire iow = 1;
+    // wire[2:0] address;
     // wire[7:0] led_o;
     // wire[7:0] led_enable_o;
     // wire[2:0] count;
@@ -71,8 +72,8 @@ module disptest(
     //     .iow(iow),
     //     .led_o(led_o),
     //     .led_enable_o(led_enable_o)
-        // .count(count),
-        // .dig(dig),
-        // .clk_sys(clk_sys)
+    //     .count(count),
+    //     .dig(dig),
+    //     .clk_sys(clk_sys)
     // );
 endmodule
