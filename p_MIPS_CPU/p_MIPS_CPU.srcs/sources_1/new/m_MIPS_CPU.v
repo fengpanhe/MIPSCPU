@@ -266,6 +266,7 @@ module m_MIPS_CPU(
     /*EX/MEM Regs*/
     c_EX_MEM EXToMEMRegs(
     .clk(clk),
+    .reset(reset),
     .NextPC_ex(NextPC_ex),
     .NextPC_mem(NextPC_mem),
     .ALUResult_ex(ALUResult_ex),
@@ -331,6 +332,7 @@ module m_MIPS_CPU(
     /*MEM/WB Regs*/  
     c_MEM_WB MEMToWBRegs(
     .clk(clk),
+    .reset(reset),
     .RegWr_mem(RegWr_mem),
     .CPWr_mem(CPWr_mem),
     .RegWrAddr_mem(RegWrAddr_mem),
@@ -344,9 +346,6 @@ module m_MIPS_CPU(
     .RegWrData_wb(RegWrData_wb),
     .CPWrData_wb(CPWrData_wb)
     );
-    
-    
-    
     assign Instruction = Instruction_if;
     assign Instruction2 = Instruction_id;
     assign ALUCode = ALUCode_id;

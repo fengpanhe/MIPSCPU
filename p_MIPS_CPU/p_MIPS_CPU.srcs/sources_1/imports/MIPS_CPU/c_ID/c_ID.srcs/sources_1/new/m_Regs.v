@@ -22,13 +22,13 @@
 
 module m_Regs(
     input clk,
+    input reset,
     input RegWr,
     input[4:0] RsAddr,
     input[4:0] RtAddr,
     input[4:0] RegWrAddr,
     input[31:0] RegWrData_wb,
     input[31:0] RegWrData_mem,
-    //input[31:0] ALUResult_mem,
     input[31:0] ALUResult_ex,
     input[2:0] ForwardA,
     input[2:0] ForwardB,
@@ -53,12 +53,23 @@ module m_Regs(
 
     always @(posedge clk2)
     begin
-    RsData <= Regs[RsAddr];
-    RtData <= Regs[RtAddr];
-    if(RegWr && (|RegWrAddr[4:0]))
-        Regs[RegWrAddr] = RegWrData_wb;
+    if(reset == 1)
+        begin
+        RsData <= 0;
+        RsResult <= 0;
+        RtData <= 0;
+        RtResult <= 0;
+        for(i = 0; i < 32; i=i+1)
+            Regs[i] = 0; 
+        end
+    else
+        begin
+        RsData <= Regs[RsAddr];
+        RtData <= Regs[RtAddr];
+        if(RegWr && (|RegWrAddr[4:0]))
+            Regs[RegWrAddr] = RegWrData_wb;
+        end
     end
-    
     always @(*)
     begin
         case(ForwardA)

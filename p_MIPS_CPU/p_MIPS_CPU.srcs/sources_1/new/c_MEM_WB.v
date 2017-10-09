@@ -22,6 +22,7 @@
 
 module c_MEM_WB(
     input clk,
+    input reset,
     input RegWr_mem,
     input CPWr_mem,
     input[4:0] RegWrAddr_mem,
@@ -37,38 +38,44 @@ module c_MEM_WB(
     );
     
     //reg for RegWr
-    m_dff #(1) dff1 (
+    m_dffr #(1) dffr1 (
     .clk(clk),
+    .reset(reset),
     .din(RegWr_mem),
     .dout(RegWr_wb)
     );
     //reg for RegWrAddr
-    m_dff #(5) dff2 (
+    m_dffr #(5) dffr2 (
     .clk(clk),
+    .reset(reset),
     .din(RegWrAddr_mem),
     .dout(RegWrAddr_wb)
     );
     //reg for CPWr
-    m_dff #(1) dff3 (
+    m_dffr #(1) dffr3 (
     .clk(clk),
+    .reset(reset),
     .din(CPWr_mem),
     .dout(CPWr_wb)
     );
     //reg for CPWrData
-    m_dff #(32) dff4(
+    m_dffr #(32) dffr4(
     .clk(clk),
+    .reset(reset),
     .din(CPWrData_mem),
     .dout(CPWrData_wb)
     );
     //reg for CPWrAddr
-    m_dff #(5) dff5(
+    m_dffr #(5) dffr5(
     .clk(clk),
+    .reset(reset),
     .din(CPWrAddr_mem),
     .dout(CPWrAddr_wb)
     );
     //reg for RegWrData
-    m_dff #(32) dff6(
+    m_dffr #(32) dffr6(
     .clk(clk),
+    .reset(reset),
     .din(RegWrData_mem),
     .dout(RegWrData_wb)
     );

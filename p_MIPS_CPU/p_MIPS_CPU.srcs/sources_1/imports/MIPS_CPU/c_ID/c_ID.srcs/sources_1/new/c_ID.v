@@ -150,6 +150,7 @@ module c_ID(
     //Regs
     m_Regs Regs(
     .clk(clk),
+    .reset(reset),
     .RegWr(RegWr_wb),
     .RsAddr(RsAddr_id),
     .RtAddr(RtAddr_id),

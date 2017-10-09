@@ -27,7 +27,8 @@ module CPU_TEST3();
      always #5 clk = ~clk;
      initial
      begin
-     reset = 1;
+     reset = 0;
+     #200 reset = 1;
      #5 reset = 0;
      end
      wire[31:0] Instruction_if,Instruction_id;

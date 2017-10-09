@@ -64,7 +64,10 @@ module c_IF(
     if(PC_IFWrite)
         begin
         if(reset == 1)
+            begin
             PC_out<=0;
+            NextPC<=4;
+            end
         else
             begin
             PC_out = PC_in;
