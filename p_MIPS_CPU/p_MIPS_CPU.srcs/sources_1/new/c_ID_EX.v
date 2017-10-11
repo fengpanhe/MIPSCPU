@@ -34,6 +34,7 @@ module c_ID_EX(
     input ALUsrcB_id,
     input RegDst_id,
     input AL_id,
+    input signedOp_id,
     input[31:0] NextPC_id,
     input[31:0] Sa_id,
     input[31:0] Imme_id,
@@ -55,6 +56,7 @@ module c_ID_EX(
     output ALUsrcB_ex,
     output RegDst_ex,
     output AL_ex,
+    output signedOp_ex,
     output[31:0] NextPC_ex,
     output[31:0] Sa_ex,
     output[31:0] Imme_ex,
@@ -208,4 +210,11 @@ module c_ID_EX(
     .din(MemReadSize_id),
     .dout(MemReadSize_ex)
     );    
+    //reg for signedOp
+    m_dffr #1 dffr21(
+    .clk(clk),
+    .reset(reset),
+    .din(signedOp_id),
+    .dout(signedOp_ex)
+    );
 endmodule

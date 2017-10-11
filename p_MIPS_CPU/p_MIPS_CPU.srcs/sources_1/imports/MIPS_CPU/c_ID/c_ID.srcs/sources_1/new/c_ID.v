@@ -45,7 +45,7 @@ module c_ID(
     input[31:0] CPWrData_ex,
     input MemOrIORead_ex,                   //上一条指令是读MEM指令的信号，用于判断冒险发生的条件         
     input overFlow,
-    //output MemToReg_id,                 //译码生成的选择回写Regs数据源的控制信号
+    input signedOp_ex,
     output MemOrIOToReg_id,
     output CPToReg_id,                  
     output RegWr_id,                    //译码生成的用于回写Regs的使能信号
@@ -66,6 +66,7 @@ module c_ID(
     output JR,                          //寄存器跳转指令
     output JAL,                      //需保存PC地址的指令
     output BAL,                      //分支跳转且需保存PC地址的指令
+    output signedOp_id,
     output[31:0] BranchAddr,            //分支跳转目标地址
     output[31:0] JmpAddr,               //无条件跳转目标地址
     output[31:0] JrAddr,                //寄存器跳转目标地址
@@ -78,7 +79,7 @@ module c_ID(
     output[31:0] Sa_id,                 //零扩展成32bit的移位立即数
     output[31:0] Imme_id                //符号扩展成32bit的立即数
     );
-    
+    wire OF;                            //有符号加减溢出标志
     wire[31:0] JAddr;
     wire Je,Jmp;
     assign RsAddr_id = Instruction_id[25:21];
@@ -86,12 +87,12 @@ module c_ID(
     assign RdAddr_id = Instruction_id[15:11];
     assign Sa_id = {27'b0,Instruction_id[10:6]};
     assign Imme_id = {{16{Instruction_id[15]}},Instruction_id[15:0]};
-    //assign JmpAddr = {NextPC_id[31:28],Instruction_id[25:0],2'b00};
     assign JrAddr = RsData_id;
     assign J = Jmp|| Je;
     assign IF_flush = Z || J || JR;
-  
     assign JAddr = {NextPC_id[31:28],Instruction_id[25:0],2'b00};
+    assign OF = overFlow&&signedOp_ex;
+    
     wire[31:0] Imme_shift;
     assign Imme_shift = Imme_id << 2;
     //此处未做边界检测，当NextPC+offset < 0 时，相当于跳转到尾部对应位置
@@ -122,7 +123,8 @@ module c_ID(
     .Jmp(Jmp),
     .Jr(JR),
     .Jal(JAL),
-    .Bal(BAL)
+    .Bal(BAL),
+    .signedOp(signedOp_id)
     );
     //Forward
     wire[2:0] ForwardA,ForwardB,ForwardCP;
@@ -188,7 +190,7 @@ module c_ID(
     m_ExceptionProc EP(
     .ALUCode(ALUCode_id),
     .Func(Instruction_id[5:0]),
-    .Overflow(overFlow),
+    .Overflow(OF),
     .int_i(int_i),
     .JAddr(JAddr),
     .eretAddr(eretAddr),

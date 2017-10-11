@@ -41,7 +41,8 @@ module m_Decoder(
     output Jmp,                       //跳转指令
     output Jr,                      //寄存器跳转指令
     output Jal,                     //需保存PC的无条件跳转指令
-    output Bal                      //需保存PC的有条件跳转指令
+    output Bal,                      //需保存PC的有条件跳转指令
+    output signedOp
     );
     /*R_type_instructions*/
     parameter R_type_op = 6'b000000;
@@ -206,6 +207,7 @@ module m_Decoder(
      assign Jr = JR | JALR;
      assign Jal = JALR | JAL;
      assign Bal = BGEZAL | BLTZAL;
+     assign signedOp = ADD | SUB | ADDI;
      
      /*ALU_OP Parameters*/
      parameter ALU_ADD = 5'd0;

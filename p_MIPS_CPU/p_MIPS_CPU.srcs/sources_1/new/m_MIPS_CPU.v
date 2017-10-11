@@ -126,6 +126,7 @@ module m_MIPS_CPU(
     wire[31:0] RsData_id,RtData_id,RsData_ex,RtData_ex;
     wire[31:0] ALUResult_ex,ALUResult_mem,ALUResult_wb;
     wire[31:0] CPResult_id,CPResult_ex,CPResult_mem,CPResult_wb;
+    wire signedOp_id,signedOp_ex;
     wire Stall;
     wire Overflow;
     c_ID ID(
@@ -153,6 +154,7 @@ module m_MIPS_CPU(
     .CPWrData_ex(CPWrData_ex),
     .MemOrIORead_ex(MemOrIORead_ex),
     .overFlow(Overflow),
+    .signedOp_ex(signedOp_ex),
     .MemOrIOToReg_id(MemOrIOToReg_id),
     .CPToReg_id(CPToReg_id),
     .RegWr_id(RegWr_id),
@@ -173,6 +175,7 @@ module m_MIPS_CPU(
     .JR(JR),
     .JAL(JAL),
     .BAL(BAL),
+    .signedOp_id(signedOp_id),
     .BranchAddr(BranchAddr),
     .JmpAddr(JmpAddr),
     .JrAddr(JrAddr),
@@ -201,6 +204,7 @@ module m_MIPS_CPU(
     .ALUsrcB_id(ALUsrcB_id),
     .RegDst_id(RegDst_id),
     .AL_id(AL_id),
+    .signedOp_id(signedOp_id),
     .NextPC_id(NextPC_id),
     .Sa_id(Sa_id),
     .Imme_id(Imme_id),
@@ -222,6 +226,7 @@ module m_MIPS_CPU(
     .ALUsrcB_ex(ALUsrcB_ex),
     .RegDst_ex(RegDst_ex),
     .AL_ex(AL_ex),
+    .signedOp_ex(signedOp_ex),
     .NextPC_ex(NextPC_ex),
     .Sa_ex(Sa_ex),
     .Imme_ex(Imme_ex),
