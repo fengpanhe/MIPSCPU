@@ -164,6 +164,7 @@ module ctc16(
     always @(negedge pulse0) begin  //脉冲０计数（CNT0计数脉冲）
         if ((status1[15] == 1) && (mode1[0] == 1)) begin
             if (count1 == 0) begin      //定时计数到0
+                cout0 = 0;
                 stat12 = status1 | 16'h0001;    //置状态寄存器为计数到
                 if (mode1[1] == 1) begin        //如果重复计数，重装初始值
                     cnt12 = initcnt1;
@@ -174,6 +175,7 @@ module ctc16(
                 end
             end
             else begin              //count!=1
+                cout0 = 1;
                 cnt12 = count1 - 1'b1;  //计数值减1
                 stat12 = status1 | 16'h8000;
             end  
@@ -183,6 +185,7 @@ module ctc16(
     always @(negedge pulse1) begin  //脉冲1计数（CNT1计数脉冲）
         if ((status2[15] == 1) && (mode2[0] == 1)) begin
             if (count2 == 0) begin      //定时计数到0
+                cout1 = 0;
                 stat22 = status2 | 16'h0001;    //置状态寄存器为计数到
                 if (mode2[1] == 1) begin        //如果重复计数，重装初始值
                     cnt22 = initcnt2;
@@ -193,6 +196,7 @@ module ctc16(
                 end
             end
             else begin              //count!=1
+                cout1 = 1;
                 cnt22 = count2 - 1'b1;  //计数值减1
                 stat22 = status2 | 16'h8000;
             end  
