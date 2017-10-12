@@ -37,7 +37,8 @@ module ioread(
     output reg[31:0] ioread_data
     );
 
-    always @(posedge clk)
+    always @(negedge clk)
+    #1
     begin
         if (reset == 1) begin
             ioread_data = 32'h00000000;

@@ -31,8 +31,6 @@ module sw_led_pwm_test(
     reset = 1;
     #5 reset = 0;
     end
-
-
     wire[31:0] Instruction_if,Instruction_id;
     wire[4:0] ALUCode_id;
     wire[31:0] ALUa_ex;
@@ -41,6 +39,8 @@ module sw_led_pwm_test(
     wire pwmWave;
     wire[31:0] SWInput;
     wire[31:0] LEDOutput;
+    wire[31:0] RegWrData_mem;
+    wire[31:0] RegWrData_wb;
 
     assign SWInput = 32'h12345678;
     m_MIPS_CPU MIPS_CPU(
@@ -54,6 +54,8 @@ module sw_led_pwm_test(
      .aluresult_ex(ALUResult_ex),
      .pwmWave(pwmWave),
      .SWInput(SWInput),
-     .LEDOutput(LEDOutput)
+     .LEDOutput(LEDOutput),
+     .regwrdata_mem(RegWrData_mem),
+     .regwrdata_wb(RegWrData_wb)
      );
 endmodule
