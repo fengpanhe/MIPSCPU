@@ -69,20 +69,26 @@ module ctc16(
                         4'b0000: begin
                             mode1 = iowrite_data;
                             stat11 = status1 & 16'h7ffc;
+                            stat12 = status1 & 16'h7ffc;
                         end
                         4'b0010: begin
                             mode2 = iowrite_data;
                             stat21 = status2 & 16'h7ffc;
+                            stat22 = status2 & 16'h7ffc;
                         end
                         4'b0100: begin
                             initcnt1 = iowrite_data;
                             cnt11 = iowrite_data;
                             stat11 = status1 | 16'h8000;
+                            cnt12 = iowrite_data;
+                            stat12 = status1 | 16'h8000;
                         end
                         4'b0110: begin
                             initcnt2 = iowrite_data;
                             cnt21 = iowrite_data;
                             stat21 = status2 | 16'h8000;
+                            cnt22 = iowrite_data;
+                            stat22 = status2 | 16'h8000;
                         end
                         default: rubbish = iowrite_data;
                     endcase
