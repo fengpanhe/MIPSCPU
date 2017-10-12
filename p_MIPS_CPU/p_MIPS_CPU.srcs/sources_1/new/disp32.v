@@ -42,7 +42,7 @@ module disp32(
 
     wire clk_sys;
 
-    always @(reset or posedge clk) begin
+    always @(posedge clk) begin
         if (reset == 1) begin
             // reset
             rdata = 32'h00000000;

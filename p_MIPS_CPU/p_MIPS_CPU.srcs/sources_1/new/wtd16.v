@@ -24,16 +24,16 @@ module wtd16(
     input reset,            //系统复位信号
     input clk,              //系统时钟
     input cs,               //片�?��?�接wdtctrl
-    input iow,              //写信�?
+    input iow,              //写信�??
     input[15:0] data,       //cpu写的数据
-    output reg rst          //输出的复位信�?
+    output reg rst          //输出的复位信�??
     );
 
-    reg[15:0] count;        //计数�?
-    reg[2:0] cnt;           //小计数器，计4个时�?
+    reg[15:0] count;        //计数�??
+    reg[2:0] cnt;           //小计数器，计4个时�??
 
     initial rst = 0;
-    always @(negedge clk or reset) begin
+    always @(negedge clk) begin
         if (reset == 1) begin
             // reset
             count = 16'hffff;
@@ -48,7 +48,7 @@ module wtd16(
             end
             else begin
                 count = count - 1'b1;       //计数没到0，则计数器减1
-                if (cnt == 3'b000) begin     //小计数器�?0，说明复位信号已经满4时钟周期
+                if (cnt == 3'b000) begin     //小计数器�??0，说明复位信号已经满4时钟周期
                     rst = 0;
                 end
                 else begin

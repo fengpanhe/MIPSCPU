@@ -1,10 +1,10 @@
 // Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2015.4 (win64) Build 1412921 Wed Nov 18 09:43:45 MST 2015
-// Date        : Fri Sep 29 09:15:03 2017
+// Date        : Thu Oct 12 22:29:15 2017
 // Host        : ThinkPad-PC running 64-bit Service Pack 1  (build 7601)
 // Command     : write_verilog -force -mode synth_stub
-//               E:/MIPS_CPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/Branch_adder/Branch_adder_stub.v
+//               C:/Users/ThinkPad/Documents/GitHub/MIPSCPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/Branch_adder/Branch_adder_stub.v
 // Design      : Branch_adder
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7a100tfgg484-1
