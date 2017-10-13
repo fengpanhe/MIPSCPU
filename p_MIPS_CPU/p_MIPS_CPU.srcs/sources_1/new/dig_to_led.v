@@ -26,7 +26,11 @@ module dig_to_led(
     input point_i,
     output reg[7:0] led_o
     );
-
+    initial
+    begin
+    led_o <= 8'hff;
+    end
+    
     always @(dig_i or point_i) begin
         if (enable_i == 0) begin
             led_o = 8'hff;

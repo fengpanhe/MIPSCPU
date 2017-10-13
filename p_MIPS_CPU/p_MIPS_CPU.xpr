@@ -547,7 +547,7 @@
         <Option Name="TopModule" Val="BIOS_TEST"/>
         <Option Name="TopLib" Val="xil_defaultlib"/>
         <Option Name="SrcSet" Val="sources_1"/>
-        <Option Name="xsim.simulate.runtime" Val="500ns"/>
+        <Option Name="xsim.simulate.runtime" Val="50us"/>
       </Config>
     </FileSet>
     <FileSet Name="c_addsub" Type="BlockSrcs" RelSrcDir="$PSRCDIR/c_addsub">
