@@ -28,18 +28,29 @@ module disp32(
     input wire[15:0] data,      //系统总线中的数据线
     input wire[2:0] address,    //端口地址
     output wire[7:0] led_o,      //led输出信号
-    output reg[7:0] led_enable_o      //led使能信号
+    output reg[7:0] led_enable_o,      //led使能信号
+    output clk2,
+    output[2:0] cnt
     );
     reg[31:0] rdata; //数码管数据锁存器
     reg[15:0] tdata; //特殊显示数据锁存器 低八位对应8个小数点，高八位表示某个数码管是否显示
     reg[2:0] count; //8计数器
+    initial
+    begin
+    rdata <= 32'h00000000;
+    tdata <= 16'h0000;
+    count <= 0;
+    end
 
     reg[3:0] dig;
     reg point;
 
     wire clk_sys;
-
-    always @(posedge clk) begin
+    assign clk2 = clk_sys;
+    assign cnt = count;
+    
+    
+    always @(negedge clk) begin
         if (reset == 1) begin
             // reset
             rdata = 32'h00000000;
@@ -64,7 +75,7 @@ module disp32(
     );
     
     //8计数器
-    always @(clk_sys or reset)  begin
+    always @(posedge clk_sys)  begin
         if(reset == 1) begin
             count = 0;
         end 

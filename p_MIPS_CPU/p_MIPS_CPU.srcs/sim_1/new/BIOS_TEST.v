@@ -48,6 +48,9 @@ module BIOS_TEST();
      wire[31:0] RsData_id,RtData_id;
      wire[4:0] RsAddr_id,RtAddr_id;
      wire[7:0] DISPOutput;
+     wire dispclk;
+     wire[2:0] dispcnt;
+     wire[31:0] ledOut;
     //wire[31:0] HI,LO;
     m_MIPS_CPU MIPS_CPU(
     .clk(clk),
@@ -64,15 +67,6 @@ module BIOS_TEST();
     .Instruction2(Instruction_id),
     .regwrdata_wb(RegWrData_wb),
     .regwrdata_mem(RegWrData_mem),
-    //.memwr_id(MemWr_id),
-    //.memwr_ex(MemWr_ex),
-    //.memwr_mem(MemWr_mem),
-    //.memwrdata_mem(MemWrData_mem),
-    //.flush(flush),
-    //.tmpout(tmpOut),
-    //.jmpAddr(JmpAddr),
-    //.jrAddr(JrAddr),
-    //.regwr_wb(RegWr_wb),
     .DISPOutput(DISPOutput),
     .rsaddr_id(RsAddr_id),
     .rtaddr_id(RtAddr_id),
@@ -81,7 +75,10 @@ module BIOS_TEST();
     .regwraddr_wb(RegWrAddr_wb),
     .j(J),
     .jr(JR),
-    .z(Z)
+    .z(Z),
+    .dispClk(dispclk),
+    .dispCnt(dispcnt),
+    .LEDOutput(ledOut)
     );
 
 

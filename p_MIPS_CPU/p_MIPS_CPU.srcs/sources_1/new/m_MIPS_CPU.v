@@ -71,7 +71,9 @@ module m_MIPS_CPU(
     input pulse1,
     output cnt0,
     output cnt1,
-    output pwmWave
+    output pwmWave,
+    output dispClk,
+    output[2:0] dispCnt
     );
     wire WDTRst;       
     wire reset;
@@ -333,7 +335,9 @@ module m_MIPS_CPU(
     .pwmWave(pwmWave),
     .rst(WDTRst),
     .RegWrData_mem(RegWrData_mem),
-    .tmpOut(tmpout)
+    .tmpOut(tmpout),
+    .dispClk(dispClk),
+    .dispCnt(dispCnt)
     );
 
     /*MEM/WB Regs*/  

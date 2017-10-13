@@ -37,25 +37,25 @@ module dig_to_led(
         end
         else begin
             case (dig_i)
-                4'h0: led_o[6:0] = 7'hc0;
-                4'h1: led_o[6:0] = 7'hf9;
-                4'h2: led_o[6:0] = 7'ha4;
-                4'h3: led_o[6:0] = 7'hb0;
-                4'h4: led_o[6:0] = 7'h99;
-                4'h5: led_o[6:0] = 7'h92;
-                4'h6: led_o[6:0] = 7'h82;
-                4'h7: led_o[6:0] = 7'hf8;
-                4'h8: led_o[6:0] = 7'h80;
-                4'h9: led_o[6:0] = 7'h90;
-                4'ha: led_o[6:0] = 7'h88;
-                4'hb: led_o[6:0] = 7'h83;
-                4'hc: led_o[6:0] = 7'hc6;
-                4'hd: led_o[6:0] = 7'ha1;
-                4'he: led_o[6:0] = 7'h86;
-                4'hf: led_o[6:0] = 7'h8e;
-                default: led_o[6:0] = 7'hff;
+                4'h0: led_o[7:0] = 8'h03;
+                4'h1: led_o[7:0] = 8'h9f;
+                4'h2: led_o[7:0] = 8'h25;
+                4'h3: led_o[7:0] = 8'h0d;
+                4'h4: led_o[7:0] = 8'h99;
+                4'h5: led_o[7:0] = 8'h49;
+                4'h6: led_o[7:0] = 8'h41;
+                4'h7: led_o[7:0] = 8'h1f;
+                4'h8: led_o[7:0] = 8'h01;
+                4'h9: led_o[7:0] = 8'h09;
+                4'ha: led_o[7:0] = 8'h11;
+                4'hb: led_o[7:0] = 8'hc1;
+                4'hc: led_o[7:0] = 8'h63;
+                4'hd: led_o[7:0] = 8'h85;
+                4'he: led_o[7:0] = 8'h61;
+                4'hf: led_o[7:0] = 8'h71;
+                default: led_o[7:0] = 8'hff;
             endcase
-            led_o[7] = ~point_i;
+            led_o[0] = ~point_i;
         end    
     end
 endmodule

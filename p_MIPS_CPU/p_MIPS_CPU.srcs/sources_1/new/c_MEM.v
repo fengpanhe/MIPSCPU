@@ -47,7 +47,9 @@ module c_MEM(
     output pwmWave,
     output rst,
     output reg[31:0] RegWrData_mem,
-    output[31:0] tmpOut
+    output[31:0] tmpOut,
+    output dispClk,
+    output[2:0] dispCnt
     );
     wire[31:0] WrData;      //写到MEM或IO中的数据
     wire MemWr;
@@ -129,7 +131,9 @@ module c_MEM(
    .address(portAddr[2:0]),
    .iow(IOWr),
    .led_o(DISPOutput),
-   .led_enable_o(DISPEn)
+   .led_enable_o(DISPEn),
+   .clk2(dispClk),
+   .cnt(dispCnt)
    );
    //wire[3:0] col,line;
    key16 KEY(

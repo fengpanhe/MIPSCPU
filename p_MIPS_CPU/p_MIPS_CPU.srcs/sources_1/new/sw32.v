@@ -32,7 +32,6 @@ module sw32(
 
     always @(negedge clk) begin
         if (reset == 1) begin
-            // reset
             ioread_data = 16'h0000;
         end
         if ((cs == 1) && (ior == 1) && (address == 1)) begin
