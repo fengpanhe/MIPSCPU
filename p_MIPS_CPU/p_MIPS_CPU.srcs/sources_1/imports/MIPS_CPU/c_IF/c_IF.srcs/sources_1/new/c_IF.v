@@ -56,6 +56,7 @@ module c_IF(
     3'b001:PC_in = BranchAddr;
     3'b010:PC_in = JmpAddr;
     3'b100:PC_in = JrAddr;
+    default:PC_in = NextPC;
     endcase
     end
     //PC_reg

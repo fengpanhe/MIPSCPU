@@ -114,7 +114,7 @@ module cp0_reg(
 //******************************************************************************
     always @ ( * ) begin
         if(rst == `RstEnable) begin
-            data_o <= `ZeroWord;
+            CPResult <= `ZeroWord;
         end else begin
             case(raddr_i)
                 `CP0_REG_STATUS:begin               //¶ÁStatus¼Ä´æÆ÷

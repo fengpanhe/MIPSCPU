@@ -56,9 +56,9 @@ module m_Regs(
     if(reset == 1)
         begin
         RsData <= 0;
-        RsResult <= 0;
+        //RsResult <= 0;
         RtData <= 0;
-        RtResult <= 0;
+        //RtResult <= 0;
         for(i = 0; i < 32; i=i+1)
             Regs[i] = 0; 
         end

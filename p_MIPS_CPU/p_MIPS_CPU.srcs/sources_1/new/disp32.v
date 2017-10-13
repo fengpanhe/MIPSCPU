@@ -29,9 +29,6 @@ module disp32(
     input wire[2:0] address,    //端口地址
     output wire[7:0] led_o,      //led输出信号
     output reg[7:0] led_enable_o      //led使能信号
-    // output[2:0] count,
-    // output[3:0] dig,
-    // output clk_sys
     );
     reg[31:0] rdata; //数码管数据锁存器
     reg[15:0] tdata; //特殊显示数据锁存器 低八位对应8个小数点，高八位表示某个数码管是否显示
@@ -51,8 +48,8 @@ module disp32(
         else if (cs == 1 && iow == 1) begin
             case (address[2:0])
                 3'b000: rdata[15:0] <= data;
-                3'b001: rdata[31:16] <= data;
-                3'b001: tdata[15:0] <= data;
+                3'b010: rdata[31:16] <= data;
+                3'b100: tdata[15:0] <= data;
                 default: begin
                     rdata = 32'h00000000;
                     tdata = 16'h0000;
@@ -67,7 +64,7 @@ module disp32(
     );
     
     //8计数器
-    always @(clk_sys)  begin
+    always @(clk_sys or reset)  begin
         if(reset == 1) begin
             count = 0;
         end 

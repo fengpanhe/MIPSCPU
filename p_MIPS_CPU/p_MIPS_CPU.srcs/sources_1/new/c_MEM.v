@@ -174,7 +174,7 @@ module c_MEM(
    wtd16 WTD(
    .clk(clk),
    .reset(reset),
-   .cs(WTDCtrl),
+   .cs(WDTCtrl),
    .iow(IOWr),
    .data(WrData[15:0]),
    .rst(rst)
