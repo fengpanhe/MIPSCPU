@@ -44,19 +44,19 @@ module pwm16(
             midcount = 16'h0000;
             flag = 16'h0000;
             pwm = 1;
-            counter = 16'h0000;
+            counter = 16'h0001;
         end
         else if (cs == 1 && iow == 1) begin      //cpu写pwm寄存器
             case (address[2:0])
                 3'b000: maxcount = data;
                 3'b010: midcount = data;
-                3'b100: flag[0] = data[0];      //写实能寄存器
+                3'b100: flag[0] = data[0];      //写使能寄存器
                 default: rubbish = data;
             endcase
         end
         else if (flag[0]) begin
             if (counter == maxcount) begin      //计数到最大值
-                counter = 16'b0000;
+                counter = 16'b0001;
                 pwm = 1;
             end
             else begin

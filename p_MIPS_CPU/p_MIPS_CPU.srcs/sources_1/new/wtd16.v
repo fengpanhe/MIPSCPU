@@ -32,18 +32,26 @@ module wtd16(
     reg[15:0] count;        //计数�??
     reg[2:0] cnt;           //小计数器，计4个时�??
 
-    initial rst = 0;
+    parameter WTDVAL = 16'hffff;
+
+    initial 
+    begin
+    rst <= 0;
+    count <= WTDVAL;
+    cnt <= 3'b000;
+    end
+    
     always @(negedge clk) begin
         if (reset == 1) begin
             // reset
-            count = 16'hffff;
+            count = WTDVAL;
             cnt = 3'b000;
             rst = 0;
         end
         else begin
             if (count == 16'd0) begin   //已计数到0
                 cnt = 3'b100;           //启动小计数器
-                count = 16'hffff;
+                count = WTDVAL;
                 rst = 1;                //输出复位信号
             end
             else begin
@@ -56,7 +64,7 @@ module wtd16(
                 end
 
                 if ((cs == 1) && (iow == 1)) begin  //得到写信号后，看门狗全部复位
-                    count = 16'hffff;
+                    count = WTDVAL;
                     cnt = 3'b000;
                     rst = 0;
                 end
