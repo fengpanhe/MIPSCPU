@@ -93,7 +93,7 @@ module key16(
                             4'b1110: keyvalue = 16'h0000;
                             4'b1101: keyvalue = 16'h000f;
                             4'b1011: keyvalue = 16'h000e;
-                            4'b0111: keyvalue = 16'h000d;
+                            4'b0111: keyvalue = 16'h000dcd ;
                         endcase
                         keystat = keystat | 16'h0001;
                         line <= 4'b0000;
