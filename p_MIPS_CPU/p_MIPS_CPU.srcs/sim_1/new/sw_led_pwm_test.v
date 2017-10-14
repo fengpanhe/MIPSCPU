@@ -29,7 +29,7 @@ module sw_led_pwm_test(
     initial
     begin
     reset = 1;
-    #5 reset = 0;
+    #10 reset = 0;
     end
     wire[31:0] Instruction_if,Instruction_id;
     wire[4:0] ALUCode_id;

@@ -54,7 +54,7 @@ module pwm16(
                 default: rubbish = data;
             endcase
         end
-        else if (flag[0] == 1) begin
+        else if (flag[0] == 1'b1) begin
             if (counter == maxcount) begin      //计数到最大值
                 counter = 16'b0001;
                 pwm = 1;

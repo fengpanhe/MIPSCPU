@@ -43,15 +43,31 @@ reg[3:0] col;
      
     wire[3:0] line; 
     wire[15:0] ioread_data; 
-    key16 key( 
-        .clk(clk), 
-        .reset(reset), 
-        .address(address), 
-        .cs(cs), 
-        .ior(1), 
-        .col(col), 
-        .line(line), 
-        .ioread_data(ioread_data) 
-    ); 
- 
+    // key16 key( 
+    //     .clk(clk), 
+    //     .reset(reset), 
+    //     .address(address), 
+    //     .cs(cs), 
+    //     .ior(1), 
+    //     .col(col), 
+    //     .line(line), 
+    //     .ioread_data(ioread_data) 
+    // ); 
+
+
+    wire[31:0] Instruction_if,Instruction_id;
+    wire[4:0] ALUCode_id;
+    wire[31:0] ALUa_ex;
+    wire[31:0] ALUb_ex;
+    wire[31:0] ALUResult_ex;
+    m_MIPS_CPU MIPS_CPU(
+     .clk(clk),
+     .rst(reset),
+     .Instruction(Instruction_if),
+     .Instruction2(Instruction_id),
+     .ALUCode(ALUCode_id),
+     .ALU_a(ALUa_ex),
+     .ALU_b(ALUb_ex),
+     .aluresult_ex(ALUResult_ex),
+     );
 endmodule
