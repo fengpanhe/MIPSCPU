@@ -47,8 +47,12 @@ module key16(
                 4'b0000: if(col != 4'b1111) line <= 4'b1110;
                 4'b1110: //0锟斤拷
                     if(col != 4'b1111) begin
-                        keyvalue[3:0] = col;
-                        keyvalue[7:4] = line;
+                        case(col)
+                            4'b1110: keyvalue = 16'h0001;
+                            4'b1101: keyvalue = 16'h0002;
+                            4'b1011: keyvalue = 16'h0003;
+                            4'b0111: keyvalue = 16'h000a;
+                        endcase
                         keystat = keystat | 16'h0001;
                         line <= 4'b0000;
                     end 
@@ -57,8 +61,12 @@ module key16(
                     end
                 4'b1101: //1锟斤拷
                     if(col != 4'b1111) begin
-                        keyvalue[3:0] = col;
-                        keyvalue[7:4] = line;
+                        case(col)
+                            4'b1110: keyvalue = 16'h0004;
+                            4'b1101: keyvalue = 16'h0005;
+                            4'b1011: keyvalue = 16'h0006;
+                            4'b0111: keyvalue = 16'h000b;
+                        endcase
                         keystat = keystat | 16'h0001;
                         line <= 4'b0000;
                     end 
@@ -67,8 +75,12 @@ module key16(
                     end
                 4'b1011: //2锟斤拷
                     if(col != 4'b1111) begin
-                        keyvalue[3:0] = col;
-                        keyvalue[7:4] = line;
+                        case(col)
+                            4'b1110: keyvalue = 16'h0007;
+                            4'b1101: keyvalue = 16'h0008;
+                            4'b1011: keyvalue = 16'h0009;
+                            4'b0111: keyvalue = 16'h000c;
+                        endcase
                         keystat = keystat | 16'h0001;
                         line <= 4'b0000;
                     end 
@@ -77,8 +89,12 @@ module key16(
                     end
                 4'b0111: //3锟斤拷
                     if(col != 4'b1111) begin
-                        keyvalue[3:0] = col;
-                        keyvalue[7:4] = line;
+                        case(col)
+                            4'b1110: keyvalue = 16'h0000;
+                            4'b1101: keyvalue = 16'h000f;
+                            4'b1011: keyvalue = 16'h000e;
+                            4'b0111: keyvalue = 16'h000d;
+                        endcase
                         keystat = keystat | 16'h0001;
                         line <= 4'b0000;
                     end 

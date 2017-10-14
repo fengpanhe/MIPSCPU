@@ -33,7 +33,7 @@ reg[3:0] col;
     reset = 1; 
     #10 reset = 0; 
     col[0] = line[0]; 
-    #30 col[0] = 1; 
+    #50 col[0] = 1; 
     end 
  
  
@@ -61,13 +61,15 @@ reg[3:0] col;
     wire[31:0] ALUb_ex;
     wire[31:0] ALUResult_ex;
     m_MIPS_CPU MIPS_CPU(
-     .clk(clk),
-     .rst(reset),
-     .Instruction(Instruction_if),
-     .Instruction2(Instruction_id),
-     .ALUCode(ALUCode_id),
-     .ALU_a(ALUa_ex),
-     .ALU_b(ALUb_ex),
-     .aluresult_ex(ALUResult_ex),
+    .clk(clk),
+    .rst(reset),
+    .Instruction(Instruction_if),
+    .Instruction2(Instruction_id),
+    .ALUCode(ALUCode_id),
+    .ALU_a(ALUa_ex),
+    .ALU_b(ALUb_ex),
+    .aluresult_ex(ALUResult_ex),
+    .col(col), 
+    .line(line)
      );
 endmodule
