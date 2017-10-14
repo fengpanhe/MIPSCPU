@@ -77,7 +77,8 @@ module m_MIPS_CPU(
     );
     wire WDTRst;       
     wire reset;
-    assign reset = rst|| WDTRst;  
+    assign reset = rst|| WDTRst;
+    wire[5:0] int_i;  
     /*IF Module*/
     wire[31:0] Instruction_if,Instruction_id;
     wire[31:0] NextPC_id,NextPC_if,NextPC_ex,NextPC_mem,NextPC_wb;
@@ -157,6 +158,7 @@ module m_MIPS_CPU(
     .MemOrIORead_ex(MemOrIORead_ex),
     .overFlow(Overflow),
     .signedOp_ex(signedOp_ex),
+    .int_i(int_i),
     .MemOrIOToReg_id(MemOrIOToReg_id),
     .CPToReg_id(CPToReg_id),
     .RegWr_id(RegWr_id),
@@ -334,6 +336,7 @@ module m_MIPS_CPU(
     .cnt1(cnt1),
     .pwmWave(pwmWave),
     .rst(WDTRst),
+    .int_i(int_i),
     .RegWrData_mem(RegWrData_mem),
     .tmpOut(tmpout),
     .dispClk(dispClk),

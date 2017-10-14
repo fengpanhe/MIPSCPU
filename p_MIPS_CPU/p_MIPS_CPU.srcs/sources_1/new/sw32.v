@@ -27,15 +27,37 @@ module sw32(
     input ior,      //è¯»ä¿¡å?
     input address, //ç«¯å£å?
     input[31:0] swi,      //swçš„å¼•è„šè¾“å…¥ä¿¡å?
-    output reg[31:0] ioread_data   //è¯»å‡ºçš„æ•°æ?
+    output reg[31:0] ioread_data,   //è¯»å‡ºçš„æ•°æ?
+    output reg[5:0] int_sw
     );
-
+    
+    reg int_flag; //ÓÃÓÚÅĞ¶ÏÊÇ·ñÇå³şint_iĞÅºÅ
+    
+    initial
+    begin
+    int_sw <= 0;
+    int_flag <= 0;
+    end
+    
     always @(negedge clk) begin
         if (reset == 1) begin
-            ioread_data = 16'h0000;
+            ioread_data <= 16'h0000;
+            int_sw <= 6'b000000;
+            int_flag <= 0;
         end
         if ((cs == 1) && (ior == 1) && (address == 1)) begin
-            ioread_data = swi;
+            ioread_data <= swi;
         end
+        if(int_flag) begin
+            int_sw <= 6'b000000;
+            int_flag <= 0;
+        end
+        if(|int_sw)begin
+            int_flag = 1;
+        end
+    end
+    
+    always @(swi)begin
+        int_sw <= 6'b000001;
     end
 endmodule

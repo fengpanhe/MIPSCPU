@@ -46,6 +46,7 @@ module c_MEM(
     output cnt1,
     output pwmWave,
     output rst,
+    output[5:0] int_i,
     output reg[31:0] RegWrData_mem,
     output[31:0] tmpOut,
     output dispClk,
@@ -146,8 +147,7 @@ module c_MEM(
    .line(line),
    .ioread_data(KEYReadData)
    );
-   //wire pulse0,pulse1;
-   //wire cnt0,cnt1;
+
    ctc16 CTC(
    .clk(clk),
    .reset(reset),
@@ -201,7 +201,8 @@ module c_MEM(
    .ior(IORead),
    .address(portAddr[0]),
    .swi(SWInput),
-   .ioread_data(SWReadData)
+   .ioread_data(SWReadData),
+   .int_sw(int_i)
    );
             
     always @(*)

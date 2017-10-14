@@ -25,6 +25,8 @@ module m_ExceptionProc(
     input[5:0] Func,
     input Overflow,
     input[5:0] int_i,
+    input int_en,
+    input[5:0] int_mask,
     input[31:0] eretAddr,
     input[31:0] JAddr,
     output reg[4:0] exceptType,
@@ -44,7 +46,7 @@ module m_ExceptionProc(
     parameter EXC_RESERVED = 5'b01010;
     parameter EXC_OVERFLOW = 5'b01100;
     
-    parameter EXC_ADDR = 32'h00000030;
+    parameter EXC_ADDR = 32'h00000030;  //异常处理程序入口地址
     
     initial 
     begin
@@ -54,7 +56,7 @@ module m_ExceptionProc(
     
     always @(*)
     begin
-    if(|int_i)
+    if((|(int_i & int_mask)) && int_en)
         begin
         exceptType <= EXC_HARD;
         JmpAddr <= EXC_ADDR;

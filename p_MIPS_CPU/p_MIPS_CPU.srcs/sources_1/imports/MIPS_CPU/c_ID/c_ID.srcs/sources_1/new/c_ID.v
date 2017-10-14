@@ -46,6 +46,7 @@ module c_ID(
     input MemOrIORead_ex,                   //上一条指令是读MEM指令的信号，用于判断冒险发生的条件         
     input overFlow,
     input signedOp_ex,
+    input[5:0] int_i,
     output MemOrIOToReg_id,
     output CPToReg_id,                  
     output RegWr_id,                    //译码生成的用于回写Regs的使能信号
@@ -107,7 +108,6 @@ module c_ID(
     .func(Instruction_id[5:0]),
     .rs(Instruction_id[25:21]),
     .rt(Instruction_id[20:16]),
-    //.MemToReg(MemToReg_id),
     .MemOrIOToReg(MemOrIOToReg_id),
     .CPToReg(CPToReg_id),
     .MemOrIOWr(MemOrIOWr_id),
@@ -159,7 +159,6 @@ module c_ID(
     .RegWrAddr(RegWrAddr_wb),
     .RegWrData_wb(RegWrData_wb),
     .RegWrData_mem(RegWrData_mem),
-    //.ALUResult_mem(ALUResult_mem),
     .ALUResult_ex(ALUResult_ex),
     .ForwardA(ForwardA),
     .ForwardB(ForwardB),
@@ -183,15 +182,17 @@ module c_ID(
     .Stall(Stall)
     );
     wire[4:0] excCode;              //异常类型编号
-    wire[5:0] int_i;                //中断类型号
     wire[31:0] eretAddr;
-    //assign excCode = Instruction_id[10:6];
-    assign int_i = 0;
+    wire int_en;                    //中断使能位
+    wire[5:0] int_mask;             //中断屏蔽位
+    //assign int_i = 0;
     m_ExceptionProc EP(
     .ALUCode(ALUCode_id),
     .Func(Instruction_id[5:0]),
     .Overflow(OF),
     .int_i(int_i),
+    .int_en(int_en),
+    .int_mask(int_mask),
     .JAddr(JAddr),
     .eretAddr(eretAddr),
     .exceptType(excCode),
@@ -214,6 +215,8 @@ module c_ID(
     .int_i(int_i),
     .current_inst_addr_i(NextPC_id),
     .data_o(CPData_id),
-    .eretAddr(eretAddr)
+    .eretAddr(eretAddr),
+    .int_en(int_en),
+    .int_mask(int_mask)
     );
 endmodule

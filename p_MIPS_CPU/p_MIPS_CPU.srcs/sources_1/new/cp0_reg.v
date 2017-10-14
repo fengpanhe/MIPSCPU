@@ -40,11 +40,15 @@ module cp0_reg(
     output reg[31:0] status_o,   //Status Reg的值
     output reg[31:0] cause_o,    //Cause Reg的值
     output reg[31:0] epc_o,      //EPC Reg的值，用于保存中断返回地址
-    output[31:0] eretAddr
+    output[31:0] eretAddr,
+    output  int_en,              //中断使能位
+    output[5:0] int_mask
 
     );
     reg[31:0] CPResult;
     assign eretAddr = epc_o;
+    assign int_en = status_o[0];
+    assign int_mask = status_o[15:10];
 //******************************************************************************
 //                     对CP0中寄存器的写操作：时序逻辑
 //  Cause Reg中只有其中IP[5:0]、ExcCode[4:0]字段可写
@@ -80,7 +84,9 @@ module cp0_reg(
                 5'b00000:begin                
                     epc_o <= current_inst_addr_i;  //保存返回地址
                     cause_o[6:2] <= 5'b00000;      //设置ExcCode
-                    cause_o[13:8] <= int_i;
+                    cause_o[13:8] <= int_i;        //设置中断编码
+                    status_o[0] <= 0;              //关中断
+                    status_o[15:10] <= 6'b000000;  //设置中断屏蔽
                 end
                 //系统调用syscall
                 5'b01000:begin                 
