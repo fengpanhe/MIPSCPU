@@ -31,8 +31,8 @@ reg[3:0] col;
     begin 
     col = 4'b1111; 
     reset = 1; 
-    #10 reset = 0; 
-    col[0] = line[0]; 
+    #6 reset = 0; 
+    #100 col[0] = line[0]; 
     #50 col[0] = 1; 
     end 
  
@@ -70,6 +70,7 @@ reg[3:0] col;
     .ALU_b(ALUb_ex),
     .aluresult_ex(ALUResult_ex),
     .col(col), 
-    .line(line)
+    .line(line),
+    .SWInput(24'h000000)
      );
 endmodule

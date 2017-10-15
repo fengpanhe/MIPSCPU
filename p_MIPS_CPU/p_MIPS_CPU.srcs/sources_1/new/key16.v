@@ -39,6 +39,11 @@ module key16(
     end
     
     always @(negedge clk) begin
+
+        if (int_key == 1) begin
+            int_key <= 1'b0;
+        end
+
         if (reset == 1) begin
             // reset
             ioread_data = 16'h0000;
@@ -111,10 +116,6 @@ module key16(
                         keystat = keystat & 16'hfffe;
                     end
             endcase
-
-            if (int_key == 1) begin
-                int_key <= 1'b0;
-            end
 
             if ((cs == 1) && (ior == 1)) begin // 閿熸枻鎷烽敓鑴氱尨鎷?
                 if (address == 2'b00) begin    //閿熸枻鎷烽敓鏂ゆ嫹鍊?
