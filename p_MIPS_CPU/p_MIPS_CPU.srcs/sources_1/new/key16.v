@@ -23,12 +23,12 @@
 module key16(
     input wire reset,       //閿熸枻鎷蜂綅閿熻剼鐚存嫹
     input wire cs,          //鐗囬€夐敓鑴氬彿锝忔嫹閿熸枻鎷穔eyctrl
-    input wire clk,         //绯荤粺鏃堕敓鏂ゆ�?
-    input wire ior,         //閿熸枻鎷烽敓鑴氱尨鎷�?
+    input wire clk,         //绯荤粺鏃堕敓鏂ゆ?
+    input wire ior,         //閿熸枻鎷烽敓鑴氱尨鎷?
     input wire[1:0] address,//閿熷壙鍙ｇ尨鎷�
-    input wire[3:0] col,    //閿熸枻鎷烽敓鏂ゆ�?
-    output reg[3:0] line,   //閿熸枻鎷烽敓鏂ゆ�?
-    output reg[15:0] ioread_data,//閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓锟�?
+    input wire[3:0] col,    //閿熸枻鎷烽敓鏂ゆ?
+    output reg[3:0] line,   //閿熸枻鎷烽敓鏂ゆ?
+    output reg[15:0] ioread_data,//閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓锟?
     output reg int_key
     );
 
@@ -49,7 +49,7 @@ module key16(
         else begin
             case(line)
                 4'b0000: if(col != 4'b1111) line <= 4'b1110;
-                4'b1110: //0閿熸枻鎷�?
+                4'b1110: //0閿熸枻鎷?
                     if(col != 4'b1111) begin
                         case(col)
                             4'b1110: keyvalue = 16'h0001;
@@ -59,11 +59,12 @@ module key16(
                         endcase
                         keystat = keystat | 16'h0001;
                         line <= 4'b0000;
+                        int_key <= 1'b1;
                     end 
                     else begin
                         line <= 4'b1101;
                     end
-                4'b1101: //1閿熸枻鎷�?
+                4'b1101: //1閿熸枻鎷?
                     if(col != 4'b1111) begin
                         case(col)
                             4'b1110: keyvalue = 16'h0004;
@@ -73,11 +74,12 @@ module key16(
                         endcase
                         keystat = keystat | 16'h0001;
                         line <= 4'b0000;
+                        int_key <= 1'b1;
                     end 
                     else begin
                         line <= 4'b1011;
                     end
-                4'b1011: //2閿熸枻鎷�?
+                4'b1011: //2閿熸枻鎷?
                     if(col != 4'b1111) begin
                         case(col)
                             4'b1110: keyvalue = 16'h0007;
@@ -87,11 +89,12 @@ module key16(
                         endcase
                         keystat = keystat | 16'h0001;
                         line <= 4'b0000;
+                        int_key <= 1'b1;
                     end 
                     else begin
                         line <= 4'b0111;
                     end
-                4'b0111: //3閿熸枻鎷�?
+                4'b0111: //3閿熸枻鎷?
                     if(col != 4'b1111) begin
                         case(col)
                             4'b1110: keyvalue = 16'h0000;
@@ -101,6 +104,7 @@ module key16(
                         endcase
                         keystat = keystat | 16'h0001;
                         line <= 4'b0000;
+                        int_key <= 1'b1;
                     end 
                     else begin
                         line <= 4'b0000;
@@ -108,11 +112,15 @@ module key16(
                     end
             endcase
 
-            if ((cs == 1) && (ior == 1)) begin // 閿熸枻鎷烽敓鑴氱尨鎷�?
-                if (address == 2'b00) begin    //閿熸枻鎷烽敓鏂ゆ嫹鍊�?
+            if (int_key == 1) begin
+                int_key <= 1'b0;
+            end
+
+            if ((cs == 1) && (ior == 1)) begin // 閿熸枻鎷烽敓鑴氱尨鎷?
+                if (address == 2'b00) begin    //閿熸枻鎷烽敓鏂ゆ嫹鍊?
                     ioread_data = keyvalue;
                 end
-                else if(address == 2'b10) begin //閿熸枻鎷风姸鎬佸悓鏃堕敓鏂ゆ嫹鐘舵€�?
+                else if(address == 2'b10) begin //閿熸枻鎷风姸鎬佸悓鏃堕敓鏂ゆ嫹鐘舵€?
                     ioread_data = keystat;
                     keystat = keystat & 16'hfffe;
                 end

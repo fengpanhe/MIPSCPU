@@ -21,9 +21,9 @@
 
 
 module m_MIPS_CPU(
-    input clk,                          //ÏµÍ³Ê±ÖÓ
-    input rst,                          //Íâ²¿¸´Î»ÐÅºÅ
-    /*output[31:0] Instruction,
+    input clk,                          //ÏµÍ³Ê±ï¿½ï¿½
+    input rst,                          //ï¿½â²¿ï¿½ï¿½Î»ï¿½Åºï¿½
+    output[31:0] Instruction,
     output stall,
     output pc_ifwrite,
     output flush,
@@ -59,25 +59,25 @@ module m_MIPS_CPU(
     output regwr_wb,
     output j,
     output jr,
-    output z,*/
-    output[7:0] DISPOutput,             //ÊýÂë¹ÜÊý¾ÝÊä³ö
-    output[7:0] DISPEn,                 //ÊýÂë¹ÜÊ¹ÄÜ¿ØÖÆÊä³ö
-    input[23:0] SWInput,                //²¦Âë¿ª¹ØÊäÈë
-    output[23:0] LEDOutput,             //LEDÊä³ö
-    input[3:0] col,                     //¼üÅÌÁÐÏßÊäÈë
-    output[3:0] line                   //¼üÅÌÐÐÏßÊä³ö
-   /* input pulse0,                       //¼ÆÊýÆ÷0ÊäÈëÂö³å
-    input pulse1,                       //¼ÆÊýÆ÷1ÊäÈëÂö³å
-    output cnt0,                        //¶¨Ê±/¼ÆÊýÆ÷0Êä³öÐÅºÅ
-    output cnt1,                        //¶¨Ê±/¼ÆÊýÆ÷1Êä³öÐÅºÅ
-    output pwmWave                      //pwmsÊä³öÐÅºÅ*/
+    output z,
+    output[7:0] DISPOutput,             //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    output[7:0] DISPEn,                 //ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ü¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    input[23:0] SWInput,                //ï¿½ï¿½ï¿½ë¿ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    output[23:0] LEDOutput,             //LEDï¿½ï¿½ï¿½
+    input[3:0] col,                     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    output[3:0] line,                   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    input pulse0,                       //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    input pulse1,                       //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    output cnt0,                        //ï¿½ï¿½Ê±/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½Åºï¿½
+    output cnt1,                        //ï¿½ï¿½Ê±/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½Åºï¿½
+    output pwmWave                      //pwmsï¿½ï¿½ï¿½ï¿½Åºï¿½
     );
-    wire pulse1,pulse1;
-    wire cnt0,cnt1,pwmWave;
-    wire WDTRst;                        //¿´ÃÅ¹·Êä³ö¸´Î»ÐÅºÅ      
+    //wire pulse1,pulse1;
+    //wire cnt0,cnt1,pwmWave;
+    wire WDTRst;                        //ï¿½ï¿½ï¿½Å¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Åºï¿½      
     wire reset;
     assign reset = rst|| WDTRst;
-    wire[5:0] int_i;                    //ÖÐ¶ÏÖ¸Ê¾ÐÅºÅ
+    wire[5:0] int_i;                    //ï¿½Ð¶ï¿½Ö¸Ê¾ï¿½Åºï¿½
     /*IF Module*/
     wire[31:0] Instruction_if,Instruction_id;
     wire[31:0] NextPC_id,NextPC_if,NextPC_ex,NextPC_mem,NextPC_wb;
@@ -356,7 +356,7 @@ module m_MIPS_CPU(
     .RegWrData_wb(RegWrData_wb),
     .CPWrData_wb(CPWrData_wb)
     );
-    /*assign Instruction = Instruction_if;
+    assign Instruction = Instruction_if;
     assign Instruction2 = Instruction_id;
     assign ALUCode = ALUCode_id;
     assign nextpc_if = NextPC_if;
@@ -387,6 +387,6 @@ module m_MIPS_CPU(
     assign jrAddr = JrAddr;
     assign j = J;
     assign jr = JR;
-    assign z = Z;*/
+    assign z = Z;
     
 endmodule
