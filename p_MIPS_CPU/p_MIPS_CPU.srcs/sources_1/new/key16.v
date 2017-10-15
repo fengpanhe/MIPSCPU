@@ -26,7 +26,6 @@ module key16(
     input wire clk,         //绯荤粺鏃堕敓鏂ゆ�?
     input wire ior,         //閿熸枻鎷烽敓鑴氱尨鎷�?
     input wire[1:0] address,//閿熷壙鍙ｇ尨鎷�
-    input wire int_pro,
     input wire[3:0] col,    //閿熸枻鎷烽敓鏂ゆ�?
     output reg[3:0] line,   //閿熸枻鎷烽敓鏂ゆ�?
     output reg[15:0] ioread_data,//閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓锟�?
@@ -37,19 +36,6 @@ module key16(
     reg[15:0] keystat;
     initial begin
         int_key <= 1'b0;
-    end
-
-
-    always @(reset or keyvalue or int_pro) begin
-        if(reset == 1) begin
-            int_key <= 1'b0;
-        end
-        else begin
-            int_key <= 1'b1;
-        end    
-        if(int_pro == 1) begin
-            int_key <= 1'b0;
-        end
     end
     
     always @(negedge clk) begin

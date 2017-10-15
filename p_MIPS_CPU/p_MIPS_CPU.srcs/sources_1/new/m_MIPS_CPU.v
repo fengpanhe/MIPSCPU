@@ -23,7 +23,7 @@
 module m_MIPS_CPU(
     input clk,                          //系统时钟
     input rst,                          //外部复位信号
-    output[31:0] Instruction,
+    /*output[31:0] Instruction,
     output stall,
     output pc_ifwrite,
     output flush,
@@ -59,24 +59,25 @@ module m_MIPS_CPU(
     output regwr_wb,
     output j,
     output jr,
-    output z,
+    output z,*/
     output[7:0] DISPOutput,             //数码管数据输出
     output[7:0] DISPEn,                 //数码管使能控制输出
     input[23:0] SWInput,                //拨码开关输入
     output[23:0] LEDOutput,             //LED输出
     input[3:0] col,                     //键盘列线输入
-    output[3:0] line,                   //键盘行线输出
-    input pulse0,                       //计数器0输入脉冲
+    output[3:0] line                   //键盘行线输出
+   /* input pulse0,                       //计数器0输入脉冲
     input pulse1,                       //计数器1输入脉冲
     output cnt0,                        //定时/计数器0输出信号
     output cnt1,                        //定时/计数器1输出信号
-    output pwmWave                      //pwms输出信号
+    output pwmWave                      //pwms输出信号*/
     );
+    wire pulse1,pulse1;
+    wire cnt0,cnt1,pwmWave;
     wire WDTRst;                        //看门狗输出复位信号      
     wire reset;
     assign reset = rst|| WDTRst;
     wire[5:0] int_i;                    //中断指示信号
-    wire int_pro;
     /*IF Module*/
     wire[31:0] Instruction_if,Instruction_id;
     wire[31:0] NextPC_id,NextPC_if,NextPC_ex,NextPC_mem,NextPC_wb;
@@ -178,7 +179,6 @@ module m_MIPS_CPU(
     .JAL(JAL),
     .BAL(BAL),
     .signedOp_id(signedOp_id),
-    .int_pro(int_pro),
     .BranchAddr(BranchAddr),
     .JmpAddr(JmpAddr),
     .JrAddr(JrAddr),
@@ -323,7 +323,6 @@ module m_MIPS_CPU(
     .CPToReg_mem(CPToReg_mem),
     .AL_mem(AL_mem),
     .MemWrData_mem(MemWrData_mem),
-    .int_pro(int_pro),
     .pulse0(pulse0),
     .pulse1(pulse1),
     .col(col),
@@ -357,7 +356,7 @@ module m_MIPS_CPU(
     .RegWrData_wb(RegWrData_wb),
     .CPWrData_wb(CPWrData_wb)
     );
-    assign Instruction = Instruction_if;
+    /*assign Instruction = Instruction_if;
     assign Instruction2 = Instruction_id;
     assign ALUCode = ALUCode_id;
     assign nextpc_if = NextPC_if;
@@ -388,6 +387,6 @@ module m_MIPS_CPU(
     assign jrAddr = JrAddr;
     assign j = J;
     assign jr = JR;
-    assign z = Z;
+    assign z = Z;*/
     
 endmodule
