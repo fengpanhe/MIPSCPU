@@ -26,38 +26,38 @@ module sw32(
     input cs,      //ç‰‡é??
     input ior,      //è¯»ä¿¡å?
     input address, //ç«¯å£å?
-    input[31:0] swi,      //swçš„å¼•è„šè¾“å…¥ä¿¡å?
+    input int_pro,
+    input[23:0] swi,      //swçš„å¼•è„šè¾“å…¥ä¿¡å?
     output reg[31:0] ioread_data,   //è¯»å‡ºçš„æ•°æ?
-    output reg[5:0] int_sw
+    output reg int_sw
     );
     
-    reg int_flag; //ÓÃÓÚÅĞ¶ÏÊÇ·ñÇå³şint_iĞÅºÅ
     
     initial
     begin
-    int_sw <= 0;
-    int_flag <= 0;
+    int_sw <= 1'b0;
     end
     
     always @(negedge clk) begin
         if (reset == 1) begin
             ioread_data <= 16'h0000;
-            int_sw <= 6'b000000;
-            int_flag <= 0;
         end
-        if ((cs == 1) && (ior == 1) && (address == 1)) begin
-            ioread_data <= swi;
-        end
-        if(int_flag) begin
-            int_sw <= 6'b000000;
-            int_flag <= 0;
-        end
-        if(|int_sw)begin
-            int_flag = 1;
+        else begin
+            if ((cs == 1) && (ior == 1) && (address == 1)) begin
+                ioread_data <= {8'b0,swi};
+            end
         end
     end
     
-    always @(swi)begin
-        int_sw <= 6'b000001;
+    always @(swi or reset or int_pro)begin
+        if(reset == 1)begin
+            int_sw <= 1'b0;
+        end
+        else begin 
+            int_sw <= 1'b1;
+        end
+        if(int_pro == 1)begin
+            int_sw <= 1'b0;
+        end    
     end
 endmodule

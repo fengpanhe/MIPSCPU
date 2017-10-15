@@ -21,8 +21,8 @@
 
 
 module m_MIPS_CPU(
-    input clk,
-    input rst,
+    input clk,                          //系统时钟
+    input rst,                          //外部复位信号
     output[31:0] Instruction,
     output stall,
     output pc_ifwrite,
@@ -37,8 +37,8 @@ module m_MIPS_CPU(
     output[31:0] ALU_b,
     output[31:0] aluresult_ex,
     output[31:0] aluresult_mem,
-    output[31:0] HI,
-    output[31:0] LO,
+    //output[31:0] HI,
+    //output[31:0] LO,
     output[31:0] regwrdata_wb,
     output[31:0] regwrdata_mem,
     output[31:0] memaddr,
@@ -49,7 +49,6 @@ module m_MIPS_CPU(
     output memwr_mem,
     output[31:0] memtmpout,
     output[1:0] memreadsize_mem,
-    output[31:0] tmpout,
     output[31:0] jmpAddr,
     output[31:0] jrAddr,
     output[4:0] rsaddr_id,
@@ -61,24 +60,23 @@ module m_MIPS_CPU(
     output j,
     output jr,
     output z,
-    output[7:0] DISPOutput,
-    output[7:0] DISPEn,
-    input[31:0] SWInput,
-    output[31:0] LEDOutput,
-    input[3:0] col,
-    output[3:0] line,
-    input pulse0,
-    input pulse1,
-    output cnt0,
-    output cnt1,
-    output pwmWave,
-    output dispClk,
-    output[2:0] dispCnt
+    output[7:0] DISPOutput,             //数码管数据输出
+    output[7:0] DISPEn,                 //数码管使能控制输出
+    input[23:0] SWInput,                //拨码开关输入
+    output[23:0] LEDOutput,             //LED输出
+    input[3:0] col,                     //键盘列线输入
+    output[3:0] line,                   //键盘行线输出
+    input pulse0,                       //计数器0输入脉冲
+    input pulse1,                       //计数器1输入脉冲
+    output cnt0,                        //定时/计数器0输出信号
+    output cnt1,                        //定时/计数器1输出信号
+    output pwmWave                      //pwms输出信号
     );
-    wire WDTRst;       
+    wire WDTRst;                        //看门狗输出复位信号      
     wire reset;
     assign reset = rst|| WDTRst;
-    wire[5:0] int_i;  
+    wire[5:0] int_i;                    //中断指示信号
+    wire int_pro;
     /*IF Module*/
     wire[31:0] Instruction_if,Instruction_id;
     wire[31:0] NextPC_id,NextPC_if,NextPC_ex,NextPC_mem,NextPC_wb;
@@ -111,21 +109,21 @@ module m_MIPS_CPU(
     wire[4:0] RsAddr_id,RdAddr_id,RtAddr_id,RdAddr_ex,RtAddr_ex;
     wire RegWr_id,RegWr_mem,RegWr_wb;
     wire MemOrIORead_id,MemOrIORead_ex,MemOrIORead_mem;
-    wire MemOrIOToReg_id,MemOrIOToReg_ex,MemOrIOToReg_mem;//,MemOrIOToReg_wb;
-    wire CPToReg_id,CPToReg_ex,CPToReg_mem,CPToReg_wb;////////////////////////////////
+    wire MemOrIOToReg_id,MemOrIOToReg_ex,MemOrIOToReg_mem;
+    wire CPToReg_id,CPToReg_ex,CPToReg_mem,CPToReg_wb;
     wire MemOrIOWr_id,MemOrIOWr_ex,MemOrIOWr_mem;
-    wire CPWr_id,CPWr_ex,CPWr_mem,CPWr_wb;///////////////////////////////////////////
+    wire CPWr_id,CPWr_ex,CPWr_mem,CPWr_wb;
     wire ALUsrcA_id,ALUsrcA_ex,ALUsrcB_id,ALUsrcB_ex;
     wire[4:0] ALUCode_id,ALUCode_ex;
     wire RegDst_id,RegDst_ex;
     wire JAL,BAL,AL_id,AL_ex,AL_mem,AL_wb;
     wire[31:0] Sa_id,Sa_ex,Imme_id,Imme_ex;
     wire[4:0] RegWrAddr_ex,RegWrAddr_mem,RegWrAddr_wb;
-    wire[4:0] CPWrAddr_ex,CPWrAddr_mem,CPWrAddr_wb;//////////////////////////////
+    wire[4:0] CPWrAddr_ex,CPWrAddr_mem,CPWrAddr_wb;
     wire[1:0] MemReadSize_id,MemReadSize_ex,MemReadSize_mem;
     wire MemExtType_id,MemExtType_ex,MemExtType_mem;
     wire[31:0] RegWrData_mem,RegWrData_wb;
-    wire[31:0] CPWrData_ex,CPWrData_mem,CPWrData_wb;///////////////////////
+    wire[31:0] CPWrData_ex,CPWrData_mem,CPWrData_wb;
     wire[31:0] RsData_id,RtData_id,RsData_ex,RtData_ex;
     wire[31:0] ALUResult_ex,ALUResult_mem,ALUResult_wb;
     wire[31:0] CPResult_id,CPResult_ex,CPResult_mem,CPResult_wb;
@@ -180,6 +178,7 @@ module m_MIPS_CPU(
     .JAL(JAL),
     .BAL(BAL),
     .signedOp_id(signedOp_id),
+    .int_pro(int_pro),
     .BranchAddr(BranchAddr),
     .JmpAddr(JmpAddr),
     .JrAddr(JrAddr),
@@ -264,8 +263,8 @@ module m_MIPS_CPU(
     .RegWrAddr_ex(RegWrAddr_ex),
     .CPWrAddr_ex(CPWrAddr_ex),
     .ALUResult_ex(ALUResult_ex),
-    .HI(HI),
-    .LO(LO),
+    //.HI(HI),
+    //.LO(LO),
     .MemWrData_ex(MemWrData_ex),
     .CPWrData_ex(CPWrData_ex),
     .Overflow(Overflow),
@@ -324,6 +323,7 @@ module m_MIPS_CPU(
     .CPToReg_mem(CPToReg_mem),
     .AL_mem(AL_mem),
     .MemWrData_mem(MemWrData_mem),
+    .int_pro(int_pro),
     .pulse0(pulse0),
     .pulse1(pulse1),
     .col(col),
@@ -337,10 +337,7 @@ module m_MIPS_CPU(
     .pwmWave(pwmWave),
     .rst(WDTRst),
     .int_i(int_i),
-    .RegWrData_mem(RegWrData_mem),
-    .tmpOut(tmpout),
-    .dispClk(dispClk),
-    .dispCnt(dispCnt)
+    .RegWrData_mem(RegWrData_mem)
     );
 
     /*MEM/WB Regs*/  
@@ -365,36 +362,22 @@ module m_MIPS_CPU(
     assign ALUCode = ALUCode_id;
     assign nextpc_if = NextPC_if;
     assign nextpc_id = NextPC_id;
-    //assign nextpc_ex = NextPC_ex;
     assign nextpc_mem = NextPC_mem;
     assign aluresult_ex = ALUResult_ex;
     assign aluresult_mem = ALUResult_mem;
     assign stall = Stall;
     assign pc_ifwrite = PC_IFWrite;
-    //assign aluresult_mem = ALUResult_mem;
     assign ALU_a = ALU_A;
     assign ALU_b = ALU_B;
     assign flush = IF_flush;
-    //assign regwr_id = RegWr_id;
     assign regwr_wb = RegWr_wb;
-    //assign alusrcA_id = ALUsrcA_id;
-    //assign alusrcB_id = ALUsrcB_id;
-    //assign regdst_id = RegDst_id;
-    //assign regdst_ex = RegDst_ex;
-    //assign rsdata_ex = RsData_ex;
-    //assign rtdata_ex = RtData_ex;
-    //assign regwraddr_ex = RegWrAddr_ex;
     assign regwraddr_wb = RegWrAddr_wb;
     assign regwrdata_mem = RegWrData_mem;
-    //assign rsaddr_ex = RsAddr_ex;
-    //assign rtaddr_ex = RtAddr_ex;
-    //assign rdaddr_ex = RdAddr_ex;
     assign rsaddr_id = RsAddr_id;
     assign rtaddr_id = RtAddr_id;
     assign rsdata_id = RsData_id;
     assign rtdata_id = RtData_id;
     assign regwrdata_wb = RegWrData_wb;
-    //assign memtoreg_wb = MemToReg_wb;
     assign memaddr = ALUResult_mem;
     assign memwr_id = MemOrIOWr_id;
     assign memwr_ex = MemOrIOWr_ex;

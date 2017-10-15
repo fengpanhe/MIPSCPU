@@ -26,8 +26,7 @@ module m_DataRam(
     input MemExtType,
     input[31:0] MemAddr,
     input[31:0] MemWrData,
-    output reg[31:0] MemOutput,
-    output reg[31:0] tmpOut
+    output reg[31:0] MemOutput
     );
     wire clk;
     assign clk = ~clock;
@@ -145,9 +144,6 @@ module m_DataRam(
       .dina(WrData3),    // input wire [7 : 0] dina
       .douta(tmpOut2[31:24])  // output wire [7 : 0] douta
     );
-
-    //assign ExtElem1 = MemExtType && tmpOut2[7];//Byte operate
-    //assign ExtElem2 = MemExtType && tmpOut2[15];//HalfWord operate
     
     /*对load指令的信号控制*/
     always @(*)
@@ -197,18 +193,6 @@ module m_DataRam(
           MemOutput = tmpOut2;
           end
     endcase
-    tmpOut <= tmpOut2;
     end
        
-    
-    /*
-    always @(*)
-    begin
-    case(MemWrSize)
-    2'b00: MemOutput = {{24{ExtElem1}},tmpOut2[7:0]};//{24{ExtElem1},tmpOut[7:0]};
-    2'b01: MemOutput = {{16{ExtElem2}},tmpOut2[15:0]};
-    2'b11: MemOutput = tmpOut2;
-    endcase
-    tmpOut <= tmpOut2;
-    end*/
 endmodule

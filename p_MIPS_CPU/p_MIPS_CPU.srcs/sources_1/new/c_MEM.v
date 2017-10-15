@@ -34,23 +34,21 @@ module c_MEM(
     input CPToReg_mem,
     input AL_mem,
     input[31:0] MemWrData_mem,
+    input int_pro,
     input pulse0,
     input pulse1,
-    input[31:0] SWInput,
+    input[23:0] SWInput,
     input[3:0] col,
     output[3:0] line,
     output[7:0] DISPOutput,
     output[7:0] DISPEn,
-    output[31:0] LEDOutput,
+    output[23:0] LEDOutput,
     output cnt0,
     output cnt1,
     output pwmWave,
     output rst,
     output[5:0] int_i,
-    output reg[31:0] RegWrData_mem,
-    output[31:0] tmpOut,
-    output dispClk,
-    output[2:0] dispCnt
+    output reg[31:0] RegWrData_mem
     );
     wire[31:0] WrData;      //写到MEM或IO中的数据
     wire MemWr;
@@ -62,6 +60,9 @@ module c_MEM(
     assign MemRead = MemOrIORead_mem && (ALUResult_mem[31:10] != 22'b1111111111111111111111);
     assign IORead = MemOrIORead_mem && (ALUResult_mem[31:10] == 22'b1111111111111111111111);
     
+    wire int_key,int_sw;
+    assign int_i = {4'b0000,int_key,int_sw};
+   
     wire[31:0] MemResult;
     wire[31:0] IOResult;
     m_DataRam DataRam(
@@ -71,12 +72,11 @@ module c_MEM(
     .MemExtType(MemExtType_mem),
     .MemAddr(ALUResult_mem),
     .MemWrData(WrData),
-    .MemOutput(MemResult),
-    .tmpOut(tmpOut)
+    .MemOutput(MemResult)
     );
     
     wire[3:0] portAddr;
-    wire DISPCtrl,KEYCtrl,CTCCtrl,PWMCtrl,UARTCtrl,WDTCtrl,LEDCtrl,SWCtrl;
+    wire DISPCtrl,KEYCtrl,CTCCtrl,PWMCtrl,WDTCtrl,LEDCtrl,SWCtrl;
     wire[31:0] rData;
      memorio MemOrIO(
      .caddress(ALUResult_mem),
@@ -91,7 +91,6 @@ module c_MEM(
      .KEYCtrl(KEYCtrl),
      .CTCCtrl(CTCCtrl),
      .PWMCtrl(PWMCtrl),
-     .UARTCtrl(UARTCtrl),
      .WDTCtrl(WDTCtrl),
      .LEDCtrl(LEDCtrl),
      .SWCtrl(SWCtrl),
@@ -100,7 +99,7 @@ module c_MEM(
      .write_data(WrData)
      );
     
-    wire[31:0] UARTReadData,SWReadData;
+    wire[31:0] SWReadData;
     wire[15:0] KEYReadData,CTCReadData;
     ioread IOReadUnit(
     .clk(clk),
@@ -108,11 +107,9 @@ module c_MEM(
     .ioread(IORead),
     .KEYCtrl(KEYCtrl),
     .CTCCtrl(CTCCtrl),
-    .UARTCtrl(UARTCtrl),
     .SWCtrl(SWCtrl),
     .ioread_data_key(KEYReadData),
     .ioread_data_ctc(CTCReadData),
-    .ioread_data_uart(UARTReadData),
     .ioread_data_sw(SWReadData),
     .ioread_data(IOResult)
     );
@@ -121,9 +118,6 @@ module c_MEM(
    输入包括：IOAddr(ALUResult_mem[9:0]),PortAddr,WrData,IOWr,clk，en(LEDCtrl/PWMCtrl/...)
    输出包括：KEYReadData/SWReadData
    */
-   /*temp signal*/
-   //wire[7:0] LEDOutput;
-   //wire LEDEn;
    disp32 DISP(
    .clk(clk),
    .reset(reset),
@@ -132,20 +126,21 @@ module c_MEM(
    .address(portAddr[2:0]),
    .iow(IOWr),
    .led_o(DISPOutput),
-   .led_enable_o(DISPEn),
-   .clk2(dispClk),
-   .cnt(dispCnt)
+   .led_enable_o(DISPEn)
    );
-   //wire[3:0] col,line;
+   
+ 
    key16 KEY(
    .clk(clk),
    .reset(reset),
    .cs(KEYCtrl),
    .ior(IORead),
    .address(portAddr[1:0]),
+   .int_pro(int_pro),
    .col(col),
    .line(line),
-   .ioread_data(KEYReadData)
+   .ioread_data(KEYReadData),
+   .int_key(int_key)
    );
 
    ctc16 CTC(
@@ -193,16 +188,17 @@ module c_MEM(
    .data(WrData),
    .ledo(LEDOutput)
    );  
-   
+
    sw32 SW(
    .clk(clk),
    .reset(reset),
    .cs(SWCtrl),
    .ior(IORead),
    .address(portAddr[0]),
+   .int_pro(int_pro),
    .swi(SWInput),
    .ioread_data(SWReadData),
-   .int_sw(int_i)
+   .int_sw(int_sw)
    );
             
     always @(*)

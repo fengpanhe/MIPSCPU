@@ -39,7 +39,6 @@ module memorio(
     output wire KEYCtrl,            //4*4键盘          0xFFFFFC10
     output wire CTCCtrl,            //定时/计数器      0xFFFFFC20
     output wire PWMCtrl,            // 脉冲宽度调制器  0xFFFFFC30
-    output wire UARTCtrl,           //异步串行口       0xFFFFFC40
     output wire WDTCtrl,            //看门狗?         0xFFFFFC50
     output wire LEDCtrl,            //LED灯            0xFFFFFC60
     output wire SWCtrl,             //拨码开关         0xFFFFFC70
@@ -60,7 +59,6 @@ module memorio(
     assign KEYCtrl = ((iorw == 1) && (caddress[9:4] == 6'b000001)) ? 1'b1 : 1'b0;
     assign CTCCtrl = ((iorw == 1) && (caddress[9:4] == 6'b000010)) ? 1'b1 : 1'b0;
     assign PWMCtrl = ((iorw == 1) && (caddress[9:4] == 6'b000011)) ? 1'b1 : 1'b0;
-    assign UARTCtrl = ((iorw == 1) && (caddress[9:4] == 6'b000100)) ? 1'b1 : 1'b0;
     assign WDTCtrl = ((iorw == 1) && (caddress[9:4] == 6'b000101)) ? 1'b1 : 1'b0;
     assign LEDCtrl = ((iorw == 1) && (caddress[9:4] == 6'b000110)) ? 1'b1 : 1'b0;
     assign SWCtrl = ((iorw == 1) && (caddress[9:4] == 6'b000111)) ? 1'b1 : 1'b0;

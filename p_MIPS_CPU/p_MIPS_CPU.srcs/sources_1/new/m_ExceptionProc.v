@@ -31,7 +31,8 @@ module m_ExceptionProc(
     input[31:0] JAddr,
     output reg[4:0] exceptType,
     output reg[31:0] JmpAddr,
-    output reg Je
+    output reg Je,
+    output reg int_pro
     );
     parameter BREAK_func = 6'b001101;
     parameter SYSCALL_func = 6'b001100;
@@ -51,6 +52,7 @@ module m_ExceptionProc(
     initial 
     begin
     Je <= 0;
+    int_pro <= 0;
     JmpAddr <= JAddr;
     end
     
@@ -61,15 +63,18 @@ module m_ExceptionProc(
         exceptType <= EXC_HARD;
         JmpAddr <= EXC_ADDR;
         Je <= 1;
+        int_pro <= 1;
         end
     else if(Overflow)
         begin
         exceptType <= EXC_OVERFLOW;
         JmpAddr <= EXC_ADDR;
         Je <= 1;
+        int_pro <= 0;
         end
     else if(ALUCode == ALU_EXCEPT)
         begin
+        int_pro <= 0;
         case(Func)
         BREAK_func: begin
                     exceptType <= EXC_BREAK;
@@ -93,12 +98,14 @@ module m_ExceptionProc(
         exceptType <= EXC_RESERVED; 
         JmpAddr <= EXC_ADDR;
         Je <= 1;
+        int_pro <= 0;
         end
     else
         begin
         exceptType <= 5'bx;
         JmpAddr <= JAddr;
         Je <= 0;
+        int_pro <= 0;
         end
     end
 endmodule

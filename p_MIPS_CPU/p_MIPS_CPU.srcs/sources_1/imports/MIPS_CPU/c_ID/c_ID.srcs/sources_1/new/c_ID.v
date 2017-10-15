@@ -68,6 +68,7 @@ module c_ID(
     output JAL,                      //需保存PC地址的指令
     output BAL,                      //分支跳转且需保存PC地址的指令
     output signedOp_id,
+    output int_pro,
     output[31:0] BranchAddr,            //分支跳转目标地址
     output[31:0] JmpAddr,               //无条件跳转目标地址
     output[31:0] JrAddr,                //寄存器跳转目标地址
@@ -197,7 +198,8 @@ module c_ID(
     .eretAddr(eretAddr),
     .exceptType(excCode),
     .JmpAddr(JmpAddr),
-    .Je(Je)
+    .Je(Je),
+    .int_pro(int_pro)
     );
     
     //CP0
