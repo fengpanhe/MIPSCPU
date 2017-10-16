@@ -59,6 +59,7 @@ USE blk_mem_gen_v8_3_1.blk_mem_gen_v8_3_1;
 ENTITY m_programRom IS
   PORT (
     clka : IN STD_LOGIC;
+    rsta : IN STD_LOGIC;
     addra : IN STD_LOGIC_VECTOR(13 DOWNTO 0);
     douta : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
   );
@@ -212,6 +213,7 @@ ARCHITECTURE m_programRom_arch OF m_programRom IS
   END COMPONENT blk_mem_gen_v8_3_1;
   ATTRIBUTE X_INTERFACE_INFO : STRING;
   ATTRIBUTE X_INTERFACE_INFO OF clka: SIGNAL IS "xilinx.com:interface:bram:1.0 BRAM_PORTA CLK";
+  ATTRIBUTE X_INTERFACE_INFO OF rsta: SIGNAL IS "xilinx.com:interface:bram:1.0 BRAM_PORTA RST";
   ATTRIBUTE X_INTERFACE_INFO OF addra: SIGNAL IS "xilinx.com:interface:bram:1.0 BRAM_PORTA ADDR";
   ATTRIBUTE X_INTERFACE_INFO OF douta: SIGNAL IS "xilinx.com:interface:bram:1.0 BRAM_PORTA DOUT";
 BEGIN
@@ -237,7 +239,7 @@ BEGIN
       C_INIT_FILE => "m_programRom.mem",
       C_USE_DEFAULT_DATA => 1,
       C_DEFAULT_DATA => "0",
-      C_HAS_RSTA => 0,
+      C_HAS_RSTA => 1,
       C_RST_PRIORITY_A => "CE",
       C_RSTRAM_A => 0,
       C_INITA_VAL => "0",
@@ -293,7 +295,7 @@ BEGIN
     )
     PORT MAP (
       clka => clka,
-      rsta => '0',
+      rsta => rsta,
       ena => '0',
       regcea => '0',
       wea => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 1)),

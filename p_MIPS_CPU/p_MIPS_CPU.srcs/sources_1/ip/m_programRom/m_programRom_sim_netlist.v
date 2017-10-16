@@ -1,7 +1,7 @@
 // Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2015.4 (win64) Build 1412921 Wed Nov 18 09:43:45 MST 2015
-// Date        : Sun Oct 15 18:18:26 2017
+// Date        : Mon Oct 16 09:45:08 2017
 // Host        : ThinkPad-PC running 64-bit Service Pack 1  (build 7601)
 // Command     : write_verilog -force -mode funcsim
 //               C:/Users/ThinkPad/Documents/GitHub/MIPSCPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/m_programRom/m_programRom_sim_netlist.v
@@ -12,20 +12,23 @@
 // --------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CHECK_LICENSE_TYPE = "m_programRom,blk_mem_gen_v8_3_1,{}" *) (* core_generation_info = "m_programRom,blk_mem_gen_v8_3_1,{x_ipProduct=Vivado 2015.4,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=blk_mem_gen,x_ipVersion=8.3,x_ipCoreRevision=1,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_FAMILY=artix7,C_XDEVICEFAMILY=artix7,C_ELABORATION_DIR=./,C_INTERFACE_TYPE=0,C_AXI_TYPE=1,C_AXI_SLAVE_TYPE=0,C_USE_BRAM_BLOCK=0,C_ENABLE_32BIT_ADDRESS=0,C_CTRL_ECC_ALGO=NONE,C_HAS_AXI_ID=0,C_AXI_ID_WIDTH=4,C_MEM_TYPE=3,C_BYTE_SIZE=9,C_ALGORITHM=1,C_PRIM_TYPE=1,C_LOAD_INIT_FILE=1,C_INIT_FILE_NAME=m_programRom.mif,C_INIT_FILE=m_programRom.mem,C_USE_DEFAULT_DATA=1,C_DEFAULT_DATA=0,C_HAS_RSTA=0,C_RST_PRIORITY_A=CE,C_RSTRAM_A=0,C_INITA_VAL=0,C_HAS_ENA=0,C_HAS_REGCEA=0,C_USE_BYTE_WEA=0,C_WEA_WIDTH=1,C_WRITE_MODE_A=WRITE_FIRST,C_WRITE_WIDTH_A=32,C_READ_WIDTH_A=32,C_WRITE_DEPTH_A=16384,C_READ_DEPTH_A=16384,C_ADDRA_WIDTH=14,C_HAS_RSTB=0,C_RST_PRIORITY_B=CE,C_RSTRAM_B=0,C_INITB_VAL=0,C_HAS_ENB=0,C_HAS_REGCEB=0,C_USE_BYTE_WEB=0,C_WEB_WIDTH=1,C_WRITE_MODE_B=WRITE_FIRST,C_WRITE_WIDTH_B=32,C_READ_WIDTH_B=32,C_WRITE_DEPTH_B=16384,C_READ_DEPTH_B=16384,C_ADDRB_WIDTH=14,C_HAS_MEM_OUTPUT_REGS_A=0,C_HAS_MEM_OUTPUT_REGS_B=0,C_HAS_MUX_OUTPUT_REGS_A=0,C_HAS_MUX_OUTPUT_REGS_B=0,C_MUX_PIPELINE_STAGES=0,C_HAS_SOFTECC_INPUT_REGS_A=0,C_HAS_SOFTECC_OUTPUT_REGS_B=0,C_USE_SOFTECC=0,C_USE_ECC=0,C_EN_ECC_PIPE=0,C_HAS_INJECTERR=0,C_SIM_COLLISION_CHECK=ALL,C_COMMON_CLK=0,C_DISABLE_WARN_BHV_COLL=0,C_EN_SLEEP_PIN=0,C_USE_URAM=0,C_EN_RDADDRA_CHG=0,C_EN_RDADDRB_CHG=0,C_EN_DEEPSLEEP_PIN=0,C_EN_SHUTDOWN_PIN=0,C_EN_SAFETY_CKT=0,C_DISABLE_WARN_BHV_RANGE=0,C_COUNT_36K_BRAM=14,C_COUNT_18K_BRAM=1,C_EST_POWER_SUMMARY=Estimated Power for IP     _     12.7204 mW}" *) (* downgradeipidentifiedwarnings = "yes" *) 
+(* CHECK_LICENSE_TYPE = "m_programRom,blk_mem_gen_v8_3_1,{}" *) (* core_generation_info = "m_programRom,blk_mem_gen_v8_3_1,{x_ipProduct=Vivado 2015.4,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=blk_mem_gen,x_ipVersion=8.3,x_ipCoreRevision=1,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_FAMILY=artix7,C_XDEVICEFAMILY=artix7,C_ELABORATION_DIR=./,C_INTERFACE_TYPE=0,C_AXI_TYPE=1,C_AXI_SLAVE_TYPE=0,C_USE_BRAM_BLOCK=0,C_ENABLE_32BIT_ADDRESS=0,C_CTRL_ECC_ALGO=NONE,C_HAS_AXI_ID=0,C_AXI_ID_WIDTH=4,C_MEM_TYPE=3,C_BYTE_SIZE=9,C_ALGORITHM=1,C_PRIM_TYPE=1,C_LOAD_INIT_FILE=1,C_INIT_FILE_NAME=m_programRom.mif,C_INIT_FILE=m_programRom.mem,C_USE_DEFAULT_DATA=1,C_DEFAULT_DATA=0,C_HAS_RSTA=1,C_RST_PRIORITY_A=CE,C_RSTRAM_A=0,C_INITA_VAL=0,C_HAS_ENA=0,C_HAS_REGCEA=0,C_USE_BYTE_WEA=0,C_WEA_WIDTH=1,C_WRITE_MODE_A=WRITE_FIRST,C_WRITE_WIDTH_A=32,C_READ_WIDTH_A=32,C_WRITE_DEPTH_A=16384,C_READ_DEPTH_A=16384,C_ADDRA_WIDTH=14,C_HAS_RSTB=0,C_RST_PRIORITY_B=CE,C_RSTRAM_B=0,C_INITB_VAL=0,C_HAS_ENB=0,C_HAS_REGCEB=0,C_USE_BYTE_WEB=0,C_WEB_WIDTH=1,C_WRITE_MODE_B=WRITE_FIRST,C_WRITE_WIDTH_B=32,C_READ_WIDTH_B=32,C_WRITE_DEPTH_B=16384,C_READ_DEPTH_B=16384,C_ADDRB_WIDTH=14,C_HAS_MEM_OUTPUT_REGS_A=0,C_HAS_MEM_OUTPUT_REGS_B=0,C_HAS_MUX_OUTPUT_REGS_A=0,C_HAS_MUX_OUTPUT_REGS_B=0,C_MUX_PIPELINE_STAGES=0,C_HAS_SOFTECC_INPUT_REGS_A=0,C_HAS_SOFTECC_OUTPUT_REGS_B=0,C_USE_SOFTECC=0,C_USE_ECC=0,C_EN_ECC_PIPE=0,C_HAS_INJECTERR=0,C_SIM_COLLISION_CHECK=ALL,C_COMMON_CLK=0,C_DISABLE_WARN_BHV_COLL=0,C_EN_SLEEP_PIN=0,C_USE_URAM=0,C_EN_RDADDRA_CHG=0,C_EN_RDADDRB_CHG=0,C_EN_DEEPSLEEP_PIN=0,C_EN_SHUTDOWN_PIN=0,C_EN_SAFETY_CKT=0,C_DISABLE_WARN_BHV_RANGE=0,C_COUNT_36K_BRAM=14,C_COUNT_18K_BRAM=1,C_EST_POWER_SUMMARY=Estimated Power for IP     _     12.7204 mW}" *) (* downgradeipidentifiedwarnings = "yes" *) 
 (* x_core_info = "blk_mem_gen_v8_3_1,Vivado 2015.4" *) 
 (* NotValidForBitStream *)
 module m_programRom
    (clka,
+    rsta,
     addra,
     douta);
   (* x_interface_info = "xilinx.com:interface:bram:1.0 BRAM_PORTA CLK" *) input clka;
+  (* x_interface_info = "xilinx.com:interface:bram:1.0 BRAM_PORTA RST" *) input rsta;
   (* x_interface_info = "xilinx.com:interface:bram:1.0 BRAM_PORTA ADDR" *) input [13:0]addra;
   (* x_interface_info = "xilinx.com:interface:bram:1.0 BRAM_PORTA DOUT" *) output [31:0]douta;
 
   wire [13:0]addra;
   wire clka;
   wire [31:0]douta;
+  wire rsta;
   wire NLW_U0_dbiterr_UNCONNECTED;
   wire NLW_U0_rsta_busy_UNCONNECTED;
   wire NLW_U0_rstb_busy_UNCONNECTED;
@@ -82,7 +85,7 @@ module m_programRom
   (* C_HAS_MUX_OUTPUT_REGS_B = "0" *) 
   (* C_HAS_REGCEA = "0" *) 
   (* C_HAS_REGCEB = "0" *) 
-  (* C_HAS_RSTA = "0" *) 
+  (* C_HAS_RSTA = "1" *) 
   (* C_HAS_RSTB = "0" *) 
   (* C_HAS_SOFTECC_INPUT_REGS_A = "0" *) 
   (* C_HAS_SOFTECC_OUTPUT_REGS_B = "0" *) 
@@ -141,7 +144,7 @@ module m_programRom
         .rdaddrecc(NLW_U0_rdaddrecc_UNCONNECTED[13:0]),
         .regcea(1'b0),
         .regceb(1'b0),
-        .rsta(1'b0),
+        .rsta(rsta),
         .rsta_busy(NLW_U0_rsta_busy_UNCONNECTED),
         .rstb(1'b0),
         .rstb_busy(NLW_U0_rstb_busy_UNCONNECTED),
@@ -192,10 +195,12 @@ endmodule
 module m_programRom_blk_mem_gen_generic_cstr
    (douta,
     addra,
-    clka);
+    clka,
+    rsta);
   output [31:0]douta;
   input [13:0]addra;
   input clka;
+  input rsta;
 
   wire [13:0]addra;
   wire clka;
@@ -312,6 +317,7 @@ module m_programRom_blk_mem_gen_generic_cstr
   wire \ramloop[9].ram.r_n_34 ;
   wire \ramloop[9].ram.r_n_35 ;
   wire \ramloop[9].ram.r_n_36 ;
+  wire rsta;
   wire NLW_i_27_O_UNCONNECTED;
 
   m_programRom_blk_mem_gen_mux \has_mux_a.A 
@@ -351,87 +357,102 @@ module m_programRom_blk_mem_gen_generic_cstr
   m_programRom_blk_mem_gen_prim_width \ramloop[0].ram.r 
        (.addra(addra),
         .clka(clka),
-        .douta(douta[0]));
+        .douta(douta[0]),
+        .rsta(rsta));
   m_programRom_blk_mem_gen_prim_width__parameterized9 \ramloop[10].ram.r 
        (.addra(addra[11:0]),
         .clka(clka),
         .\douta[21] ({\ramloop[10].ram.r_n_28 ,\ramloop[10].ram.r_n_29 ,\ramloop[10].ram.r_n_30 ,\ramloop[10].ram.r_n_31 ,\ramloop[10].ram.r_n_32 ,\ramloop[10].ram.r_n_33 ,\ramloop[10].ram.r_n_34 ,\ramloop[10].ram.r_n_35 }),
         .\douta[22] (\ramloop[10].ram.r_n_36 ),
-        .ram_ena(ram_ena));
+        .ram_ena(ram_ena),
+        .rsta(rsta));
   m_programRom_blk_mem_gen_prim_width__parameterized10 \ramloop[11].ram.r 
        (.addra(addra),
         .clka(clka),
         .\douta[30] ({\ramloop[11].ram.r_n_28 ,\ramloop[11].ram.r_n_29 ,\ramloop[11].ram.r_n_30 ,\ramloop[11].ram.r_n_31 ,\ramloop[11].ram.r_n_32 ,\ramloop[11].ram.r_n_33 ,\ramloop[11].ram.r_n_34 ,\ramloop[11].ram.r_n_35 }),
         .\douta[31] (\ramloop[11].ram.r_n_36 ),
-        .ena_array(ena_array));
+        .ena_array(ena_array),
+        .rsta(rsta));
   m_programRom_blk_mem_gen_prim_width__parameterized11 \ramloop[12].ram.r 
        (.addra(addra[11:0]),
         .\addra[13] (\ramloop[4].ram.r_n_37 ),
         .clka(clka),
         .\douta[30] ({\ramloop[12].ram.r_n_28 ,\ramloop[12].ram.r_n_29 ,\ramloop[12].ram.r_n_30 ,\ramloop[12].ram.r_n_31 ,\ramloop[12].ram.r_n_32 ,\ramloop[12].ram.r_n_33 ,\ramloop[12].ram.r_n_34 ,\ramloop[12].ram.r_n_35 }),
-        .\douta[31] (\ramloop[12].ram.r_n_36 ));
+        .\douta[31] (\ramloop[12].ram.r_n_36 ),
+        .rsta(rsta));
   m_programRom_blk_mem_gen_prim_width__parameterized12 \ramloop[13].ram.r 
        (.addra(addra[11:0]),
         .\addra[12] (\ramloop[5].ram.r_n_37 ),
         .clka(clka),
         .\douta[30] ({\ramloop[13].ram.r_n_28 ,\ramloop[13].ram.r_n_29 ,\ramloop[13].ram.r_n_30 ,\ramloop[13].ram.r_n_31 ,\ramloop[13].ram.r_n_32 ,\ramloop[13].ram.r_n_33 ,\ramloop[13].ram.r_n_34 ,\ramloop[13].ram.r_n_35 }),
-        .\douta[31] (\ramloop[13].ram.r_n_36 ));
+        .\douta[31] (\ramloop[13].ram.r_n_36 ),
+        .rsta(rsta));
   m_programRom_blk_mem_gen_prim_width__parameterized13 \ramloop[14].ram.r 
        (.addra(addra),
         .clka(clka),
         .\douta[30] ({\ramloop[14].ram.r_n_28 ,\ramloop[14].ram.r_n_29 ,\ramloop[14].ram.r_n_30 ,\ramloop[14].ram.r_n_31 ,\ramloop[14].ram.r_n_32 ,\ramloop[14].ram.r_n_33 ,\ramloop[14].ram.r_n_34 ,\ramloop[14].ram.r_n_35 }),
         .\douta[31] (\ramloop[14].ram.r_n_36 ),
-        .ram_ena(ram_ena));
+        .ram_ena(ram_ena),
+        .rsta(rsta));
   m_programRom_blk_mem_gen_prim_width__parameterized0 \ramloop[1].ram.r 
        (.addra(addra),
         .clka(clka),
-        .douta(douta[2:1]));
+        .douta(douta[2:1]),
+        .rsta(rsta));
   m_programRom_blk_mem_gen_prim_width__parameterized1 \ramloop[2].ram.r 
        (.addra(addra),
         .clka(clka),
-        .douta(douta[4:3]));
+        .douta(douta[4:3]),
+        .rsta(rsta));
   m_programRom_blk_mem_gen_prim_width__parameterized2 \ramloop[3].ram.r 
        (.addra(addra[11:0]),
         .clka(clka),
         .\douta[12] ({\ramloop[3].ram.r_n_28 ,\ramloop[3].ram.r_n_29 ,\ramloop[3].ram.r_n_30 ,\ramloop[3].ram.r_n_31 ,\ramloop[3].ram.r_n_32 ,\ramloop[3].ram.r_n_33 ,\ramloop[3].ram.r_n_34 ,\ramloop[3].ram.r_n_35 }),
         .\douta[13] (\ramloop[3].ram.r_n_36 ),
-        .ena_array(ena_array));
+        .ena_array(ena_array),
+        .rsta(rsta));
   m_programRom_blk_mem_gen_prim_width__parameterized3 \ramloop[4].ram.r 
        (.\DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram (\ramloop[4].ram.r_n_37 ),
         .addra(addra),
         .clka(clka),
         .\douta[12] ({\ramloop[4].ram.r_n_28 ,\ramloop[4].ram.r_n_29 ,\ramloop[4].ram.r_n_30 ,\ramloop[4].ram.r_n_31 ,\ramloop[4].ram.r_n_32 ,\ramloop[4].ram.r_n_33 ,\ramloop[4].ram.r_n_34 ,\ramloop[4].ram.r_n_35 }),
-        .\douta[13] (\ramloop[4].ram.r_n_36 ));
+        .\douta[13] (\ramloop[4].ram.r_n_36 ),
+        .rsta(rsta));
   m_programRom_blk_mem_gen_prim_width__parameterized4 \ramloop[5].ram.r 
        (.\DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram (\ramloop[5].ram.r_n_37 ),
         .addra(addra),
         .clka(clka),
         .\douta[12] ({\ramloop[5].ram.r_n_28 ,\ramloop[5].ram.r_n_29 ,\ramloop[5].ram.r_n_30 ,\ramloop[5].ram.r_n_31 ,\ramloop[5].ram.r_n_32 ,\ramloop[5].ram.r_n_33 ,\ramloop[5].ram.r_n_34 ,\ramloop[5].ram.r_n_35 }),
-        .\douta[13] (\ramloop[5].ram.r_n_36 ));
+        .\douta[13] (\ramloop[5].ram.r_n_36 ),
+        .rsta(rsta));
   m_programRom_blk_mem_gen_prim_width__parameterized5 \ramloop[6].ram.r 
        (.DOADO({\ramloop[6].ram.r_n_28 ,\ramloop[6].ram.r_n_29 ,\ramloop[6].ram.r_n_30 ,\ramloop[6].ram.r_n_31 ,\ramloop[6].ram.r_n_32 ,\ramloop[6].ram.r_n_33 ,\ramloop[6].ram.r_n_34 ,\ramloop[6].ram.r_n_35 }),
         .DOPADOP(\ramloop[6].ram.r_n_36 ),
         .addra(addra[11:0]),
         .clka(clka),
-        .ram_ena(ram_ena));
+        .ram_ena(ram_ena),
+        .rsta(rsta));
   m_programRom_blk_mem_gen_prim_width__parameterized6 \ramloop[7].ram.r 
        (.addra(addra[11:0]),
         .clka(clka),
         .\douta[21] ({\ramloop[7].ram.r_n_28 ,\ramloop[7].ram.r_n_29 ,\ramloop[7].ram.r_n_30 ,\ramloop[7].ram.r_n_31 ,\ramloop[7].ram.r_n_32 ,\ramloop[7].ram.r_n_33 ,\ramloop[7].ram.r_n_34 ,\ramloop[7].ram.r_n_35 }),
         .\douta[22] (\ramloop[7].ram.r_n_36 ),
-        .ena_array(ena_array));
+        .ena_array(ena_array),
+        .rsta(rsta));
   m_programRom_blk_mem_gen_prim_width__parameterized7 \ramloop[8].ram.r 
        (.addra(addra[11:0]),
         .\addra[13] (\ramloop[4].ram.r_n_37 ),
         .clka(clka),
         .\douta[21] ({\ramloop[8].ram.r_n_28 ,\ramloop[8].ram.r_n_29 ,\ramloop[8].ram.r_n_30 ,\ramloop[8].ram.r_n_31 ,\ramloop[8].ram.r_n_32 ,\ramloop[8].ram.r_n_33 ,\ramloop[8].ram.r_n_34 ,\ramloop[8].ram.r_n_35 }),
-        .\douta[22] (\ramloop[8].ram.r_n_36 ));
+        .\douta[22] (\ramloop[8].ram.r_n_36 ),
+        .rsta(rsta));
   m_programRom_blk_mem_gen_prim_width__parameterized8 \ramloop[9].ram.r 
        (.addra(addra[11:0]),
         .\addra[12] (\ramloop[5].ram.r_n_37 ),
         .clka(clka),
         .\douta[21] ({\ramloop[9].ram.r_n_28 ,\ramloop[9].ram.r_n_29 ,\ramloop[9].ram.r_n_30 ,\ramloop[9].ram.r_n_31 ,\ramloop[9].ram.r_n_32 ,\ramloop[9].ram.r_n_33 ,\ramloop[9].ram.r_n_34 ,\ramloop[9].ram.r_n_35 }),
-        .\douta[22] (\ramloop[9].ram.r_n_36 ));
+        .\douta[22] (\ramloop[9].ram.r_n_36 ),
+        .rsta(rsta));
 endmodule
 
 (* ORIG_REF_NAME = "blk_mem_gen_mux" *) 
@@ -812,57 +833,69 @@ endmodule
 module m_programRom_blk_mem_gen_prim_width
    (douta,
     clka,
+    rsta,
     addra);
   output [0:0]douta;
   input clka;
+  input rsta;
   input [13:0]addra;
 
   wire [13:0]addra;
   wire clka;
   wire [0:0]douta;
+  wire rsta;
 
   m_programRom_blk_mem_gen_prim_wrapper_init \prim_init.ram 
        (.addra(addra),
         .clka(clka),
-        .douta(douta));
+        .douta(douta),
+        .rsta(rsta));
 endmodule
 
 (* ORIG_REF_NAME = "blk_mem_gen_prim_width" *) 
 module m_programRom_blk_mem_gen_prim_width__parameterized0
    (douta,
     clka,
+    rsta,
     addra);
   output [1:0]douta;
   input clka;
+  input rsta;
   input [13:0]addra;
 
   wire [13:0]addra;
   wire clka;
   wire [1:0]douta;
+  wire rsta;
 
   m_programRom_blk_mem_gen_prim_wrapper_init__parameterized0 \prim_init.ram 
        (.addra(addra),
         .clka(clka),
-        .douta(douta));
+        .douta(douta),
+        .rsta(rsta));
 endmodule
 
 (* ORIG_REF_NAME = "blk_mem_gen_prim_width" *) 
 module m_programRom_blk_mem_gen_prim_width__parameterized1
    (douta,
     clka,
+    rsta,
     addra);
   output [1:0]douta;
   input clka;
+  input rsta;
   input [13:0]addra;
 
   wire [13:0]addra;
   wire clka;
   wire [1:0]douta;
+  wire rsta;
 
   m_programRom_blk_mem_gen_prim_wrapper_init__parameterized1 \prim_init.ram 
        (.addra(addra),
         .clka(clka),
-        .douta(douta));
+        .douta(douta),
+        .rsta(rsta));
 endmodule
 
 (* ORIG_REF_NAME = "blk_mem_gen_prim_width" *) 
@@ -871,11 +904,13 @@ module m_programRom_blk_mem_gen_prim_width__parameterized10
     \douta[31] ,
     ena_array,
     clka,
+    rsta,
     addra);
   output [7:0]\douta[30] ;
   output [0:0]\douta[31] ;
   output [0:0]ena_array;
   input clka;
+  input rsta;
   input [13:0]addra;
 
   wire [13:0]addra;
@@ -883,13 +918,15 @@ module m_programRom_blk_mem_gen_prim_width__parameterized10
   wire [7:0]\douta[30] ;
   wire [0:0]\douta[31] ;
   wire [0:0]ena_array;
+  wire rsta;
 
   m_programRom_blk_mem_gen_prim_wrapper_init__parameterized10 \prim_init.ram 
        (.addra(addra),
         .clka(clka),
         .\douta[30] (\douta[30] ),
         .\douta[31] (\douta[31] ),
-        .ena_array(ena_array));
+        .ena_array(ena_array),
+        .rsta(rsta));
 endmodule
 
 (* ORIG_REF_NAME = "blk_mem_gen_prim_width" *) 
@@ -898,11 +935,13 @@ module m_programRom_blk_mem_gen_prim_width__parameterized11
     \douta[31] ,
     clka,
     \addra[13] ,
+    rsta,
     addra);
   output [7:0]\douta[30] ;
   output [0:0]\douta[31] ;
   input clka;
   input \addra[13] ;
+  input rsta;
   input [11:0]addra;
 
   wire [11:0]addra;
@@ -910,13 +949,15 @@ module m_programRom_blk_mem_gen_prim_width__parameterized11
   wire clka;
   wire [7:0]\douta[30] ;
   wire [0:0]\douta[31] ;
+  wire rsta;
 
   m_programRom_blk_mem_gen_prim_wrapper_init__parameterized11 \prim_init.ram 
        (.addra(addra),
         .\addra[13] (\addra[13] ),
         .clka(clka),
         .\douta[30] (\douta[30] ),
-        .\douta[31] (\douta[31] ));
+        .\douta[31] (\douta[31] ),
+        .rsta(rsta));
 endmodule
 
 (* ORIG_REF_NAME = "blk_mem_gen_prim_width" *) 
@@ -925,11 +966,13 @@ module m_programRom_blk_mem_gen_prim_width__parameterized12
     \douta[31] ,
     clka,
     \addra[12] ,
+    rsta,
     addra);
   output [7:0]\douta[30] ;
   output [0:0]\douta[31] ;
   input clka;
   input \addra[12] ;
+  input rsta;
   input [11:0]addra;
 
   wire [11:0]addra;
@@ -937,13 +980,15 @@ module m_programRom_blk_mem_gen_prim_width__parameterized12
   wire clka;
   wire [7:0]\douta[30] ;
   wire [0:0]\douta[31] ;
+  wire rsta;
 
   m_programRom_blk_mem_gen_prim_wrapper_init__parameterized12 \prim_init.ram 
        (.addra(addra),
         .\addra[12] (\addra[12] ),
         .clka(clka),
         .\douta[30] (\douta[30] ),
-        .\douta[31] (\douta[31] ));
+        .\douta[31] (\douta[31] ),
+        .rsta(rsta));
 endmodule
 
 (* ORIG_REF_NAME = "blk_mem_gen_prim_width" *) 
@@ -952,11 +997,13 @@ module m_programRom_blk_mem_gen_prim_width__parameterized13
     \douta[31] ,
     ram_ena,
     clka,
+    rsta,
     addra);
   output [7:0]\douta[30] ;
   output [0:0]\douta[31] ;
   output ram_ena;
   input clka;
+  input rsta;
   input [13:0]addra;
 
   wire [13:0]addra;
@@ -964,13 +1011,15 @@ module m_programRom_blk_mem_gen_prim_width__parameterized13
   wire [7:0]\douta[30] ;
   wire [0:0]\douta[31] ;
   wire ram_ena;
+  wire rsta;
 
   m_programRom_blk_mem_gen_prim_wrapper_init__parameterized13 \prim_init.ram 
        (.addra(addra),
         .clka(clka),
         .\douta[30] (\douta[30] ),
         .\douta[31] (\douta[31] ),
-        .ram_ena(ram_ena));
+        .ram_ena(ram_ena),
+        .rsta(rsta));
 endmodule
 
 (* ORIG_REF_NAME = "blk_mem_gen_prim_width" *) 
@@ -979,11 +1028,13 @@ module m_programRom_blk_mem_gen_prim_width__parameterized2
     \douta[13] ,
     clka,
     ena_array,
+    rsta,
     addra);
   output [7:0]\douta[12] ;
   output [0:0]\douta[13] ;
   input clka;
   input [0:0]ena_array;
+  input rsta;
   input [11:0]addra;
 
   wire [11:0]addra;
@@ -991,13 +1042,15 @@ module m_programRom_blk_mem_gen_prim_width__parameterized2
   wire [7:0]\douta[12] ;
   wire [0:0]\douta[13] ;
   wire [0:0]ena_array;
+  wire rsta;
 
   m_programRom_blk_mem_gen_prim_wrapper_init__parameterized2 \prim_init.ram 
        (.addra(addra),
         .clka(clka),
         .\douta[12] (\douta[12] ),
         .\douta[13] (\douta[13] ),
-        .ena_array(ena_array));
+        .ena_array(ena_array),
+        .rsta(rsta));
 endmodule
 
 (* ORIG_REF_NAME = "blk_mem_gen_prim_width" *) 
@@ -1006,11 +1059,13 @@ module m_programRom_blk_mem_gen_prim_width__parameterized3
     \douta[13] ,
     \DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram ,
     clka,
+    rsta,
     addra);
   output [7:0]\douta[12] ;
   output [0:0]\douta[13] ;
   output \DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram ;
   input clka;
+  input rsta;
   input [13:0]addra;
 
   wire \DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram ;
@@ -1018,13 +1073,15 @@ module m_programRom_blk_mem_gen_prim_width__parameterized3
   wire clka;
   wire [7:0]\douta[12] ;
   wire [0:0]\douta[13] ;
+  wire rsta;
 
   m_programRom_blk_mem_gen_prim_wrapper_init__parameterized3 \prim_init.ram 
        (.\DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_0 (\DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram ),
         .addra(addra),
         .clka(clka),
         .\douta[12] (\douta[12] ),
-        .\douta[13] (\douta[13] ));
+        .\douta[13] (\douta[13] ),
+        .rsta(rsta));
 endmodule
 
 (* ORIG_REF_NAME = "blk_mem_gen_prim_width" *) 
@@ -1033,11 +1090,13 @@ module m_programRom_blk_mem_gen_prim_width__parameterized4
     \douta[13] ,
     \DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram ,
     clka,
+    rsta,
     addra);
   output [7:0]\douta[12] ;
   output [0:0]\douta[13] ;
   output \DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram ;
   input clka;
+  input rsta;
   input [13:0]addra;
 
   wire \DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram ;
@@ -1045,13 +1104,15 @@ module m_programRom_blk_mem_gen_prim_width__parameterized4
   wire clka;
   wire [7:0]\douta[12] ;
   wire [0:0]\douta[13] ;
+  wire rsta;
 
   m_programRom_blk_mem_gen_prim_wrapper_init__parameterized4 \prim_init.ram 
        (.\DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_0 (\DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram ),
         .addra(addra),
         .clka(clka),
         .\douta[12] (\douta[12] ),
-        .\douta[13] (\douta[13] ));
+        .\douta[13] (\douta[13] ),
+        .rsta(rsta));
 endmodule
 
 (* ORIG_REF_NAME = "blk_mem_gen_prim_width" *) 
@@ -1060,11 +1121,13 @@ module m_programRom_blk_mem_gen_prim_width__parameterized5
     DOPADOP,
     clka,
     ram_ena,
+    rsta,
     addra);
   output [7:0]DOADO;
   output [0:0]DOPADOP;
   input clka;
   input ram_ena;
+  input rsta;
   input [11:0]addra;
 
   wire [7:0]DOADO;
@@ -1072,13 +1135,15 @@ module m_programRom_blk_mem_gen_prim_width__parameterized5
   wire [11:0]addra;
   wire clka;
   wire ram_ena;
+  wire rsta;
 
   m_programRom_blk_mem_gen_prim_wrapper_init__parameterized5 \prim_init.ram 
        (.DOADO(DOADO),
         .DOPADOP(DOPADOP),
         .addra(addra),
         .clka(clka),
-        .ram_ena(ram_ena));
+        .ram_ena(ram_ena),
+        .rsta(rsta));
 endmodule
 
 (* ORIG_REF_NAME = "blk_mem_gen_prim_width" *) 
@@ -1087,11 +1152,13 @@ module m_programRom_blk_mem_gen_prim_width__parameterized6
     \douta[22] ,
     clka,
     ena_array,
+    rsta,
     addra);
   output [7:0]\douta[21] ;
   output [0:0]\douta[22] ;
   input clka;
   input [0:0]ena_array;
+  input rsta;
   input [11:0]addra;
 
   wire [11:0]addra;
@@ -1099,13 +1166,15 @@ module m_programRom_blk_mem_gen_prim_width__parameterized6
   wire [7:0]\douta[21] ;
   wire [0:0]\douta[22] ;
   wire [0:0]ena_array;
+  wire rsta;
 
   m_programRom_blk_mem_gen_prim_wrapper_init__parameterized6 \prim_init.ram 
        (.addra(addra),
         .clka(clka),
         .\douta[21] (\douta[21] ),
         .\douta[22] (\douta[22] ),
-        .ena_array(ena_array));
+        .ena_array(ena_array),
+        .rsta(rsta));
 endmodule
 
 (* ORIG_REF_NAME = "blk_mem_gen_prim_width" *) 
@@ -1114,11 +1183,13 @@ module m_programRom_blk_mem_gen_prim_width__parameterized7
     \douta[22] ,
     clka,
     \addra[13] ,
+    rsta,
     addra);
   output [7:0]\douta[21] ;
   output [0:0]\douta[22] ;
   input clka;
   input \addra[13] ;
+  input rsta;
   input [11:0]addra;
 
   wire [11:0]addra;
@@ -1126,13 +1197,15 @@ module m_programRom_blk_mem_gen_prim_width__parameterized7
   wire clka;
   wire [7:0]\douta[21] ;
   wire [0:0]\douta[22] ;
+  wire rsta;
 
   m_programRom_blk_mem_gen_prim_wrapper_init__parameterized7 \prim_init.ram 
        (.addra(addra),
         .\addra[13] (\addra[13] ),
         .clka(clka),
         .\douta[21] (\douta[21] ),
-        .\douta[22] (\douta[22] ));
+        .\douta[22] (\douta[22] ),
+        .rsta(rsta));
 endmodule
 
 (* ORIG_REF_NAME = "blk_mem_gen_prim_width" *) 
@@ -1141,11 +1214,13 @@ module m_programRom_blk_mem_gen_prim_width__parameterized8
     \douta[22] ,
     clka,
     \addra[12] ,
+    rsta,
     addra);
   output [7:0]\douta[21] ;
   output [0:0]\douta[22] ;
   input clka;
   input \addra[12] ;
+  input rsta;
   input [11:0]addra;
 
   wire [11:0]addra;
@@ -1153,13 +1228,15 @@ module m_programRom_blk_mem_gen_prim_width__parameterized8
   wire clka;
   wire [7:0]\douta[21] ;
   wire [0:0]\douta[22] ;
+  wire rsta;
 
   m_programRom_blk_mem_gen_prim_wrapper_init__parameterized8 \prim_init.ram 
        (.addra(addra),
         .\addra[12] (\addra[12] ),
         .clka(clka),
         .\douta[21] (\douta[21] ),
-        .\douta[22] (\douta[22] ));
+        .\douta[22] (\douta[22] ),
+        .rsta(rsta));
 endmodule
 
 (* ORIG_REF_NAME = "blk_mem_gen_prim_width" *) 
@@ -1168,11 +1245,13 @@ module m_programRom_blk_mem_gen_prim_width__parameterized9
     \douta[22] ,
     clka,
     ram_ena,
+    rsta,
     addra);
   output [7:0]\douta[21] ;
   output [0:0]\douta[22] ;
   input clka;
   input ram_ena;
+  input rsta;
   input [11:0]addra;
 
   wire [11:0]addra;
@@ -1180,27 +1259,32 @@ module m_programRom_blk_mem_gen_prim_width__parameterized9
   wire [7:0]\douta[21] ;
   wire [0:0]\douta[22] ;
   wire ram_ena;
+  wire rsta;
 
   m_programRom_blk_mem_gen_prim_wrapper_init__parameterized9 \prim_init.ram 
        (.addra(addra),
         .clka(clka),
         .\douta[21] (\douta[21] ),
         .\douta[22] (\douta[22] ),
-        .ram_ena(ram_ena));
+        .ram_ena(ram_ena),
+        .rsta(rsta));
 endmodule
 
 (* ORIG_REF_NAME = "blk_mem_gen_prim_wrapper_init" *) 
 module m_programRom_blk_mem_gen_prim_wrapper_init
    (douta,
     clka,
+    rsta,
     addra);
   output [0:0]douta;
   input clka;
+  input rsta;
   input [13:0]addra;
 
   wire [13:0]addra;
   wire clka;
   wire [0:0]douta;
+  wire rsta;
   wire [15:1]\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM18.ram_DOADO_UNCONNECTED ;
   wire [15:0]\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM18.ram_DOBDO_UNCONNECTED ;
   wire [1:0]\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM18.ram_DOPADOP_UNCONNECTED ;
@@ -1325,8 +1409,8 @@ module m_programRom_blk_mem_gen_prim_wrapper_init
         .ENBWREN(1'b0),
         .REGCEAREGCE(1'b0),
         .REGCEB(1'b0),
-        .RSTRAMARSTRAM(1'b0),
-        .RSTRAMB(1'b0),
+        .RSTRAMARSTRAM(rsta),
+        .RSTRAMB(rsta),
         .RSTREGARSTREG(1'b0),
         .RSTREGB(1'b0),
         .WEA({1'b0,1'b0}),
@@ -1337,14 +1421,17 @@ endmodule
 module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized0
    (douta,
     clka,
+    rsta,
     addra);
   output [1:0]douta;
   input clka;
+  input rsta;
   input [13:0]addra;
 
   wire [13:0]addra;
   wire clka;
   wire [1:0]douta;
+  wire rsta;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTA_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTB_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_DBITERR_UNCONNECTED ;
@@ -1560,8 +1647,8 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized0
         .RDADDRECC(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_RDADDRECC_UNCONNECTED [8:0]),
         .REGCEAREGCE(1'b0),
         .REGCEB(1'b0),
-        .RSTRAMARSTRAM(1'b0),
-        .RSTRAMB(1'b0),
+        .RSTRAMARSTRAM(rsta),
+        .RSTRAMB(rsta),
         .RSTREGARSTREG(1'b0),
         .RSTREGB(1'b0),
         .SBITERR(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_SBITERR_UNCONNECTED ),
@@ -1573,14 +1660,17 @@ endmodule
 module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized1
    (douta,
     clka,
+    rsta,
     addra);
   output [1:0]douta;
   input clka;
+  input rsta;
   input [13:0]addra;
 
   wire [13:0]addra;
   wire clka;
   wire [1:0]douta;
+  wire rsta;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTA_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTB_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_DBITERR_UNCONNECTED ;
@@ -1796,8 +1886,8 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized1
         .RDADDRECC(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_RDADDRECC_UNCONNECTED [8:0]),
         .REGCEAREGCE(1'b0),
         .REGCEB(1'b0),
-        .RSTRAMARSTRAM(1'b0),
-        .RSTRAMB(1'b0),
+        .RSTRAMARSTRAM(rsta),
+        .RSTRAMB(rsta),
         .RSTREGARSTREG(1'b0),
         .RSTREGB(1'b0),
         .SBITERR(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_SBITERR_UNCONNECTED ),
@@ -1811,11 +1901,13 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized10
     \douta[31] ,
     ena_array,
     clka,
+    rsta,
     addra);
   output [7:0]\douta[30] ;
   output [0:0]\douta[31] ;
   output [0:0]ena_array;
   input clka;
+  input rsta;
   input [13:0]addra;
 
   wire [13:0]addra;
@@ -1823,6 +1915,7 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized10
   wire [7:0]\douta[30] ;
   wire [0:0]\douta[31] ;
   wire [0:0]ena_array;
+  wire rsta;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTA_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTB_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_DBITERR_UNCONNECTED ;
@@ -2038,8 +2131,8 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized10
         .RDADDRECC(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_RDADDRECC_UNCONNECTED [8:0]),
         .REGCEAREGCE(1'b0),
         .REGCEB(1'b0),
-        .RSTRAMARSTRAM(1'b0),
-        .RSTRAMB(1'b0),
+        .RSTRAMARSTRAM(rsta),
+        .RSTRAMB(rsta),
         .RSTREGARSTREG(1'b0),
         .RSTREGB(1'b0),
         .SBITERR(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_SBITERR_UNCONNECTED ),
@@ -2059,11 +2152,13 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized11
     \douta[31] ,
     clka,
     \addra[13] ,
+    rsta,
     addra);
   output [7:0]\douta[30] ;
   output [0:0]\douta[31] ;
   input clka;
   input \addra[13] ;
+  input rsta;
   input [11:0]addra;
 
   wire [11:0]addra;
@@ -2071,6 +2166,7 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized11
   wire clka;
   wire [7:0]\douta[30] ;
   wire [0:0]\douta[31] ;
+  wire rsta;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTA_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTB_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_DBITERR_UNCONNECTED ;
@@ -2286,8 +2382,8 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized11
         .RDADDRECC(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_RDADDRECC_UNCONNECTED [8:0]),
         .REGCEAREGCE(1'b0),
         .REGCEB(1'b0),
-        .RSTRAMARSTRAM(1'b0),
-        .RSTRAMB(1'b0),
+        .RSTRAMARSTRAM(rsta),
+        .RSTRAMB(rsta),
         .RSTREGARSTREG(1'b0),
         .RSTREGB(1'b0),
         .SBITERR(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_SBITERR_UNCONNECTED ),
@@ -2301,11 +2397,13 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized12
     \douta[31] ,
     clka,
     \addra[12] ,
+    rsta,
     addra);
   output [7:0]\douta[30] ;
   output [0:0]\douta[31] ;
   input clka;
   input \addra[12] ;
+  input rsta;
   input [11:0]addra;
 
   wire [11:0]addra;
@@ -2313,6 +2411,7 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized12
   wire clka;
   wire [7:0]\douta[30] ;
   wire [0:0]\douta[31] ;
+  wire rsta;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTA_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTB_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_DBITERR_UNCONNECTED ;
@@ -2528,8 +2627,8 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized12
         .RDADDRECC(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_RDADDRECC_UNCONNECTED [8:0]),
         .REGCEAREGCE(1'b0),
         .REGCEB(1'b0),
-        .RSTRAMARSTRAM(1'b0),
-        .RSTRAMB(1'b0),
+        .RSTRAMARSTRAM(rsta),
+        .RSTRAMB(rsta),
         .RSTREGARSTREG(1'b0),
         .RSTREGB(1'b0),
         .SBITERR(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_SBITERR_UNCONNECTED ),
@@ -2543,11 +2642,13 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized13
     \douta[31] ,
     ram_ena,
     clka,
+    rsta,
     addra);
   output [7:0]\douta[30] ;
   output [0:0]\douta[31] ;
   output ram_ena;
   input clka;
+  input rsta;
   input [13:0]addra;
 
   wire [13:0]addra;
@@ -2555,6 +2656,7 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized13
   wire [7:0]\douta[30] ;
   wire [0:0]\douta[31] ;
   wire ram_ena;
+  wire rsta;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTA_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTB_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_DBITERR_UNCONNECTED ;
@@ -2770,8 +2872,8 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized13
         .RDADDRECC(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_RDADDRECC_UNCONNECTED [8:0]),
         .REGCEAREGCE(1'b0),
         .REGCEB(1'b0),
-        .RSTRAMARSTRAM(1'b0),
-        .RSTRAMB(1'b0),
+        .RSTRAMARSTRAM(rsta),
+        .RSTRAMB(rsta),
         .RSTREGARSTREG(1'b0),
         .RSTREGB(1'b0),
         .SBITERR(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_SBITERR_UNCONNECTED ),
@@ -2791,11 +2893,13 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized2
     \douta[13] ,
     clka,
     ena_array,
+    rsta,
     addra);
   output [7:0]\douta[12] ;
   output [0:0]\douta[13] ;
   input clka;
   input [0:0]ena_array;
+  input rsta;
   input [11:0]addra;
 
   wire [11:0]addra;
@@ -2803,6 +2907,7 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized2
   wire [7:0]\douta[12] ;
   wire [0:0]\douta[13] ;
   wire [0:0]ena_array;
+  wire rsta;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTA_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTB_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_DBITERR_UNCONNECTED ;
@@ -3018,8 +3123,8 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized2
         .RDADDRECC(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_RDADDRECC_UNCONNECTED [8:0]),
         .REGCEAREGCE(1'b0),
         .REGCEB(1'b0),
-        .RSTRAMARSTRAM(1'b0),
-        .RSTRAMB(1'b0),
+        .RSTRAMARSTRAM(rsta),
+        .RSTRAMB(rsta),
         .RSTREGARSTREG(1'b0),
         .RSTREGB(1'b0),
         .SBITERR(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_SBITERR_UNCONNECTED ),
@@ -3033,11 +3138,13 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized3
     \douta[13] ,
     \DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_0 ,
     clka,
+    rsta,
     addra);
   output [7:0]\douta[12] ;
   output [0:0]\douta[13] ;
   output \DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_0 ;
   input clka;
+  input rsta;
   input [13:0]addra;
 
   wire \DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_0 ;
@@ -3045,6 +3152,7 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized3
   wire clka;
   wire [7:0]\douta[12] ;
   wire [0:0]\douta[13] ;
+  wire rsta;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTA_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTB_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_DBITERR_UNCONNECTED ;
@@ -3260,8 +3368,8 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized3
         .RDADDRECC(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_RDADDRECC_UNCONNECTED [8:0]),
         .REGCEAREGCE(1'b0),
         .REGCEB(1'b0),
-        .RSTRAMARSTRAM(1'b0),
-        .RSTRAMB(1'b0),
+        .RSTRAMARSTRAM(rsta),
+        .RSTRAMB(rsta),
         .RSTREGARSTREG(1'b0),
         .RSTREGB(1'b0),
         .SBITERR(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_SBITERR_UNCONNECTED ),
@@ -3281,11 +3389,13 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized4
     \douta[13] ,
     \DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_0 ,
     clka,
+    rsta,
     addra);
   output [7:0]\douta[12] ;
   output [0:0]\douta[13] ;
   output \DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_0 ;
   input clka;
+  input rsta;
   input [13:0]addra;
 
   wire \DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_0 ;
@@ -3293,6 +3403,7 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized4
   wire clka;
   wire [7:0]\douta[12] ;
   wire [0:0]\douta[13] ;
+  wire rsta;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTA_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTB_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_DBITERR_UNCONNECTED ;
@@ -3508,8 +3619,8 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized4
         .RDADDRECC(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_RDADDRECC_UNCONNECTED [8:0]),
         .REGCEAREGCE(1'b0),
         .REGCEB(1'b0),
-        .RSTRAMARSTRAM(1'b0),
-        .RSTRAMB(1'b0),
+        .RSTRAMARSTRAM(rsta),
+        .RSTRAMB(rsta),
         .RSTREGARSTREG(1'b0),
         .RSTREGB(1'b0),
         .SBITERR(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_SBITERR_UNCONNECTED ),
@@ -3529,11 +3640,13 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized5
     DOPADOP,
     clka,
     ram_ena,
+    rsta,
     addra);
   output [7:0]DOADO;
   output [0:0]DOPADOP;
   input clka;
   input ram_ena;
+  input rsta;
   input [11:0]addra;
 
   wire [7:0]DOADO;
@@ -3541,6 +3654,7 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized5
   wire [11:0]addra;
   wire clka;
   wire ram_ena;
+  wire rsta;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTA_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTB_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_DBITERR_UNCONNECTED ;
@@ -3756,8 +3870,8 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized5
         .RDADDRECC(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_RDADDRECC_UNCONNECTED [8:0]),
         .REGCEAREGCE(1'b0),
         .REGCEB(1'b0),
-        .RSTRAMARSTRAM(1'b0),
-        .RSTRAMB(1'b0),
+        .RSTRAMARSTRAM(rsta),
+        .RSTRAMB(rsta),
         .RSTREGARSTREG(1'b0),
         .RSTREGB(1'b0),
         .SBITERR(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_SBITERR_UNCONNECTED ),
@@ -3771,11 +3885,13 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized6
     \douta[22] ,
     clka,
     ena_array,
+    rsta,
     addra);
   output [7:0]\douta[21] ;
   output [0:0]\douta[22] ;
   input clka;
   input [0:0]ena_array;
+  input rsta;
   input [11:0]addra;
 
   wire [11:0]addra;
@@ -3783,6 +3899,7 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized6
   wire [7:0]\douta[21] ;
   wire [0:0]\douta[22] ;
   wire [0:0]ena_array;
+  wire rsta;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTA_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTB_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_DBITERR_UNCONNECTED ;
@@ -3998,8 +4115,8 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized6
         .RDADDRECC(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_RDADDRECC_UNCONNECTED [8:0]),
         .REGCEAREGCE(1'b0),
         .REGCEB(1'b0),
-        .RSTRAMARSTRAM(1'b0),
-        .RSTRAMB(1'b0),
+        .RSTRAMARSTRAM(rsta),
+        .RSTRAMB(rsta),
         .RSTREGARSTREG(1'b0),
         .RSTREGB(1'b0),
         .SBITERR(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_SBITERR_UNCONNECTED ),
@@ -4013,11 +4130,13 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized7
     \douta[22] ,
     clka,
     \addra[13] ,
+    rsta,
     addra);
   output [7:0]\douta[21] ;
   output [0:0]\douta[22] ;
   input clka;
   input \addra[13] ;
+  input rsta;
   input [11:0]addra;
 
   wire [11:0]addra;
@@ -4025,6 +4144,7 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized7
   wire clka;
   wire [7:0]\douta[21] ;
   wire [0:0]\douta[22] ;
+  wire rsta;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTA_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTB_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_DBITERR_UNCONNECTED ;
@@ -4240,8 +4360,8 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized7
         .RDADDRECC(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_RDADDRECC_UNCONNECTED [8:0]),
         .REGCEAREGCE(1'b0),
         .REGCEB(1'b0),
-        .RSTRAMARSTRAM(1'b0),
-        .RSTRAMB(1'b0),
+        .RSTRAMARSTRAM(rsta),
+        .RSTRAMB(rsta),
         .RSTREGARSTREG(1'b0),
         .RSTREGB(1'b0),
         .SBITERR(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_SBITERR_UNCONNECTED ),
@@ -4255,11 +4375,13 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized8
     \douta[22] ,
     clka,
     \addra[12] ,
+    rsta,
     addra);
   output [7:0]\douta[21] ;
   output [0:0]\douta[22] ;
   input clka;
   input \addra[12] ;
+  input rsta;
   input [11:0]addra;
 
   wire [11:0]addra;
@@ -4267,6 +4389,7 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized8
   wire clka;
   wire [7:0]\douta[21] ;
   wire [0:0]\douta[22] ;
+  wire rsta;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTA_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTB_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_DBITERR_UNCONNECTED ;
@@ -4482,8 +4605,8 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized8
         .RDADDRECC(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_RDADDRECC_UNCONNECTED [8:0]),
         .REGCEAREGCE(1'b0),
         .REGCEB(1'b0),
-        .RSTRAMARSTRAM(1'b0),
-        .RSTRAMB(1'b0),
+        .RSTRAMARSTRAM(rsta),
+        .RSTRAMB(rsta),
         .RSTREGARSTREG(1'b0),
         .RSTREGB(1'b0),
         .SBITERR(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_SBITERR_UNCONNECTED ),
@@ -4497,11 +4620,13 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized9
     \douta[22] ,
     clka,
     ram_ena,
+    rsta,
     addra);
   output [7:0]\douta[21] ;
   output [0:0]\douta[22] ;
   input clka;
   input ram_ena;
+  input rsta;
   input [11:0]addra;
 
   wire [11:0]addra;
@@ -4509,6 +4634,7 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized9
   wire [7:0]\douta[21] ;
   wire [0:0]\douta[22] ;
   wire ram_ena;
+  wire rsta;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTA_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_CASCADEOUTB_UNCONNECTED ;
   wire \NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_DBITERR_UNCONNECTED ;
@@ -4724,8 +4850,8 @@ module m_programRom_blk_mem_gen_prim_wrapper_init__parameterized9
         .RDADDRECC(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_RDADDRECC_UNCONNECTED [8:0]),
         .REGCEAREGCE(1'b0),
         .REGCEB(1'b0),
-        .RSTRAMARSTRAM(1'b0),
-        .RSTRAMB(1'b0),
+        .RSTRAMARSTRAM(rsta),
+        .RSTRAMB(rsta),
         .RSTREGARSTREG(1'b0),
         .RSTREGB(1'b0),
         .SBITERR(\NLW_DEVICE_7SERIES.NO_BMM_INFO.SP.SIMPLE_PRIM36.ram_SBITERR_UNCONNECTED ),
@@ -4737,19 +4863,23 @@ endmodule
 module m_programRom_blk_mem_gen_top
    (douta,
     addra,
-    clka);
+    clka,
+    rsta);
   output [31:0]douta;
   input [13:0]addra;
   input clka;
+  input rsta;
 
   wire [13:0]addra;
   wire clka;
   wire [31:0]douta;
+  wire rsta;
 
   m_programRom_blk_mem_gen_generic_cstr \valid.cstr 
        (.addra(addra),
         .clka(clka),
-        .douta(douta));
+        .douta(douta),
+        .rsta(rsta));
 endmodule
 
 (* C_ADDRA_WIDTH = "14" *) (* C_ADDRB_WIDTH = "14" *) (* C_ALGORITHM = "1" *) 
@@ -4763,7 +4893,7 @@ endmodule
 (* C_FAMILY = "artix7" *) (* C_HAS_AXI_ID = "0" *) (* C_HAS_ENA = "0" *) 
 (* C_HAS_ENB = "0" *) (* C_HAS_INJECTERR = "0" *) (* C_HAS_MEM_OUTPUT_REGS_A = "0" *) 
 (* C_HAS_MEM_OUTPUT_REGS_B = "0" *) (* C_HAS_MUX_OUTPUT_REGS_A = "0" *) (* C_HAS_MUX_OUTPUT_REGS_B = "0" *) 
-(* C_HAS_REGCEA = "0" *) (* C_HAS_REGCEB = "0" *) (* C_HAS_RSTA = "0" *) 
+(* C_HAS_REGCEA = "0" *) (* C_HAS_REGCEB = "0" *) (* C_HAS_RSTA = "1" *) 
 (* C_HAS_RSTB = "0" *) (* C_HAS_SOFTECC_INPUT_REGS_A = "0" *) (* C_HAS_SOFTECC_OUTPUT_REGS_B = "0" *) 
 (* C_INITA_VAL = "0" *) (* C_INITB_VAL = "0" *) (* C_INIT_FILE = "m_programRom.mem" *) 
 (* C_INIT_FILE_NAME = "m_programRom.mif" *) (* C_INTERFACE_TYPE = "0" *) (* C_LOAD_INIT_FILE = "1" *) 
@@ -5069,26 +5199,31 @@ module m_programRom_blk_mem_gen_v8_3_1
   m_programRom_blk_mem_gen_v8_3_1_synth inst_blk_mem_gen
        (.addra(addra),
         .clka(clka),
-        .douta(douta));
+        .douta(douta),
+        .rsta(rsta));
 endmodule
 
 (* ORIG_REF_NAME = "blk_mem_gen_v8_3_1_synth" *) 
 module m_programRom_blk_mem_gen_v8_3_1_synth
    (douta,
     addra,
-    clka);
+    clka,
+    rsta);
   output [31:0]douta;
   input [13:0]addra;
   input clka;
+  input rsta;
 
   wire [13:0]addra;
   wire clka;
   wire [31:0]douta;
+  wire rsta;
 
   m_programRom_blk_mem_gen_top \gnativebmg.native_blk_mem_gen 
        (.addra(addra),
         .clka(clka),
-        .douta(douta));
+        .douta(douta),
+        .rsta(rsta));
 endmodule
 `ifndef GLBL
 `define GLBL

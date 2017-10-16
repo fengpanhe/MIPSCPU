@@ -31,7 +31,7 @@ reg[3:0] col;
     begin 
     col = 4'b1111; 
     reset = 1; 
-    #6 reset = 0; 
+    #10 reset = 0; 
     #100 col[0] = line[0]; 
     #50 col[0] = 1; 
     end 

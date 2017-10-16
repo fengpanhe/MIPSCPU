@@ -80,6 +80,7 @@ module c_IF(
     //Program Rom
     m_programRom programRom (
       .clka(~clk),    // input wire clka
+      .rsta(reset),
       .addra(PC_out[15:2]),  // input wire [13 : 0] addra
       .douta(Instruction_if)  // output wire [31 : 0] douta
     );
