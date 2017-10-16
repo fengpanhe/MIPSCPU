@@ -32,10 +32,11 @@ module c_EX(
     input[31:0] RsData_ex,
     input[31:0] RtData_ex,
     input[31:0] CPData_ex,
+    input CPToReg_ex,
     input AL_ex,                        //用于选择写回Reg的Address 0:RsAddr/RtAddr 1:31号Reg
     output reg[4:0] RegWrAddr_ex,      //最终确定的写回Reg的Address
     output[4:0] CPWrAddr_ex,           //最终确定的写回CP0的Address
-    output[31:0] ALUResult_ex,         //ALU的输出结果
+    output reg[31:0] ALUResult_ex,         //ALU的输出结果
     output[31:0] MemWrData_ex,         //对于SW类型的指令，需要写入MEM中的数据
     output[31:0] CPWrData_ex,          //最终确定写回CP0的数据
     output Overflow,                   //有符号加减运算的溢出标志位
@@ -44,6 +45,8 @@ module c_EX(
     output[31:0] HI,                  //HI寄存器中的值(用于测试)
     output[31:0] LO                   //LO寄存器中的值(用于测试)
     );
+    
+    wire[31:0] ALUResult;
     initial
     begin
     RegWrAddr_ex <= 5'b00000;
@@ -91,9 +94,17 @@ module c_EX(
     .ALUCode(ALUCode_ex),
     .ALU_A(ALU_A),
     .ALU_B(ALU_B),
-    .ALU_Result(ALUResult_ex),
+    .ALU_Result(ALUResult),
     .HI(HI),
     .LO(LO),
     .Overflow(Overflow)
     );
+    
+    always @(*)
+    begin
+    if(CPToReg_ex == 1)
+        ALUResult_ex <= CPData_ex;
+    else
+        ALUResult_ex <= ALUResult;
+    end
 endmodule

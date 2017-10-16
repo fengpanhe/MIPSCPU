@@ -63,18 +63,18 @@ module m_MIPS_CPU(
     output[7:0] DISPOutput,             //������������
     output[7:0] DISPEn,                 //�����ʹ�ܿ������
     input[23:0] SWInput,                //���뿪������
-    output[23:0] LEDOutput,             //LED���
+    output[23:0] LEDOutput,             //LED���?
     input[3:0] col,                     //������������
-    output[3:0] line,                   //�����������
+    output[3:0] line,                   //�����������?
     input pulse0,                       //������0��������
     input pulse1,                       //������1��������
-    output cnt0,                        //��ʱ/������0����ź�
-    output cnt1,                        //��ʱ/������1����ź�
-    output pwmWave                      //pwms����ź�
+    output cnt0,                        //��ʱ/������0����ź�?
+    output cnt1,                        //��ʱ/������1����ź�?
+    output pwmWave                      //pwms����ź�?
     );
     //wire pulse1,pulse1;
     //wire cnt0,cnt1,pwmWave;
-    wire WDTRst;                        //���Ź������λ�ź�      
+    wire WDTRst;                        //���Ź������λ�ź�?      
     wire reset;
     assign reset = rst|| WDTRst;
     wire[5:0] int_i;                    //�ж�ָʾ�ź�
@@ -259,6 +259,7 @@ module m_MIPS_CPU(
     .RsData_ex(RsData_ex),
     .RtData_ex(RtData_ex),
     .CPData_ex(CPResult_ex),
+    .CPToReg_ex(CPToReg_ex),
     .AL_ex(AL_ex),
     .RegWrAddr_ex(RegWrAddr_ex),
     .CPWrAddr_ex(CPWrAddr_ex),
