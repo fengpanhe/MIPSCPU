@@ -45,8 +45,8 @@ module key_test(
     initial
     begin
     SWInput = 24'h000000;
-    //#150
-    //SWInput = 24'h123456;
+    #150
+    SWInput = 24'h123456;
     end
     
      
@@ -55,8 +55,8 @@ module key_test(
     col = 4'b1111; 
     reset = 1; 
     #10 reset = 0; 
-    #300 col[0] = line[0]; 
-    #50 col[0] = 1; 
+    //#300 col[0] = line[0]; 
+    //#50 col[0] = 1; 
     end 
   
     m_MIPS_CPU MIPS_CPU(
