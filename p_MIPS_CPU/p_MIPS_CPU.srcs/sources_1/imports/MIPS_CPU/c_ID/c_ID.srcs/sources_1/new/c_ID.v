@@ -83,6 +83,7 @@ module c_ID(
     wire OF;                            //有符号加减溢出标志
     wire[31:0] JAddr;
     wire Je,Jmp;
+    wire Z_tmp;
     assign RsAddr_id = Instruction_id[25:21];
     assign RtAddr_id = Instruction_id[20:16];
     assign RdAddr_id = Instruction_id[15:11];
@@ -90,6 +91,7 @@ module c_ID(
     assign Imme_id = {{16{Instruction_id[15]}},Instruction_id[15:0]};
     assign JrAddr = RsData_id;
     assign J = Jmp|| Je;
+    assign Z = Z_tmp & (~Je);
     assign IF_flush = Z || J || JR;
     assign JAddr = {NextPC_id[31:28],Instruction_id[25:0],2'b00};
     assign OF = overFlow&&signedOp_ex;
@@ -170,7 +172,7 @@ module c_ID(
     .ALUCode_id(ALUCode_id),
     .RsData_id(RsData_id),
     .RtData_id(RtData_id),
-    .Z(Z)
+    .Z(Z_tmp)
     );
     //HazardDectector
     m_HazardDetector HazardDetector(

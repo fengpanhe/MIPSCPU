@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="10" Path="/home/he/Xilinx/MIPSCPU/p_MIPS_CPU/p_MIPS_CPU.xpr">
+<Project Version="7" Minor="10" Path="C:/Users/ThinkPad/Documents/GitHub/MIPSCPU/p_MIPS_CPU/p_MIPS_CPU.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="934dcbaca86a4af1b40efb6b405cce7a"/>
@@ -90,6 +90,15 @@
       </File>
       <File Path="$PSRCDIR/sources_1/new/clock_div.v">
         <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/m_ALU.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../../../Desktop/sources_1/new/m_ALU.v"/>
+          <Attr Name="ImportTime" Val="1506335844"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -184,15 +193,6 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/m_ALU.v">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../../../Desktop/sources_1/new/m_ALU.v"/>
-          <Attr Name="ImportTime" Val="1506335844"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
       <File Path="$PSRCDIR/sources_1/imports/new/memorio.v">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PSRCDIR/sources_1/new/memorio.v"/>
@@ -260,6 +260,15 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/c_EX.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../../../Desktop/sources_1/new/c_EX.v"/>
+          <Attr Name="ImportTime" Val="1506338162"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PSRCDIR/sources_1/new/c_MEM_WB.v">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -301,15 +310,6 @@
       </File>
       <File Path="$PSRCDIR/sources_1/new/c_EX_MEM.v">
         <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/c_EX.v">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../../../Desktop/sources_1/new/c_EX.v"/>
-          <Attr Name="ImportTime" Val="1506338162"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -455,6 +455,12 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PPRDIR/InitialFile/test.coe">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
         <Option Name="TopModule" Val="m_MIPS_CPU"/>
@@ -591,7 +597,6 @@
         <Option Name="TopModule" Val="key_test"/>
         <Option Name="TopLib" Val="xil_defaultlib"/>
         <Option Name="SrcSet" Val="sources_1"/>
-        <Option Name="xsim.simulate.runtime" Val="500ns"/>
       </Config>
     </FileSet>
     <FileSet Name="c_addsub" Type="BlockSrcs" RelSrcDir="$PSRCDIR/c_addsub">
@@ -734,6 +739,9 @@
     </Simulator>
     <Simulator Name="Riviera">
       <Option Name="Description" Val="Riviera-PRO Simulator"/>
+    </Simulator>
+    <Simulator Name="ActiveHDL">
+      <Option Name="Description" Val="Active-HDL Simulator"/>
     </Simulator>
   </Simulators>
   <Runs Version="1" Minor="10">

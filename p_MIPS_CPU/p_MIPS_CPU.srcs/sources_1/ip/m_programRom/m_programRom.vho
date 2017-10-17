@@ -55,6 +55,7 @@
 COMPONENT m_programRom
   PORT (
     clka : IN STD_LOGIC;
+    rsta : IN STD_LOGIC;
     addra : IN STD_LOGIC_VECTOR(13 DOWNTO 0);
     douta : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
   );
@@ -68,6 +69,7 @@ END COMPONENT;
 your_instance_name : m_programRom
   PORT MAP (
     clka => clka,
+    rsta => rsta,
     addra => addra,
     douta => douta
   );

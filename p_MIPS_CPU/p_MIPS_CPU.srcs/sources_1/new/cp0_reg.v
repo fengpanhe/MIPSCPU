@@ -56,7 +56,7 @@ module cp0_reg(
     always @ ( posedge clk ) begin
         if(rst == `RstEnable) begin
             //Status寄存器的初始值
-            status_o <= 32'b0001_0000_0000_0000_0000_0000_0000_0000;
+            status_o <= 32'b0000_0000_0000_0000_0000_0000_0000_0000;
             //Cause寄存器的初始值
             cause_o <= `ZeroWord;
             //EPC寄存器的初始值
@@ -85,8 +85,8 @@ module cp0_reg(
                     epc_o <= current_inst_addr_i;  //保存返回地址
                     cause_o[6:2] <= 5'b00000;      //设置ExcCode
                     cause_o[13:8] <= int_i;        //设置中断编码
-                    status_o[0] <= 0;              //关中断
-                    status_o[15:10] <= 6'b000000;  //设置中断屏蔽
+                    //status_o[0] <= 0;              //关中断
+                    //status_o[15:10] <= 6'b000000;  //设置中断屏蔽
                 end
                 //系统调用syscall
                 5'b01000:begin                 
