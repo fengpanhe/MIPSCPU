@@ -44,7 +44,7 @@ module sw32(
             sw_pre <= swi;
         end
         else begin
-            if ((cs == 1) && (ior == 1) && (address == 1)) begin
+            if ((cs == 1) && (ior == 1) && (address == 0)) begin
                 ioread_data <= {8'b0,swi};
             end
             if(swi == sw_pre)begin

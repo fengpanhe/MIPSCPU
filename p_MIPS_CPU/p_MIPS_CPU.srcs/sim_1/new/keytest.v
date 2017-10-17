@@ -45,7 +45,7 @@ module key_test(
     initial
     begin
     SWInput = 24'h000000;
-    #150
+    #120
     SWInput = 24'h123456;
     end
     

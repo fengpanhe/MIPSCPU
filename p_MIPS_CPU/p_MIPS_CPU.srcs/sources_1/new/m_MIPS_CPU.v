@@ -23,7 +23,7 @@
 module m_MIPS_CPU(
     input clk,                          //ϵͳʱ��
     input rst,                          //�ⲿ��λ�ź�
-    output[31:0] Instruction,
+    /*output[31:0] Instruction,
     output stall,
     output pc_ifwrite,
     output flush,
@@ -59,21 +59,21 @@ module m_MIPS_CPU(
     output regwr_wb,
     output j,
     output jr,
-    output z,
+    output z,*/
     output[7:0] DISPOutput,             //������������
     output[7:0] DISPEn,                 //�����ʹ�ܿ������
     input[23:0] SWInput,                //���뿪������
     output[23:0] LEDOutput,             //LED���?
     input[3:0] col,                     //������������
-    output[3:0] line,                   //�����������?
-    input pulse0,                       //������0��������
+    output[3:0] line                   //�����������?
+    /*input pulse0,                       //������0��������
     input pulse1,                       //������1��������
     output cnt0,                        //��ʱ/������0����ź�?
     output cnt1,                        //��ʱ/������1����ź�?
-    output pwmWave                      //pwms����ź�?
+    output pwmWave*/                    //pwms����ź�?
     );
-    //wire pulse1,pulse1;
-    //wire cnt0,cnt1,pwmWave;
+    wire pulse1,pulse1;
+    wire cnt0,cnt1,pwmWave;
     wire WDTRst;                        //���Ź������λ�ź�?      
     wire reset;
     assign reset = rst|| WDTRst;
@@ -357,6 +357,7 @@ module m_MIPS_CPU(
     .RegWrData_wb(RegWrData_wb),
     .CPWrData_wb(CPWrData_wb)
     );
+   /*
     assign Instruction = Instruction_if;
     assign Instruction2 = Instruction_id;
     assign ALUCode = ALUCode_id;
@@ -389,5 +390,5 @@ module m_MIPS_CPU(
     assign j = J;
     assign jr = JR;
     assign z = Z;
-    
+    */
 endmodule
