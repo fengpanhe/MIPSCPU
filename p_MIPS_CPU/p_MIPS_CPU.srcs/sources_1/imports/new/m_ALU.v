@@ -104,7 +104,9 @@ module m_ALU(
         .P(divRes_signed)
     );
     m_divider divider (
+        .s_axis_divisor_tvalid(1'b1),
         .s_axis_divisor_tdata(ALU_B),      // input wire [31 : 0] s_axis_divisor_tdata
+        .s_axis_dividend_tvalid(1'b1), 
         .s_axis_dividend_tdata(ALU_A),    // input wire [31 : 0] s_axis_dividend_tdata
         .m_axis_dout_tdata(divRes)            // output wire [63 : 0] m_axis_dout_tdata
     );

@@ -68,7 +68,6 @@ module c_ID(
     output JAL,                      //需保存PC地址的指令
     output BAL,                      //分支跳转且需保存PC地址的指令
     output signedOp_id,
-    output int_pro,
     output[31:0] BranchAddr,            //分支跳转目标地址
     output[31:0] JmpAddr,               //无条件跳转目标地址
     output[31:0] JrAddr,                //寄存器跳转目标地址
@@ -81,9 +80,31 @@ module c_ID(
     output[31:0] Sa_id,                 //零扩展成32bit的移位立即数
     output[31:0] Imme_id                //符号扩展成32bit的立即数
     );
+    reg[31:0] NextPC;
+    reg ExcFlag ;
+    initial 
+    begin
+    NextPC <= 0;
+    ExcFlag <= 0;
+    end
+    
+    always @(posedge clk) begin
+        if(ExcFlag == 1) begin
+            ExcFlag <= 0;
+        end
+        else begin
+            if(IF_flush == 1) begin
+                ExcFlag <= 1;
+            end
+            NextPC <= NextPC_id;
+        end
+    end
+    
+    
     wire OF;                            //有符号加减溢出标志
     wire[31:0] JAddr;
     wire Je,Jmp;
+    wire Z_tmp;
     assign RsAddr_id = Instruction_id[25:21];
     assign RtAddr_id = Instruction_id[20:16];
     assign RdAddr_id = Instruction_id[15:11];
@@ -91,6 +112,7 @@ module c_ID(
     assign Imme_id = {{16{Instruction_id[15]}},Instruction_id[15:0]};
     assign JrAddr = RsData_id;
     assign J = Jmp|| Je;
+    assign Z = Z_tmp & (~Je);
     assign IF_flush = Z || J || JR;
     assign JAddr = {NextPC_id[31:28],Instruction_id[25:0],2'b00};
     assign OF = overFlow&&signedOp_ex;
@@ -171,7 +193,7 @@ module c_ID(
     .ALUCode_id(ALUCode_id),
     .RsData_id(RsData_id),
     .RtData_id(RtData_id),
-    .Z(Z)
+    .Z(Z_tmp)
     );
     //HazardDectector
     m_HazardDetector HazardDetector(
@@ -198,8 +220,7 @@ module c_ID(
     .eretAddr(eretAddr),
     .exceptType(excCode),
     .JmpAddr(JmpAddr),
-    .Je(Je),
-    .int_pro(int_pro)
+    .Je(Je)
     );
     
     //CP0
@@ -215,7 +236,7 @@ module c_ID(
     .CPWrData_mem(CPWrData_mem),
     .excepttype_i(excCode),
     .int_i(int_i),
-    .current_inst_addr_i(NextPC_id),
+    .current_inst_addr_i(NextPC),
     .data_o(CPData_id),
     .eretAddr(eretAddr),
     .int_en(int_en),

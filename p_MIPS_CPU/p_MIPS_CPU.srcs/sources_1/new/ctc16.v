@@ -61,8 +61,8 @@ module ctc16(
     always @(negedge clk) begin
         if (reset == 1) begin
             // reset
-            cout0 = 1;
-            cout1 = 1;
+            //cout0 = 1;
+            //cout1 = 1;
             initcnt1 = 16'h0000;
             initcnt2 = 16'h0000;
             cnt11 = 16'h0000;
@@ -168,7 +168,7 @@ module ctc16(
             end         //cs == 0
         end     //reset == 0
     end
-
+/*
     always @(negedge pulse0) begin  //脉冲０计数（CNT0计数脉冲�??
         if ((status1[15] == 1) && (mode1[0] == 1)) begin
             if (count1 == 0) begin      //定时计数�?0
@@ -210,7 +210,7 @@ module ctc16(
             end  
         end
     end
-
+*/
     always @(stat11, stat12) begin    //将定时和计数两个进程对状态寄存器的赋值真正赋给该寄存�??
         if (reset == 0) begin
             // reset

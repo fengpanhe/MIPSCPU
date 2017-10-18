@@ -47,7 +47,9 @@ module m_signedDiv(
          .S(B_unsigned)  // output wire [31 : 0] S
     );
     m_divider Divider (
+         .s_axis_divisor_tvalid(1'b1),
          .s_axis_divisor_tdata(B_unsigned),      // input wire [31 : 0] s_axis_divisor_tdata
+         .s_axis_dividend_tvalid(1'b1), 
          .s_axis_dividend_tdata(A_unsigned),    // input wire [31 : 0] s_axis_dividend_tdata
          .m_axis_dout_tdata(res)            // output wire [63 : 0] m_axis_dout_tdata
     );

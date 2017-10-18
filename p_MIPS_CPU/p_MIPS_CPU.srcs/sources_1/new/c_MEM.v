@@ -34,7 +34,6 @@ module c_MEM(
     input CPToReg_mem,
     input AL_mem,
     input[31:0] MemWrData_mem,
-    input int_pro,
     input pulse0,
     input pulse1,
     input[23:0] SWInput,
@@ -136,7 +135,6 @@ module c_MEM(
    .cs(KEYCtrl),
    .ior(IORead),
    .address(portAddr[1:0]),
-   .int_pro(int_pro),
    .col(col),
    .line(line),
    .ioread_data(KEYReadData),
@@ -195,7 +193,6 @@ module c_MEM(
    .cs(SWCtrl),
    .ior(IORead),
    .address(portAddr[0]),
-   .int_pro(int_pro),
    .swi(SWInput),
    .ioread_data(SWReadData),
    .int_sw(int_sw)
