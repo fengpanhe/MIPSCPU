@@ -21,18 +21,18 @@
 
 
 module disp32(
-    input wire reset,           //ÏµÍ³¸´Î»ĞÅºÅ
+    input wire reset,           //ÏµÍ³ï¿½ï¿½Î»ï¿½Åºï¿½
     input wire clk,
-    input wire cs,              //Æ¬ĞÅºÅ£¬½ÓLEDCtrl
-    input wire iow,             //i/0Ğ´ĞÅºÅ
-    input wire[15:0] data,      //ÏµÍ³×ÜÏßÖĞµÄÊı¾İÏß
-    input wire[2:0] address,    //¶Ë¿ÚµØÖ·
-    output wire[7:0] led_o,      //ledÊä³öĞÅºÅ
-    output reg[7:0] led_enable_o      //ledÊ¹ÄÜĞÅºÅ
+    input wire cs,              //Æ¬ï¿½ÅºÅ£ï¿½ï¿½ï¿½LEDCtrl
+    input wire iow,             //i/0Ğ´ï¿½Åºï¿½
+    input wire[15:0] data,      //ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    input wire[2:0] address,    //ï¿½Ë¿Úµï¿½Ö·
+    output wire[7:0] led_o,      //ledï¿½ï¿½ï¿½ï¿½Åºï¿½
+    output reg[7:0] led_enable_o      //ledÊ¹ï¿½ï¿½ï¿½Åºï¿½
     );
-    reg[31:0] rdata; //ÊıÂë¹ÜÊı¾İËø´æÆ÷
-    reg[15:0] tdata; //ÌØÊâÏÔÊ¾Êı¾İËø´æÆ÷ µÍ°ËÎ»¶ÔÓ¦8¸öĞ¡Êıµã£¬¸ß°ËÎ»±íÊ¾Ä³¸öÊıÂë¹ÜÊÇ·ñÏÔÊ¾
-    reg[2:0] count; //8¼ÆÊıÆ÷
+    reg[31:0] rdata; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    reg[15:0] tdata; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Í°ï¿½Î»ï¿½ï¿½Ó¦8ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ã£¬ï¿½ß°ï¿½Î»ï¿½ï¿½Ê¾Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ê¾
+    reg[2:0] count; //8ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     initial
     begin
     rdata <= 32'h00000000;
@@ -63,12 +63,12 @@ module disp32(
         end
     end
 
-    clock_div U0(
+    clock_div #(32'h00001388) U0(
         .clk(clk),
-        .clk_sys_1HZ(clk_sys)
+        .clk_sys(clk_sys)
     );
     
-    //8¼ÆÊıÆ÷
+    //8ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     always @(posedge clk_sys)  begin
         if(reset == 1) begin
             count = 0;
@@ -89,7 +89,7 @@ module disp32(
         .led_o(led_o)
         );
 
-    always @(count) begin
+    always @(negedge clk) begin
         case(count[2:0])
             3'b000: begin
                 if (tdata[8] == 1) begin
