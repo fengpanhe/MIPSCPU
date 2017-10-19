@@ -21,19 +21,18 @@
 
 
 module clock_div(
-    clk,
-    clk_sys_1HZ
+    input clk,
+    output clk_sys
     );
-    input clk;
-    output clk_sys_1HZ;
     
-    reg clk_sys_1HZ = 0;
-    reg [19:0] div_counter = 20'h186A0; //10^5d
+    parameter count = 1;
+    reg clk_sys = 0;
+    reg [31:0] div_counter = 0; //10^5d  h01388
     always @(posedge clk)
     begin
         if(div_counter == 0) begin
-            clk_sys_1HZ <= ~clk_sys_1HZ;
-            div_counter = 20'h186A0;
+            clk_sys <= ~clk_sys;
+            div_counter = count;
         end 
         else begin
             div_counter <= div_counter - 1;
