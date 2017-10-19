@@ -21,28 +21,36 @@
 
 
 module m_MIPS_CPU(
-    input clk,                          //ϵͳʱ��
+    input clk0,                          //ϵͳʱ��
     input rst,                          //�ⲿ��λ�ź�
-    /*output[31:0] Instruction,
-    output stall,
+    output[31:0] Instruction,
+    /*output stall,
     output pc_ifwrite,
     output flush,
-    output[4:0] ALUCode,
+    output[4:0] ALUCode,*/
     output[31:0] nextpc_if,
     output[31:0] nextpc_id,
-    output[31:0] nextpc_ex,
-    output[31:0] nextpc_mem,
+    /*output[31:0] nextpc_ex,
+    output[31:0] nextpc_mem,*/
     output[31:0] Instruction2,
-    output[31:0] ALU_a,
-    output[31:0] ALU_b,
-    output[31:0] aluresult_ex,
-    output[31:0] aluresult_mem,
+    /*output[31:0] ALU_a,
+    output[31:0] ALU_b,*/
+    //output[31:0] aluresult_ex,
+    //output[31:0] memwrdata_mem,
+    //output[31:0] regwrdata_mem,
+    //output[31:0] wd,/////////////////
+    //output[31:0] rd,
+    //output IOWr,
+    //output IORead,
+    //output[31:0] IOReadData,//////////////////////
+    //output[31:0] IOReadData_sw,
+    //output SWctrl,///////////////////////
+    //output[31:0] aluresult_mem,
     //output[31:0] HI,
     //output[31:0] LO,
-    output[31:0] regwrdata_wb,
+    /*output[31:0] regwrdata_wb,
     output[31:0] regwrdata_mem,
     output[31:0] memaddr,
-    output[31:0] memwrdata_mem,
     output memtoreg_wb,
     output memwr_id,
     output memwr_ex,
@@ -70,13 +78,18 @@ module m_MIPS_CPU(
     input pulse1,                       //������1��������
     output cnt0,                        //��ʱ/������0����ź�?
     output cnt1,                        //��ʱ/������1����ź�?
-    output pwmWave*/                    //pwms����ź�?
+    output pwmWave  */                  //pwms����ź�?
     );
-    wire pulse1,pulse1;
+    wire clk;
+    ClkDiv c_Div(
+    .initClk(clk0),
+    .clk(clk)
+    );
+    wire pulse0,pulse1;
     wire cnt0,cnt1,pwmWave;
     wire WDTRst;                        //���Ź������λ�ź�?      
     wire reset;
-    assign reset = rst|| WDTRst;
+    assign reset = rst;//|| WDTRst;
     wire[5:0] int_i;                    //�ж�ָʾ�ź�
     /*IF Module*/
     wire[31:0] Instruction_if,Instruction_id;
@@ -337,7 +350,14 @@ module m_MIPS_CPU(
     .pwmWave(pwmWave),
     .rst(WDTRst),
     .int_i(int_i),
-    .RegWrData_mem(RegWrData_mem)
+    .RegWrData_mem(RegWrData_mem),
+    .wd(wd),
+    .rd(rd),
+    .IOWr(IOWr),
+    .IORead(IORead),
+    .IOReadData(IOReadData),
+    .IOReadData_sw(IOReadData_sw),
+    .SWctrl(SWctrl)
     );
 
     /*MEM/WB Regs*/  
@@ -357,20 +377,22 @@ module m_MIPS_CPU(
     .RegWrData_wb(RegWrData_wb),
     .CPWrData_wb(CPWrData_wb)
     );
-   /*
+   
     assign Instruction = Instruction_if;
     assign Instruction2 = Instruction_id;
-    assign ALUCode = ALUCode_id;
+    //assign ALUCode = ALUCode_id;
     assign nextpc_if = NextPC_if;
     assign nextpc_id = NextPC_id;
-    assign nextpc_mem = NextPC_mem;
-    assign aluresult_ex = ALUResult_ex;
-    assign aluresult_mem = ALUResult_mem;
-    assign stall = Stall;
-    assign pc_ifwrite = PC_IFWrite;
-    assign ALU_a = ALU_A;
-    assign ALU_b = ALU_B;
-    assign flush = IF_flush;
+    //assign nextpc_mem = NextPC_mem;
+    //assign aluresult_ex = ALUResult_ex;
+    //assign aluresult_mem = ALUResult_mem;
+    /*assign stall = Stall;
+    assign pc_ifwrite = PC_IFWrite;*/
+    /*assign ALU_a = ALU_A;
+    assign ALU_b = ALU_B;*/
+    //assign memwrdata_mem = MemWrData_mem;
+   // assign regwrdata_mem = RegWrData_mem;
+    /*assign flush = IF_flush;
     assign regwr_wb = RegWr_wb;
     assign regwraddr_wb = RegWrAddr_wb;
     assign regwrdata_mem = RegWrData_mem;
@@ -383,12 +405,12 @@ module m_MIPS_CPU(
     assign memwr_id = MemOrIOWr_id;
     assign memwr_ex = MemOrIOWr_ex;
     assign memwr_mem = MemOrIOWr_mem;
-    assign memwrdata_mem = MemWrData_mem;
+    
     assign memreadsize_mem = MemReadSize_mem;
     assign jmpAddr = JmpAddr;
     assign jrAddr = JrAddr;
     assign j = J;
     assign jr = JR;
-    assign z = Z;
-    */
+    assign z = Z;*/
+    
 endmodule

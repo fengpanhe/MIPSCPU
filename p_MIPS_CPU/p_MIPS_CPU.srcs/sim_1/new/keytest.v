@@ -27,26 +27,37 @@ module key_test(
     reg reset; 
     wire[31:0] Instruction_if,Instruction_id;
     wire[31:0] NextPC_if,NextPC_id;
-    wire[4:0] ALUCode_id;
-    wire[31:0] ALUa_ex;
-    wire[31:0] ALUb_ex;
-    wire[31:0] ALUResult_ex;
-    wire cs = 1; 
-    wire iow = 1; 
-    wire[2:0] address = 2'b10; 
-        
+   /* wire[31:0] ALUa_ex;
+    wire[31:0] ALUb_ex;*/
+    //wire[31:0] ALUResult_ex;//,ALUResult_mem;
+    
     wire[3:0] line; 
     reg[3:0] col; 
     reg[23:0] SWInput;
     wire[23:0] LEDOutput;
     wire[7:0] DISPOutput;
+    wire[7:0] DISPEn;
+   // wire[31:0] MemWrData_mem;
+   // wire[31:0] WrData;
+   // wire[31:0] RegWrData_mem;
+    //wire[31:0] rData;
+    //wire IOWr,IORead;
+   // wire[31:0] IOReadData;
+    //wire[31:0] IOReadData_sw;
+   // wire SWctrl;
     always #5 clk = ~clk;
     
     initial
     begin
-    SWInput = 24'h000000;
-    #120
+    SWInput = 24'h0000ff;
+    #500
     SWInput = 24'h123456;
+    #350
+    SWInput = 24'h001111;
+    #200
+    reset = 1;
+    #100
+    reset = 0;
     end
     
      
@@ -60,20 +71,30 @@ module key_test(
     end 
   
     m_MIPS_CPU MIPS_CPU(
-    .clk(clk),
+    .clk0(clk),
     .rst(reset),
     .Instruction(Instruction_if),
     .Instruction2(Instruction_id),
     .nextpc_if(NextPC_if),
     .nextpc_id(NextPC_id),
-    .ALUCode(ALUCode_id),
-    .ALU_a(ALUa_ex),
-    .ALU_b(ALUb_ex),
-    .aluresult_ex(ALUResult_ex),
+    //.memwrdata_mem(MemWrData_mem),
+    //.regwrdata_mem(RegWrData_mem),
+    //.wd(WrData),
+    //.rd(rData),
+    //.IORead(IORead),
+    //.IOWr(IOWr),
+   // .IOReadData(IOReadData),
+   // .IOReadData_sw(IOReadData_sw),
+   // .SWctrl(SWctrl),
+    //.ALU_a(ALUa_ex),
+    //.ALU_b(ALUb_ex),
+    //.aluresult_ex(ALUResult_ex),
+    //.aluresult_mem(ALUResult_mem),
     .col(col), 
     .line(line),
     .SWInput(SWInput),
     .LEDOutput(LEDOutput),
-    .DISPOutput(DISPOutput)
+    .DISPOutput(DISPOutput),
+    .DISPEn(DISPEn)
      );
 endmodule

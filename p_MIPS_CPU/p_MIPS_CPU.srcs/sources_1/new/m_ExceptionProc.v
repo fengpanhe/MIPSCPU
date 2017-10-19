@@ -51,7 +51,7 @@ module m_ExceptionProc(
     initial 
     begin
     Je <= 0;
-    JmpAddr <= JAddr;
+//    JmpAddr <= JAddr;
     end
     
     always @(*)

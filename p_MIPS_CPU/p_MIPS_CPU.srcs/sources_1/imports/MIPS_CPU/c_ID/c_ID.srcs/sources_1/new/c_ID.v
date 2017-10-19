@@ -88,7 +88,7 @@ module c_ID(
     ExcFlag <= 0;
     end
     
-    always @(posedge clk) begin
+   /* always @(posedge clk) begin
         if(ExcFlag == 1) begin
             ExcFlag <= 0;
         end
@@ -98,7 +98,7 @@ module c_ID(
             end
             NextPC <= NextPC_id;
         end
-    end
+    end*/
     
     
     wire OF;                            //有符号加减溢出标志
@@ -236,7 +236,7 @@ module c_ID(
     .CPWrData_mem(CPWrData_mem),
     .excepttype_i(excCode),
     .int_i(int_i),
-    .current_inst_addr_i(NextPC),
+    .current_inst_addr_i(NextPC_id),
     .data_o(CPData_id),
     .eretAddr(eretAddr),
     .int_en(int_en),

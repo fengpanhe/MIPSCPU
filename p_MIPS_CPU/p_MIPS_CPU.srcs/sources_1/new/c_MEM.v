@@ -47,13 +47,21 @@ module c_MEM(
     output pwmWave,
     output rst,
     output[5:0] int_i,
-    output reg[31:0] RegWrData_mem
+    output reg[31:0] RegWrData_mem,
+    output[31:0] wd,
+    output[31:0] rd,
+    output IOWr,
+    output IORead,
+    output[31:0] IOReadData,
+    output[31:0] IOReadData_sw,
+    output SWctrl
     );
     wire[31:0] WrData;      //写到MEM或IO中的数据
+    assign wd = WrData;
     wire MemWr;
     wire MemRead;
-    wire IOWr;
-    wire IORead;
+    /*wire IOWr;
+    wire IORead;*/
     assign MemWr = MemOrIOWr_mem && (ALUResult_mem[31:10] != 22'b1111111111111111111111);
     assign IOWr = MemOrIOWr_mem && (ALUResult_mem[31:10] == 22'b1111111111111111111111);
     assign MemRead = MemOrIORead_mem && (ALUResult_mem[31:10] != 22'b1111111111111111111111);
@@ -64,6 +72,7 @@ module c_MEM(
    
     wire[31:0] MemResult;
     wire[31:0] IOResult;
+    assign IOReadData = IOResult;
     m_DataRam DataRam(
     .clock(clk),
     .MemWr(MemWr),
@@ -77,6 +86,7 @@ module c_MEM(
     wire[3:0] portAddr;
     wire DISPCtrl,KEYCtrl,CTCCtrl,PWMCtrl,WDTCtrl,LEDCtrl,SWCtrl;
     wire[31:0] rData;
+    assign rd = rData;
      memorio MemOrIO(
      .caddress(ALUResult_mem),
      .memread(MemRead),
@@ -99,11 +109,13 @@ module c_MEM(
      );
     
     wire[31:0] SWReadData;
+    assign IOReadData_sw = SWReadData;
+    assign SWctrl = SWCtrl;
     wire[15:0] KEYReadData,CTCReadData;
     ioread IOReadUnit(
-    .clk(clk),
-    .reset(reset),
-    .ioread(IORead),
+    //.clk(clk),
+    //.reset(reset),
+    //.ioread(IORead),
     .KEYCtrl(KEYCtrl),
     .CTCCtrl(CTCCtrl),
     .SWCtrl(SWCtrl),

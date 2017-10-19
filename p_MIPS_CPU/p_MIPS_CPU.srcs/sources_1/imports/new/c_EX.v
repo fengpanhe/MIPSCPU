@@ -63,7 +63,6 @@ module c_EX(
         case(ALUsrcA_ex)
             1'b0: ALU_A <= RsData_ex;
             1'b1: ALU_A <= Sa_ex;
-            default: ALU_A <= 32'bx;
         endcase
     end
     //Mux for ALUsrcB
@@ -71,7 +70,6 @@ module c_EX(
         case(ALUsrcB_ex)
             1'b0: ALU_B <= RtData_ex;
             1'b1: ALU_B <= Imme_ex;
-            default: ALU_B <= 32'bx;
         endcase
     end
     
