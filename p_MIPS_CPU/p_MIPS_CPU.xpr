@@ -596,7 +596,9 @@
         <Option Name="DesignMode" Val="RTL"/>
         <Option Name="TopModule" Val="key_test"/>
         <Option Name="TopLib" Val="xil_defaultlib"/>
+        <Option Name="SimMode" Val="post-implementation"/>
         <Option Name="SrcSet" Val="sources_1"/>
+        <Option Name="NLNetlistMode" Val="funcsim"/>
       </Config>
     </FileSet>
     <FileSet Name="c_addsub" Type="BlockSrcs" RelSrcDir="$PSRCDIR/c_addsub">
@@ -683,19 +685,6 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="m_programRom.xci" FileRelPathName="synth/m_programRom.vhd"/>
-        <CompFileExtendedInfo CompFileName="m_programRom.xci" FileRelPathName="m_programRom_ooc.xdc"/>
-        <CompFileExtendedInfo CompFileName="m_programRom.xci" FileRelPathName="blk_mem_gen_v8_3_1/hdl/blk_mem_gen_v8_3_vhsyn_rfs.vhd"/>
-        <CompFileExtendedInfo CompFileName="m_programRom.xci" FileRelPathName="summary.log"/>
-        <CompFileExtendedInfo CompFileName="m_programRom.xci" FileRelPathName="blk_mem_gen_v8_3_1/hdl/blk_mem_gen_v8_3.vhd"/>
-        <CompFileExtendedInfo CompFileName="m_programRom.xci" FileRelPathName="sim/m_programRom.vhd"/>
-        <CompFileExtendedInfo CompFileName="m_programRom.xci" FileRelPathName="blk_mem_gen_v8_3_1/simulation/blk_mem_gen_v8_3.vhd"/>
-        <CompFileExtendedInfo CompFileName="m_programRom.xci" FileRelPathName="m_programRom.mif"/>
-        <CompFileExtendedInfo CompFileName="m_programRom.xci" FileRelPathName="m_programRom.veo"/>
-        <CompFileExtendedInfo CompFileName="m_programRom.xci" FileRelPathName="m_programRom.vho"/>
-        <CompFileExtendedInfo CompFileName="m_programRom.xci" FileRelPathName="doc/blk_mem_gen_v8_3_changelog.txt"/>
-        <CompFileExtendedInfo CompFileName="m_programRom.xci" FileRelPathName="m_programRom.xml"/>
-        <CompFileExtendedInfo CompFileName="m_programRom.xci" FileRelPathName="c:/Users/zyc99/Documents/GitHub/MIPSCPU/p_MIPS_CPU/InitialFile/piple32Test5.coe"/>
       </File>
       <Config>
         <Option Name="TopModule" Val="m_programRom"/>

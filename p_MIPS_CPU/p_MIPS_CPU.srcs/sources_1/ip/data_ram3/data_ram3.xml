@@ -962,11 +962,7 @@
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-<<<<<<< HEAD
-            <spirit:value>Sun Oct 15 11:45:54 UTC 2017</spirit:value>
-=======
             <spirit:value>Mon Oct 16 01:25:57 UTC 2017</spirit:value>
->>>>>>> 3e106b0f1d1e2f82cb6c81958c832353a0cd7f8c
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>StaleAtRelink</spirit:name>
@@ -1000,11 +996,7 @@
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-<<<<<<< HEAD
-            <spirit:value>Sun Oct 15 11:59:16 UTC 2017</spirit:value>
-=======
             <spirit:value>Mon Oct 16 01:25:57 UTC 2017</spirit:value>
->>>>>>> 3e106b0f1d1e2f82cb6c81958c832353a0cd7f8c
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>StaleAtRelink</spirit:name>

@@ -101,9 +101,6 @@ module c_MEM(
     wire[31:0] SWReadData;
     wire[15:0] KEYReadData,CTCReadData;
     ioread IOReadUnit(
-    .clk(clk),
-    .reset(reset),
-    .ioread(IORead),
     .KEYCtrl(KEYCtrl),
     .CTCCtrl(CTCCtrl),
     .SWCtrl(SWCtrl),

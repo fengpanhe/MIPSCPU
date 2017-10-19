@@ -23,8 +23,8 @@
 module m_MIPS_CPU(
     input clk,                          //ϵͳʱ��
     input rst,                          //�ⲿ��λ�ź�
-    /*output[31:0] Instruction,
-    output stall,
+    //output[31:0] Instruction,
+    /*output stall,
     output pc_ifwrite,
     output flush,
     output[4:0] ALUCode,
@@ -357,9 +357,9 @@ module m_MIPS_CPU(
     .RegWrData_wb(RegWrData_wb),
     .CPWrData_wb(CPWrData_wb)
     );
-   /*
-    assign Instruction = Instruction_if;
-    assign Instruction2 = Instruction_id;
+   
+    //assign Instruction = Instruction_if;
+   /* assign Instruction2 = Instruction_id;
     assign ALUCode = ALUCode_id;
     assign nextpc_if = NextPC_if;
     assign nextpc_id = NextPC_id;
@@ -389,6 +389,6 @@ module m_MIPS_CPU(
     assign jrAddr = JrAddr;
     assign j = J;
     assign jr = JR;
-    assign z = Z;
-    */
+    assign z = Z;*/
+    
 endmodule

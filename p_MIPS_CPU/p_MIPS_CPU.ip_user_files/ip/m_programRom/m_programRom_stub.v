@@ -1,13 +1,8 @@
 // Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2015.4 (win64) Build 1412921 Wed Nov 18 09:43:45 MST 2015
-<<<<<<< HEAD
-// Date        : Sun Oct 15 20:02:53 2017
+// Date        : Thu Oct 19 19:16:25 2017
 // Host        : DESKTOP-HAEL08M running 64-bit major release  (build 9200)
-=======
-// Date        : Tue Oct 17 21:12:44 2017
-// Host        : ThinkPad-PC running 64-bit Service Pack 1  (build 7601)
->>>>>>> 3e106b0f1d1e2f82cb6c81958c832353a0cd7f8c
 // Command     : write_verilog -force -mode synth_stub
 //               C:/Users/zyc99/Documents/GitHub/MIPSCPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/m_programRom/m_programRom_stub.v
 // Design      : m_programRom

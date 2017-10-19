@@ -25,15 +25,15 @@ module key_test(
     ); 
     reg clk = 1; 
     reg reset; 
-    wire[31:0] Instruction_if,Instruction_id;
-    wire[31:0] NextPC_if,NextPC_id;
+    wire[31:0] Instruction_if;//,Instruction_id;
+    /*wire[31:0] NextPC_if,NextPC_id;
     wire[4:0] ALUCode_id;
     wire[31:0] ALUa_ex;
     wire[31:0] ALUb_ex;
     wire[31:0] ALUResult_ex;
     wire cs = 1; 
     wire iow = 1; 
-    wire[2:0] address = 2'b10; 
+    wire[2:0] address = 2'b10; */
         
     wire[3:0] line; 
     reg[3:0] col; 
@@ -63,13 +63,13 @@ module key_test(
     .clk(clk),
     .rst(reset),
     .Instruction(Instruction_if),
-    .Instruction2(Instruction_id),
+    /*.Instruction2(Instruction_id),
     .nextpc_if(NextPC_if),
     .nextpc_id(NextPC_id),
     .ALUCode(ALUCode_id),
     .ALU_a(ALUa_ex),
     .ALU_b(ALUb_ex),
-    .aluresult_ex(ALUResult_ex),
+    .aluresult_ex(ALUResult_ex),*/
     .col(col), 
     .line(line),
     .SWInput(SWInput),
