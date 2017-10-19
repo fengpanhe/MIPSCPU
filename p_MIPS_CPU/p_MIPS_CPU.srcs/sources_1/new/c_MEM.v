@@ -113,9 +113,6 @@ module c_MEM(
     assign SWctrl = SWCtrl;
     wire[15:0] KEYReadData,CTCReadData;
     ioread IOReadUnit(
-    //.clk(clk),
-    //.reset(reset),
-    //.ioread(IORead),
     .KEYCtrl(KEYCtrl),
     .CTCCtrl(CTCCtrl),
     .SWCtrl(SWCtrl),

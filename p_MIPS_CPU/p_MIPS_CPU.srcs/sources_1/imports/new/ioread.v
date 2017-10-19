@@ -21,9 +21,6 @@
 
 
 module ioread(
-    //input wire clk,
-    //input wire reset,
-    //input wire ioread,
     input wire KEYCtrl,
     input wire CTCCtrl,
     input wire SWCtrl,
@@ -46,6 +43,19 @@ module ioread(
     end
    /* always @(negedge clk)
     #3
+=======
+    wire[2:0] sel = {SWCtrl,CTCCtrl,KEYCtrl};
+    
+   always @(*)begin
+        case(sel)
+        3'b001: ioread_data = {16'h0000,ioread_data_key};
+        3'b010: ioread_data = {16'h0000,ioread_data_ctc};
+        3'b100: ioread_data = ioread_data_sw;
+        endcase
+   end 
+    /*always @(negedge clk)
+    #1
+>>>>>>> 5caeccada6fd743a82e0ad0ba5c9534a0d404e5c
     begin
         if (reset == 1) begin
             ioread_data = 32'h00000000;

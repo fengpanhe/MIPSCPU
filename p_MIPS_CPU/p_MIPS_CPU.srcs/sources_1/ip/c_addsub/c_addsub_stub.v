@@ -1,10 +1,10 @@
 // Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2015.4 (win64) Build 1412921 Wed Nov 18 09:43:45 MST 2015
-// Date        : Thu Oct 12 22:29:15 2017
-// Host        : ThinkPad-PC running 64-bit Service Pack 1  (build 7601)
+// Date        : Sun Oct 15 19:47:03 2017
+// Host        : DESKTOP-HAEL08M running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub
-//               C:/Users/ThinkPad/Documents/GitHub/MIPSCPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_stub.v
+//               C:/Users/zyc99/Documents/GitHub/MIPSCPU/p_MIPS_CPU/p_MIPS_CPU.srcs/sources_1/ip/c_addsub/c_addsub_stub.v
 // Design      : c_addsub
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7a100tfgg484-1

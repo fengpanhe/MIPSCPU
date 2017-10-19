@@ -378,9 +378,9 @@ module m_MIPS_CPU(
     .CPWrData_wb(CPWrData_wb)
     );
    
-    assign Instruction = Instruction_if;
-    assign Instruction2 = Instruction_id;
-    //assign ALUCode = ALUCode_id;
+    //assign Instruction = Instruction_if;
+   /* assign Instruction2 = Instruction_id;
+    assign ALUCode = ALUCode_id;
     assign nextpc_if = NextPC_if;
     assign nextpc_id = NextPC_id;
     //assign nextpc_mem = NextPC_mem;

@@ -25,11 +25,11 @@ module disptest(
     );
     reg clk = 1;
     reg reset;
-    always #5 clk = ~clk;
+    always #20 clk = ~clk;
     initial
     begin
     reset = 1;
-    #5 reset = 0;
+    #40 reset = 0;
     end
 
 
@@ -37,7 +37,6 @@ module disptest(
     wire[4:0] ALUCode_id;
     wire[31:0] ALUResult_ex;
     wire[31:0] ALUa_ex,ALUb_ex;
-    wire[31:0] HI,LO;
     wire[7:0] DISPOutput;
     wire[7:0] DISPEn;
     m_MIPS_CPU MIPS_CPU(
@@ -49,8 +48,6 @@ module disptest(
      .ALU_a(ALUa_ex),
      .ALU_b(ALUb_ex),
      .aluresult_ex(ALUResult_ex),
-     .HI(HI),
-     .LO(LO),
      .Instruction2(Instruction_id),
      .DISPOutput(DISPOutput),
      .DISPEn(DISPEn)
