@@ -27,10 +27,10 @@ module key_test(
     reg reset; 
     wire[31:0] Instruction_if,Instruction_id;
     wire[31:0] NextPC_if,NextPC_id;
-   /* wire[31:0] ALUa_ex;
-    wire[31:0] ALUb_ex;*/
-    //wire[31:0] ALUResult_ex;//,ALUResult_mem;
-    
+    wire[31:0] ALUa_ex;
+    wire[31:0] ALUb_ex;
+    wire[31:0] ALUResult_ex;//,ALUResult_mem;
+    wire[4:0] ExcCode;
     wire[3:0] line; 
     reg[3:0] col; 
     reg[23:0] SWInput;
@@ -52,12 +52,8 @@ module key_test(
     SWInput = 24'h0000ff;
     #500
     SWInput = 24'h123456;
-    #350
+    #450
     SWInput = 24'h001111;
-    #200
-    reset = 1;
-    #100
-    reset = 0;
     end
     
      
@@ -86,10 +82,11 @@ module key_test(
    // .IOReadData(IOReadData),
    // .IOReadData_sw(IOReadData_sw),
    // .SWctrl(SWctrl),
-    //.ALU_a(ALUa_ex),
-    //.ALU_b(ALUb_ex),
-    //.aluresult_ex(ALUResult_ex),
+    .ALU_a(ALUa_ex),
+    .ALU_b(ALUb_ex),
+    .aluresult_ex(ALUResult_ex),
     //.aluresult_mem(ALUResult_mem),
+    .excCode(ExcCode),
     .col(col), 
     .line(line),
     .SWInput(SWInput),

@@ -29,8 +29,16 @@ module m_ExceptionProc(
     input[5:0] int_mask,
     input[31:0] eretAddr,
     input[31:0] JAddr,
+    input[31:0] NextPC,
+    input[31:0] JrAddr,
+    input[31:0] BranchAddr,
+    input Jr,
+    input Jmp,
+    input Z, 
+    input SaveFlag,
     output reg[4:0] exceptType,
     output reg[31:0] JmpAddr,
+    output reg[31:0] RetAddr,
     output reg Je
     );
     parameter BREAK_func = 6'b001101;
@@ -50,8 +58,21 @@ module m_ExceptionProc(
     
     initial 
     begin
-    Je <= 0;
-//    JmpAddr <= JAddr;
+        Je <= 0;
+    end
+    
+    wire[2:0] RetAddrSrc = {Jr,Jmp,Z};
+    always @(*)
+    begin
+        if(SaveFlag && Je) begin
+              case(RetAddrSrc)
+              3'b000: RetAddr <= NextPC; 
+              3'b001: RetAddr <= BranchAddr;
+              3'b010: RetAddr <= JAddr;
+              3'b100: RetAddr <= JrAddr;
+              default:RetAddr <= NextPC;
+              endcase
+        end    
     end
     
     always @(*)
@@ -96,7 +117,7 @@ module m_ExceptionProc(
         end
     else
         begin
-        exceptType <= 5'bx;
+        exceptType <= 5'b11111;
         JmpAddr <= JAddr;
         Je <= 0;
         end
