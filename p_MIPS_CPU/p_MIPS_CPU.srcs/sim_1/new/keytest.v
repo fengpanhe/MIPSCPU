@@ -47,14 +47,14 @@ module key_test(
    // wire SWctrl;
     always #5 clk = ~clk;
     
-    initial
-    begin
-    SWInput = 24'h0000ff;
-    #500
-    SWInput = 24'h123456;
-    #450
-    SWInput = 24'h001111;
-    end
+//    initial
+//    begin
+//    SWInput = 24'h0000ff;
+//    #500
+//    SWInput = 24'h123456;
+//    #450
+//    SWInput = 24'h001111;
+//    end
     
      
     initial 
@@ -86,7 +86,7 @@ module key_test(
     .ALU_b(ALUb_ex),
     .aluresult_ex(ALUResult_ex),
     //.aluresult_mem(ALUResult_mem),
-    .excCode(ExcCode),
+    //.excCode(ExcCode),
     .col(col), 
     .line(line),
     .SWInput(SWInput),
