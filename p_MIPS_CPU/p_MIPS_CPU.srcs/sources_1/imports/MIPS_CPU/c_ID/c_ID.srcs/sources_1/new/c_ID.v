@@ -51,8 +51,8 @@ module c_ID(
     output CPToReg_id,                  
     output RegWr_id,                    //译码生成的用于回写Regs的使能信号
     output CPWr_id,                     //译码生成用于回写CP0寄存器的使能信号
-    output MemOrIOWr_id,                    //译码生成的用于写MEM的使能信号
-    output MemOrIORead_id,                  //译码生成的指示当前指令是读MEM的信号
+    output MemOrIOWr_id,                //译码生成的用于写MEM的使能信号
+    output MemOrIORead_id,              //译码生成的指示当前指令是读MEM的信号
     output[1:0] MemReadSize_id,         //译码生成的用于判断读MEM指令读取位数的控制信号
     output MemExtType_id,               //译码生成的用于控制读MEM指令输出结果扩展方式的控制信号
     output[4:0] ALUCode_id,             //译码生成的用于选择ALU运算功能的信号
@@ -62,12 +62,13 @@ module c_ID(
     output Stall,                       //发生冒险时用于清空ID/EX级Reg的控制信号
     output PC_IFWrite,                  //发生冒险时用于暂停IF/ID级Reg的控制信号
     output IF_flush,                    //处理跳转分支冲突的控制信号
-    output Z,                        //分支指令条件成立的信号
+    output Z,                           //分支指令条件成立的信号
     output J,                           //跳转指令
     output JR,                          //寄存器跳转指令
-    output JAL,                      //需保存PC地址的指令
-    output BAL,                      //分支跳转且需保存PC地址的指令
+    output JAL,                         //需保存PC地址的指令
+    output BAL,                         //分支跳转且需保存PC地址的指令
     output signedOp_id,
+    output[4:0] EC,
     output[31:0] BranchAddr,            //分支跳转目标地址
     output[31:0] JmpAddr,               //无条件跳转目标地址
     output[31:0] JrAddr,                //寄存器跳转目标地址
@@ -80,27 +81,9 @@ module c_ID(
     output[31:0] Sa_id,                 //零扩展成32bit的移位立即数
     output[31:0] Imme_id                //符号扩展成32bit的立即数
     );
-    reg[31:0] NextPC;
-    reg ExcFlag ;
-    initial 
-    begin
-    NextPC <= 0;
-    ExcFlag <= 0;
-    end
-    
-   /* always @(posedge clk) begin
-        if(ExcFlag == 1) begin
-            ExcFlag <= 0;
-        end
-        else begin
-            if(IF_flush == 1) begin
-                ExcFlag <= 1;
-            end
-            NextPC <= NextPC_id;
-        end
-    end*/
-    
-    
+    wire[31:0] RetAddr;
+    wire SaveFlag; 
+    assign SaveFlag = |Instruction_id;
     wire OF;                            //有符号加减溢出标志
     wire[31:0] JAddr;
     wire Je,Jmp;
@@ -205,6 +188,7 @@ module c_ID(
     .Stall(Stall)
     );
     wire[4:0] excCode;              //异常类型编号
+    assign EC = excCode;
     wire[31:0] eretAddr;
     wire int_en;                    //中断使能位
     wire[5:0] int_mask;             //中断屏蔽位
@@ -218,8 +202,16 @@ module c_ID(
     .int_mask(int_mask),
     .JAddr(JAddr),
     .eretAddr(eretAddr),
-    .exceptType(excCode),
+    .NextPC(NextPC_id),
+    .JrAddr(JrAddr),
+    .BranchAddr(BranchAddr),
+    .Jr(JR),
+    .Jmp(Jmp),
+    .Z(Z_tmp),
+    .SaveFlag(SaveFlag),
     .JmpAddr(JmpAddr),
+    .exceptType(excCode),
+    .RetAddr(RetAddr),
     .Je(Je)
     );
     
@@ -236,7 +228,7 @@ module c_ID(
     .CPWrData_mem(CPWrData_mem),
     .excepttype_i(excCode),
     .int_i(int_i),
-    .current_inst_addr_i(NextPC_id),
+    .current_inst_addr_i(RetAddr),
     .data_o(CPData_id),
     .eretAddr(eretAddr),
     .int_en(int_en),

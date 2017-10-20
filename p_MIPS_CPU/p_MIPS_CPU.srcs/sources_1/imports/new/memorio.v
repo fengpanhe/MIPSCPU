@@ -32,8 +32,7 @@ module memorio(
 
     input wire[31:0] wdata,         //要输出到存储器或io中的数据
 
-    
-
+   
     //外设的片选信号
     output wire DISPCtrl,           //数码管           0xFFFFFC00
     output wire KEYCtrl,            //4*4键盘          0xFFFFFC10
