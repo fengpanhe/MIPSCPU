@@ -19,7 +19,7 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
+`include "defines.v"
 module key16(
     input wire reset,       //閿熸枻鎷蜂綅閿熻剼鐚存嫹
     input wire cs,          //鐗囬€夐敓鑴氬彿锝忔嫹閿熸枻鎷穔eyctrl
@@ -32,9 +32,11 @@ module key16(
     output reg int_key
     );
 
+    
     reg[15:0] keyvalue;
     reg[15:0] keystat;
     reg[31:0] delay_count;
+    reg flag;
     initial begin
         int_key <= 1'b0;
     end
@@ -46,35 +48,37 @@ module key16(
             ioread_data = 16'h0000;
             keyvalue = 16'h0000;
             keystat = 16'h0000;
-            delay_count = 32'h05F5E100; //100000000d
+            delay_count = 32'h00000000; //100000000d
             line = 4'h0;
+            int_key <= 1'b0;
+            flag = 0;
         end
         else begin
 
             if (int_key == 1) begin
                 int_key <= 1'b0;
             end
-            else if (keystat[0] == 1'b1) begin
+            else if (flag == 1'b1) begin
                 if (col == 4'b1111) begin
                     line <= 4'b0000;
                     int_key <= 1'b1;
-                    keystat[0] = 1'b0;
+                    flag = 1'b0;
                 end
             end 
             else begin
                 case(line)
                     4'b0000: begin
                         if(col != 4'b1111) begin
-                            if (delay_count != 0) begin
-                                delay_count = delay_count - 1'b1;
+                            if (delay_count < `key_delay_count) begin
+                                delay_count = delay_count + 1'b1;
                             end
                             else begin
                                 line <= 4'b1110;
-                                delay_count = 32'h05F5E100;
+                                delay_count = 32'h00000000;
                             end
                         end 
                         else begin
-                            delay_count = 32'h05F5E100;
+                            delay_count = 32'h00000000;
                         end
                     end 
                     4'b1110: //0閿熸枻鎷?
@@ -86,6 +90,7 @@ module key16(
                                 4'b0111: keyvalue = 16'h000a;
                             endcase
                             keystat = keystat | 16'h0001;
+                            flag = 1;
                         end 
                         else begin
                             line <= 4'b1101;
@@ -99,6 +104,7 @@ module key16(
                                 4'b0111: keyvalue = 16'h000b;
                             endcase
                             keystat = keystat | 16'h0001;
+                            flag = 1;
                         end 
                         else begin
                             line <= 4'b1011;
@@ -112,6 +118,7 @@ module key16(
                                 4'b0111: keyvalue = 16'h000c;
                             endcase
                             keystat = keystat | 16'h0001;
+                            flag = 1;
                         end 
                         else begin
                             line <= 4'b0111;
@@ -119,12 +126,13 @@ module key16(
                     4'b0111: //3閿熸枻鎷?
                         if(col != 4'b1111) begin
                             case(col)
-                                4'b1110: keyvalue = 16'h0000;
-                                4'b1101: keyvalue = 16'h000f;
+                                4'b1110: keyvalue = 16'h000f;
+                                4'b1101: keyvalue = 16'h0000;
                                 4'b1011: keyvalue = 16'h000e;
                                 4'b0111: keyvalue = 16'h000d;
                             endcase
                             keystat = keystat | 16'h0001;
+                            flag = 1;
                         end 
                         else begin
                             line <= 4'b0000;

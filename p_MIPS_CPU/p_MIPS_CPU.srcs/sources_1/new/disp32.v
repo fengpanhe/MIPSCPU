@@ -19,7 +19,7 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
+`include "defines.v"
 module disp32(
     input wire reset,           //ϵͳ��λ�ź�
     input wire clk,
@@ -63,7 +63,7 @@ module disp32(
         end
     end
 
-    clock_div #(32'h00001388) U0(
+    clock_div #(`disp_clk_div) U0( //1388
         .clk(clk),
         .clk_sys(clk_sys)
     );
