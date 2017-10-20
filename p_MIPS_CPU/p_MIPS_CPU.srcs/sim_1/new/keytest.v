@@ -51,6 +51,7 @@ module key_test(
    // wire SWctrl;
     always #5 clk = ~clk;
     
+
     /*initial
     begin
     SWInput = 24'h0000ff;
