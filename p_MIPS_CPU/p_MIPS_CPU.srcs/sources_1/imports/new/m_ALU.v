@@ -148,21 +148,31 @@ module m_ALU(
         end
         else begin    
             case(ALUCode)
-            ALU_MULT: {HI,LO} = multRes_signed;
-            ALU_MULTU: {HI,LO} = multRes;
-            ALU_DIV: {HI,LO} = divRes_signed;
-            ALU_DIVU: {HI,LO} = divRes;
+            ALU_MULT: {HI,LO} <= multRes_signed;
+            ALU_MULTU: {HI,LO} <= multRes;
+            ALU_DIV: {HI,LO} <= divRes_signed;
+            ALU_DIVU: {HI,LO} <= divRes;
+            ALU_MTHI: HI = ALU_A;
+            ALU_MTLO: LO = ALU_A;
             endcase
         end
     end
+    /*always @ (negedge clk) begin
+        if(ALUCode == ALU_MULT || ALUCode == ALU_MULTU || ALUCode == ALU_DIV || ALUCode == ALU_DIVU)
+        begin
+            HI <= HI_tmp;
+            LO <= LO_tmp;
+        end
+    
+    end*/
     always @(*) begin
         case(ALUCode)
             ALU_ADD: ALU_Result = r0; 
             ALU_SUB: ALU_Result = r0;
-            /*ALU_MULT: {HI,LO} = multRes_signed;
-            ALU_MULTU: {HI,LO} = multRes;
-            ALU_DIV: {HI,LO} = divRes_signed;
-            ALU_DIVU: {HI,LO} = divRes;*/
+           /* ALU_MULT: {HI_tmp,LO_tmp} = multRes_signed;
+            ALU_MULTU: {HI_tmp,LO_tmp} = multRes;
+            ALU_DIV: {HI_tmp,LO_tmp} = divRes_signed;
+            ALU_DIVU: {HI_tmp,LO_tmp} = divRes;*/
             ALU_AND: ALU_Result = r1;
             ALU_OR:  ALU_Result = r2;
             ALU_XOR: ALU_Result = r3;
@@ -174,13 +184,13 @@ module m_ALU(
             ALU_SRA: ALU_Result = r11;
             ALU_MFHI: ALU_Result = r14;
             ALU_MFLO: ALU_Result = r15;
-            ALU_MTHI: HI = ALU_A;
-            ALU_MTLO: LO = ALU_A;
+            //ALU_MTHI: HI = ALU_A;
+            //ALU_MTLO: LO = ALU_A;
             ALU_ANDI: ALU_Result = r5;
             ALU_ORI: ALU_Result = r6;
             ALU_XORI: ALU_Result = r7;
             ALU_LUI: ALU_Result = r8;
-            default:ALU_Result = 32'bx;
+            default:ALU_Result = 32'b0;
         endcase
     end 
 endmodule

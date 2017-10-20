@@ -35,7 +35,6 @@ module sw32(
     initial
     begin
     int_sw <= 1'b0;
-    sw_pre <= swi;
     end
     
     always @(negedge clk) begin
