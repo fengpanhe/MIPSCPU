@@ -19,7 +19,7 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
+`include "defines.v"
 module m_MIPS_CPU(
     input clk0,                          //ϵͳʱ��
     input rst,                          //�ⲿ��λ�ź�
@@ -82,10 +82,10 @@ module m_MIPS_CPU(
     output pwmWave  */                  //pwms����ź�?
     );
     wire clk;
-    ClkDiv c_Div(
-    .initClk(clk0),
-    .clk(clk)
-    );
+    clock_div #(`clk_div) U0(
+            .clk(clk0),
+            .clk_sys(clk)
+        );
     wire pulse0,pulse1;
     wire cnt0,cnt1,pwmWave;
     wire WDTRst;                        //���Ź������λ�ź�?      
