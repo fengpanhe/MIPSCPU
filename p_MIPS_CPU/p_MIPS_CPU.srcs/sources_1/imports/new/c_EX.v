@@ -21,6 +21,8 @@
 
 
 module c_EX(
+    input clk,
+    input reset,
     input RegDst_ex,            //用于选择写回Reg的Address 0:RtAddt 1:RdAddr
     input[4:0] ALUCode_ex,      //用于选择ALU进行的运算类型
     input ALUsrcA_ex,           //用于选择ALUsrcA的源操作数 0:RsData 1:Sa
@@ -89,6 +91,8 @@ module c_EX(
     end
     //ALU 
     m_ALU ALU(
+    .clk(clk),
+    .reset(reset),
     .ALUCode(ALUCode_ex),
     .ALU_A(ALU_A),
     .ALU_B(ALU_B),

@@ -21,6 +21,8 @@
 
 
 module m_ALU(
+    input clk,
+    input reset,
     input[4:0] ALUCode,             //ALU要执行的运算类型
     input[31:0] ALU_A,              //ALU源操作数A
     input[31:0] ALU_B,              //ALU源操作数B
@@ -138,14 +140,29 @@ module m_ALU(
         r14 = HI;                           //mfhi
         r15 = LO;                           //mflo
     end
-    always @(*) begin
-        case(ALUCode)
-            ALU_ADD: ALU_Result = r0; 
-            ALU_SUB: ALU_Result = r0;
+    
+    always @(negedge clk) begin
+        if(reset == 1) begin
+            HI <= 32'h00000000;
+            LO <= 32'h00000000;
+        end
+        else begin    
+            case(ALUCode)
             ALU_MULT: {HI,LO} = multRes_signed;
             ALU_MULTU: {HI,LO} = multRes;
             ALU_DIV: {HI,LO} = divRes_signed;
             ALU_DIVU: {HI,LO} = divRes;
+            endcase
+        end
+    end
+    always @(*) begin
+        case(ALUCode)
+            ALU_ADD: ALU_Result = r0; 
+            ALU_SUB: ALU_Result = r0;
+            /*ALU_MULT: {HI,LO} = multRes_signed;
+            ALU_MULTU: {HI,LO} = multRes;
+            ALU_DIV: {HI,LO} = divRes_signed;
+            ALU_DIVU: {HI,LO} = divRes;*/
             ALU_AND: ALU_Result = r1;
             ALU_OR:  ALU_Result = r2;
             ALU_XOR: ALU_Result = r3;

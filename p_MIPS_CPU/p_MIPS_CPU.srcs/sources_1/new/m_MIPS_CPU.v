@@ -23,16 +23,16 @@
 module m_MIPS_CPU(
     input clk0,                          //ϵͳʱ��
     input rst,                          //�ⲿ��λ�ź�
-    //output[31:0] Instruction,
+    output[31:0] Instruction,
     /*output stall,
     output pc_ifwrite,
-    output flush,
-    output[4:0] ALUCode,*/
-    /*output[31:0] nextpc_if,
+    output flush,*/
+    output[4:0] alucode,
+    output[31:0] nextpc_if,
     output[31:0] nextpc_id,
     /*output[31:0] nextpc_ex,
     output[31:0] nextpc_mem,*/
-    /*output[31:0] Instruction2,
+    output[31:0] Instruction2,
     output[31:0] ALU_a,
     output[31:0] ALU_b,
     output[31:0] aluresult_ex,
@@ -46,8 +46,8 @@ module m_MIPS_CPU(
     //output[31:0] IOReadData_sw,
     //output SWctrl,///////////////////////
     //output[31:0] aluresult_mem,
-    //output[31:0] HI,
-    //output[31:0] LO,
+    output[31:0] HI,
+    output[31:0] LO,
     /*output[31:0] regwrdata_wb,
     output[31:0] regwrdata_mem,
     output[31:0] memaddr,
@@ -69,6 +69,7 @@ module m_MIPS_CPU(
     output jr,
     output z,*/
     //output[4:0] excCode,
+    output clk2,
     output[7:0] DISPOutput,             //������������
     output[7:0] DISPEn,                 //�����ʹ�ܿ������
     input[23:0] SWInput,                //���뿪������
@@ -86,6 +87,7 @@ module m_MIPS_CPU(
             .clk(clk0),
             .clk_sys(clk)
         );
+    assign clk2 = clk;
     wire pulse0,pulse1;
     wire cnt0,cnt1,pwmWave;
     wire WDTRst;                        //���Ź������λ�ź�?      
@@ -263,6 +265,8 @@ module m_MIPS_CPU(
     wire[31:0] ALU_A,ALU_B;
  
     c_EX EX(
+    .clk(clk),
+    .reset(reset),
     .RegDst_ex(RegDst_ex),
     .ALUCode_ex(ALUCode_ex),
     .ALUsrcA_ex(ALUsrcA_ex),
@@ -279,8 +283,8 @@ module m_MIPS_CPU(
     .RegWrAddr_ex(RegWrAddr_ex),
     .CPWrAddr_ex(CPWrAddr_ex),
     .ALUResult_ex(ALUResult_ex),
-    //.HI(HI),
-    //.LO(LO),
+    .HI(HI),
+    .LO(LO),
     .MemWrData_ex(MemWrData_ex),
     .CPWrData_ex(CPWrData_ex),
     .Overflow(Overflow),
@@ -380,9 +384,9 @@ module m_MIPS_CPU(
     .CPWrData_wb(CPWrData_wb)
     );
    
-    /*assign Instruction = Instruction_if;
+    assign Instruction = Instruction_if;
     assign Instruction2 = Instruction_id;
-    //assign ALUCode = ALUCode_id;
+    assign alucode = ALUCode_id;
     assign nextpc_if = NextPC_if;
     assign nextpc_id = NextPC_id;
     //assign nextpc_mem = NextPC_mem;
@@ -390,7 +394,7 @@ module m_MIPS_CPU(
     //assign aluresult_mem = ALUResult_mem;
     /*assign stall = Stall;
     assign pc_ifwrite = PC_IFWrite;*/
-    /*assign ALU_a = ALU_A;
+    assign ALU_a = ALU_A;
     assign ALU_b = ALU_B;
     //assign memwrdata_mem = MemWrData_mem;
    // assign regwrdata_mem = RegWrData_mem;
