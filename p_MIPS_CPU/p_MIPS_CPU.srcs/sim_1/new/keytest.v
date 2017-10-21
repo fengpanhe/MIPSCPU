@@ -31,7 +31,7 @@ module key_test(
     wire[4:0] ALUCode;
     wire[31:0] ALUa_ex;
     wire[31:0] ALUb_ex;
-    wire[31:0] ALUResult_ex;//,ALUResult_mem;
+    wire[31:0] ALUResult_ex;
     wire[31:0] HI,LO;
   
     /*wire[4:0] ExcCode;
