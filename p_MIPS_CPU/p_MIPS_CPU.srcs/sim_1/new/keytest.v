@@ -28,18 +28,16 @@ module key_test(
     wire clk2;
     wire[31:0] Instruction_if,Instruction_id;
     wire[31:0] NextPC_if,NextPC_id;
-    wire[4:0] ALUCode;
+    /*wire[4:0] ALUCode;
     wire[31:0] ALUa_ex;
     wire[31:0] ALUb_ex;
     wire[31:0] ALUResult_ex;
     wire[31:0] HI,LO;
-    wire DivFinished;
-    wire DivOn;
-    wire[4:0] DivCnt;
+  
     /*wire[4:0] ExcCode;
     wire[3:0] line; 
-    reg[3:0] col; */
-    reg[23:0] SWInput;
+    reg[3:0] col; 
+    reg[23:0] SWInput;*/
     wire[23:0] LEDOutput;
     wire[7:0] DISPOutput;
     wire[7:0] DISPEn;
@@ -54,14 +52,14 @@ module key_test(
     always #5 clk = ~clk;
     
 
-    initial
+    /*initial
     begin
     SWInput = 24'h0000ff;
-    #1500
+    #500
     SWInput = 24'h123456;
-    #1000
+    #450
     SWInput = 24'h001111;
-    end
+    end*/
     
      
     initial 
@@ -89,21 +87,18 @@ module key_test(
    // .IOReadData(IOReadData),
    // .IOReadData_sw(IOReadData_sw),
    // .SWctrl(SWctrl),
-    .divfinished(DivFinished),
-    .DivOn(DivOn),
-    .DivCnt(DivCnt),
-    .ALU_a(ALUa_ex),
+   /* .ALU_a(ALUa_ex),
     .ALU_b(ALUb_ex),
     .alucode(ALUCode),
     .aluresult_ex(ALUResult_ex),
     .HI(HI),
-    .LO(LO),
+    .LO(LO),*/
     .clk2(clk2),
     //.aluresult_mem(ALUResult_mem),
    /* .excCode(ExcCode),
     .col(col), 
-    .line(line),*/
-    .SWInput(SWInput),
+    .line(line),
+    .SWInput(SWInput),*/
     .LEDOutput(LEDOutput),
     .DISPOutput(DISPOutput),
     .DISPEn(DISPEn)

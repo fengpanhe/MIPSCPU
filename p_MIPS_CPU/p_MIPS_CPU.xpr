@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="10" Path="C:/Users/ThinkPad/Documents/GitHub/MIPSCPU/p_MIPS_CPU/p_MIPS_CPU.xpr">
+<Project Version="7" Minor="10" Path="C:/Users/zyc99/Documents/GitHub/MIPSCPU/p_MIPS_CPU/p_MIPS_CPU.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="934dcbaca86a4af1b40efb6b405cce7a"/>
@@ -54,13 +54,6 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/new/m_DivProc.v">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
       <File Path="$PSRCDIR/sources_1/imports/new/m_signedMult.v">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../../../../Desktop/sources_1/new/m_signedMult.v"/>
@@ -97,6 +90,15 @@
       </File>
       <File Path="$PSRCDIR/sources_1/new/clock_div.v">
         <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/m_ALU.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../../../Desktop/sources_1/new/m_ALU.v"/>
+          <Attr Name="ImportTime" Val="1506335844"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -186,15 +188,6 @@
         <FileInfo>
           <Attr Name="ImportPath" Val="E:/XilinxPro/m_MEM/m_MEM.srcs/sources_1/new/m_DataRam.v"/>
           <Attr Name="ImportTime" Val="1506177836"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/m_ALU.v">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../../../Desktop/sources_1/new/m_ALU.v"/>
-          <Attr Name="ImportTime" Val="1506335844"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -489,7 +482,25 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/InitialFile/testint.coe">
+      <File Path="$PPRDIR/InitialFile/r2.coe">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/InitialFile/r1.coe">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/InitialFile/r3.coe">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/InitialFile/r4.coe">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>

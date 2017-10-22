@@ -27,13 +27,13 @@ module m_MIPS_CPU(
     /*output stall,
     output pc_ifwrite,
     output flush,*/
-    /*output[4:0] alucode,
-    output[31:0] nextpc_if,
+    //output[4:0] alucode,
+   /* output[31:0] nextpc_if,
     output[31:0] nextpc_id,
     /*output[31:0] nextpc_ex,
     output[31:0] nextpc_mem,*/
-    /*output[31:0] Instruction2,
-    output[31:0] ALU_a,
+    //output[31:0] Instruction2,
+    /*output[31:0] ALU_a,
     output[31:0] ALU_b,
     output[31:0] aluresult_ex,
     //output[31:0] memwrdata_mem,
@@ -396,13 +396,13 @@ module m_MIPS_CPU(
     .CPWrData_wb(CPWrData_wb)
     );
    
-    /*assign Instruction = Instruction_if;
+   /* assign Instruction = Instruction_if;
     assign Instruction2 = Instruction_id;
-    assign alucode = ALUCode_id;
+    //assign alucode = ALUCode_id;
     assign nextpc_if = NextPC_if;
     assign nextpc_id = NextPC_id;
     //assign nextpc_mem = NextPC_mem;
-    assign aluresult_ex = ALUResult_ex;
+    //assign aluresult_ex = ALUResult_ex;
     //assign aluresult_mem = ALUResult_mem;
     /*assign stall = Stall;
     assign pc_ifwrite = PC_IFWrite;*/
