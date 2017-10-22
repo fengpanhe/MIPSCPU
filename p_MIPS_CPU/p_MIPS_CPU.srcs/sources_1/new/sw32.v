@@ -23,6 +23,7 @@
 module sw32(
     input reset,    //复位
     input clk,      //系统时钟
+    input en,
     input cs,      //片�??
     input ior,      //读信�?
     input address, //端口�?
@@ -46,12 +47,14 @@ module sw32(
             if ((cs == 1) && (ior == 1) && (address == 0)) begin
                 ioread_data <= {8'b0,swi};
             end
-            if(swi == sw_pre)begin
-                int_sw <= 1'b0;
-            end
-            else begin
-                int_sw <= 1'b1;
-                sw_pre <= swi;
+            if(en == 1) begin
+                if(swi == sw_pre )begin
+                    int_sw <= 1'b0;
+                end
+                else begin
+                    int_sw <= 1'b1;
+                    sw_pre <= swi;
+                end
             end
         end
     end

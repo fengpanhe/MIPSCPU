@@ -24,6 +24,7 @@
 module cp0_reg(
     input rst,
     input clk,
+    input en,
     input we_i,                //CP0的写使能端
     input[4:0] waddr_i,        //CP0写入地址选择
     input[31:0] data_i,     //CP0写入数据
@@ -78,6 +79,7 @@ module cp0_reg(
                 endcase
             end
             
+           
             //处理异常       
             case(excepttype_i)
                 //外部硬件中断

@@ -41,7 +41,7 @@ module pwm16(
         if (reset == 1) begin
             // reset
             maxcount = 16'hffff;
-            midcount = 16'h0000;
+            midcount = 16'h7fff;
             flag = 16'h0000;
             pwm = 1;
             counter = 16'h0001;

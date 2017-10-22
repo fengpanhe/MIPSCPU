@@ -23,6 +23,7 @@
 module c_ID_EX(
     input clk,
     input reset,
+    input en,
     input MemOrIOToReg_id,
     input CPToReg_id,
     input MemOrIOWr_id,
@@ -70,150 +71,171 @@ module c_ID_EX(
     );
     
     //reg for MemToReg
-     m_dffr #(1) dffr1(
+     m_dffre #(1) dffre1(
      .clk(clk),
      .reset(reset),
+     .en(en),
      .din(MemOrIOToReg_id),
      .dout(MemOrIOToReg_ex)
      );
      //reg for CPToReg  
-     m_dffr #(1) dffr2(
+     m_dffre #(1) dffre2(
      .clk(clk),
      .reset(reset),
+     .en(en),
      .din(CPToReg_id),
      .dout(CPToReg_ex)
      );
      //reg for RegWr
-     m_dffr #(1) dffr3(
+     m_dffre #(1) dffre3(
      .clk(clk),
      .reset(reset),
+     .en(en),
      .din(RegWr_id),
      .dout(RegWr_ex)
      );
      //reg for MemWr
-     m_dffr #(1) dffr4(
+     m_dffre #(1) dffre4(
     .clk(clk),
     .reset(reset),
+    .en(en),
     .din(MemOrIOWr_id),
     .dout(MemOrIOWr_ex)
     );
     //reg for CPWr
-    m_dffr #(1) dffr5(
+    m_dffre #(1) dffre5(
     .clk(clk),
     .reset(reset),
+    .en(en),
     .din(CPWr_id),
     .dout(CPWr_ex)
      );
     //reg for MemRead
-    m_dffr #(1) dffr6(        
+    m_dffre #(1) dffre6(        
     .clk(clk),                
-    .reset(reset),  
+    .reset(reset),
+    .en(en),  
     .din(MemOrIORead_id),           
     .dout(MemOrIORead_ex)           
     );                     
     //reg for ALUCode
-    m_dffr #(5) dffr7(
+    m_dffre #(5) dffre7(
     .clk(clk),
     .reset(reset),
+    .en(en),
     .din(ALUCode_id),
     .dout(ALUCode_ex)
     );
     //reg for ALUsrc
-    m_dffr #(2) dffr8(
+    m_dffre #(2) dffre8(
     .clk(clk),
     .reset(reset),
+    .en(en),
     .din({ALUsrcA_id,ALUsrcB_id}),
     .dout({ALUsrcA_ex,ALUsrcB_ex})
     );
     //reg for RegDst
-    m_dffr #(1) dffr9(
+    m_dffre #(1) dffre9(
     .clk(clk),
     .reset(reset),
+    .en(en),
     .din(RegDst_id),
     .dout(RegDst_ex)
     );
     //reg for AL
-    m_dffr #(1) dffr10(
+    m_dffre #(1) dffre10(
     .clk(clk),
     .reset(reset),
+    .en(en),
     .din(AL_id),
     .dout(AL_ex)
     );
     //reg for NextPC
-    m_dffr #(32) dffr11(
+    m_dffre #(32) dffre11(
     .clk(clk),
     .reset(reset),
+    .en(en),
     .din(NextPC_id),
     .dout(NextPC_ex)
     );    
     //reg for Sa
-    m_dffr #(32) dffr12(
+    m_dffre #(32) dffre12(
     .clk(clk),
     .reset(reset),
+    .en(en),
     .din(Sa_id),
     .dout(Sa_ex)
     );
     //reg for Imme
-    m_dffr #(32) dffr13(
+    m_dffre #(32) dffre13(
     .clk(clk),
     .reset(reset),
+    .en(en),
     .din(Imme_id),
     .dout(Imme_ex)
     );
     //reg for RsData
-    m_dffr #(32) dffr14(
+    m_dffre #(32) dffre14(
     .clk(clk),
     .reset(reset),
+    .en(en),
     .din(RsData_id),
     .dout(RsData_ex)
     ); 
     //reg for RtData
-    m_dffr #(32) dffr15(
+    m_dffre #(32) dffre15(
     .clk(clk),
     .reset(reset),
+    .en(en),
     .din(RtData_id),
     .dout(RtData_ex)
     );
     //reg for CPResult
-    m_dffr #(32) dffr16(
+    m_dffre #(32) dffre16(
     .clk(clk),
     .reset(reset),
+    .en(en),
     .din(CPResult_id),
     .dout(CPResult_ex)
     );
     //reg for RtAddr
-    m_dffr #(5) dffr17(
+    m_dffre #(5) dffre17(
     .clk(clk),
     .reset(reset),
+    .en(en),
     .din(RtAddr_id),
     .dout(RtAddr_ex)
     );
     //reg for RdAddt
-    m_dffr #(5) dffr18(
+    m_dffre #(5) dffre18(
     .clk(clk),
     .reset(reset),
+    .en(en),
     .din(RdAddr_id),
     .dout(RdAddr_ex)
     );
     
     //reg for MemExtType 
-    m_dffr #(1) dffr19(
+    m_dffre #(1) dffre19(
     .clk(clk),
     .reset(reset),
+    .en(en),
     .din(MemExtType_id),
     .dout(MemExtType_ex)
     );
     //reg for MemReadSize
-    m_dffr #(2) dffr20(
+    m_dffre #(2) dffre20(
     .clk(clk),
     .reset(reset),
+    .en(en),
     .din(MemReadSize_id),
     .dout(MemReadSize_ex)
     );    
     //reg for signedOp
-    m_dffr #1 dffr21(
+    m_dffre #1 dffre21(
     .clk(clk),
     .reset(reset),
+    .en(en),
     .din(signedOp_id),
     .dout(signedOp_ex)
     );

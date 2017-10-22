@@ -29,6 +29,9 @@ module m_ALU(
     output reg[31:0] ALU_Result,   //ALU运算结果
     output[31:0] HI,                
     output[31:0] LO,
+    output DivFinished,
+    output DivOn,
+    output[4:0] DivCnt,
     output reg Overflow            //有符号加减运算溢出标志
     );
     
@@ -141,7 +144,18 @@ module m_ALU(
         r15 = LO;                           //mflo
     end
     
-    always @(*) begin
+    //wire DivOn;
+    assign DivOn = (ALUCode == ALU_DIV)||(ALUCode == ALU_DIVU);
+    m_DivProc DivProc(
+    .clk(clk),
+    .reset(reset),
+    .DivOn(DivOn),
+    .DivCnt(DivCnt),
+    .DivFinished(DivFinished)
+    );
+    
+    /*处理HI、LO的时序逻辑*/
+    always @(negedge clk) begin
         if(reset == 1) begin
             HI <= 32'h00000000;
             LO <= 32'h00000000;
@@ -157,14 +171,7 @@ module m_ALU(
             endcase
         end
     end
-    /*always @ (negedge clk) begin
-        if(ALUCode == ALU_MULT || ALUCode == ALU_MULTU || ALUCode == ALU_DIV || ALUCode == ALU_DIVU)
-        begin
-            HI <= HI_tmp;
-            LO <= LO_tmp;
-        end
-    
-    end*/
+
     always @(*) begin
         case(ALUCode)
             ALU_ADD: ALU_Result = r0; 

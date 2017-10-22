@@ -23,6 +23,7 @@
 module c_EX_MEM(
     input clk,
     input reset,
+    input en,
     input[31:0] NextPC_ex,
     output[31:0] NextPC_mem,
     input[31:0] ALUResult_ex,
@@ -58,114 +59,130 @@ module c_EX_MEM(
     );
     
      //reg for NextPC
-     m_dffr #(32) dffr1 (
+     m_dffre #(32) dffre1 (
      .clk(clk),
      .reset(reset),
+     .en(en),
      .din(NextPC_ex),
      .dout(NextPC_mem)
      );
      //reg for ALUResult
-     m_dffr #(32) dffr2 (
+     m_dffre #(32) dffre2 (
      .clk(clk),
      .reset(reset),
+     .en(en),
      .din(ALUResult_ex),
      .dout(ALUResult_mem)
      );
      //reg for MemToReg
-      m_dffr #(1) dffr3 (
+      m_dffre #(1) dffre3 (
       .clk(clk),
       .reset(reset),
+      .en(en),
       .din(MemOrIOToReg_ex),
       .dout(MemOrIOToReg_mem)
       );
       //reg for MemWr
-      m_dffr #(1) dffr4 (
+      m_dffre #(1) dffre4 (
       .clk(clk),
       .reset(reset),
+      .en(en),
       .din(MemOrIOWr_ex),
       .dout(MemOrIOWr_mem)
       );
       //reg for MemExtType
-      m_dffr #(1) dffr5 (
+      m_dffre #(1) dffre5 (
       .clk(clk),
       .reset(reset),
+      .en(en),
       .din(MemExtType_ex),
       .dout(MemExtType_mem)
       );
       //reg for MemReadSize
-     m_dffr #(2) dffr6 (
+     m_dffre #(2) dffre6 (
      .clk(clk),
      .reset(reset),
+     .en(en),
      .din(MemReadSize_ex),
      .dout(MemReadSize_mem)
      );
      //reg for RegWr
-     m_dffr #(1) dffr7 (
+     m_dffre #(1) dffre7 (
      .clk(clk),
      .reset(reset),
+     .en(en),
      .din(RegWr_ex),
      .dout(RegWr_mem)
      );
      //reg for RegWrAddr
-     m_dffr #(5) dffr8 (
+     m_dffre #(5) dffre8 (
      .clk(clk),
      .reset(reset),
+     .en(en),
      .din(RegWrAddr_ex),
      .dout(RegWrAddr_mem)
      );
      //reg for MemWrData
-     m_dffr #(32) dffr9 (
+     m_dffre #(32) dffre9 (
      .clk(clk),
      .reset(reset),
+     .en(en),
      .din(MemWrData_ex),
      .dout(MemWrData_mem)
      );
      //reg for AL
-     m_dffr #(1) dffr10 (
+     m_dffre #(1) dffre10 (
      .clk(clk),
      .reset(reset),
+     .en(en),
      .din(AL_ex),
      .dout(AL_mem)
      );
      //reg for CPToReg
-     m_dffr #(1) dffr11(
+     m_dffre #(1) dffre11(
      .clk(clk),
      .reset(reset),
+     .en(en),
      .din(CPToReg_ex),
      .dout(CPToReg_mem)
      );
      //reg for CPWr
-     m_dffr #(1) dffr12(
+     m_dffre #(1) dffre12(
      .clk(clk),
      .reset(reset),
+     .en(en),
      .din(CPWr_ex),
      .dout(CPWr_mem)
      );
      //reg for CPWrData
-     m_dffr #(32) dffr13(
+     m_dffre #(32) dffre13(
      .clk(clk),
      .reset(reset),
+     .en(en),
      .din(CPWrData_ex),
      .dout(CPWrData_mem)
      );
      //reg for CPResult
-     m_dffr #(32) dffr14(
+     m_dffre #(32) dffre14(
      .clk(clk),
      .reset(reset),
+     .en(en),
      .din(CPResult_ex),
      .dout(CPResult_mem)
      );
      //reg for CPWrAddr
-     m_dffr #(5) dffr15(
+     m_dffre #(5) dffre15(
      .clk(clk),
      .reset(reset),
+     .en(en),
      .din(CPWrAddr_ex),
      .dout(CPWrAddr_mem)
      );
      //reg for MemRead
-     m_dffr #(1) dffr16(
+     m_dffre #(1) dffre16(
      .clk(clk),
      .reset(reset),
+     .en(en),
      .din(MemOrIORead_ex),
      .dout(MemOrIORead_mem)
      );

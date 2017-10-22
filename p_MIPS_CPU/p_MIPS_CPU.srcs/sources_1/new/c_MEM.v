@@ -23,6 +23,7 @@
 module c_MEM(
     input clk,
     input reset,
+    input en,
     input MemOrIOWr_mem,
     input MemOrIORead_mem,
     input[1:0] MemReadSize_mem,
@@ -199,6 +200,7 @@ module c_MEM(
    sw32 SW(
    .clk(clk),
    .reset(reset),
+   .en(en),
    .cs(SWCtrl),
    .ior(IORead),
    .address(portAddr[0]),
