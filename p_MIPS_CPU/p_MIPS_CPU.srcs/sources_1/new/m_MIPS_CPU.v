@@ -384,7 +384,7 @@ module m_MIPS_CPU(
     .CPWrData_wb(CPWrData_wb)
     );
    
-   /* assign Instruction = Instruction_if;
+    /*assign Instruction = Instruction_if;
     assign Instruction2 = Instruction_id;
     assign alucode = ALUCode_id;
     assign nextpc_if = NextPC_if;
@@ -394,7 +394,7 @@ module m_MIPS_CPU(
     //assign aluresult_mem = ALUResult_mem;
     /*assign stall = Stall;
     assign pc_ifwrite = PC_IFWrite;*/
-   /* assign ALU_a = ALU_A;
+    /*assign ALU_a = ALU_A;
     assign ALU_b = ALU_B;
     //assign memwrdata_mem = MemWrData_mem;
    // assign regwrdata_mem = RegWrData_mem;

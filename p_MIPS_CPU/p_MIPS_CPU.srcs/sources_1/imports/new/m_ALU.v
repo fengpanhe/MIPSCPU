@@ -141,7 +141,7 @@ module m_ALU(
         r15 = LO;                           //mflo
     end
     
-    always @(negedge clk) begin
+    always @(*) begin
         if(reset == 1) begin
             HI <= 32'h00000000;
             LO <= 32'h00000000;

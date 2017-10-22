@@ -47,15 +47,15 @@ module m_Forward(
       100:RegWrData_wb--Èý½×Êý¾Ý³åÍ»
       */
     assign ForwardA[0] = RegWr_ex && (RegWrAddr_ex != 0) && (RegWrAddr_ex == RsAddr_id);
-    assign ForwardA[1] = RegWr_mem && (RegWrAddr_mem != 0) && (RegWrAddr_ex != RsAddr_id) 
+    assign ForwardA[1] = RegWr_mem && (RegWrAddr_mem != 0) && (~ForwardA[0])
                          && (RegWrAddr_mem == RsAddr_id);
-    assign ForwardA[2] = RegWr_wb && (RegWrAddr_wb != 0) && (RegWrAddr_ex != RsAddr_id) 
-                         && (RegWrAddr_mem != RsAddr_id) && (RegWrAddr_wb == RsAddr_id); 
+    assign ForwardA[2] = RegWr_wb && (RegWrAddr_wb != 0) && (~ForwardA[0]) 
+                         && (~ForwardA[1]) && (RegWrAddr_wb == RsAddr_id); 
     assign ForwardB[0] = RegWr_ex && (RegWrAddr_ex != 0) && (RegWrAddr_ex == RtAddr_id);
-    assign ForwardB[1] = RegWr_mem && (RegWrAddr_mem != 0) && (RegWrAddr_ex != RtAddr_id) 
+    assign ForwardB[1] = RegWr_mem && (RegWrAddr_mem != 0) && (~ForwardB[0])
                          && (RegWrAddr_mem == RtAddr_id);
-    assign ForwardB[2] = RegWr_wb && (RegWrAddr_wb != 0) && (RegWrAddr_ex != RtAddr_id) 
-                         && (RegWrAddr_mem != RtAddr_id) && (RegWrAddr_wb == RtAddr_id); 
+    assign ForwardB[2] = RegWr_wb && (RegWrAddr_wb != 0) && (~ForwardB[0]) 
+                         && (~ForwardB[1]) && (RegWrAddr_wb == RtAddr_id); 
     /*ForwardCP[1:0]
       000:CPData
       001:CPWrData_ex
