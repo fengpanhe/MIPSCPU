@@ -69,7 +69,10 @@ module m_MIPS_CPU(
     output jr,
     output z,*/
     //output[4:0] excCode,
-    //output clk2,
+   /* output divfinished,
+    output DivOn,
+    output[4:0] DivCnt,
+    output clk2,*/
     output[7:0] DISPOutput,             //������������
     output[7:0] DISPEn,                 //�����ʹ�ܿ������
     input[23:0] SWInput,                //���뿪������
@@ -88,6 +91,8 @@ module m_MIPS_CPU(
             .clk_sys(clk)
         );
     //assign clk2 = clk;
+    wire DivFinished;
+    assign divfinished = DivFinished;
     wire pulse0,pulse1;
     wire cnt0,cnt1,pwmWave;
     wire WDTRst;                        //���Ź������λ�ź�?      
@@ -102,7 +107,7 @@ module m_MIPS_CPU(
     c_IF IF(
     .clk(clk),
     .reset(reset),
-    .PC_IFWrite(PC_IFWrite),
+    .PC_IFWrite(PC_IFWrite && DivFinished),
     .Jr(JR),
     .J(J),
     .Z(Z),
@@ -116,7 +121,7 @@ module m_MIPS_CPU(
     c_IF_ID IFToIDRegs(
     .clk(clk),   
     .reset(reset||IF_flush),
-    .en(PC_IFWrite),
+    .en(PC_IFWrite && DivFinished),
     .NextPC_if(NextPC_if),
     .Instruction_if(Instruction_if),
     .NextPC_id(NextPC_id),
@@ -213,6 +218,7 @@ module m_MIPS_CPU(
     c_ID_EX IDToEXRegs(
     .clk(clk),
     .reset(reset||Stall),
+    .en(DivFinished),
     .MemOrIOToReg_id(MemOrIOToReg_id),
     .CPToReg_id(CPToReg_id),
     .RegWr_id(RegWr_id),
@@ -288,6 +294,9 @@ module m_MIPS_CPU(
     .MemWrData_ex(MemWrData_ex),
     .CPWrData_ex(CPWrData_ex),
     .Overflow(Overflow),
+    .DivFinished(DivFinished),
+    .DivOn(DivOn),
+    .DivCnt(DivCnt),
     .ALU_A(ALU_A),
     .ALU_B(ALU_B)
     );
@@ -295,6 +304,7 @@ module m_MIPS_CPU(
     c_EX_MEM EXToMEMRegs(
     .clk(clk),
     .reset(reset),
+    .en(DivFinished),
     .NextPC_ex(NextPC_ex),
     .NextPC_mem(NextPC_mem),
     .ALUResult_ex(ALUResult_ex),
@@ -332,6 +342,7 @@ module m_MIPS_CPU(
     c_MEM MEM(
     .clk(clk),
     .reset(reset),
+    .en(DivFinished),
     .MemOrIOWr_mem(MemOrIOWr_mem),
     .MemOrIORead_mem(MemOrIORead_mem),
     .MemReadSize_mem(MemReadSize_mem),
@@ -370,6 +381,7 @@ module m_MIPS_CPU(
     c_MEM_WB MEMToWBRegs(
     .clk(clk),
     .reset(reset),
+    .en(DivFinished),
     .RegWr_mem(RegWr_mem),
     .CPWr_mem(CPWr_mem),
     .RegWrAddr_mem(RegWrAddr_mem),

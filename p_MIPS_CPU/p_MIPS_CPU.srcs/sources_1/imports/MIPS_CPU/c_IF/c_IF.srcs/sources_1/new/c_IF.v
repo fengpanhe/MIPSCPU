@@ -32,15 +32,14 @@ module c_IF(
     input[31:0] BranchAddr,     //Branch指令目标地址
     output[31:0] Instruction_if,//取出的机器指令
     output[31:0] NextPC_if      //顺序执行的下一条PC地址 
-    //output[31:0] curPC_if
     );
    
     reg[31:0] PC_in;
     reg[31:0] PC_out;
     reg[31:0] NextPC;
     wire[2:0] PCSource = {Jr,J,Z};
-    //assign curPC_if = PC_out;
-    assign NextPC_if = NextPC;//因为ROM取指令有一个时钟的延迟，故输出的NextPC用curPC代替
+   
+    assign NextPC_if = NextPC;
     initial 
     begin
     PC_in = 0;

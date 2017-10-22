@@ -33,12 +33,14 @@ module key_test(
     wire[31:0] ALUb_ex;
     wire[31:0] ALUResult_ex;
     wire[31:0] HI,LO;
-  
+    wire DivFinished;
+    wire DivOn;
+    wire[4:0] DivCnt;
     /*wire[4:0] ExcCode;
     wire[3:0] line; 
-    reg[3:0] col; 
+    reg[3:0] col; */
     reg[23:0] SWInput;
-    wire[23:0] LEDOutput;*/
+    wire[23:0] LEDOutput;
     wire[7:0] DISPOutput;
     wire[7:0] DISPEn;
    // wire[31:0] MemWrData_mem;
@@ -52,14 +54,14 @@ module key_test(
     always #5 clk = ~clk;
     
 
-    /*initial
+    initial
     begin
     SWInput = 24'h0000ff;
-    #500
+    #1500
     SWInput = 24'h123456;
-    #450
+    #1000
     SWInput = 24'h001111;
-    end*/
+    end
     
      
     initial 
@@ -87,6 +89,9 @@ module key_test(
    // .IOReadData(IOReadData),
    // .IOReadData_sw(IOReadData_sw),
    // .SWctrl(SWctrl),
+    .divfinished(DivFinished),
+    .DivOn(DivOn),
+    .DivCnt(DivCnt),
     .ALU_a(ALUa_ex),
     .ALU_b(ALUb_ex),
     .alucode(ALUCode),
@@ -97,9 +102,9 @@ module key_test(
     //.aluresult_mem(ALUResult_mem),
    /* .excCode(ExcCode),
     .col(col), 
-    .line(line),
+    .line(line),*/
     .SWInput(SWInput),
-    .LEDOutput(LEDOutput),*/
+    .LEDOutput(LEDOutput),
     .DISPOutput(DISPOutput),
     .DISPEn(DISPEn)
      );

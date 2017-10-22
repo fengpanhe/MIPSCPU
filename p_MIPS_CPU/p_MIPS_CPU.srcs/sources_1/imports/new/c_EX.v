@@ -42,6 +42,9 @@ module c_EX(
     output[31:0] MemWrData_ex,         //对于SW类型的指令，需要写入MEM中的数据
     output[31:0] CPWrData_ex,          //最终确定写回CP0的数据
     output Overflow,                   //有符号加减运算的溢出标志位
+    output DivFinished,
+    output DivOn,
+    output[4:0] DivCnt,
     output reg[31:0] ALU_A,           //ALU的源操作数A(用于测试)
     output reg[31:0] ALU_B,          //ALU的源操作数B(用于测试)
     output[31:0] HI,                  //HI寄存器中的值(用于测试)
@@ -99,6 +102,9 @@ module c_EX(
     .ALU_Result(ALUResult),
     .HI(HI),
     .LO(LO),
+    .DivFinished(DivFinished),
+    .DivOn(DivOn),
+    .DivCnt(DivCnt),
     .Overflow(Overflow)
     );
     
