@@ -74,7 +74,7 @@ module disp32(
             count = 0;
         end 
         else begin
-            if(count == 7)
+            if(count == 8)
                 count = 0;
             else begin
                 count = count + 1;

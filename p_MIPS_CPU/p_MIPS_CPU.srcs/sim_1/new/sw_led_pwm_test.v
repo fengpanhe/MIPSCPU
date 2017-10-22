@@ -44,18 +44,18 @@ module sw_led_pwm_test(
 
     assign SWInput = 32'h12345678;
     m_MIPS_CPU MIPS_CPU(
-     .clk(clk),
+     .clk0(clk),
      .rst(reset),
      .Instruction(Instruction_if),
      .Instruction2(Instruction_id),
-     .ALUCode(ALUCode_id),
+//     .ALUCode(ALUCode_id),
      .ALU_a(ALUa_ex),
      .ALU_b(ALUb_ex),
      .aluresult_ex(ALUResult_ex),
-     .pwmWave(pwmWave),
-     .SWInput(SWInput),
-     .LEDOutput(LEDOutput),
-     .regwrdata_mem(RegWrData_mem),
-     .regwrdata_wb(RegWrData_wb)
+     .pwmWave(pwmWave)
+//     .SWInput(SWInput),
+//     .LEDOutput(LEDOutput),
+//     .regwrdata_mem(RegWrData_mem),
+//     .regwrdata_wb(RegWrData_wb)
      );
 endmodule
