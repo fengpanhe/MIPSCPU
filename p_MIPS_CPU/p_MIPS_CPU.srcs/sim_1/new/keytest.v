@@ -28,7 +28,7 @@ module key_test(
     wire clk2;
     wire[31:0] Instruction_if,Instruction_id;
     wire[31:0] NextPC_if,NextPC_id;
-    wire[4:0] ALUCode;
+    /*wire[4:0] ALUCode;
     wire[31:0] ALUa_ex;
     wire[31:0] ALUb_ex;
     wire[31:0] ALUResult_ex;
@@ -37,8 +37,8 @@ module key_test(
     /*wire[4:0] ExcCode;
     wire[3:0] line; 
     reg[3:0] col; 
-    reg[23:0] SWInput;
-    wire[23:0] LEDOutput;*/
+    reg[23:0] SWInput;*/
+    wire[23:0] LEDOutput;
     wire[7:0] DISPOutput;
     wire[7:0] DISPEn;
    // wire[31:0] MemWrData_mem;
@@ -87,19 +87,19 @@ module key_test(
    // .IOReadData(IOReadData),
    // .IOReadData_sw(IOReadData_sw),
    // .SWctrl(SWctrl),
-    .ALU_a(ALUa_ex),
+   /* .ALU_a(ALUa_ex),
     .ALU_b(ALUb_ex),
     .alucode(ALUCode),
     .aluresult_ex(ALUResult_ex),
     .HI(HI),
-    .LO(LO),
+    .LO(LO),*/
     .clk2(clk2),
     //.aluresult_mem(ALUResult_mem),
    /* .excCode(ExcCode),
     .col(col), 
     .line(line),
-    .SWInput(SWInput),
-    .LEDOutput(LEDOutput),*/
+    .SWInput(SWInput),*/
+    .LEDOutput(LEDOutput),
     .DISPOutput(DISPOutput),
     .DISPEn(DISPEn)
      );
