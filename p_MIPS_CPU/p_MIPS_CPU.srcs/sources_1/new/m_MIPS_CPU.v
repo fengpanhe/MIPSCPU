@@ -23,16 +23,16 @@
 module m_MIPS_CPU(
     input clk0,                          //ϵͳʱ��
     input rst,                          //�ⲿ��λ�ź�
-    //output[31:0] Instruction,
+    output[31:0] Instruction,
     /*output stall,
     output pc_ifwrite,
     output flush,*/
     //output[4:0] alucode,
-   /* output[31:0] nextpc_if,
+    output[31:0] nextpc_if,
     output[31:0] nextpc_id,
     /*output[31:0] nextpc_ex,
     output[31:0] nextpc_mem,*/
-    //output[31:0] Instruction2,
+    output[31:0] Instruction2,
     /*output[31:0] ALU_a,
     output[31:0] ALU_b,
     output[31:0] aluresult_ex,
@@ -71,8 +71,8 @@ module m_MIPS_CPU(
     //output[4:0] excCode,
    /* output divfinished,
     output DivOn,
-    output[4:0] DivCnt,
-    output clk2,*/
+    output[4:0] DivCnt,*/
+    output clk2,
     output[7:0] DISPOutput,             //������������
     output[7:0] DISPEn,                 //�����ʹ�ܿ������
     input[23:0] SWInput,                //���뿪������
@@ -396,7 +396,7 @@ module m_MIPS_CPU(
     .CPWrData_wb(CPWrData_wb)
     );
    
-   /* assign Instruction = Instruction_if;
+    assign Instruction = Instruction_if;
     assign Instruction2 = Instruction_id;
     //assign alucode = ALUCode_id;
     assign nextpc_if = NextPC_if;

@@ -32,12 +32,12 @@ module key_test(
     wire[31:0] ALUa_ex;
     wire[31:0] ALUb_ex;
     wire[31:0] ALUResult_ex;
-    wire[31:0] HI,LO;
+    wire[31:0] HI,LO;*/
   
-    /*wire[4:0] ExcCode;
+    //wire[4:0] ExcCode;
     wire[3:0] line; 
     reg[3:0] col; 
-    reg[23:0] SWInput;*/
+    reg[23:0] SWInput;
     wire[23:0] LEDOutput;
     wire[7:0] DISPOutput;
     wire[7:0] DISPEn;
@@ -52,23 +52,23 @@ module key_test(
     always #5 clk = ~clk;
     
 
-    /*initial
+    initial
     begin
     SWInput = 24'h0000ff;
-    #500
+    /*#500
     SWInput = 24'h123456;
     #450
-    SWInput = 24'h001111;
-    end*/
+    SWInput = 24'h001111;*/
+    end
     
      
     initial 
     begin 
-   // col = 4'b1111; 
+    col = 4'b1111; 
     reset = 1; 
-    #10 reset = 0; 
-    //#300 col[0] = line[0]; 
-    //#50 col[0] = 1; 
+    #100 reset = 0; 
+    #2100 col[0] = line[0]; 
+    #200 col[0] = 1; 
     end 
   
     m_MIPS_CPU MIPS_CPU(
@@ -95,10 +95,10 @@ module key_test(
     .LO(LO),*/
     .clk2(clk2),
     //.aluresult_mem(ALUResult_mem),
-   /* .excCode(ExcCode),
+  //.excCode(ExcCode),
     .col(col), 
     .line(line),
-    .SWInput(SWInput),*/
+    .SWInput(SWInput),
     .LEDOutput(LEDOutput),
     .DISPOutput(DISPOutput),
     .DISPEn(DISPEn)
