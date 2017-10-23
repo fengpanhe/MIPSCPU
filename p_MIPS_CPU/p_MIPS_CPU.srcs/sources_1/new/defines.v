@@ -21,7 +21,8 @@
 
 `define clk_div 32'h00000002
 //  7A120=500000
-`define key_delay_count 32'h0000C350            //32'h000061A8
+//`define key_delay_count 32'h0000C350            //32'h000061A8
+`define key_delay_count 32'h00000001 
 `define disp_clk_div 32'h00001388          
 //******************************************************************************
 //                             项目的全部宏定义
