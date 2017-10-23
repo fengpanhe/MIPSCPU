@@ -133,7 +133,7 @@ module c_ID(
     .signedOp(signedOp_id)
     );
     //Forward
-    wire[2:0] ForwardA,ForwardB,ForwardCP;
+    wire[2:0] ForwardA,ForwardB,ForwardCP,ForwardEPC;
     m_Forward Forward(
     .RegWrAddr_mem(RegWrAddr_mem),
     .RegWrAddr_wb(RegWrAddr_wb),
@@ -152,7 +152,8 @@ module c_ID(
     .RdAddr_id(RdAddr_id),
     .ForwardA(ForwardA),
     .ForwardB(ForwardB),
-    .ForwardCP(ForwardCP)
+    .ForwardCP(ForwardCP),
+    .ForwardEPC(ForwardEPC)
     );
      
     //Regs
@@ -224,6 +225,7 @@ module c_ID(
     .data_i(CPWrData_wb),
     .raddr_i(RdAddr_id),
     .ForwardCP(ForwardCP),
+    .ForwardEPC(ForwardEPC),
     .CPWrData_ex(CPWrData_ex),
     .CPWrData_mem(CPWrData_mem),
     .excepttype_i(excCode),

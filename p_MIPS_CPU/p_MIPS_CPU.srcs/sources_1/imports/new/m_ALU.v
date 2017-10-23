@@ -146,7 +146,7 @@ module m_ALU(
     
     //wire DivOn;
     assign DivOn = (ALUCode == ALU_DIV)||(ALUCode == ALU_DIVU);
-    m_DivProccess DivProc(
+    m_DivProc DivProc(
     .clk(clk),
     .reset(reset),
     .DivOn(DivOn),

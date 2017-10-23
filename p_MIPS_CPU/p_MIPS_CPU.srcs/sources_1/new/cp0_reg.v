@@ -31,6 +31,7 @@ module cp0_reg(
     input[4:0] raddr_i,        //CP0读取地址
     output reg[31:0] data_o,     //CP0读取数据    
     input[2:0] ForwardCP,
+    input[2:0] ForwardEPC,
     input[31:0] CPWrData_ex,
     input[31:0] CPWrData_mem,
     //异常相关输入接口
@@ -41,13 +42,13 @@ module cp0_reg(
     output reg[31:0] status_o,   //Status Reg的值
     output reg[31:0] cause_o,    //Cause Reg的值
     output reg[31:0] epc_o,      //EPC Reg的值，用于保存中断返回地址
-    output[31:0] eretAddr,
+    output reg[31:0] eretAddr,
     output  int_en,              //中断使能位
     output[5:0] int_mask
 
     );
     reg[31:0] CPResult;
-    assign eretAddr = epc_o;
+    //assign eretAddr = epc_o;
     assign int_en = status_o[0];
     assign int_mask = status_o[15:10];
 //******************************************************************************
@@ -147,6 +148,16 @@ module cp0_reg(
         3'b001: data_o <= CPWrData_ex;
         3'b010: data_o <= CPWrData_mem;
         3'b100: data_o <= data_i;
+        endcase
+    end
+    
+    always @(*)
+    begin
+        case(ForwardEPC)
+        3'b000: eretAddr <= epc_o;
+        3'b001: eretAddr <= CPWrData_ex;
+        3'b010: eretAddr <= CPWrData_mem;
+        3'b100: eretAddr <= data_i;
         endcase
     end
 endmodule
