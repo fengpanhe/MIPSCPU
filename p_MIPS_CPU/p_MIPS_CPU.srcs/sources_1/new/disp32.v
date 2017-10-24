@@ -27,12 +27,12 @@ module disp32(
     input wire iow,             //i/0д�ź�
     input wire[15:0] data,      //ϵͳ�����е�������
     input wire[2:0] address,    //�˿ڵ�ַ
-    output wire[7:0] led_o,      //led����ź�
+    output wire[7:0] led_o,      //led����ź�?
     output reg[7:0] led_enable_o      //ledʹ���ź�
     );
-    reg[31:0] rdata; //���������������
-    reg[15:0] tdata; //������ʾ���������� �Ͱ�λ��Ӧ8��С���㣬�߰�λ��ʾĳ��������Ƿ���ʾ
-    reg[2:0] count; //8������
+    reg[31:0] rdata; //���������������?
+    reg[15:0] tdata; //������ʾ���������� �Ͱ�λ��Ӧ8��С���㣬�߰�λ��ʾĳ��������Ƿ����?
+    reg[3:0] count; //8������
     initial
     begin
     rdata <= 32'h00000000;
@@ -90,57 +90,57 @@ module disp32(
         );
 
     always @(negedge clk) begin
-        case(count[2:0])
-            3'b000: begin
+        case(count[3:0])
+            4'b000: begin
                 if (tdata[8] == 1) begin
                     dig = rdata[3:0];
                     point = tdata[0];
                     led_enable_o <= 8'b11111110;
                 end
             end
-            3'h1: begin
+            4'h1: begin
                 if (tdata[9] == 1) begin
                     dig = rdata[7:4];
                     point = tdata[1];
                     led_enable_o <= 8'b11111101;
                 end
             end
-            3'h2: begin
+            4'h2: begin
                 if (tdata[10] == 1) begin
                     dig = rdata[11:8];
                     point = tdata[2];
                     led_enable_o <= 8'b11111011;
                 end
             end
-            3'h3: begin
+            4'h3: begin
                 if (tdata[11] == 1) begin
                     dig = rdata[15:12];
                     point = tdata[3];
                     led_enable_o <= 8'b11110111;
                 end
             end
-            3'h4: begin
+            4'h4: begin
                 if (tdata[12] == 1) begin
                     dig = rdata[19:16];
                     point = tdata[4];
                     led_enable_o <= 8'b11101111;
                 end
             end
-            3'h5: begin
+            4'h5: begin
                 if (tdata[13] == 1) begin
                     dig = rdata[23:20];
                     point = tdata[5];
                     led_enable_o <= 8'b11011111;
                 end
             end
-            3'h6: begin
+            4'h6: begin
                 if (tdata[14] == 1) begin
                     dig = rdata[27:24];
                     point = tdata[6];
                     led_enable_o <= 8'b10111111;
                 end
             end
-            3'h7: begin
+            4'h7: begin
                 if (tdata[15] == 1) begin
                     dig = rdata[31:28];
                     point = tdata[7];
