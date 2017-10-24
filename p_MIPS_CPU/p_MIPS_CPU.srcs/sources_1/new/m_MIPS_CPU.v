@@ -23,12 +23,12 @@
 module m_MIPS_CPU(
     input clk0,                          //ϵͳʱ��
     input rst,                          //�ⲿ��λ�ź�
-   // output[31:0] Instruction,
+    output[31:0] Instruction,
     /*output stall,
     output pc_ifwrite,*/
     /*output flush,
-    output[4:0] alucode,
-    output[31:0] nextpc_if,
+    output[4:0] alucode,*/
+    /*output[31:0] nextpc_if,
     output[31:0] nextpc_id,
     /*output[31:0] nextpc_ex,
     output[31:0] nextpc_mem,*/
@@ -36,7 +36,7 @@ module m_MIPS_CPU(
     output[31:0] ALU_a,
     output[31:0] ALU_b,
     output[31:0] aluresult_ex,
-    output[31:0] rAddr,
+    /*output[31:0] rAddr,
     output sFlag,
     //output[31:0] memwrdata_mem,
     //output[31:0] regwrdata_mem,
@@ -410,19 +410,19 @@ module m_MIPS_CPU(
    
    /* assign Instruction = Instruction_if;
     assign Instruction2 = Instruction_id;
-    assign alucode = ALUCode_id;
+    //assign alucode = ALUCode_id;
     assign nextpc_if = NextPC_if;
     assign nextpc_id = NextPC_id;
     //assign nextpc_mem = NextPC_mem;
     assign aluresult_ex = ALUResult_ex;
     //assign aluresult_mem = ALUResult_mem;
-    /*assign stall = Stall;*/
+    //assign stall = Stall;*/
     //assign pc_ifwrite = PC_IFWrite;
    /* assign ALU_a = ALU_A;
     assign ALU_b = ALU_B;
     //assign memwrdata_mem = MemWrData_mem;
    // assign regwrdata_mem = RegWrData_mem;
-    assign flush = IF_flush;
+   // assign flush = IF_flush;
     /*assign regwr_wb = RegWr_wb;
     assign regwraddr_wb = RegWrAddr_wb;
     assign regwrdata_mem = RegWrData_mem;

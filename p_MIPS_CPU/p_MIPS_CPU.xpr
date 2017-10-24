@@ -593,7 +593,6 @@
         <Option Name="DesignMode" Val="RTL"/>
         <Option Name="TopModule" Val="key_test"/>
         <Option Name="TopLib" Val="xil_defaultlib"/>
-        <Option Name="SimMode" Val="post-synthesis"/>
         <Option Name="SrcSet" Val="sources_1"/>
       </Config>
     </FileSet>

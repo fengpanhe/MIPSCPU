@@ -1,6 +1,6 @@
 .DATA
 .TEXT 0x0000
-start: addi  $sp,$0,0xbffc
+start: nop 
   addi  $sp,$0,0xbffc
   sll   $sp,$sp,16
   srl   $sp,$sp,16
@@ -54,7 +54,7 @@ lop: addi  $t2,$t2,-1
   sw  $0,0xfc00($0)
   sw  $0,0xfc02($0)
   sw  $0,0xfc04($0)
-  j loop
+  j 0x8000
 error: sw  $s0,0xfc00($0)
   sw  $s1,0xfc04($0)
   addi  $t5,$0,0xffff
