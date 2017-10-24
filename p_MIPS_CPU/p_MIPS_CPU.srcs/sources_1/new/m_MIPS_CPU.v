@@ -23,19 +23,21 @@
 module m_MIPS_CPU(
     input clk0,                          //ϵͳʱ��
     input rst,                          //�ⲿ��λ�ź�
-    output[31:0] Instruction,
+   // output[31:0] Instruction,
     /*output stall,
-    output pc_ifwrite,
-    output flush,*/
-    //output[4:0] alucode,
+    output pc_ifwrite,*/
+    /*output flush,
+    output[4:0] alucode,
     output[31:0] nextpc_if,
     output[31:0] nextpc_id,
     /*output[31:0] nextpc_ex,
     output[31:0] nextpc_mem,*/
-    output[31:0] Instruction2,
-    /*output[31:0] ALU_a,
+    /*output[31:0] Instruction2,
+    output[31:0] ALU_a,
     output[31:0] ALU_b,
     output[31:0] aluresult_ex,
+    output[31:0] rAddr,
+    output sFlag,
     //output[31:0] memwrdata_mem,
     //output[31:0] regwrdata_mem,
     //output[31:0] wd,/////////////////
@@ -72,7 +74,8 @@ module m_MIPS_CPU(
    /* output divfinished,
     output DivOn,
     output[4:0] DivCnt,*/
-    output clk2,
+    //output clk2,
+    //output clk3,
     output[7:0] DISPOutput,             //������������
     output[7:0] DISPEn,                 //�����ʹ�ܿ������
     input[23:0] SWInput,                //���뿪������
@@ -86,11 +89,17 @@ module m_MIPS_CPU(
     output pwmWave  */                  //pwms����ź�?
     );
     wire clk;
+    wire clk_tmp;
     clock_div #(`clk_div) U0(
             .clk(clk0),
             .clk_sys(clk)
         );
+    clock_div U1(
+    .clk(clk0),
+    .clk_sys(clk_tmp)
+    );
     //assign clk2 = clk;
+    //assign clk3 = clk_tmp;
     wire DivFinished;
     assign divfinished = DivFinished;
     wire pulse0,pulse1;
@@ -154,6 +163,7 @@ module m_MIPS_CPU(
     wire Overflow;
     c_ID ID(
     .clk(clk),
+    .clk2(clk_tmp),
     .reset(reset),
     .Instruction_id(Instruction_id),
     .NextPC_id(NextPC_id),
@@ -210,6 +220,8 @@ module m_MIPS_CPU(
     .RsAddr_id(RsAddr_id),
     .RtAddr_id(RtAddr_id),
     .RdAddr_id(RdAddr_id),
+    .rAddr(rAddr),
+    .sFlag(sFlag),
     .Sa_id(Sa_id),
     .Imme_id(Imme_id)
     );
@@ -396,22 +408,22 @@ module m_MIPS_CPU(
     .CPWrData_wb(CPWrData_wb)
     );
    
-    assign Instruction = Instruction_if;
+   /* assign Instruction = Instruction_if;
     assign Instruction2 = Instruction_id;
-    //assign alucode = ALUCode_id;
+    assign alucode = ALUCode_id;
     assign nextpc_if = NextPC_if;
     assign nextpc_id = NextPC_id;
     //assign nextpc_mem = NextPC_mem;
-    //assign aluresult_ex = ALUResult_ex;
+    assign aluresult_ex = ALUResult_ex;
     //assign aluresult_mem = ALUResult_mem;
-    /*assign stall = Stall;
-    assign pc_ifwrite = PC_IFWrite;*/
-    /*assign ALU_a = ALU_A;
+    /*assign stall = Stall;*/
+    //assign pc_ifwrite = PC_IFWrite;
+   /* assign ALU_a = ALU_A;
     assign ALU_b = ALU_B;
     //assign memwrdata_mem = MemWrData_mem;
    // assign regwrdata_mem = RegWrData_mem;
-    /*assign flush = IF_flush;
-    assign regwr_wb = RegWr_wb;
+    assign flush = IF_flush;
+    /*assign regwr_wb = RegWr_wb;
     assign regwraddr_wb = RegWrAddr_wb;
     assign regwrdata_mem = RegWrData_mem;
     assign rsaddr_id = RsAddr_id;
