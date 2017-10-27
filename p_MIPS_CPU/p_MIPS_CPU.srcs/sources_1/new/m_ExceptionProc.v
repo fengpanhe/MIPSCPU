@@ -21,6 +21,7 @@
 
 
 module m_ExceptionProc(
+    input clk,
     input[4:0] ALUCode,
     input[5:0] Func,
     input Overflow,
@@ -55,24 +56,31 @@ module m_ExceptionProc(
     parameter EXC_OVERFLOW = 5'b01100;
     
     parameter EXC_ADDR = 32'h00001000;  //异常处理程序入口地址
-    
+    //parameter EXC_ADDR = 32'h00000030;
     initial 
     begin
         Je <= 0;
     end
-    
+
     wire[2:0] RetAddrSrc = {Jr,Jmp,Z};
-    always @(*)
+    always @(posedge clk)
     begin
-        if(SaveFlag && Je) begin
+        if(SaveFlag) begin
               case(RetAddrSrc)
               3'b000: RetAddr <= NextPC; 
               3'b001: RetAddr <= BranchAddr;
               3'b010: RetAddr <= JAddr;
               3'b100: RetAddr <= JrAddr;
-              default:RetAddr <= NextPC;
+              default:begin
+                        if(ALUCode == ALU_EXCEPT && Func == ERET_func) begin
+                            RetAddr <= eretAddr;
+                        end
+                        else begin
+                            RetAddr <= NextPC;
+                        end
+                      end
               endcase
-        end    
+        end  
     end
     
     always @(*)

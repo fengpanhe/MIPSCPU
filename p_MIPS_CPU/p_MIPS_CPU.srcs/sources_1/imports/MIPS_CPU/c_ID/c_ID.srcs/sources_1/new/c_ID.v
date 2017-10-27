@@ -22,6 +22,7 @@
 
 module c_ID(
     input clk,                          //机器时钟
+    input clk2,
     input reset,
     input[31:0] Instruction_id,         //待执行指令
     input[31:0] NextPC_id,              //PC+4地址
@@ -77,12 +78,16 @@ module c_ID(
     output[31:0] CPData_id,             
     output[4:0] RsAddr_id,             
     output[4:0] RtAddr_id,             
-    output[4:0] RdAddr_id,            
+    output[4:0] RdAddr_id,     
+    output[31:0] rAddr,       
+    output sFlag,
     output[31:0] Sa_id,                 //零扩展成32bit的移位立即数
     output[31:0] Imme_id                //符号扩展成32bit的立即数
     );
     wire[31:0] RetAddr;
+    assign rAddr=RetAddr;
     wire SaveFlag; 
+    assign sFlag = SaveFlag;
     assign SaveFlag = |Instruction_id;
     wire OF;                            //有符号加减溢出标志
     wire[31:0] JAddr;
@@ -133,7 +138,7 @@ module c_ID(
     .signedOp(signedOp_id)
     );
     //Forward
-    wire[2:0] ForwardA,ForwardB,ForwardCP;
+    wire[2:0] ForwardA,ForwardB,ForwardCP,ForwardEPC;
     m_Forward Forward(
     .RegWrAddr_mem(RegWrAddr_mem),
     .RegWrAddr_wb(RegWrAddr_wb),
@@ -152,7 +157,8 @@ module c_ID(
     .RdAddr_id(RdAddr_id),
     .ForwardA(ForwardA),
     .ForwardB(ForwardB),
-    .ForwardCP(ForwardCP)
+    .ForwardCP(ForwardCP),
+    .ForwardEPC(ForwardEPC)
     );
      
     //Regs
@@ -194,6 +200,7 @@ module c_ID(
     wire[5:0] int_mask;             //中断屏蔽位
     //assign int_i = 0;
     m_ExceptionProc EP(
+    .clk(clk2),
     .ALUCode(ALUCode_id),
     .Func(Instruction_id[5:0]),
     .Overflow(OF),
@@ -224,6 +231,7 @@ module c_ID(
     .data_i(CPWrData_wb),
     .raddr_i(RdAddr_id),
     .ForwardCP(ForwardCP),
+    .ForwardEPC(ForwardEPC),
     .CPWrData_ex(CPWrData_ex),
     .CPWrData_mem(CPWrData_mem),
     .excepttype_i(excCode),

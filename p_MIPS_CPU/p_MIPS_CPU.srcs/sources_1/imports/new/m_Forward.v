@@ -19,7 +19,6 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
 module m_Forward(
     input[4:0] RegWrAddr_mem,
     input[4:0] RegWrAddr_wb,
@@ -38,7 +37,8 @@ module m_Forward(
     input[4:0] RdAddr_id,
     output[2:0] ForwardA,
     output[2:0] ForwardB,
-    output[2:0] ForwardCP
+    output[2:0] ForwardCP,
+    output[2:0] ForwardEPC
     );
     /*ForwardA/B[2:0] 
       000:RsData/RtData--ÎÞÊý¾Ý³åÍ»
@@ -56,30 +56,14 @@ module m_Forward(
                          && (RegWrAddr_mem == RtAddr_id);
     assign ForwardB[2] = RegWr_wb && (RegWrAddr_wb != 0) && (~ForwardB[0]) 
                          && (~ForwardB[1]) && (RegWrAddr_wb == RtAddr_id); 
-    /*ForwardCP[1:0]
-      000:CPData
-      001:CPWrData_ex
-      010:CPWrData_mem
-      100:CPWrData_wb
-      */
     assign ForwardCP[0] = CPWr_ex && (CPWrAddr_ex == RdAddr_id);
-    assign ForwardCP[1] = CPWr_mem && (CPWrAddr_ex != RdAddr_id) && (CPWrAddr_mem == RdAddr_id);
-    assign ForwardCP[2] = CPWr_wb && (CPWrAddr_ex != RdAddr_id) && (CPWrAddr_mem != RdAddr_id) && (CPWrAddr_wb == RdAddr_id);
+    assign ForwardCP[1] = CPWr_mem  && (~ForwardCP[0])
+                         && (CPWrAddr_mem == RdAddr_id);
+    assign ForwardCP[2] = CPWr_wb  && (~ForwardCP[0])
+                         && (~ForwardCP[1]) && (CPWrAddr_wb == RdAddr_id);
     
-    
-    
-    /*assign ForwardA[0] = RegWr_wb && (RegWrAddr_wb != 0)
-                                &&(RegWrAddr_mem != RsAddr_ex)
-                                &&(RegWrAddr_wb == RsAddr_ex);
-    assign ForwardA[1] = RegWr_mem && (RegWrAddr_mem != 0)
-                        &&(RegWrAddr_mem == RsAddr_ex);
-    assign ForwardB[0] = RegWr_wb && (RegWrAddr_wb != 0)
-                        &&(RegWrAddr_mem != RtAddr_ex)
-                        &&(RegWrAddr_wb == RtAddr_ex);
-    assign ForwardB[1] = RegWr_mem && (RegWrAddr_mem != 0)
-                        &&(RegWrAddr_mem == RtAddr_ex);   
-                        
-    assign ForwardCP[0] = CPWr_wb && (CPWrAddr_mem != RdAddr_ex) && (CPWrAddr_wb == RdAddr_ex);
-    
-    assign ForwardCP[1] = CPWr_mem && (CPWrAddr_mem == RdAddr_ex);*/
+    assign ForwardEPC[0] = CPWr_ex && (CPWrAddr_ex == 5'b01110);
+    assign ForwardEPC[1] = CPWr_mem && (~ForwardEPC[0]) && (CPWrAddr_mem == 5'b01110);
+    assign ForwardEPC[2] = CPWr_wb  && (~ForwardEPC[0])
+                           && (~ForwardEPC[1]) && (CPWrAddr_wb ==5'b01110);
 endmodule
