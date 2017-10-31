@@ -76,6 +76,7 @@ module c_MEM(
     assign IOReadData = IOResult;
     m_DataRam DataRam(
     .clock(clk),
+    .reset(reset),
     .MemWr(MemWr),
     .MemWrSize(MemReadSize_mem),
     .MemExtType(MemExtType_mem),

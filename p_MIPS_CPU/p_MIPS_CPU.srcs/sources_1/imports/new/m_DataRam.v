@@ -21,6 +21,7 @@
 
 module m_DataRam(
     input clock,
+    input reset,
     input MemWr,
     input[1:0] MemWrSize,
     input MemExtType,
@@ -55,6 +56,13 @@ module m_DataRam(
     //对store指令的信号控制
     always @(*)
     begin
+    if(reset == 1) begin
+     MemWr0 <= 0;
+     MemWr1 <= 0;
+     MemWr2 <= 0;
+     MemWr3 <= 0;
+    end
+    else begin
     case(MemWrSize)
     2'b00:begin
           MemWrData0 <= MemWrData[7:0];
@@ -120,9 +128,9 @@ module m_DataRam(
             end
           end
     endcase
+    end
     end            
    
-      
     data_ram0 ram0 (
       .clka(clk),    // input wire clka
       .wea(WrEn0),      // input wire [0 : 0] wea

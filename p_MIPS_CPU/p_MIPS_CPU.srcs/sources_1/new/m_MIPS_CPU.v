@@ -23,16 +23,16 @@
 module m_MIPS_CPU(
     input clk0,                          //外部输入的频率为100MHZ的时钟
     input rst,                           //外部硬件复位信号
-    output[31:0] Instruction,
+    /*output[31:0] Instruction,
     /*output stall,
     output pc_ifwrite,*/
     /*output flush,
     output[4:0] alucode,*/
-    output[31:0] nextpc_if,
+    /*output[31:0] nextpc_if,
     output[31:0] nextpc_id,
     /*output[31:0] nextpc_ex,
     output[31:0] nextpc_mem,*/
-    output[31:0] Instruction2,
+    /*output[31:0] Instruction2,
     output[31:0] ALU_a,
     output[31:0] ALU_b,
     output[31:0] aluresult_ex,
@@ -74,8 +74,8 @@ module m_MIPS_CPU(
    /* output divfinished,
     output DivOn,
     output[4:0] DivCnt,*/
-    output clk2,
-    output clk3,
+    //output clk2,
+    //output clk3,
     output[7:0] DISPOutput,             //数码管数据输出信号
     output[7:0] DISPEn,                 //数码管使能输出信号
     input[23:0] SWInput,                //拨码开关输入信号
@@ -95,8 +95,8 @@ module m_MIPS_CPU(
     .clk(clk0),
     .clk_sys(clk_tmp)
     );
-    assign clk2 = clk;
-    assign clk3 = clk_tmp;
+    //assign clk2 = clk;
+    //assign clk3 = clk_tmp;
     wire DivFinished;                 //除法运算是否完成信号，用于使能各个流水寄存器，从而实现除法器的停流水  
     //assign divfinished = DivFinished;
     wire pulse0,pulse1;               //外部输入用于计数器的时钟信号
@@ -403,7 +403,7 @@ module m_MIPS_CPU(
     .CPWrData_wb(CPWrData_wb)
     );
    
-    assign Instruction = Instruction_if;
+    /*assign Instruction = Instruction_if;
     assign Instruction2 = Instruction_id;
     //assign alucode = ALUCode_id;
     assign nextpc_if = NextPC_if;
@@ -413,7 +413,7 @@ module m_MIPS_CPU(
     //assign aluresult_mem = ALUResult_mem;
     //assign stall = Stall;*/
     //assign pc_ifwrite = PC_IFWrite;
-    assign ALU_a = ALU_A;
+   /* assign ALU_a = ALU_A;
     assign ALU_b = ALU_B;
     //assign memwrdata_mem = MemWrData_mem;
    // assign regwrdata_mem = RegWrData_mem;

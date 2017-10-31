@@ -68,11 +68,11 @@ module key_test(
      
     initial 
     begin 
-    col = 4'b1111; 
+    //col = 4'b1111; 
     reset = 1; 
     #55 reset = 0; 
-    #8100 col[0] = line[0]; 
-    #200 col[0] = 1; 
+    /*#8100 col[0] = line[0]; 
+    #200 col[0] = 1; */
     end 
   
     m_MIPS_CPU MIPS_CPU(
@@ -101,12 +101,12 @@ module key_test(
     /*.HI(HI),
     .LO(LO),*/
     .clk2(clk2),
-   // .clk3(clk3),
+    .clk3(clk3),
     //.aluresult_mem(ALUResult_mem),
   //.excCode(ExcCode),
-    .col(col), 
+   /* .col(col), 
     .line(line),
-    .SWInput(SWInput),
+    .SWInput(SWInput),*/
     .LEDOutput(LEDOutput),
     .DISPOutput(DISPOutput),
     .DISPEn(DISPEn)
