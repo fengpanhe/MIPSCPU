@@ -44,6 +44,13 @@ module m_DataRam(
     assign WrData1 = MemWrData1;
     assign WrData2 = MemWrData2;
     assign WrData3 = MemWrData3;
+    
+    initial begin
+     MemWr0 <= 0;
+     MemWr1 <= 0;
+     MemWr2 <= 0;
+     MemWr3 <= 0;
+    end
    
     //对store指令的信号控制
     always @(*)

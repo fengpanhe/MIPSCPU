@@ -21,18 +21,18 @@
 
 `include "defines.v"
 module m_MIPS_CPU(
-    input clk0,                          //系统时锟斤拷
-    input rst,                          //锟解部锟斤拷位锟脚猴拷
+    input clk0,                          //外部输入的频率为100MHZ的时钟
+    input rst,                           //外部硬件复位信号
     output[31:0] Instruction,
     /*output stall,
     output pc_ifwrite,*/
     /*output flush,
     output[4:0] alucode,*/
-    /*output[31:0] nextpc_if,
+    output[31:0] nextpc_if,
     output[31:0] nextpc_id,
     /*output[31:0] nextpc_ex,
     output[31:0] nextpc_mem,*/
-    /*output[31:0] Instruction2,
+    output[31:0] Instruction2,
     output[31:0] ALU_a,
     output[31:0] ALU_b,
     output[31:0] aluresult_ex,
@@ -74,40 +74,42 @@ module m_MIPS_CPU(
    /* output divfinished,
     output DivOn,
     output[4:0] DivCnt,*/
-    //output clk2,
-    //output clk3,
-    output[7:0] DISPOutput,             //锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
-    output[7:0] DISPEn,                 //锟斤拷锟斤拷锟绞癸拷芸锟斤拷锟斤拷锟斤拷
-    input[23:0] SWInput,                //锟斤拷锟诫开锟斤拷锟斤拷锟斤拷
-    output[23:0] LEDOutput,             //LED锟斤拷锟?
-    input[3:0] col,                     //锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
-    output[3:0] line                   //锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟?
-    /*input pulse0,                       //锟斤拷锟斤拷锟斤拷0锟斤拷锟斤拷锟斤拷锟斤拷
-    input pulse1,                       //锟斤拷锟斤拷锟斤拷1锟斤拷锟斤拷锟斤拷锟斤拷
-    output cnt0,                        //锟斤拷时/锟斤拷锟斤拷锟斤拷0锟斤拷锟斤拷藕锟?
-    output cnt1,                        //锟斤拷时/锟斤拷锟斤拷锟斤拷1锟斤拷锟斤拷藕锟?
-    output pwmWave  */                  //pwms锟斤拷锟斤拷藕锟?
+    output clk2,
+    output clk3,
+    output[7:0] DISPOutput,             //数码管数据输出信号
+    output[7:0] DISPEn,                 //数码管使能输出信号
+    input[23:0] SWInput,                //拨码开关输入信号
+    output[23:0] LEDOutput,             //LED输出信号
+    input[3:0] col,                     //键盘的列信号
+    output[3:0] line                    //键盘的行信号
     );
-    wire clk;
-    wire clk_tmp;
+    wire clk;                          //系统时钟，对输入时钟进行四分频 
+    wire clk_tmp;                      //辅助时钟，对输入时钟进行二分频
+    /*四分频分频器*/
     clock_div #(`clk_div) U0(
             .clk(clk0),
             .clk_sys(clk)
         );
+    /*二分频分频器*/
     clock_div U1(
     .clk(clk0),
     .clk_sys(clk_tmp)
     );
-    //assign clk2 = clk;
-    //assign clk3 = clk_tmp;
-    wire DivFinished;
-    assign divfinished = DivFinished;
-    wire pulse0,pulse1;
-    wire cnt0,cnt1,pwmWave;
-    wire WDTRst;                        //锟斤拷锟脚癸拷锟斤拷锟斤拷锟轿伙拷藕锟?      
-    wire reset;
-    assign reset = rst;//|| WDTRst;
-    wire[5:0] int_i;                    //锟叫讹拷指示锟脚猴拷
+    assign clk2 = clk;
+    assign clk3 = clk_tmp;
+    wire DivFinished;                 //除法运算是否完成信号，用于使能各个流水寄存器，从而实现除法器的停流水  
+    //assign divfinished = DivFinished;
+    wire pulse0,pulse1;               //外部输入用于计数器的时钟信号
+    wire cnt0,cnt1,pwmWave;           //CTC和PWM的输出信号
+    wire WDTRst;                      //看门狗复位信号      
+    wire reset;                       //系统复位信号
+    wire[23:0] tmpLEDOutput;
+    assign LEDOutput[20:0] = tmpLEDOutput[20:0];
+    assign LEDOutput[23] = pwmWave && tmpLEDOutput[23];
+    assign LEDOutput[22] = cnt0 && tmpLEDOutput[22];
+    assign LEDOutput[21] = cnt1 && tmpLEDOutput[21];
+    assign reset = rst|| WDTRst;
+    wire[5:0] int_i;                  //中断请求信号
     /*IF Module*/
     wire[31:0] Instruction_if,Instruction_id;
     wire[31:0] NextPC_id,NextPC_if,NextPC_ex,NextPC_mem,NextPC_wb;
@@ -373,20 +375,13 @@ module m_MIPS_CPU(
     .SWInput(SWInput),
     .DISPOutput(DISPOutput),
     .DISPEn(DISPEn),
-    .LEDOutput(LEDOutput),
+    .LEDOutput(tmpLEDOutput),
     .cnt0(cnt0),
     .cnt1(cnt1),
     .pwmWave(pwmWave),
     .rst(WDTRst),
     .int_i(int_i),
     .RegWrData_mem(RegWrData_mem)
-    //.wd(wd),
-    //.rd(rd),
-    //.IOWr(IOWr),
-    //.IORead(IORead),
-    //.IOReadData(IOReadData),
-    //.IOReadData_sw(IOReadData_sw),
-    //.SWctrl(SWctrl)
     );
 
     /*MEM/WB Regs*/  
@@ -408,7 +403,7 @@ module m_MIPS_CPU(
     .CPWrData_wb(CPWrData_wb)
     );
    
-   /* assign Instruction = Instruction_if;
+    assign Instruction = Instruction_if;
     assign Instruction2 = Instruction_id;
     //assign alucode = ALUCode_id;
     assign nextpc_if = NextPC_if;
@@ -418,7 +413,7 @@ module m_MIPS_CPU(
     //assign aluresult_mem = ALUResult_mem;
     //assign stall = Stall;*/
     //assign pc_ifwrite = PC_IFWrite;
-   /* assign ALU_a = ALU_A;
+    assign ALU_a = ALU_A;
     assign ALU_b = ALU_B;
     //assign memwrdata_mem = MemWrData_mem;
    // assign regwrdata_mem = RegWrData_mem;

@@ -26,7 +26,7 @@ module key_test(
     reg clk = 1; 
     reg reset; 
     wire clk2;
-   // wire clk3;
+    wire clk3;
     wire[31:0] Instruction_if,Instruction_id;
     wire[31:0] NextPC_if,NextPC_id;
    // wire[4:0] ALUCode;
@@ -39,7 +39,7 @@ module key_test(
     //wire[31:0] HI,LO;*/
   
     //wire[4:0] ExcCode;
-    wire[3:0] line; 
+    /*wire[3:0] line; 
     reg[3:0] col; 
     reg[23:0] SWInput;
     wire[23:0] LEDOutput;
@@ -56,14 +56,14 @@ module key_test(
     always #5 clk = ~clk;
     
 
-    initial
+    /*initial
     begin
     SWInput = 24'h0000ff;
     /*#500
     SWInput = 24'h123456;
     #450
     SWInput = 24'h001111;*/
-    end
+    //end
     
      
     initial 
