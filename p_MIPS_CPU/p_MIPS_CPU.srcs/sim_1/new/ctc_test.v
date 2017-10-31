@@ -27,12 +27,12 @@ module ctc_test(
     reg reset;
     reg pulse1 = 1;
     always #5 clk = ~clk;
-    always #10 pulse1 = ~pulse1;
+//    always #10 pulse1 = ~pulse1;
     initial
     begin
     reset = 0;
     #1 reset = 1;
-    #5 reset = 0;
+    #10 reset = 0;
     end
     wire[31:0] Instruction_if,Instruction_id;
     wire[4:0] ALUCode_id;
@@ -49,7 +49,7 @@ module ctc_test(
      .ALU_a(ALUa_ex),
      .ALU_b(ALUb_ex),
      .aluresult_ex(ALUResult_ex),
-     .pulse1(pulse1),
+//     .pulse1(pulse1),
      .cnt0(cnt0),
      .cnt1(cnt1)
      );
