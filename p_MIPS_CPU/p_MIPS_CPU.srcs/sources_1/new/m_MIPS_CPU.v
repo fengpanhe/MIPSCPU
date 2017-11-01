@@ -23,7 +23,7 @@
 module m_MIPS_CPU(
     input clk0,                          //外部输入的频率为100MHZ的时钟
     input rst,                           //外部硬件复位信号
-    /*output[31:0] Instruction,
+    //output[31:0] Instruction,
     /*output stall,
     output pc_ifwrite,*/
     /*output flush,
