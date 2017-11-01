@@ -32,7 +32,7 @@ module pwm16(
 
     reg[15:0] maxcount;             //最大值寄存器
     reg[15:0] midcount;             //对比寄存器
-    reg[15:0] flag;                 //使能寄存器
+    reg flag;                 //使能寄存器
     reg[15:0] rubbish;              //错误端口号的data处理
     reg[15:0] counter;              //计数器
 
@@ -42,7 +42,7 @@ module pwm16(
             // reset
             maxcount = 16'hffff;
             midcount = 16'h7fff;
-            flag = 16'h0000;
+            flag = 0;
             pwm = 1;
             counter = 16'h0001;
         end
@@ -50,11 +50,11 @@ module pwm16(
             case (address[2:0])
                 3'b000: maxcount = data;
                 3'b010: midcount = data;
-                3'b100: flag[0] = data[0];      //写使能寄存器
+                3'b100: flag = data[0];      //写使能寄存器
                 default: rubbish = data;
             endcase
         end
-        else if (flag[0] == 1'b1) begin
+        else if (flag == 1'b1) begin
             if (counter == maxcount) begin      //计数到最大值
                 counter = 16'b0001;
                 pwm = 1;

@@ -25,8 +25,8 @@ module key_test(
     ); 
     reg clk = 1; 
     reg reset; 
-    wire clk2;
-    wire clk3;
+   // wire clk2;
+   // wire clk3;
     wire[31:0] Instruction_if,Instruction_id;
     wire[31:0] NextPC_if,NextPC_id;
    // wire[4:0] ALUCode;
@@ -100,8 +100,8 @@ module key_test(
     .aluresult_ex(ALUResult_ex),
     /*.HI(HI),
     .LO(LO),*/
-    .clk2(clk2),
-    .clk3(clk3),
+   // .clk2(clk2),
+   // .clk3(clk3),
     //.aluresult_mem(ALUResult_mem),
   //.excCode(ExcCode),
    /* .col(col), 
